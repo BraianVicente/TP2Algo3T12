@@ -39,7 +39,7 @@ public abstract class UnidadConVida extends Unidad{
     	return vida;
     }
     @Override
-	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException {
+	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException,DeadUnitException {
     	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
