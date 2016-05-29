@@ -1,18 +1,27 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.Unidad;
+import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
 
 public abstract class UnidadConVida extends Unidad{
 	
+	private Chispa chispa;
+	
 	protected UnidadConVida(Equipo equipo) {
 		super(equipo);
 		vida = getVidaMaxima();
+		chispa = new ChispaHolder();
 	}
 	@Override
 	public boolean existe(){
 		return true;
+	}
+	
+	@Override
+	public boolean tieneChispa() {
+		return (chispa instanceof ChispaSuprema);
 	}
 
 	//-------------------vida---------------
@@ -23,7 +32,7 @@ public abstract class UnidadConVida extends Unidad{
     }
     @Override
 	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException {
-    	if(atacante.es(equipo)){//Este if está mal, cómo puedo volarlo?
+    	if(atacante.es(equipo)){//Este if estï¿½ mal, cï¿½mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
     	vida -= danio;

@@ -23,5 +23,6 @@ public abstract class Unidad {
     public abstract boolean puedeAtacar(Posicion a, Posicion desde);
     public abstract boolean puedeMoverse(Posicion a, Posicion desde);
     public abstract void recibirDanio(Unidad atacante,int danio) throws FriendlyFireException;
+    public abstract boolean tieneChispa();
     
 }

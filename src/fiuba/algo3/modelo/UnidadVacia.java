@@ -34,4 +34,9 @@ public class UnidadVacia extends Unidad{
 	@Override
 	public void recibirDanio(Unidad atacante, int danio) {}
     //no hace nada!
+
+	@Override
+	public boolean tieneChispa() {
+		return false;
+	}
 }
