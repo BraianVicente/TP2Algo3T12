@@ -44,6 +44,7 @@ public abstract class UnidadConVida extends Unidad{
     		throw new FriendlyFireException();
     	}
     	vida -= danio;
+    	if (vida <= 0) throw new DeadUnitException();
     }
     
     //------------------ataque-----------------
