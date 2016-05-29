@@ -47,6 +47,6 @@ public class ContenedorCasilleroTest {
 		Posicion posicion=new Posicion(0,0);
 		
 		contenedor.agregarUnidad(posicion,new Bumblebee());
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 }

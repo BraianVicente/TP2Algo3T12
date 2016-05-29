@@ -1,5 +1,7 @@
 package fiuba.algo3.test.unidadesVivientes;
 
+import static org.junit.Assert.*;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,7 +42,7 @@ public class FrenzyTest {
 		MentiTron prime = new MentiTron();
 		Frenzy transformer = new Frenzy();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzï¿½ la excepciï¿½n como debï¿½a ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 	
 	@Test(expected = FriendlyFireException.class)
@@ -49,7 +51,7 @@ public class FrenzyTest {
 		Frenzy transformer = new Frenzy();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzï¿½ la excepciï¿½n como debï¿½a ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 
 }

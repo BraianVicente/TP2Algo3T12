@@ -16,9 +16,9 @@ import fiuba.algo3.modelo.chispa.Chispa;
  * @author brahvic
  */
 public class Casillero {
-
+    
     public Posicion posicion;
-    public Unidad unidad;
+    public Unidad unidad ;
     public Chispa chispa;
 
     public Casillero(Posicion posicion) {
@@ -30,22 +30,21 @@ public class Casillero {
         return (!(this.unidad.existe()));
     }
 
-    public void agregarUnidad(Unidad unidad2) {
-        this.unidad = unidad2;
-    }
+	public void agregarUnidad(Unidad unidad2) {
+		this.unidad=unidad2;
+	}
+	public void quitarUnidadActual(){
+		this.unidad=new UnidadVacia();
+	}
 
-    public void quitarUnidadActual() {
-        this.unidad = new UnidadVacia();
-    }
+	public Unidad obtenerUnidad() {
+		return unidad;
+		
+	}
 
-    public Unidad obtenerUnidad() {
-        return unidad;
-
-    }
-
-    public void agregarChispa(Chispa chispa) {
-        this.chispa = chispa;
-
-    }
+	public void agregarChispa(Chispa chispa) {
+		this.chispa=chispa;
+		
+	}
 
 }

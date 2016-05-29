@@ -50,7 +50,7 @@ public class BumblebeeTest {
 		Bumblebee transformer = new Bumblebee();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 
 }

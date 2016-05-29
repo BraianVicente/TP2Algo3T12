@@ -42,7 +42,7 @@ public class BonecrusherTest {
 		MentiTron prime = new MentiTron();
 		Bonecrusher transformer = new Bonecrusher();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 	
 	@Test(expected = FriendlyFireException.class)
@@ -51,7 +51,7 @@ public class BonecrusherTest {
 		Bonecrusher transformer = new Bonecrusher();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 
 }

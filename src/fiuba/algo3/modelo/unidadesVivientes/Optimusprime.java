@@ -8,23 +8,23 @@ import fiuba.algo3.modelo.formas.Peterbilt;
 
 public class Optimusprime extends Transformer {
 
-    public Optimusprime() {
-        super(new Autobots());
-    }
+	public Optimusprime() {
+		super(new Autobots());
+	}
 
-    @Override
-    protected Forma getVehiculo() {
-        return new Peterbilt();
-    }
+	@Override
+	protected Forma getVehiculo() {
+		return new Peterbilt();
+	}
 
-    @Override
-    protected Forma getHumanoide() {
-        return new HumanoideOptimusprime();
-    }
+	@Override
+	protected Forma getHumanoide() {
+		return new HumanoideOptimusprime();
+	}
 
-    @Override
-    public int getVidaMaxima() {
-        return 500;
-    }
+	@Override
+	public int getVidaMaxima() {
+		return 500;
+	}
 
 }

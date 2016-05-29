@@ -7,24 +7,24 @@ import fiuba.algo3.modelo.formas.NaveCybertroniana;
 
 public class Megatron extends Transformer {
 
-    public Megatron() {
-        super(new Decepticons());
-        // TODO Auto-generated constructor stub
-    }
+	public Megatron() {
+		super(new Decepticons());
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    protected Forma getVehiculo() {
-        return new NaveCybertroniana();
-    }
+	@Override
+	protected Forma getVehiculo() {
+		return new NaveCybertroniana();
+	}
 
-    @Override
-    protected Forma getHumanoide() {
-        return new HumanoideMegatron();
-    }
+	@Override
+	protected Forma getHumanoide() {
+		return new HumanoideMegatron();
+	}
 
-    @Override
-    public int getVidaMaxima() {
-        return 550;
-    }
+	@Override
+	public int getVidaMaxima() {
+		return 550;
+	}
 
 }

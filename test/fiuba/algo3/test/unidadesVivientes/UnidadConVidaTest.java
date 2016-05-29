@@ -8,10 +8,10 @@ import org.junit.Test;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 /**
- * Testeo UnidadConVida con dos clases de mentira que no son mock creo, esta bin esto? 
- * Como deberia hacerse?
+ * Testeo UnidadConVida con dos clases de mentira que no son mock creo, está bin esto? 
+ * Cómo debería hacerse?
  * 
- * @author Jose Sb
+ * @author José Sb
  *
  */
 public class UnidadConVidaTest {

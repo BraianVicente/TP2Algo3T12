@@ -42,7 +42,7 @@ public class OptimusprimeTest {
 		MentiPrime prime = new MentiPrime();
 		Optimusprime transformer = new Optimusprime();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 	
 	@Test(expected = FriendlyFireException.class)
@@ -51,7 +51,7 @@ public class OptimusprimeTest {
 		Optimusprime transformer = new Optimusprime();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzo la excepcion como debia ser");
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 
 }
