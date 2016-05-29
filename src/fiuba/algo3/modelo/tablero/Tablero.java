@@ -6,6 +6,7 @@
 package fiuba.algo3.modelo.tablero;
 
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
+import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 
 /**
@@ -27,4 +28,11 @@ public class Tablero {
         return this.tablero.isEmpty(posicion);
     }
     
+    public void quitarUnidadActual(Posicion posicion) {
+        this.tablero.quitarUnidadActual(posicion);
+         
+     }
+     public void agregarUnidadConVida(Posicion posicion, UnidadConVida unidad) {
+    	 this.tablero.agregarUnidadConVida(posicion, unidad);    		 
+     }
 }

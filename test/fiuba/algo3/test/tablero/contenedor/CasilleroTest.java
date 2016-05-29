@@ -1,4 +1,4 @@
-package fiuba.algo3.test.contenedor;
+package fiuba.algo3.test.tablero.contenedor;
 
 
 

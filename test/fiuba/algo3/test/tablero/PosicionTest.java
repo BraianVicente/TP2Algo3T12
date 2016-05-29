@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package algo3.fiuba.model.tablero;
+package fiuba.algo3.test.tablero;
 
 import fiuba.algo3.modelo.tablero.Posicion;
 import org.junit.Assert;
