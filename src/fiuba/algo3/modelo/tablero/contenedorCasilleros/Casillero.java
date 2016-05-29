@@ -6,6 +6,7 @@
 package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.UnidadVacia;
 
@@ -26,5 +27,12 @@ public class Casillero {
     public boolean isEmpty() {
         return (!(this.unidad.existe()));
     }
+
+	public void agregarUnidadConVida(UnidadConVida unidad) {
+		this.unidad=unidad;
+	}
+	public void quitarUnidadActual(){
+		this.unidad=new UnidadVacia();
+	}
 
 }

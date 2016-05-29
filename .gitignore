@@ -7,3 +7,4 @@ tmp/
 .settings/
 build.xml.old
 manifest.mf
+/bin/
