@@ -42,7 +42,7 @@ public class MegatronTest {
 		MentiTron prime = new MentiTron();
 		Megatron transformer = new Megatron();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzó la excepción como debía ser");
+		Assert.fail("No se lanzo la excepcion como debia ser");
 	}
 	
 	@Test(expected = FriendlyFireException.class)
@@ -51,7 +51,7 @@ public class MegatronTest {
 		Megatron transformer = new Megatron();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzó la excepción como debía ser");
+		Assert.fail("No se lanzo la excepcion como debia ser");
 	}
 
 }

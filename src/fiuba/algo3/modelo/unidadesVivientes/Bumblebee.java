@@ -7,22 +7,23 @@ import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 
 public class Bumblebee extends Transformer {
 
-	public Bumblebee(){
-		super(new Autobots());
-	}
-	@Override
-	protected Forma getVehiculo() {
-		return new Camaro();
-	}
+    public Bumblebee() {
+        super(new Autobots());
+    }
 
-	@Override
-	protected Forma getHumanoide() {
-		return new HumanoideBumblebee();
-	}
+    @Override
+    protected Forma getVehiculo() {
+        return new Camaro();
+    }
 
-	@Override
-	public int getVidaMaxima() {
-		return 350;
-	}
+    @Override
+    protected Forma getHumanoide() {
+        return new HumanoideBumblebee();
+    }
+
+    @Override
+    public int getVidaMaxima() {
+        return 350;
+    }
 
 }
