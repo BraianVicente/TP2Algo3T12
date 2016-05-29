@@ -5,7 +5,7 @@ public class ChispaSuprema extends Chispa {
 	
 	private ChispaSuprema() {}
 	
-	public Chispa getInstance() {
+	public static Chispa getInstance() {
 		return INSTANCE;
 	}
 }

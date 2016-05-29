@@ -6,6 +6,7 @@
 package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
 import fiuba.algo3.modelo.Unidad;
+import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
@@ -48,4 +49,9 @@ public class ContenedorCasilleros  {
     public Unidad obtenerUnidad(Posicion posicion){
     	return obtenerCasillero(posicion).obtenerUnidad();
     }
+
+	public void agregarChispa(Posicion posicion,Chispa chispa) {
+		obtenerCasillero(posicion).agregarChispa(chispa);
+		
+	}
 }

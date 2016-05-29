@@ -9,6 +9,7 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.UnidadVacia;
+import fiuba.algo3.modelo.chispa.Chispa;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Casillero {
     
     public Posicion posicion;
     public Unidad unidad ;
+    public Chispa chispa;
 
     public Casillero(Posicion posicion) {
         this.posicion = posicion;
@@ -37,6 +39,11 @@ public class Casillero {
 
 	public Unidad obtenerUnidad() {
 		return unidad;
+		
+	}
+
+	public void agregarChispa(Chispa chispa) {
+		this.chispa=chispa;
 		
 	}
 
