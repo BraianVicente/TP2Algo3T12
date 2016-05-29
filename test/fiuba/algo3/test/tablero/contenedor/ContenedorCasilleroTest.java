@@ -26,7 +26,7 @@ public class ContenedorCasilleroTest {
 		Posicion posicion=new Posicion(0,0);
 		contenedor.agregarCasilleroVacio(posicion);		
 		
-		contenedor.agregarUnidadConVida(posicion,new Bumblebee());
+		contenedor.agregarUnidad(posicion,new Bumblebee());
 		Assert.assertFalse(contenedor.isEmpty(posicion));
 	}
 	
@@ -36,7 +36,7 @@ public class ContenedorCasilleroTest {
 		Posicion posicion=new Posicion(0,0);
 		contenedor.agregarCasilleroVacio(posicion);
 		
-		contenedor.agregarUnidadConVida(posicion,new Bumblebee());
+		contenedor.agregarUnidad(posicion,new Bumblebee());
 		contenedor.quitarUnidadActual(posicion);
 		Assert.assertTrue(contenedor.isEmpty(posicion));
 	}
@@ -46,6 +46,7 @@ public class ContenedorCasilleroTest {
 		ContenedorCasilleros contenedor=new ContenedorCasilleros();
 		Posicion posicion=new Posicion(0,0);
 		
-		contenedor.agregarUnidadConVida(posicion,new Bumblebee());
+		contenedor.agregarUnidad(posicion,new Bumblebee());
+		Assert.fail("No se lanzó la excepción como debía ser");
 	}
 }

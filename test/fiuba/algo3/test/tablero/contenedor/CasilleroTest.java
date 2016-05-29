@@ -20,14 +20,14 @@ public class CasilleroTest {
 	@Test
 	public void test02CasilleroCuandoLeAgregoUnaUnidadNoEstaVacio() {
 		Casillero casillero=new Casillero(new Posicion(0,0));
-		casillero.agregarUnidadConVida(new Bumblebee());
+		casillero.agregarUnidad(new Bumblebee());
 		Assert.assertFalse(casillero.isEmpty());
 	}
 	
 	@Test
 	public void test03CasilleroCuandoLeSacoLaUnidadQuedaVacio() {
 		Casillero casillero=new Casillero(new Posicion(0,0));
-		casillero.agregarUnidadConVida(new Bumblebee());
+		casillero.agregarUnidad(new Bumblebee());
 		casillero.quitarUnidadActual();
 		Assert.assertTrue(casillero.isEmpty());
 	}

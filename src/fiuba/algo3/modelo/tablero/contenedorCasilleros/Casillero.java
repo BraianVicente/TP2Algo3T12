@@ -28,11 +28,16 @@ public class Casillero {
         return (!(this.unidad.existe()));
     }
 
-	public void agregarUnidadConVida(UnidadConVida unidad) {
-		this.unidad=unidad;
+	public void agregarUnidad(Unidad unidad2) {
+		this.unidad=unidad2;
 	}
 	public void quitarUnidadActual(){
 		this.unidad=new UnidadVacia();
+	}
+
+	public Unidad obtenerUnidad() {
+		return unidad;
+		
 	}
 
 }

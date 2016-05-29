@@ -2,6 +2,8 @@ package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.Tablero;
 
 public abstract class Transformer extends UnidadConVida {
 	Forma forma;
@@ -36,5 +38,16 @@ public abstract class Transformer extends UnidadConVida {
 	protected int getDistanciaMovimiento() {
 		return forma.getDistanciaMovimiento();
 	}
+
+	public boolean esVehiculo() {
+		return forma.esVehiculo();
+	}
+	
+	public boolean esHumanoide(){
+		return forma.esHumanoide();
+		
+	}
+
+	
 
 }

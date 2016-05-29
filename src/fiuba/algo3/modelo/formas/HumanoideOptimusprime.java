@@ -22,4 +22,14 @@ public class HumanoideOptimusprime extends Forma {
 		return 2;
 	}
 
+
+	@Override
+	public boolean esHumanoide(){
+		return true;
+	}
+	
+	@Override
+	public boolean esVehiculo(){
+		return false;
+	}
 }

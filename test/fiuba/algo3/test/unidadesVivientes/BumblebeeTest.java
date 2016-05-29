@@ -41,7 +41,7 @@ public class BumblebeeTest {
 		MentiPrime prime = new MentiPrime();
 		Bumblebee transformer = new Bumblebee();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzó la excepción como debía ser");
+		  
 	}
 	
 	@Test(expected = FriendlyFireException.class)

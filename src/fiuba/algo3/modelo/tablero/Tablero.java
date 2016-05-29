@@ -5,7 +5,9 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
+import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 
@@ -19,8 +21,8 @@ public class Tablero {
 
     public Tablero(){
     this.tablero = new ContenedorCasilleros();
-        for (Integer i = 0; i < 25;i++){
-            this.tablero.agregarCasilleroVacio(new Posicion(i%5,i/5));
+        for (Integer i = 0; i < 100;i++){
+            this.tablero.agregarCasilleroVacio(new Posicion(i%10,i/10));
         }
     }
     
@@ -32,7 +34,20 @@ public class Tablero {
         this.tablero.quitarUnidadActual(posicion);
          
      }
-     public void agregarUnidadConVida(Posicion posicion, UnidadConVida unidad) {
-    	 this.tablero.agregarUnidadConVida(posicion, unidad);    		 
+     public void agregarUnidad(Posicion posicion, Unidad unidad) {
+    	 this.tablero.agregarUnidad(posicion, unidad);    		 
      }
+     
+     public void mover(Posicion posicionInicio, Posicion posicionFin) {
+ 		Unidad unidad=tablero.obtenerUnidad(posicionInicio);
+    	 if(!unidad.puedeMoverse(posicionInicio,posicionFin)) throw new MovimientoInvalidoException();   
+    	 quitarUnidadActual(posicionInicio);
+    	 agregarUnidad(posicionFin, unidad);
+ 		
+     }
+
+	public Unidad obtenerUnidad(Posicion posicion) {
+		// TODO Auto-generated method stub
+		return tablero.obtenerUnidad(posicion);
+	}
 }

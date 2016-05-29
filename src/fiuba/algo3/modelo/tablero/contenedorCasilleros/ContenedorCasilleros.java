@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
+import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
@@ -34,8 +35,8 @@ public class ContenedorCasilleros  {
        obtenerCasillero(posicion).quitarUnidadActual();
         
     }
-    public void agregarUnidadConVida(Posicion posicion, UnidadConVida unidad) {
-    	obtenerCasillero(posicion).agregarUnidadConVida(unidad);
+    public void agregarUnidad(Posicion posicion, Unidad unidad) {
+    	obtenerCasillero(posicion).agregarUnidad(unidad);
         
     }
     
@@ -43,5 +44,8 @@ public class ContenedorCasilleros  {
     	Casillero casillero=this.misCasilleros.get(posicion);
     	if(casillero==null) throw new CasilleroInexistenteException();
     	return casillero;
+    }
+    public Unidad obtenerUnidad(Posicion posicion){
+    	return obtenerCasillero(posicion).obtenerUnidad();
     }
 }

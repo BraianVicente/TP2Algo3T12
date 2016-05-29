@@ -17,4 +17,8 @@ public abstract class Forma {
 
 	public abstract int getDistanciaMovimiento();
 
+	public abstract boolean esHumanoide();
+	
+	public abstract boolean esVehiculo();
+
 }

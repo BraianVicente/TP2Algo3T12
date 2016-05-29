@@ -22,4 +22,14 @@ public class HumanoideBonecrusher extends Forma {
 		return 1;
 	}
 
+
+	@Override
+	public boolean esHumanoide(){
+		return true;
+	}
+	
+	@Override
+	public boolean esVehiculo(){
+		return false;
+	}
 }

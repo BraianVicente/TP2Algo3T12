@@ -22,4 +22,13 @@ public class AvionF22 extends Forma {
 		return 8;
 	}
 
+	@Override
+	public boolean esHumanoide(){
+		return false;
+	}
+	
+	@Override
+	public boolean esVehiculo(){
+		return true;
+	}
 }

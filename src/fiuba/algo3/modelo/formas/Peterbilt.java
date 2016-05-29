@@ -22,4 +22,13 @@ public class Peterbilt extends Forma {
 		return 5;
 	}
 
+	@Override
+	public boolean esHumanoide(){
+		return false;
+	}
+	
+	@Override
+	public boolean esVehiculo(){
+		return true;
+	}
 }

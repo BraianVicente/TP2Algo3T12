@@ -22,4 +22,13 @@ public class Duster extends Forma {
 		return 6;
 	}
 
+	@Override
+	public boolean esHumanoide(){
+		return false;
+	}
+	
+	@Override
+	public boolean esVehiculo(){
+		return true;
+	}
 }
