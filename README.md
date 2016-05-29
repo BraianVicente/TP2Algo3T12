@@ -6,6 +6,6 @@ Grupo T12
 
 97520	DANAB	MOISÉS			nosvemosenrio@hotmail.com
 
-97811	PETRAGLIA	GONZALO		gonzalopetraglia@gmail.com
+97811	PETRAGLIA	GONZALO		gonzalpetraglia@gmail.com
 
 96542	Vicente	Braian Hernán	braianvicente@hotmail.com
