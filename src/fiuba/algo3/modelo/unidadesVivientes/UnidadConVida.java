@@ -23,6 +23,14 @@ public abstract class UnidadConVida extends Unidad{
 	public boolean tieneChispa() {
 		return (chispa instanceof ChispaSuprema);
 	}
+	
+	public void darChispa() {
+		chispa = ChispaSuprema.getInstance();
+	}
+	
+	public void quitarChispa() {
+		chispa = new ChispaHolder();
+	}
 
 	//-------------------vida---------------
     private int vida;
