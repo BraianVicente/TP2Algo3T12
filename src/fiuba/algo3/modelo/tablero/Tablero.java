@@ -44,14 +44,16 @@ public class Tablero {
     }
 
     public void mover(Posicion posicionInicio, Posicion posicionFin) {
-        try {
-        Unidad unidad = tablero.obtenerUnidad(posicionInicio);
+    	Unidad unidad = tablero.obtenerUnidad(posicionInicio);
+    	try {
+     
         if (!unidad.puedeMoverse(posicionInicio, posicionFin)) {
             throw new MovimientoInvalidoException();
         }
         quitarUnidadActual(posicionInicio);
         agregarUnidad(posicionFin, unidad);
         } catch (PosicionOcupadaException e) {
+            agregarUnidad(posicionInicio, unidad);
             throw new MovimientoInvalidoException();
 
         }
