@@ -196,19 +196,52 @@ public class PrimeraEntregaTest {
 		
 	}
 	@Test
-	public void test10OptimusAtacaMegatronDistanciaInvalidaYSacaVida(){
+	public void test10OptimusAtacaMegatronDistanciaInvalidaYNoSacaVida(){
 		Tablero tablero=new Tablero();
+		
 		Transformer megatron = new Megatron();
 		Transformer  optimusPrime= new Optimusprime();
+		optimusPrime.transformar();
 
-		Posicion posicion= new Posicion(1,0);
-		tablero.agregarUnidad(posicion, megatron);
-		posicion =new Posicion(0,1);
-		tablero.agregarUnidad(posicion,optimusPrime);
+		Posicion posicionMegatron= new Posicion(3,0);
+		tablero.agregarUnidad(posicionMegatron, megatron);
+		Posicion posicionOptimus =new Posicion(0,1);
+		tablero.agregarUnidad(posicionOptimus,optimusPrime);
 		int vidaOriginalMegatron=megatron.getVida();
+		try{
+		
+			optimusPrime.atacarA(megatron,posicionMegatron, posicionOptimus);
+			fail("Deberia lanzar excepcion de distancia");
+			
+				
+			}catch(AtaqueInvalidoPorDistanciaException e){
+				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
+			}
+	}
+	
+	@Test
+	public void test11OptimusAtacaMegatronDistanciaInvalidaCambiaDeFormaPuedeAtacar(){
+		Tablero tablero=new Tablero();
+		
+		Transformer megatron = new Megatron();
+		Transformer  optimusPrime= new Optimusprime();
+		optimusPrime.transformar();
+
+		Posicion posicionMegatron= new Posicion(3,0);
+		tablero.agregarUnidad(posicionMegatron, megatron);
+		Posicion posicionOptimus =new Posicion(0,1);
+		tablero.agregarUnidad(posicionOptimus,optimusPrime);
+		int vidaOriginalMegatron=megatron.getVida();
+		try{
+		
+			optimusPrime.atacarA(megatron,posicionMegatron, posicionOptimus);
+			fail("Deberia lanzar excepcion de distancia");
+				
+			}catch(AtaqueInvalidoPorDistanciaException e){
+				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
+			}
+		optimusPrime.transformar();
 		optimusPrime.atacarA(megatron);
-		
 		Assert.assertTrue(vidaOriginalMegatron-optimusPrime.getPuntosAtaque()==megatron.getVida());
-		
 	}
 }
