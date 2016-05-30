@@ -17,13 +17,13 @@ public abstract class Transformer extends UnidadConVida {
 		forma = forma.getAlternativa();
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
 		//(y porque son los que acordamos, y porque 
-		//se me hace que tiene más sentido aunque esta solución me guste más porque ahorra un if (if esVehiculo()))
+		//se me hace que tiene mï¿½s sentido aunque esta soluciï¿½n me guste mï¿½s porque ahorra un if (if esVehiculo()))
 	}
 	//------------------formas--------------------//
 	protected abstract Forma getVehiculo();
 	protected abstract Forma getHumanoide();
 	
-	//-----------------estadísticas---------------//
+	//-----------------estadï¿½sticas---------------//
 	@Override
 	public int getDistanciaAtaque() {
 		return forma.getDistanciaAtaque();

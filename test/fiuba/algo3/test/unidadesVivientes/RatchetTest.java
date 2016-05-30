@@ -42,7 +42,7 @@ public class RatchetTest {
 		MentiPrime prime = new MentiPrime();
 		Ratchet transformer = new Ratchet();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzó la excepción como debía ser");
+		Assert.fail("No se lanzo la excepcion como debia ser");
 	}
 	
 	@Test(expected = FriendlyFireException.class)
@@ -51,7 +51,7 @@ public class RatchetTest {
 		Ratchet transformer = new Ratchet();
 		transformer.transformar();
 		transformer.atacarA(prime);
-		Assert.fail("No se lanzó la excepción como debía ser");
+		Assert.fail("No se lanzo la excepcion como debia ser");
 	}
 
 }

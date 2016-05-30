@@ -12,31 +12,34 @@ import fiuba.algo3.modelo.tablero.Posicion;
  *
  * @author brahvic
  */
-public class UnidadVacia extends Unidad{
+public class UnidadVacia extends Unidad {
 
     public UnidadVacia() {
-    	super(new Ninguno());
+        super(new Ninguno());
     }
 
     @Override
     public boolean existe() {
-        return false ;
-    }
-    @Override
-    public boolean puedeAtacar(Posicion a, Posicion desde){
-    	return false;
-    }
-    @Override
-    public boolean puedeMoverse(Posicion a, Posicion desde){
-    	return false;
+        return false;
     }
 
-	@Override
-	public void recibirDanio(Unidad atacante, int danio) {}
+    @Override
+    public boolean puedeAtacar(Posicion a, Posicion desde) {
+        return false;
+    }
+
+    @Override
+    public boolean puedeMoverse(Posicion a, Posicion desde) {
+        return false;
+    }
+
+    @Override
+    public void recibirDanio(Unidad atacante, int danio) {
+    }
     //no hace nada!
 
-	@Override
-	public boolean tieneChispa() {
-		return false;
-	}
+    @Override
+    public boolean tieneChispa() {
+        return false;
+    }
 }
