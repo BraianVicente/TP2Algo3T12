@@ -17,10 +17,10 @@ public class RatchetTest {
 		MentiTron tron= new MentiTron();//arranca con 50 de vida
 		Ratchet transformer = new Ratchet();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-35);
+		Assert.assertEquals(tron.getVida(), 100-35);
 		transformer.transformar();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-35-5);
+		Assert.assertEquals(tron.getVida(), 100-35-5);
 	}
 	@Test
 	public void testCambiaMovilidad(){

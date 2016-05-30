@@ -16,10 +16,10 @@ public class BumblebeeTest {
 		MentiTron tron= new MentiTron();//arranca con 50 de vida
 		Bumblebee transformer = new Bumblebee();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-20);
+		Assert.assertEquals(tron.getVida(), 100-20);
 		transformer.transformar();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-20-40);
+		Assert.assertEquals(tron.getVida(), 100-20-40);
 	}
 	@Test
 	public void testCambiaMovilidad(){

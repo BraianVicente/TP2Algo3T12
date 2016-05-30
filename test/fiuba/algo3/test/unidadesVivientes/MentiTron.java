@@ -10,7 +10,7 @@ public class MentiTron extends UnidadConVida {
 	}
 	@Override
 	public int getVidaMaxima() {
-		return 50;
+		return 100;
 	}
 
 	@Override
