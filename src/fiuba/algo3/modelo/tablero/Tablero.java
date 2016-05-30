@@ -36,17 +36,25 @@ public class Tablero {
     }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
+        if (this.isEmpty(posicion)){
         this.tablero.agregarUnidad(posicion, unidad);
+        } else {
+            throw new PosicionOcupadaException();
+    }
     }
 
     public void mover(Posicion posicionInicio, Posicion posicionFin) {
+        try {
         Unidad unidad = tablero.obtenerUnidad(posicionInicio);
         if (!unidad.puedeMoverse(posicionInicio, posicionFin)) {
             throw new MovimientoInvalidoException();
         }
         quitarUnidadActual(posicionInicio);
         agregarUnidad(posicionFin, unidad);
+        } catch (PosicionOcupadaException e) {
+            throw new MovimientoInvalidoException();
 
+        }
     }
 
     public Unidad obtenerUnidad(Posicion posicion) {
