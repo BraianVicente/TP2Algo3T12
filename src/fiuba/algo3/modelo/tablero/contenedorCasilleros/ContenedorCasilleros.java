@@ -16,42 +16,47 @@ import java.util.HashMap;
  *
  * @author brahvic
  */
-public class ContenedorCasilleros  {
-    private HashMap<Posicion,Casillero> misCasilleros ;
+public class ContenedorCasilleros {
 
-    public ContenedorCasilleros(){
-        this.misCasilleros = new HashMap<Posicion,Casillero>();
+    private HashMap<Posicion, Casillero> misCasilleros;
+
+    public ContenedorCasilleros() {
+        this.misCasilleros = new HashMap<Posicion, Casillero>();
     }
 
     public void agregarCasilleroVacio(Posicion posicion) {
-        this.misCasilleros.put(posicion,new Casillero(posicion));
+        this.misCasilleros.put(posicion, new Casillero(posicion));
     }
 
     public boolean isEmpty(Posicion posicion) {
         return obtenerCasillero(posicion).isEmpty();
-        
-    }
-    
-    public void quitarUnidadActual(Posicion posicion) {
-       obtenerCasillero(posicion).quitarUnidadActual();
-        
-    }
-    public void agregarUnidad(Posicion posicion, Unidad unidad) {
-    	obtenerCasillero(posicion).agregarUnidad(unidad);
-        
-    }
-    
-    private Casillero obtenerCasillero(Posicion posicion){
-    	Casillero casillero=this.misCasilleros.get(posicion);
-    	if(casillero==null) throw new CasilleroInexistenteException();
-    	return casillero;
-    }
-    public Unidad obtenerUnidad(Posicion posicion){
-    	return obtenerCasillero(posicion).obtenerUnidad();
+
     }
 
-	public void agregarChispa(Posicion posicion,Chispa chispa) {
-		obtenerCasillero(posicion).agregarChispa(chispa);
-		
-	}
+    public void quitarUnidadActual(Posicion posicion) {
+        obtenerCasillero(posicion).quitarUnidadActual();
+
+    }
+
+    public void agregarUnidad(Posicion posicion, Unidad unidad) {
+        obtenerCasillero(posicion).agregarUnidad(unidad);
+
+    }
+
+    private Casillero obtenerCasillero(Posicion posicion) {
+        Casillero casillero = this.misCasilleros.get(posicion);
+        if (casillero == null) {
+            throw new CasilleroInexistenteException();
+        }
+        return casillero;
+    }
+
+    public Unidad obtenerUnidad(Posicion posicion) {
+        return obtenerCasillero(posicion).obtenerUnidad();
+    }
+
+    public void agregarChispa(Posicion posicion, Chispa chispa) {
+        obtenerCasillero(posicion).agregarChispa(chispa);
+
+    }
 }

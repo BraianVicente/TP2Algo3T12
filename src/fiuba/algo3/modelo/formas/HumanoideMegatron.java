@@ -2,34 +2,33 @@ package fiuba.algo3.modelo.formas;
 
 public class HumanoideMegatron extends Forma {
 
-	@Override
-	public Forma getAlternativa() {
-		return new NaveCybertroniana();
-	}
+    @Override
+    public Forma getAlternativa() {
+        return new NaveCybertroniana();
+    }
 
-	@Override
-	public int getDistanciaAtaque() {
-		return 3;
-	}
+    @Override
+    public int getDistanciaAtaque() {
+        return 3;
+    }
 
-	@Override
-	public int getPuntosAtaque() {
-		return 10;
-	}
+    @Override
+    public int getPuntosAtaque() {
+        return 10;
+    }
 
-	@Override
-	public int getDistanciaMovimiento() {
-		return 1;
-	}
+    @Override
+    public int getDistanciaMovimiento() {
+        return 1;
+    }
 
+    @Override
+    public boolean esHumanoide() {
+        return true;
+    }
 
-	@Override
-	public boolean esHumanoide(){
-		return true;
-	}
-	
-	@Override
-	public boolean esVehiculo(){
-		return false;
-	}
+    @Override
+    public boolean esVehiculo() {
+        return false;
+    }
 }

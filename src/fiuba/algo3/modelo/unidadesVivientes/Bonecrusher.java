@@ -7,23 +7,23 @@ import fiuba.algo3.modelo.formas.HumanoideBonecrusher;
 
 public class Bonecrusher extends Transformer {
 
-	public Bonecrusher() {
-		super(new Decepticons());
-	}
+    public Bonecrusher() {
+        super(new Decepticons());
+    }
 
-	@Override
-	protected Forma getVehiculo() {
-		return new Blindado();
-	}
+    @Override
+    protected Forma getVehiculo() {
+        return new Blindado();
+    }
 
-	@Override
-	protected Forma getHumanoide() {
-		return new HumanoideBonecrusher();
-	}
+    @Override
+    protected Forma getHumanoide() {
+        return new HumanoideBonecrusher();
+    }
 
-	@Override
-	public int getVidaMaxima() {
-		return 200;
-	}
+    @Override
+    public int getVidaMaxima() {
+        return 200;
+    }
 
 }

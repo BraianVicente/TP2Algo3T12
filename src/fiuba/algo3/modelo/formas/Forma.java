@@ -1,24 +1,25 @@
 package fiuba.algo3.modelo.formas;
 
 public abstract class Forma {
-	
-	/**
-	 * La forma sabe cuál es la alternativa, osea, el camaro solo se trnasforma en Bumblebee,
-	 * el camión sólo se transforma en Optimus, y así...
-	 * Sin embargo, dejo los métodos getVehiculo y getHumanoide en Transformer por las dudas
-	 * Capaz más adelante son útiles
-	 * @return
-	 */
-	public abstract Forma getAlternativa();
 
-	public abstract int getDistanciaAtaque();
+    /**
+     * La forma sabe cuï¿½l es la alternativa, osea, el camaro solo se trnasforma
+     * en Bumblebee, el camiï¿½n sï¿½lo se transforma en Optimus, y asï¿½... Sin
+     * embargo, dejo los mï¿½todos getVehiculo y getHumanoide en Transformer por
+     * las dudas Capaz mï¿½s adelante son ï¿½tiles
+     *
+     * @return
+     */
+    public abstract Forma getAlternativa();
 
-	public abstract int getPuntosAtaque();
+    public abstract int getDistanciaAtaque();
 
-	public abstract int getDistanciaMovimiento();
+    public abstract int getPuntosAtaque();
 
-	public abstract boolean esHumanoide();
-	
-	public abstract boolean esVehiculo();
+    public abstract int getDistanciaMovimiento();
+
+    public abstract boolean esHumanoide();
+
+    public abstract boolean esVehiculo();
 
 }
