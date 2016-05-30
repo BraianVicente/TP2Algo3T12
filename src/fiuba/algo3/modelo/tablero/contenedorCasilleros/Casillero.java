@@ -17,12 +17,10 @@ import fiuba.algo3.modelo.chispa.Chispa;
  */
 public class Casillero {
 
-    public Posicion posicion;
     public Unidad unidad;
     public Chispa chispa;
 
     public Casillero(Posicion posicion) {
-        this.posicion = posicion;
         this.unidad = new UnidadVacia();
     }
 
