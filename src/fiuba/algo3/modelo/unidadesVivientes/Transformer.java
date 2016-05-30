@@ -25,17 +25,17 @@ public abstract class Transformer extends UnidadConVida {
 	
 	//-----------------estadísticas---------------//
 	@Override
-	protected int getDistanciaAtaque() {
+	public int getDistanciaAtaque() {
 		return forma.getDistanciaAtaque();
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return forma.getPuntosAtaque();
 	}
 
 	@Override
-	protected int getDistanciaMovimiento() {
+	public int getDistanciaMovimiento() {
 		return forma.getDistanciaMovimiento();
 	}
 

@@ -17,10 +17,10 @@ public class OptimusprimeTest {
 		MentiTron tron= new MentiTron();//arranca con 50 de vida
 		Optimusprime transformer = new Optimusprime();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-15);
+		Assert.assertEquals(tron.getVida(), 100-15);
 		transformer.transformar();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-15-50);
+		Assert.assertEquals(tron.getVida(), 100-15-50);
 	}
 	@Test
 	public void testCambiaMovilidad(){

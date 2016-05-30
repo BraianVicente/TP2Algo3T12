@@ -36,7 +36,7 @@ public class UnidadConVidaTest {
 		MentiPrime prime = new MentiPrime();//vida: 100, ataque: 10
 		MentiTron tron = new MentiTron();//vida:50, ataque: 15
 		prime.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 50-10);
+		Assert.assertEquals(tron.getVida(), 100-10);
 	}
 	@Test
 	public void testMentiTronAtacaAMentiPrime() throws FriendlyFireException{

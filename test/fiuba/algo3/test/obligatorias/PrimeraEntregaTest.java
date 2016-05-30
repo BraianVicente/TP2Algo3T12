@@ -120,6 +120,95 @@ public class PrimeraEntregaTest {
 		posicion =new Posicion(9,7);
 		tablero.agregarUnidad(posicion, bonecrusher);
 		
+		Assert.assertEquals(bumblebee,tablero.obtenerUnidad(new Posicion(0,0)));
+		Assert.assertEquals(optimusPrime,tablero.obtenerUnidad(new Posicion(1,1)));
+		Assert.assertEquals(ratchet,tablero.obtenerUnidad(new Posicion(0,2)));
+		Assert.assertEquals(megatron,tablero.obtenerUnidad(new Posicion(8,8)));
+		Assert.assertEquals(frenzy,tablero.obtenerUnidad(new Posicion(9,9)));
+		Assert.assertEquals(bonecrusher,tablero.obtenerUnidad(new Posicion(9,7)));
+		
+		
+	}
+	
+	/*Tablero tablero=new Tablero();
+	Transformer optimusPrime = new Optimusprime();
+	Transformer bumblebee = new Bumblebee();
+	Transformer megatron = new Megatron();
+	Transformer  frenzy= new Frenzy();
+	Posicion posicion= new Posicion(1,1);
+	tablero.agregarUnidad(posicion, optimusPrime);
+	posicion =new Posicion(0,0);
+	tablero.agregarUnidad(posicion, bumblebee);
+	posicion =new Posicion(1,0);
+	tablero.agregarUnidad(posicion, megatron);
+	posicion =new Posicion(0,1);
+	tablero.agregarUnidad(posicion,frenzy);*/
+	@Test(expected=FriendlyFireException.class)
+	public void test08AtaqueAmigoNoDeberiaPermitirseEntreAutobots(){
+		Tablero tablero=new Tablero();
+		Transformer optimusPrime = new Optimusprime();
+		Transformer bumblebee = new Bumblebee();
+
+		Posicion posicion= new Posicion(1,1);
+		tablero.agregarUnidad(posicion, optimusPrime);
+		posicion =new Posicion(0,0);
+		tablero.agregarUnidad(posicion, bumblebee);
+		
+		optimusPrime.atacarA(bumblebee);
+		
+	}
+	
+	@Test
+	public void test09AtaqueAmigoNoDeberiaPermitirseEntreDecepticonsYNoDeberiaSacarVida(){
+		Tablero tablero=new Tablero();
+		
+		Transformer megatron = new Megatron();
+		Transformer  frenzy= new Frenzy();
+
+		Posicion posicion= new Posicion(1,0);
+		tablero.agregarUnidad(posicion, megatron);
+		posicion =new Posicion(0,1);
+		tablero.agregarUnidad(posicion,frenzy);
+		int vidaOriginalMegatron=megatron.getVida();
+		try{
+		
+			frenzy.atacarA(megatron);
+			
+				
+			}catch(FriendlyFireException e){
+				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
+			}
+	}
+	
+	@Test
+	public void test09OptimusAtacaMegatronDistanciaValidaYSacaVida(){
+		Tablero tablero=new Tablero();
+		Transformer megatron = new Megatron();
+		Transformer  optimusPrime= new Optimusprime();
+
+		Posicion posicion= new Posicion(1,0);
+		tablero.agregarUnidad(posicion, megatron);
+		posicion =new Posicion(0,1);
+		tablero.agregarUnidad(posicion,optimusPrime);
+		int vidaOriginalMegatron=megatron.getVida();
+		optimusPrime.atacarA(megatron);
+		Assert.assertTrue(vidaOriginalMegatron-optimusPrime.getPuntosAtaque()==megatron.getVida());
+		
+	}
+	@Test
+	public void test10OptimusAtacaMegatronDistanciaInvalidaYSacaVida(){
+		Tablero tablero=new Tablero();
+		Transformer megatron = new Megatron();
+		Transformer  optimusPrime= new Optimusprime();
+
+		Posicion posicion= new Posicion(1,0);
+		tablero.agregarUnidad(posicion, megatron);
+		posicion =new Posicion(0,1);
+		tablero.agregarUnidad(posicion,optimusPrime);
+		int vidaOriginalMegatron=megatron.getVida();
+		optimusPrime.atacarA(megatron);
+		
+		Assert.assertTrue(vidaOriginalMegatron-optimusPrime.getPuntosAtaque()==megatron.getVida());
 		
 	}
 }
