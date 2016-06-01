@@ -44,11 +44,10 @@ public class ContenedorCasilleros {
     }
 
     private Casillero obtenerCasillero(Posicion posicion) {
-        Casillero casillero = this.misCasilleros.get(posicion);
-        if (casillero == null) {
+        if ( ! this.misCasilleros.containsKey(posicion) ) {
             throw new CasilleroInexistenteException();
         }
-        return casillero;
+        return this.misCasilleros.get(posicion);
     }
 
     public Unidad obtenerUnidad(Posicion posicion) {
