@@ -22,4 +22,9 @@ public abstract class Forma {
 
     public abstract boolean esVehiculo();
 
+    public  void disminuriPuntosAtaque() {
+        //Only air units override paramether
+        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

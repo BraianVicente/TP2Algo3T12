@@ -43,8 +43,8 @@ public abstract class UnidadConVida extends Unidad{
     	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
-    	vida -= danio;
-    	if (vida <= 0) throw new DeadUnitException();
+        this.disminuirVida(danio);
+	
     }
     
     //------------------ataque-----------------
@@ -67,4 +67,13 @@ public abstract class UnidadConVida extends Unidad{
     	return a.distanciaA(desde)<=getDistanciaMovimiento();
     }
     protected abstract int getDistanciaMovimiento();
+
+    public void recibirAtaqueEspinas(){
+        this.disminuirVida((vida*5)/100);
+    }
+
+    private void disminuirVida(int danio) {
+        vida -= danio;
+    	if (vida <= 0) throw new DeadUnitException();    
+    }
 }
