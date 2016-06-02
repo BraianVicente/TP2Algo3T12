@@ -42,7 +42,7 @@ public class Tablero {
     }
 
     public void avanzarPorCasillero(Posicion ini, Posicion fin, Transformer unidad){
-        this.tablero.avanzarPorCasillero(fin, fin, unidad, Integer.BYTES);
+        this.tablero.avanzarPorCasillero(fin, fin, unidad, unidad.getDistanciaMovimiento());
     }
     public void mover(Posicion posicionInicio, Posicion posicionFin) {
 // cambiar metodo para que verifique la posibilidad de abanzar entre cada casillero

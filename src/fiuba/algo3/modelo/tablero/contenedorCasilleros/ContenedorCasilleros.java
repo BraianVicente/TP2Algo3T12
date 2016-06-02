@@ -12,6 +12,7 @@ import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -68,7 +69,7 @@ public class ContenedorCasilleros {
         if (actual.distanciaA(fin) == 0){
             return ;
         }
-        for (HashMap.Entry<Posicion, Casillero> entry : misCasilleros.entrySet()){
+        for (Map.Entry<Posicion, Casillero> entry : misCasilleros.entrySet()){
             Posicion posSiguiente = entry.getKey();
             
             if  (posSiguiente.contiguoAPosicion(actual)) {
