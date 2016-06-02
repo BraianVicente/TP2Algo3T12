@@ -6,6 +6,7 @@
 package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Ninguno;
+import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.tablero.Posicion;
 
 /**
@@ -41,5 +42,10 @@ public class UnidadVacia extends Unidad {
     @Override
     public boolean tieneChispa() {
         return false;
+    }
+
+    @Override
+    public Forma getFormaActual() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

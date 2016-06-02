@@ -8,7 +8,8 @@ package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
+import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ import java.util.HashMap;
  */
 public class ContenedorCasilleros {
 
-    private HashMap<Posicion, Casillero> misCasilleros;
+    public HashMap<Posicion, Casillero> misCasilleros;
 
     public ContenedorCasilleros() {
         this.misCasilleros = new HashMap<Posicion, Casillero>();
@@ -39,7 +40,11 @@ public class ContenedorCasilleros {
     }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
-        obtenerCasillero(posicion).agregarUnidad(unidad);
+        if (this.isEmpty(posicion)){
+            obtenerCasillero(posicion).agregarUnidad(unidad);
+        } else {
+            throw new PosicionOcupadaException();
+        }
 
     }
 
@@ -57,5 +62,33 @@ public class ContenedorCasilleros {
     public void agregarChispa(Posicion posicion, Chispa chispa) {
         obtenerCasillero(posicion).agregarChispa(chispa);
 
+    }
+
+    public void avanzarPorCasillero(Posicion actual, Posicion fin, Transformer unidad, Integer movRest) {
+        if (actual.distanciaA(fin) == 0){
+            return ;
+        }
+        for (HashMap.Entry<Posicion, Casillero> entry : misCasilleros.entrySet()){
+            Posicion posSiguiente = entry.getKey();
+            
+            if  (posSiguiente.contiguoAPosicion(actual)) {
+                if ( (fin.distanciaA(posSiguiente) ) == (movRest-1)){
+                    Casillero casilleroSiguiente = obtenerCasillero(posSiguiente);
+                    this.quitarUnidadActual(actual);
+                    try {
+                        this.agregarUnidad(posSiguiente, unidad);
+                    } catch (PosicionOcupadaException e) {
+                        this.agregarUnidad(actual,unidad);
+                        return ;
+                    }                  
+                    movRest = movRest - casilleroSiguiente.unidad.getFormaActual().disminuirEnUnMovimiento();
+                    if (movRest > 0){
+                        avanzarPorCasillero(posSiguiente,fin,unidad,movRest);
+                    }
+                    return ;
+                    
+                }
+            }
+        }
     }
 }

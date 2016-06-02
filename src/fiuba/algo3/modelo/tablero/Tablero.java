@@ -9,6 +9,7 @@ import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**
@@ -23,6 +24,7 @@ public class Tablero {
         this.tablero = new ContenedorCasilleros();
         for (Integer i = 0; i < 100; i++) {
             this.tablero.agregarCasilleroVacio(new Posicion(i % 10, i / 10));
+            
         }
     }
 
@@ -36,26 +38,28 @@ public class Tablero {
     }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
-        if (this.isEmpty(posicion)){
         this.tablero.agregarUnidad(posicion, unidad);
-        } else {
-            throw new PosicionOcupadaException();
-    }
     }
 
+    public void avanzarPorCasillero(Posicion ini, Posicion fin, Transformer unidad){
+        this.tablero.avanzarPorCasillero(fin, fin, unidad, Integer.BYTES);
+    }
     public void mover(Posicion posicionInicio, Posicion posicionFin) {
-    	Unidad unidad = tablero.obtenerUnidad(posicionInicio);
+// cambiar metodo para que verifique la posibilidad de abanzar entre cada casillero
+// t lo haga de manera recursiva, disminuyendo la distancia desplazamiento.
+// seria un public void mover(posI, posF,movRest) que verifique la penalizacion
+// en cada una de las posiciones ocupadas.
+        Unidad unidad = tablero.obtenerUnidad(posicionInicio);
     	try {
-     
-        if (!unidad.puedeMoverse(posicionInicio, posicionFin)) {
-            throw new MovimientoInvalidoException();
-        }
-        quitarUnidadActual(posicionInicio);
-        agregarUnidad(posicionFin, unidad);
-        } catch (PosicionOcupadaException e) {
+           if (!unidad.puedeMoverse(posicionInicio, posicionFin)) {
+                throw new MovimientoInvalidoException();
+            }
+           this.avanzarPorCasillero(posicionFin, posicionFin, (Transformer) unidad);
+            quitarUnidadActual(posicionInicio);
+            agregarUnidad(posicionFin, unidad);
+    } catch (PosicionOcupadaException e) {
             agregarUnidad(posicionInicio, unidad);
             throw new MovimientoInvalidoException();
-
         }
     }
 

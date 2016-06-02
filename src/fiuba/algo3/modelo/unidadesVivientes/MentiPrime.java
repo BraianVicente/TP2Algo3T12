@@ -1,6 +1,7 @@
-package fiuba.algo3.test.unidadesVivientes;
+package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 public class MentiPrime extends UnidadConVida {
@@ -27,5 +28,10 @@ public class MentiPrime extends UnidadConVida {
 	protected int getDistanciaMovimiento() {
 		return 4;
 	}
+
+    @Override
+    public Forma getFormaActual() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

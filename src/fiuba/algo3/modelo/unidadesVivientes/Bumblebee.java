@@ -26,4 +26,14 @@ public class Bumblebee extends Transformer {
         return 350;
     }
 
+    @Override
+    public boolean esTerrestre() {
+        return true;
+    }
+
+    @Override
+    public Forma getFormaActual() {
+        return this.forma;
+    }
+
 }

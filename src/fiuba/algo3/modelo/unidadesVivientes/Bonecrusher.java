@@ -26,4 +26,9 @@ public class Bonecrusher extends Transformer {
         return 200;
     }
 
+    @Override
+    public boolean esTerrestre() {
+		return true;
+    }
+
 }

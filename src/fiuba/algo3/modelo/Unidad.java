@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 
@@ -26,5 +27,7 @@ public abstract class Unidad {
     public abstract void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException;
 
     public abstract boolean tieneChispa();
+
+    public abstract Forma getFormaActual() ;
 
 }

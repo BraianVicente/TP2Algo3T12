@@ -49,10 +49,12 @@ public abstract class Transformer extends UnidadConVida {
 	}
 
     
-    public void disminuirPuntosAtaque() {
-        forma.disminuriPuntosAtaque();
+    public abstract boolean esTerrestre() ;
+
+    @Override
+    public Forma getFormaActual() {
+        return this.forma;
     }
 
-	
 
 }

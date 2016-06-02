@@ -1,5 +1,7 @@
 package fiuba.algo3.test.unidadesVivientes;
 
+import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
+import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;

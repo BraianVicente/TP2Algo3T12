@@ -1,7 +1,12 @@
 package fiuba.algo3.modelo.formas;
 
-public class Camaro extends Forma {
+public class Camaro extends FormaTerrestre {
 
+    private Integer distanciaMovimiento ;
+
+    public Camaro(){
+        this.distanciaMovimiento = 5 ;
+    }
     @Override
     public Forma getAlternativa() {
         return new HumanoideBumblebee();
@@ -19,7 +24,7 @@ public class Camaro extends Forma {
 
     @Override
     public int getDistanciaMovimiento() {
-        return 5;
+        return this.distanciaMovimiento;
     }
 
     @Override
@@ -31,5 +36,20 @@ public class Camaro extends Forma {
     public boolean esVehiculo() {
         return true;
     }
+
+    @Override
+    public Integer disminuirEnUnMovimiento() {
+        return (5/getDistanciaMovimiento()) ;
+    }
+
+    public void movimientoNormal(){
+        this.distanciaMovimiento = 5;
+    }
+
+    @Override
+    public void movimientoPenalizado() {
+        this.distanciaMovimiento = (5/2) ;
+    }
+
 
 }

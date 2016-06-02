@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.formas;
 
-public class HumanoideBonecrusher extends Forma {
+public class HumanoideBonecrusher extends FormaTerrestre {
 
     @Override
     public Forma getAlternativa() {
@@ -30,5 +30,15 @@ public class HumanoideBonecrusher extends Forma {
     @Override
     public boolean esVehiculo() {
         return false;
+    }
+
+    @Override
+    public void movimientoPenalizado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer disminuirEnUnMovimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

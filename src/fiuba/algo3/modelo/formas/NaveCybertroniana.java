@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.formas;
 
-public class NaveCybertroniana extends Forma {
+public class NaveCybertroniana extends FormaAerea {
 
     @Override
     public Forma getAlternativa() {
@@ -30,5 +30,15 @@ public class NaveCybertroniana extends Forma {
     @Override
     public boolean esVehiculo() {
         return true;
+    }
+
+    @Override
+    public void disminuirPuntosAtaque() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer disminuirEnUnMovimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

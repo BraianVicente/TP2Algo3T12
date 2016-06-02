@@ -27,4 +27,9 @@ public class Megatron extends Transformer {
         return 550;
     }
 
+    @Override
+    public boolean esTerrestre() {
+		return false;
+    }
+
 }

@@ -72,4 +72,8 @@ public class Posicion implements Cloneable {
     public String toString() {
         return "(x=" + x + ", y=" + y + ")";
     }
+
+    public boolean contiguoAPosicion(Posicion actual) {
+        return this.distanciaA(actual) == 1 ;
+    }
 }
