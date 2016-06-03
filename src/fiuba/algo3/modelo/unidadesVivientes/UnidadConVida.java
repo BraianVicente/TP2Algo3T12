@@ -39,12 +39,11 @@ public abstract class UnidadConVida extends Unidad{
     	return vida;
     }
     @Override
-	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException,DeadUnitException {
+	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException {
     	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
         this.disminuirVida(danio);
-	
     }
     
     //------------------ataque-----------------
@@ -73,7 +72,6 @@ public abstract class UnidadConVida extends Unidad{
     }
 
     private void disminuirVida(int danio) {
-        vida -= danio;
-    	if (vida <= 0) throw new DeadUnitException();    
+        vida -= danio;    
     }
 }
