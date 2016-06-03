@@ -1,5 +1,6 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
@@ -35,6 +36,8 @@ public abstract class UnidadConVida extends Unidad{
 	//-------------------vida---------------
     private int vida;
     public abstract int getVidaMaxima();
+    
+    @Override
     public int getVida(){
     	return vida;
     }
@@ -57,6 +60,7 @@ public abstract class UnidadConVida extends Unidad{
     public void atacarA(Unidad receptor,Posicion a, Posicion desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException{
     	if(!this.puedeAtacar(a, desde)) throw new AtaqueInvalidoPorDistanciaException();
     	this.atacarA(receptor);
+    	if (receptor.getVida() <= 0) Death.getInstance().unidadMuerta(a);
     }
     protected abstract int getDistanciaAtaque();
     protected abstract int getPuntosAtaque();
@@ -72,6 +76,6 @@ public abstract class UnidadConVida extends Unidad{
     }
 
     private void disminuirVida(int danio) {
-        vida -= danio;    
+        vida -= danio;
     }
 }

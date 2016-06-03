@@ -48,4 +48,9 @@ public class UnidadVacia extends Unidad {
     public Forma getFormaActual() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+	@Override
+	public int getVida() {
+		return 0;
+	}
 }

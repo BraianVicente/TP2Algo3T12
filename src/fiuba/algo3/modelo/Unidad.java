@@ -29,5 +29,7 @@ public abstract class Unidad {
     public abstract boolean tieneChispa();
 
     public abstract Forma getFormaActual() ;
+    
+    public abstract int getVida();
 
 }

@@ -22,7 +22,7 @@ public class Death implements DeathListener {
 
 	@Override
 	public void unidadMuerta(Posicion pos) {
-		if (tablero.isEmpty(pos)) return;
+		if (tablero.isEmpty(pos)) throw new RuntimeException();
 		if (tablero.obtenerUnidad(pos).tieneChispa())
 			tablero.agregarChispa(pos, ChispaSuprema.getInstance());
 		tablero.quitarUnidadActual(pos);
