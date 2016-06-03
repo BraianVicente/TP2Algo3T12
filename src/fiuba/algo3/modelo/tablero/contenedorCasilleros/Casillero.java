@@ -53,8 +53,8 @@ public class Casillero {
         return unidad;
     }
 
-    public void agregarChispa(Chispa chispa) {
-        this.chispa = chispa;
+    public void agregarChispa() {
+        this.chispa = ChispaSuprema.getInstance();
     }
     
     public boolean tieneChispa() {

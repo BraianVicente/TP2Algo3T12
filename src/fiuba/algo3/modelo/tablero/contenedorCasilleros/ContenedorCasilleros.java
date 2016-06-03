@@ -5,14 +5,13 @@
  */
 package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import fiuba.algo3.modelo.Unidad;
-import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -60,8 +59,8 @@ public class ContenedorCasilleros {
         return obtenerCasillero(posicion).obtenerUnidad();
     }
 
-    public void agregarChispa(Posicion posicion, Chispa chispa) {
-        obtenerCasillero(posicion).agregarChispa(chispa);
+    public void agregarChispa(Posicion posicion) {
+        obtenerCasillero(posicion).agregarChispa();
 
     }
 

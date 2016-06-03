@@ -7,7 +7,6 @@ package fiuba.algo3.modelo.tablero;
 
 import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Unidad;
-import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
@@ -66,8 +65,8 @@ public class Tablero {
         return tablero.obtenerUnidad(posicion);
     }
 
-    public void agregarChispa(Posicion posicion, Chispa chispa) {
-        tablero.agregarChispa(posicion, chispa);
+    public void agregarChispa(Posicion posicion) {
+        tablero.agregarChispa(posicion);
     }
 
 	public boolean tieneChispa(Posicion posicion) {

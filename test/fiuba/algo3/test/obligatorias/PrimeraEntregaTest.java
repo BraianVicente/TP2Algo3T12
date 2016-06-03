@@ -111,7 +111,7 @@ public class PrimeraEntregaTest {
 		tablero.agregarUnidad(posicion, ratchet);
 		
 		posicion =new Posicion(4,4);
-		tablero.agregarChispa(posicion,chispa);
+		tablero.agregarChispa(posicion);
 		
 		posicion =new Posicion(8,8);
 		tablero.agregarUnidad(posicion, megatron);
