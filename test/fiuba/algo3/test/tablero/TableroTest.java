@@ -11,6 +11,8 @@ import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
+import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
+import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import org.junit.Assert;
@@ -61,8 +63,13 @@ public class TableroTest {
         Assert.fail("No se lanzo la excepcion como debia ser");
     }
     
-
-    
-
+    @Test
+    public void test06UnitDeathSinChispa() {
+    	Tablero tab = new Tablero();
+		MentiTron tron = new MentiTron();//vida:50, ataque: 15
+    	tab.agregarUnidad(new Posicion(5, 5), new Bumblebee());
+    	tab.obtenerUnidad(new Posicion(5, 5)).recibirDanio(tron, 100);    	
+    	Assert.assertEquals(false, tab.isEmpty(new Posicion(5, 5)));
+    }
 }
 
