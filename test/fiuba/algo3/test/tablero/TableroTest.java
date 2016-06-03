@@ -5,18 +5,16 @@
  */
 package fiuba.algo3.test.tablero;
 
-import fiuba.algo3.modelo.Unidad;
+import org.junit.Assert;
+import org.junit.Test;
+
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
 import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Transformer;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  *

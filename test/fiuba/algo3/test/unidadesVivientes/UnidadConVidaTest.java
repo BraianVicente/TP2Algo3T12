@@ -1,14 +1,12 @@
 package fiuba.algo3.test.unidadesVivientes;
 
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
+import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
+import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 /**
  * Testeo UnidadConVida con dos clases de mentira que no son mock creo, esta bin esto? 
  * Como deberia hacerse?

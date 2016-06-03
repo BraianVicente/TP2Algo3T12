@@ -10,5 +10,7 @@ package fiuba.algo3.modelo.tablero;
  * @author brahvic
  */
 public class PosicionOcupadaException extends RuntimeException {
+
+	private static final long serialVersionUID = 3611756005877538235L;
     
 }
