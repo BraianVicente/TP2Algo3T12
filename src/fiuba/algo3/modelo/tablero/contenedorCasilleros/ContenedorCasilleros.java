@@ -92,4 +92,8 @@ public class ContenedorCasilleros {
             }
         }
     }
+
+	public boolean tieneChispa(Posicion posicion) {
+		return misCasilleros.get(posicion).tieneChispa();
+	}
 }

@@ -69,4 +69,8 @@ public class Tablero {
     public void agregarChispa(Posicion posicion, Chispa chispa) {
         tablero.agregarChispa(posicion, chispa);
     }
+
+	public boolean tieneChispa(Posicion posicion) {
+		return tablero.tieneChispa(posicion);
+	}
 }
