@@ -66,10 +66,22 @@ public class TableroTest {
     @Test
     public void test06UnitDeathSinChispa() {
     	Tablero tab = new Tablero();
-		MentiTron tron = new MentiTron();//vida:50, ataque: 15
-    	tab.agregarUnidad(new Posicion(5, 5), new Bumblebee());
-    	tab.obtenerUnidad(new Posicion(5, 5)).recibirDanio(tron, 100);    	
-    	Assert.assertEquals(false, tab.isEmpty(new Posicion(5, 5)));
+    	Posicion pos = new Posicion(5, 5);
+    	tab.agregarUnidad(pos, new Bumblebee());
+    	tab.obtenerUnidad(pos).recibirDanio(new MentiTron(), 100);    	
+    	Assert.assertEquals(false, tab.isEmpty(pos));
+    }
+    
+    @Test
+    public void test07UnitDeathConChispa() {
+    	Tablero tab = new Tablero();
+    	Posicion pos = new Posicion(5, 5);
+    	Bumblebee bee = new Bumblebee();
+    	bee.darChispa();
+    	tab.agregarUnidad(pos, bee);
+    	tab.obtenerUnidad(pos).recibirDanio(new MentiTron(), 100);
+    	Assert.assertEquals(false, tab.isEmpty(pos));
+    	Assert.assertEquals(true, tab.tieneChispa(pos));
     }
 }
 
