@@ -5,27 +5,26 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**
  *
  * @author brahvic
  */
 public class Tablero {
-
     private ContenedorCasilleros tablero;
 
     public Tablero() {
         this.tablero = new ContenedorCasilleros();
         for (Integer i = 0; i < 100; i++) {
             this.tablero.agregarCasilleroVacio(new Posicion(i % 10, i / 10));
-            
         }
+        Death.getInstance().asignarTablero(this);
     }
 
     public boolean isEmpty(Posicion posicion) {
@@ -69,6 +68,5 @@ public class Tablero {
 
     public void agregarChispa(Posicion posicion, Chispa chispa) {
         tablero.agregarChispa(posicion, chispa);
-
     }
 }
