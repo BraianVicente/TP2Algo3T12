@@ -28,15 +28,14 @@ public class ContenedorCasilleros {
     public void agregarCasilleroVacio(Posicion posicion) {
         this.misCasilleros.put(posicion, new Casillero(posicion));
     }
-
+    //este método es el motivo de la refactorización que estoy a punto de hacer
     public boolean isEmpty(Posicion posicion) {
         return obtenerCasillero(posicion).isEmpty();
-
     }
 
     public void quitarUnidadActual(Posicion posicion) {
         obtenerCasillero(posicion).quitarUnidadActual();
-
+        Casillero cas = obtenerCasillero(posicion);
     }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
@@ -50,9 +49,10 @@ public class ContenedorCasilleros {
 
     private Casillero obtenerCasillero(Posicion posicion) {
         if ( ! this.misCasilleros.containsKey(posicion) ) {
-            throw new CasilleroInexistenteException();
+            throw new CasilleroInexistenteException(posicion);
         }
-        return this.misCasilleros.get(posicion);
+        Casillero casillero = this.misCasilleros.get(posicion);
+        return casillero;
     }
 
     public Unidad obtenerUnidad(Posicion posicion) {
@@ -81,7 +81,7 @@ public class ContenedorCasilleros {
                         this.agregarUnidad(actual,unidad);
                         return ;
                     }                  
-                    movRest = movRest - casilleroSiguiente.unidad.getFormaActual().disminuirEnUnMovimiento();
+                    movRest = movRest - casilleroSiguiente.obtenerUnidad().getFormaActual().disminuirEnUnMovimiento();
                     if (movRest > 0){
                         avanzarPorCasillero(posSiguiente,fin,unidad,movRest);
                     }
@@ -94,5 +94,18 @@ public class ContenedorCasilleros {
 
 	public boolean tieneChispa(Posicion posicion) {
 		return misCasilleros.get(posicion).tieneChispa();
+	}
+	
+	public Posicion obtenerPosicion(Unidad u) throws NoSeEncuentraUnidadException{
+		Posicion buscada = null;
+		for(Map.Entry<Posicion, Casillero> entrada : misCasilleros.entrySet()){
+			if(entrada.getValue().obtenerUnidad() == u){
+				buscada = entrada.getKey();
+			}
+		}
+		if(buscada==null){
+			throw new NoSeEncuentraUnidadException(u);
+		}
+		return buscada;
 	}
 }

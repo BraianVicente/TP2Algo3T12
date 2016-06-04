@@ -1,22 +1,26 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.test.unidadesVivientes;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
+import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 public class MentiTron extends UnidadConVida {
 
-	public MentiTron(){
-		super(new Decepticons());
+	public MentiTron() {
+		super(new Decepticons(), new IgnorarMuerte());
 	}
+
 	@Override
 	public int getVidaMaxima() {
-		return 100;
+		return 50;
 	}
 
 	@Override
 	protected int getDistanciaAtaque() {
-		return 1;
+		return 0;
 	}
 
 	@Override
@@ -29,9 +33,9 @@ public class MentiTron extends UnidadConVida {
 		return 2;
 	}
 
-    @Override
-    public Forma getFormaActual() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public Forma getFormaActual() {
+		return null;
+	}
 
 }

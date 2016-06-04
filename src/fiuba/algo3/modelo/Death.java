@@ -1,11 +1,17 @@
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 
 public class Death implements DeathListener {
-	
-	private Tablero tablero;
+	private Tablero aInformar;
+	public Death(Tablero aInformar){
+		this.aInformar = aInformar;
+	}
+	public void murio(Unidad u) throws NoSeEncuentraUnidadException{
+		aInformar.murio(u);
+	}
+	/*
 	private static DeathListener INSTANCE = new Death();
 	
 	private Death() {}
@@ -26,5 +32,7 @@ public class Death implements DeathListener {
 			tablero.agregarChispa(pos);
 		tablero.quitarUnidadActual(pos);
 	}
+	*/
+	
 
 }

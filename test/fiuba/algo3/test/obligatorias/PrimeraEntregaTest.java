@@ -11,6 +11,7 @@ import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.*;
 
 
@@ -144,7 +145,7 @@ public class PrimeraEntregaTest {
 	posicion =new Posicion(0,1);
 	tablero.agregarUnidad(posicion,frenzy);*/
 	@Test(expected=FriendlyFireException.class)
-	public void test08AtaqueAmigoNoDeberiaPermitirseEntreAutobots(){
+	public void test08AtaqueAmigoNoDeberiaPermitirseEntreAutobots() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		Tablero tablero=new Tablero();
 		Transformer optimusPrime = new Optimusprime();
 		Transformer bumblebee = new Bumblebee();
@@ -159,7 +160,7 @@ public class PrimeraEntregaTest {
 	}
 	
 	@Test
-	public void test09AtaqueAmigoNoDeberiaPermitirseEntreDecepticonsYNoDeberiaSacarVida(){
+	public void test09AtaqueAmigoNoDeberiaPermitirseEntreDecepticonsYNoDeberiaSacarVida() throws NoSeEncuentraUnidadException{
 		Tablero tablero=new Tablero();
 		
 		Transformer megatron = new Megatron();
@@ -181,7 +182,7 @@ public class PrimeraEntregaTest {
 	}
 	
 	@Test
-	public void test09OptimusAtacaMegatronDistanciaValidaYSacaVida(){
+	public void test09OptimusAtacaMegatronDistanciaValidaYSacaVida() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		Tablero tablero=new Tablero();
 		Transformer megatron = new Megatron();
 		Transformer  optimusPrime= new Optimusprime();
@@ -196,7 +197,7 @@ public class PrimeraEntregaTest {
 		
 	}
 	@Test
-	public void test10OptimusAtacaMegatronDistanciaInvalidaYNoSacaVida(){
+	public void test10OptimusAtacaMegatronDistanciaInvalidaYNoSacaVida() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		Tablero tablero=new Tablero();
 		
 		Transformer megatron = new Megatron();
@@ -220,7 +221,7 @@ public class PrimeraEntregaTest {
 	}
 	
 	@Test
-	public void test11OptimusAtacaMegatronDistanciaInvalidaCambiaDeFormaPuedeAtacar(){
+	public void test11OptimusAtacaMegatronDistanciaInvalidaCambiaDeFormaPuedeAtacar() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		Tablero tablero=new Tablero();
 		
 		Transformer megatron = new Megatron();

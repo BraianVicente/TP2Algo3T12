@@ -4,23 +4,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
 
 public class RatchetTest {
 
 
 	@Test
-	public void testCambiaDanioAtaque() throws FriendlyFireException {
+	public void testCambiaDanioAtaque() throws FriendlyFireException, NoSeEncuentraUnidadException {
 		MentiTron tron= new MentiTron();//arranca con 50 de vida
 		Ratchet transformer = new Ratchet();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 100-35);
+		Assert.assertEquals(tron.getVida(), 50-35);
 		transformer.transformar();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 100-35-5);
+		Assert.assertEquals(tron.getVida(), 50-35-5);
 	}
 	@Test
 	public void testCambiaMovilidad(){
@@ -38,7 +37,7 @@ public class RatchetTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireVehiculo() throws FriendlyFireException{
+	public void testEsFriendlyFireVehiculo() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();
 		Ratchet transformer = new Ratchet();
 		transformer.atacarA(prime);
@@ -46,7 +45,7 @@ public class RatchetTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireHumanoide() throws FriendlyFireException{
+	public void testEsFriendlyFireHumanoide() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();
 		Ratchet transformer = new Ratchet();
 		transformer.transformar();

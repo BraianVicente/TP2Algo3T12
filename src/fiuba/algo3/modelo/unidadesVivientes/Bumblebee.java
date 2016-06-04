@@ -1,16 +1,22 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Camaro;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 
 public class Bumblebee extends Transformer {
 
-    public Bumblebee() {
-        super(new Autobots());
+    public Bumblebee(DeathListener command) {
+        super(new Autobots(), command);
     }
 
+    public Bumblebee() {
+        super(new Autobots(), new IgnorarMuerte());
+    }
     @Override
     protected Forma getVehiculo() {
         return new Camaro();

@@ -4,16 +4,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 
 public class BonecrusherTest {
 
 
 	@Test
-	public void testCambiaDanioAtaque() throws FriendlyFireException {
+	public void testCambiaDanioAtaque() throws FriendlyFireException, NoSeEncuentraUnidadException {
 		MentiPrime tron= new MentiPrime();//arranca con 100 de vida
 		Bonecrusher transformer = new Bonecrusher();
 		transformer.atacarA(tron);
@@ -38,7 +37,7 @@ public class BonecrusherTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireVehiculo() throws FriendlyFireException{
+	public void testEsFriendlyFireVehiculo() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiTron prime = new MentiTron();
 		Bonecrusher transformer = new Bonecrusher();
 		transformer.atacarA(prime);
@@ -46,7 +45,7 @@ public class BonecrusherTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireHumanoide() throws FriendlyFireException{
+	public void testEsFriendlyFireHumanoide() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiTron prime = new MentiTron();
 		Bonecrusher transformer = new Bonecrusher();
 		transformer.transformar();

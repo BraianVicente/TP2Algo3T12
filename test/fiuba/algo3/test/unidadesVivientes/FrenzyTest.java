@@ -1,11 +1,10 @@
 package fiuba.algo3.test.unidadesVivientes;
 
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
 
@@ -13,7 +12,7 @@ public class FrenzyTest {
 
 
 	@Test
-	public void testCambiaDanioAtaque() throws FriendlyFireException {
+	public void testCambiaDanioAtaque() throws FriendlyFireException, NoSeEncuentraUnidadException {
 		MentiPrime tron= new MentiPrime();//arranca con 100 de vida
 		Frenzy transformer = new Frenzy();
 		transformer.atacarA(tron);
@@ -38,7 +37,7 @@ public class FrenzyTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireVehiculo() throws FriendlyFireException{
+	public void testEsFriendlyFireVehiculo() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiTron prime = new MentiTron();
 		Frenzy transformer = new Frenzy();
 		transformer.atacarA(prime);
@@ -46,7 +45,7 @@ public class FrenzyTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireHumanoide() throws FriendlyFireException{
+	public void testEsFriendlyFireHumanoide() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiTron prime = new MentiTron();
 		Frenzy transformer = new Frenzy();
 		transformer.transformar();

@@ -4,9 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 /**
  * Testeo UnidadConVida con dos clases de mentira que no son mock creo, esta bin esto? 
  * Como deberia hacerse?
@@ -32,14 +31,14 @@ public class UnidadConVidaTest {
 		Assert.assertFalse(tron.puedeMoverse(new Posicion(1,1), new Posicion(2,4)));
 	}
 	@Test
-	public void testMentiPrimeAtacaAMentiTron() throws FriendlyFireException{
+	public void testMentiPrimeAtacaAMentiTron() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();//vida: 100, ataque: 10
 		MentiTron tron = new MentiTron();//vida:50, ataque: 15
 		prime.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 100-10);
+		Assert.assertEquals(tron.getVida(), 50-10);
 	}
 	@Test
-	public void testMentiTronAtacaAMentiPrime() throws FriendlyFireException{
+	public void testMentiTronAtacaAMentiPrime() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();//vida: 100, ataque: 10
 		MentiTron tron = new MentiTron();//vida:50, ataque: 15
 		tron.atacarA(prime);
@@ -47,7 +46,7 @@ public class UnidadConVidaTest {
 	}
 	
 	@Test(expected=FriendlyFireException.class)
-	public void testMentiTronAtacaAMentiTronCausaError() throws FriendlyFireException{
+	public void testMentiTronAtacaAMentiTronCausaError() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();//vida: 100, ataque: 10
 		MentiPrime tron = new MentiPrime();//vida: 100, ataque: 10
 		tron.atacarA(prime);

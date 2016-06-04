@@ -8,13 +8,18 @@ package fiuba.algo3.test.tablero;
 import org.junit.Assert;
 import org.junit.Test;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.unidadesVivientes.AtaqueInvalidoPorDistanciaException;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
+import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
+import fiuba.algo3.modelo.unidadesVivientes.Megatron;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.test.unidadesVivientes.MentiTron;
 
 /**
  *
@@ -62,27 +67,35 @@ public class TableroTest {
     }
     
     @Test
-    public void test06UnitDeathSinChispa() {
+    public void test06UnitDeathSinChispa() throws FriendlyFireException, AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException {
     	Tablero tab = new Tablero();
-    	Posicion pos = new Posicion(5, 5);
-    	Bumblebee bee = new Bumblebee();
-    	MentiTron tron = new MentiTron();
-    	tab.agregarUnidad(pos, bee);
-    	for (int i = 0; i <= 23; i++)
-    		tron.atacarA(tab.obtenerUnidad(pos), pos, new Posicion(4, 4));
-    	Assert.assertEquals(true, tab.isEmpty(pos));
+    	Death command = new Death(tab); 
+    	Posicion posB = new Posicion(5, 5);
+    	Posicion posM = new Posicion(4, 4);
+    	Bumblebee bee = new Bumblebee(command);
+    	Megatron tron = new Megatron(command);
+    	tab.agregarUnidad(posB, bee);
+    	tab.agregarUnidad(posM, tron);
+    	while(bee.getVida()>0)
+    		tron.atacarA(bee, posB, posM);
+    	Assert.assertEquals(true, tab.isEmpty(posB));
     }
     
     @Test
-    public void test07UnitDeathConChispa() {
+    public void test07UnitDeathConChispa() throws FriendlyFireException, AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException {
     	Tablero tab = new Tablero();
     	Posicion pos = new Posicion(5, 5);
-    	Bumblebee bee = new Bumblebee();
-    	MentiTron tron = new MentiTron();
+    	Death command = new Death(tab); 
+    	
+    	Bumblebee bee = new Bumblebee(command);
+    	Megatron tron = new Megatron(command);
+    	Posicion posM = new Posicion(4, 4);
     	bee.darChispa();
     	tab.agregarUnidad(pos, bee);
-    	for (int i = 0; i <= 23; i++)
-    		tron.atacarA(tab.obtenerUnidad(pos), pos, new Posicion(4, 4));
+    	tab.agregarUnidad(posM, tron);
+    	
+    	while(bee.getVida()>0)
+    		tron.atacarA(bee, pos, posM);
     	Assert.assertEquals(true, tab.isEmpty(pos));
     	Assert.assertEquals(true, tab.tieneChispa(pos));
     }

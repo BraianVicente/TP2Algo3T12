@@ -1,19 +1,23 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.Death;
+import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 
 public abstract class UnidadConVida extends Unidad{
 	
 	private Chispa chispa;
+	private DeathListener command;
 	
-	protected UnidadConVida(Equipo equipo) {
+	protected UnidadConVida(Equipo equipo, DeathListener command) {
 		super(equipo);
 		vida = getVidaMaxima();
 		chispa = new ChispaHolder();
+		this.command = command;
 	}
 	@Override
 	public boolean existe(){
@@ -42,11 +46,14 @@ public abstract class UnidadConVida extends Unidad{
     	return vida;
     }
     @Override
-	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException {
+	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException {
     	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
         this.disminuirVida(danio);
+        if (getVida() <= 0){
+    		command.murio(this);//Death.getInstance().unidadMuerta(a);
+    	}
     }
     
     //------------------ataque-----------------
@@ -54,13 +61,12 @@ public abstract class UnidadConVida extends Unidad{
     	return a.distanciaA(desde)<=getDistanciaAtaque();
     }
     
-    public void atacarA(Unidad receptor) throws FriendlyFireException{
+    public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{
     	    	receptor.recibirDanio(this,getPuntosAtaque());
     }
-    public void atacarA(Unidad receptor,Posicion a, Posicion desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException{
+    public void atacarA(Unidad receptor,Posicion a, Posicion desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException{
     	if(!this.puedeAtacar(a, desde)) throw new AtaqueInvalidoPorDistanciaException();
     	this.atacarA(receptor);
-    	if (receptor.getVida() <= 0) Death.getInstance().unidadMuerta(a);
     }
     protected abstract int getDistanciaAtaque();
     protected abstract int getPuntosAtaque();

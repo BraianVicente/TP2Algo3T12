@@ -4,23 +4,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.MentiPrime;
-import fiuba.algo3.modelo.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
 
 public class OptimusprimeTest {
 
 
 	@Test
-	public void testCambiaDanioAtaque() throws FriendlyFireException {
+	public void testCambiaDanioAtaque() throws FriendlyFireException, NoSeEncuentraUnidadException {
 		MentiTron tron= new MentiTron();//arranca con 50 de vida
 		Optimusprime transformer = new Optimusprime();
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 100-15);
+		Assert.assertEquals(tron.getVida(), 50-15);
 		transformer.transformar();
+		
 		transformer.atacarA(tron);
-		Assert.assertEquals(tron.getVida(), 100-15-50);
+		Assert.assertEquals(tron.getVida(), 50-15-50);
 	}
 	@Test
 	public void testCambiaMovilidad(){
@@ -38,7 +38,7 @@ public class OptimusprimeTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireVehiculo() throws FriendlyFireException{
+	public void testEsFriendlyFireVehiculo() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();
 		Optimusprime transformer = new Optimusprime();
 		transformer.atacarA(prime);
@@ -46,7 +46,7 @@ public class OptimusprimeTest {
 	}
 	
 	@Test(expected = FriendlyFireException.class)
-	public void testEsFriendlyFireHumanoide() throws FriendlyFireException{
+	public void testEsFriendlyFireHumanoide() throws FriendlyFireException, NoSeEncuentraUnidadException{
 		MentiPrime prime = new MentiPrime();
 		Optimusprime transformer = new Optimusprime();
 		transformer.transformar();

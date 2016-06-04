@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.formas.AvionF22;
 import fiuba.algo3.modelo.formas.Forma;
@@ -7,8 +9,12 @@ import fiuba.algo3.modelo.formas.HumanoideRatchet;
 
 public class Ratchet extends Transformer {
 
+    public Ratchet(DeathListener command) {
+        super(new Autobots(), command);
+    }
+    
     public Ratchet() {
-        super(new Autobots());
+        super(new Autobots(), new IgnorarMuerte());
     }
 
     @Override

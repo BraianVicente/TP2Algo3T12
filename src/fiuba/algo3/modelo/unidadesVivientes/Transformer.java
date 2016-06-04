@@ -1,13 +1,14 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
+import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 
 public abstract class Transformer extends UnidadConVida {
 	Forma forma;
 	
-	Transformer(Equipo equipo){
-		super(equipo);
+	Transformer(Equipo equipo,DeathListener command){
+		super(equipo,command);
 		forma = getVehiculo();
 	}
 	

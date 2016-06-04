@@ -20,10 +20,10 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Casillero {
 
-    public Unidad unidad;
-    public Chispa chispa;
-    public Superficie aerea;
-    public Superficie terrestre;
+    private Unidad unidad;
+    private Chispa chispa;
+    private Superficie aerea;
+    private Superficie terrestre;
     
     public Casillero(Posicion posicion) {
         this.unidad = new UnidadVacia();

@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Blindado;
 import fiuba.algo3.modelo.formas.Forma;
@@ -7,8 +9,11 @@ import fiuba.algo3.modelo.formas.HumanoideBonecrusher;
 
 public class Bonecrusher extends Transformer {
 
-    public Bonecrusher() {
-        super(new Decepticons());
+	public Bonecrusher(DeathListener command) {
+        super(new Decepticons(), command);
+    }
+	public Bonecrusher() {
+        super(new Decepticons(), new IgnorarMuerte());
     }
 
     @Override
