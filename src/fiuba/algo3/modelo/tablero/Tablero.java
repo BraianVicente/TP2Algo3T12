@@ -5,10 +5,10 @@
  */
 package fiuba.algo3.modelo.tablero;
 
-import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 

@@ -1,12 +1,11 @@
 package fiuba.algo3.modelo.unidadesVivientes;
 
-import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 
 public abstract class UnidadConVida extends Unidad{
 	

@@ -1,9 +1,7 @@
 package fiuba.algo3.test.unidadesVivientes;
 
-import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
-import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 

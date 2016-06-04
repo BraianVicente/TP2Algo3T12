@@ -1,7 +1,7 @@
 package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.tablero.Tablero;
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 
 public class Death implements DeathListener {
 	private Tablero aInformar;

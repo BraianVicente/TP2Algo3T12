@@ -10,7 +10,8 @@ import java.util.Map;
 
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 
 /**
@@ -28,7 +29,7 @@ public class ContenedorCasilleros {
     public void agregarCasilleroVacio(Posicion posicion) {
         this.misCasilleros.put(posicion, new Casillero(posicion));
     }
-    //este método es el motivo de la refactorización que estoy a punto de hacer
+    
     public boolean isEmpty(Posicion posicion) {
         return obtenerCasillero(posicion).isEmpty();
     }
@@ -42,10 +43,11 @@ public class ContenedorCasilleros {
         if (this.isEmpty(posicion)){
             obtenerCasillero(posicion).agregarUnidad(unidad);
         } else {
-            throw new PosicionOcupadaException();
+            throw new PosicionOcupadaException(posicion);
         }
 
     }
+    
 
     private Casillero obtenerCasillero(Posicion posicion) {
         if ( ! this.misCasilleros.containsKey(posicion) ) {
