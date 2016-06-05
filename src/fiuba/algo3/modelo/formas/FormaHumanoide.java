@@ -3,12 +3,12 @@ package fiuba.algo3.modelo.formas;
 public abstract class FormaHumanoide extends Forma {
 	@Override
 	public boolean esHumanoide() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean esVehiculo() {
-		return true;
+		return false;
 	}
 
 	@Override
