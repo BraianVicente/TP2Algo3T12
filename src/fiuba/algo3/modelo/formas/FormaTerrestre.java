@@ -18,6 +18,10 @@ public abstract class FormaTerrestre extends FormaVehiculo {
 	public float danioRealPorEspinas(float danioPosible){
 		return danioPosible;
 	}
+	
+	public boolean esAerea(){
+		return false;
+	}
 
     
 }

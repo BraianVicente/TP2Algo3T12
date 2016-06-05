@@ -13,9 +13,9 @@ public abstract class Bonus {
 			this.command = new IgnorarLevantado();
 		}
 	}
-	protected abstract Modificador obtenerModificador();
+	public abstract Modificador obtenerModificador();
 	public void serAgarradoPor(UnidadConVida u){
-		u.agregarModificador(obtenerModificador());
+		u.recibirBonus(this);
 		command.agarrado(this);
 	}
 }

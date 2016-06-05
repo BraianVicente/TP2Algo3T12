@@ -24,5 +24,9 @@ public abstract class FormaHumanoide extends Forma {
 	public float danioRealPorEspinas(float danioPosible){
 		return danioPosible;
 	}
+	
+	public boolean esAerea(){
+		return false;
+	}
 
 }

@@ -2,12 +2,21 @@ package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.Unidad;
+import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
+import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
+import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
+import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
+import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 
 public abstract class UnidadConVida extends Unidad{
 	
@@ -90,23 +99,42 @@ public abstract class UnidadConVida extends Unidad{
     }
     protected abstract int getDistanciaMovimiento();
 
-    public void recibirAtaqueEspinas(){
-        this.disminuirVida((getVidaMaxima()*5)/100);//cambié vida por getVidaMaxima()
-    }
 
-    private void disminuirVida(int danio) {
+    protected void disminuirVida(int danio) {
     	if(modificadores.recibeDanio()){
     		vida -= danio;
     	}
     }
     
     //------------------------modificadores------------------//
-    public void agregarModificador(Modificador m){
+    
+    protected void agregarModificador(Modificador m){
     	modificadores.agregar(m);
     }
     //esto se delega para abajo
     protected float coeficienteAtaqueModoVehiculo(){
     	return modificadores.coeficienteAtaqueModoVehiculo();
     }
+	public void recibirBonus(Bonus bonus) {
+		agregarModificador(bonus.obtenerModificador());
+	}
+	
+	//-------------------------interacción con superfícies--------------------//
+	public void serAfectadoPor(Superficie s){
+		s.afectarA(this);
+	}
+	//debe haber una manera más linda de hacer eesto
+	public abstract void serAfectadoPor(NebulosaAndromeda s);
+	public abstract void serAfectadoPor(Nubes s);
+	public abstract void serAfectadoPor(TormentaPsionica s);
+	public abstract void serAfectadoPor(Espinas s);
+	public abstract void serAfectadoPor(Pantano s);
+	public abstract void serAfectadoPor(Rocosa s);
+	
+	public float coeficienteMovimientoEn(Superficie s){
+		return 1;
+	}
+	
+	public abstract float coeficienteMovimientoEn(Pantano s);
     
 }

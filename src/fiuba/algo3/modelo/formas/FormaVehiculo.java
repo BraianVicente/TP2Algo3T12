@@ -14,5 +14,9 @@ public abstract class FormaVehiculo extends Forma {
 	public float coeficienteAtaqueVehiculo(float posible) {
 		return posible;
 	}
+	
+	public boolean esAerea(){
+		return false;
+	}
 
 }
