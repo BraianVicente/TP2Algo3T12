@@ -6,16 +6,26 @@
 package fiuba.algo3.modelo.tablero;
 
 import fiuba.algo3.modelo.Unidad;
+
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
+
+import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.equipos.Equipo;
+
 import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
+
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
+
+import fiuba.algo3.modelo.unidadesVivientes.Menasor;
+
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidadesVivientes.Superion;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
@@ -28,6 +38,10 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
+
+    private static final Integer MAX_DISTANCE = null; //definir distancia maxima entre units para hacer la combinacion
+	private ContenedorCasilleros tablero;
+
 
     public Tablero() {
         this.contenedorUnidades = new ContenedorUnidades();
@@ -95,5 +109,49 @@ public class Tablero {
 	public void desplazarPosicionContigua(UnidadConVida unidad, Posicion posicionSiguiente){
 		contenedorUnidades.removerUnidad(unidad);
 		contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);
+	}
+	
+	public void combinar(Posicion a, Posicion b, Posicion c) {
+		UnidadConVida unita, unitb, unitc;
+		
+		unita =obtenerUnidad(a);
+		unitb =obtenerUnidad(b);
+		unitc =obtenerUnidad(c);
+		
+		// check the distance between units
+		if ( (a.distanciaA(b) > MAX_DISTANCE) || (b.distanciaA(c) > MAX_DISTANCE) || (c.distanciaA(a) > MAX_DISTANCE) ) {
+			// throw an exception or something
+		}
+		
+		// check they're in the same team
+		if (!unita.equipo().mismoEquipo(unitb.equipo(), unitc.equipo())) {
+			// throw exception or something
+		}
+		
+		UnidadConVida comb = (UnidadConVida) unita.equipo().getCombination();
+		
+		if ( (unita.tieneChispa()) || (unitb.tieneChispa()) || (unitc.tieneChispa())) {
+			comb.darChispa();
+		}
+		
+		quitarUnidadActual(a);
+		quitarUnidadActual(b);
+		quitarUnidadActual(c);
+		
+		agregarUnidad(a, comb); // or get avg distance? 
+		
+	}
+
+	private UnidadConVida obtenerUnidad(Posicion p) {
+		return contenedorUnidades.obtenerUnidad(p);
+	}
+
+	private void agregarUnidad(Posicion p, UnidadConVida u) {
+		contenedorUnidades.agregarUnidad(u, p);
+	}
+
+	private void quitarUnidadActual(Posicion p) {
+		UnidadConVida u=contenedorUnidades.obtenerUnidad(p);
+		contenedorUnidades.removerUnidad(u);
 	}
 }

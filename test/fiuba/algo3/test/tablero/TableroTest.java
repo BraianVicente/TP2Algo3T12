@@ -19,7 +19,10 @@ import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Megatron;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
+import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
 import fiuba.algo3.test.unidadesVivientes.MentiTron;
+import fiuba.algo3.modelo.unidadesVivientes.Superion;
 
 /**
  *
@@ -98,6 +101,25 @@ public class TableroTest {
     		tron.atacarA(bee, pos, posM);
     	Assert.assertEquals(true, tab.isEmpty(pos));
     	Assert.assertEquals(true, tab.tieneChispa(pos));
+    }
+    
+    @Test
+    public void test08CombinacionSuperionSinChispa() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(6,6), posc = new Posicion(6,5);
+    	Optimusprime op = new Optimusprime();
+    	Bumblebee bee = new Bumblebee();
+    	Ratchet rat = new Ratchet();
+    	
+    	tab.agregarUnidad(posa, op);
+    	tab.agregarUnidad(posb, bee);
+    	tab.agregarUnidad(posc, rat);
+    	
+    	tab.combinar(posa, posb, posc);
+    	
+    	Assert.assertEquals(true, tab.isEmpty(posb));
+    	Assert.assertEquals(true, tab.isEmpty(posc));
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Superion);
     }
 }
 

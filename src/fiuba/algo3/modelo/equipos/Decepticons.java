@@ -1,5 +1,8 @@
 package fiuba.algo3.modelo.equipos;
 
+import fiuba.algo3.modelo.Unidad;
+import fiuba.algo3.modelo.unidadesVivientes.Menasor;
+
 public class Decepticons extends Equipo {
 
     @Override
@@ -21,5 +24,10 @@ public class Decepticons extends Equipo {
     public boolean mismoEquipo(Ninguno otro) {
         return false;
     }
+
+	@Override
+	public Unidad getCombination() {
+		return new Menasor();
+	}
 
 }

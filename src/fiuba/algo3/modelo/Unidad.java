@@ -21,6 +21,10 @@ public abstract class Unidad {
     public boolean es(Equipo e) {
         return equipo.equals(e);
     }
+    
+    public Equipo equipo() {
+    	return this.equipo;
+    }
 
     public abstract boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde);
 
