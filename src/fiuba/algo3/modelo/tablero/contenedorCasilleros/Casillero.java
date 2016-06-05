@@ -39,9 +39,9 @@ public class Casillero {
     public void agregarUnidad(Unidad unidad2) {
         this.unidad = unidad2;
         if( ( (Transformer)unidad).esTerrestre() ){
-            this.terrestre.aplicarPenalizacion((Transformer) unidad2);
+            this.terrestre.afectarA((Transformer) unidad2);
         } else {
-            this.aerea.aplicarPenalizacion((Transformer) unidad2);
+            this.aerea.afectarA((Transformer) unidad2);
         }
     }
 

@@ -7,8 +7,12 @@ public class ModificadorFlash extends ModificadorTransitorio {
 		return 3;
 	}
 	@Override
-	protected float coeficienteVelocidad(){
+	public float coeficienteVelocidad(){
 		return 3;
+	}
+	@Override
+	public Object clone() {
+		return new ModificadorFlash();
 	}
 
 }

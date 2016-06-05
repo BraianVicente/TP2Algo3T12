@@ -9,13 +9,21 @@ package fiuba.algo3.modelo.formas;
  *
  * @author brahvic
  */
-public abstract class FormaTerrestre extends Forma {
-    
-    public abstract void movimientoPenalizado() ;
-
-    public void recibirDanioEspinas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+public abstract class FormaTerrestre extends FormaVehiculo {
+	@Override
+    public float coeficienteMovimientoEnPantano(){
+		return 0;
+	}
+	@Override
+	public float danioRealPorEspinas(float danioPosible){
+		return danioPosible;
+	}
+	
+	public boolean esAerea(){
+		return false;
+	}
+	public boolean esTerrestre(){
+		return true;
+	}
     
 }

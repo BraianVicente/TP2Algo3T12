@@ -28,27 +28,12 @@ public class Camaro extends FormaTerrestre {
     }
 
     @Override
-    public boolean esHumanoide() {
-        return false;
-    }
-
-    @Override
-    public boolean esVehiculo() {
-        return true;
-    }
-
-    @Override
     public Integer disminuirEnUnMovimiento() {
         return (5/getDistanciaMovimiento()) ;
     }
 
     public void movimientoNormal(){
         this.distanciaMovimiento = 5;
-    }
-
-    @Override
-    public void movimientoPenalizado() {
-        this.distanciaMovimiento = (5/2) ;
     }
 
 

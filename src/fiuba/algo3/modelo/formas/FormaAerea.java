@@ -9,8 +9,19 @@ package fiuba.algo3.modelo.formas;
  *
  * @author brahvic
  */
-public abstract class FormaAerea extends Forma {
-    
-    public abstract void disminuirPuntosAtaque() ;
+public abstract class FormaAerea extends FormaVehiculo {
+	public float coeficienteMovimientoEnPantano(){
+		return 1;
+	}
+	public float danioRealPorEspinas(float danioPosible){
+		return 0;
+	}
+	
+	public boolean esAerea(){
+		return true;
+	}
+	public boolean esTerrestre(){
+		return false;
+	}
 
 }

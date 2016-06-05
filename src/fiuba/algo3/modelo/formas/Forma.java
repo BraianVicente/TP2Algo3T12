@@ -24,4 +24,12 @@ public abstract class Forma {
 
     public abstract Integer disminuirEnUnMovimiento() ;
 
+	public abstract float coeficienteAtaqueVehiculo(float posible);
+	public abstract float coeficienteMovimientoEnPantano();
+	public abstract float danioRealPorEspinas(float danioPosible);
+	
+	public abstract boolean esAerea();
+
+	public abstract boolean esTerrestre();
+
 }
