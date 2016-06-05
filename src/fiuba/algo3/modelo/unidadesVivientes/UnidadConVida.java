@@ -61,6 +61,11 @@ public abstract class UnidadConVida extends Unidad{
     public int getVida(){
     	return vida;
     }
+    
+    protected void setVida(int vida) {
+    	this.vida = vida;
+    }
+    
     @Override
 	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException {
     	if(atacante.es(equipo)){//Este if estï¿½ mal, cï¿½mo puedo volarlo?
@@ -92,8 +97,8 @@ public abstract class UnidadConVida extends Unidad{
     }
     public int getVelocidad(){
     	if(modificadores.puedeMoverse()){
-    		//capaz sería mejor que si está afectado por la nebulosa coso 
-    		//devuelva 0 coeficienteVelocidad, por ahora lo dejo así por las dudas.
+    		//capaz serï¿½a mejor que si estï¿½ afectado por la nebulosa coso 
+    		//devuelva 0 coeficienteVelocidad, por ahora lo dejo asï¿½ por las dudas.
     		return (int) Math.ceil(getDistanciaMovimiento()*modificadores.coeficienteVelocidad());
     	}else{
     		return 0;
@@ -126,7 +131,7 @@ public abstract class UnidadConVida extends Unidad{
 		modificadores.pasaTurno();
 	}
 	
-	//-------------------------interacción con superfícies--------------------//
+	//-------------------------interacciï¿½n con superfï¿½cies--------------------//
 	public void serAfectadoPor(Superficie s){
 		s.afectarA(this);
 	}
