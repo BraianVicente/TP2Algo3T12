@@ -24,6 +24,7 @@ public abstract class Transformer extends UnidadConVida {
 	Transformer(Equipo equipo,DeathListener command){
 		super(equipo,command);
 		forma = getVehiculo();
+		movimientosRestantes=getDistanciaMovimiento();
 	}
 	
 	public void transformar(){

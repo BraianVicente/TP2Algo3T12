@@ -47,7 +47,7 @@ public class Posicion {
     public int hashCode() {
         int hash;
         hash =  Objects.hashCode(posicionEnElPlano);
-        hash = 83 * hash + Objects.hashCode(this.plano);
+        hash =  hash+Objects.hashCode(plano);
         return hash;
     }
 

@@ -26,8 +26,8 @@ public abstract class UnidadConVida extends Unidad{
 	
 	private Chispa chispa;
 	private DeathListener command;
-	ContenedorModificadores modificadores;
-	private int movimientosRestantes;
+	private ContenedorModificadores modificadores;
+	protected int movimientosRestantes;
 	
 	protected UnidadConVida(Equipo equipo, DeathListener command) {
 		super(equipo);
@@ -35,7 +35,7 @@ public abstract class UnidadConVida extends Unidad{
 		chispa = new ChispaHolder();
 		this.command = command;
 		modificadores=new ContenedorModificadores();
-		movimientosRestantes=getDistanciaMovimiento();
+	
 	}
 	@Override
 	public boolean existe(){

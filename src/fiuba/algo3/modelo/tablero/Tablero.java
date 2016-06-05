@@ -61,7 +61,7 @@ public class Tablero {
     }
 
     public boolean isEmpty(Posicion posicion) {
-        return !this.contenedorUnidades.ocupada(posicion);
+        return !(this.contenedorUnidades.ocupada(posicion));
     }
 
    
