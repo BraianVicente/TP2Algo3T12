@@ -19,7 +19,7 @@ public class Espinas extends Superficie {
     public void aplicarPenalizacion(Transformer unidad) {
         if (unidad.esTerrestre()){
             FormaTerrestre terrestre = (FormaTerrestre)unidad.getFormaActual();
-            terrestre.recibirDanioEspinas();
+            terrestre.recibirDanioEspinas();//es a la unidad
         }
     }
     

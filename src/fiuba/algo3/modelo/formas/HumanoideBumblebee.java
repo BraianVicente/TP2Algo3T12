@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.formas;
 
-public class HumanoideBumblebee extends FormaTerrestre {
+public class HumanoideBumblebee extends FormaHumanoide {
 
     @Override
     public Forma getAlternativa() {
@@ -30,11 +30,6 @@ public class HumanoideBumblebee extends FormaTerrestre {
     @Override
     public boolean esVehiculo() {
         return false;
-    }
-
-    @Override
-    public void movimientoPenalizado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

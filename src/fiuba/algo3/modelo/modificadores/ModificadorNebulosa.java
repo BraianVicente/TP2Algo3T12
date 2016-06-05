@@ -7,8 +7,12 @@ public class ModificadorNebulosa extends ModificadorTransitorio {
 		return 3;
 	}
 	@Override
-	protected boolean puedeMoverse(){
+	public boolean puedeMoverse(){
 		return false;
+	}
+	@Override
+	public Object clone() {
+		return new ModificadorNebulosa();
 	}
 
 }

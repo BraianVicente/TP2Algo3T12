@@ -15,31 +15,33 @@ public abstract class Modificador {
 	public abstract void pasaTurno();
 	
 	abstract boolean haceEfecto();//visibilidad de paquete
+	@Override
+	public abstract Object clone();
 	
 	//-----------métodos de efectos--------------------//
 	//-----------se definen los valores "default" aquí pero la idea es
 	//que los hijos los sobreescriban
-	protected boolean puedeMoverse(){
+	public boolean puedeMoverse(){
 		return true;
 	}
 	
-	protected float coeficienteAtaqueModoVehiculo(){
+	public float coeficienteAtaqueModoVehiculo(){
 		return 1;
 	}
 	
-	protected float coeficienteAtaque(){
+	public float coeficienteAtaque(){
 		return 1;
 	}
 	
-	protected boolean recibeDanio(){
+	public boolean recibeDanio(){
 		return true;
 	}
 	
-	protected float coeficienteVelocidad(){
+	public float coeficienteVelocidad(){
 		return 1;
 	}
 	
-	protected boolean afectadoPorPsionica(){
+	public boolean afectadoPorPsionica(){
 		return false;
 	}
 }

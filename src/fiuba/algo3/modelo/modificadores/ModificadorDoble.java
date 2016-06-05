@@ -7,8 +7,13 @@ public class ModificadorDoble extends ModificadorTransitorio {
 		return 3;
 	}
 	
-	protected float coeficienteAtaque(){
+	public float coeficienteAtaque(){
 		return 2;
+	}
+
+	@Override
+	public Object clone() {
+		return new ModificadorDoble();
 	}
 
 }

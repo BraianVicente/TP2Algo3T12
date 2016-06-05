@@ -32,10 +32,6 @@ public class NaveCybertroniana extends FormaAerea {
         return true;
     }
 
-    @Override
-    public void disminuirPuntosAtaque() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public Integer disminuirEnUnMovimiento() {

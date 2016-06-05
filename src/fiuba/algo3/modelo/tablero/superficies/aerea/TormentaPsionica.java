@@ -18,7 +18,7 @@ public class TormentaPsionica extends Superficie{
     @Override
     public void aplicarPenalizacion(Transformer unidad) {
         FormaAerea aereo = (FormaAerea) unidad.getFormaActual() ;
-        aereo.disminuirPuntosAtaque();
+        aereo.disminuirPuntosAtaque();//es a la unidad que se le mete el modificador delegándole cosas
     }
     
 }

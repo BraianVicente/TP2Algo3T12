@@ -4,6 +4,8 @@ import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
+import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 
@@ -11,6 +13,7 @@ public abstract class UnidadConVida extends Unidad{
 	
 	private Chispa chispa;
 	private DeathListener command;
+	ContenedorModificadores modificadores;
 	
 	protected UnidadConVida(Equipo equipo, DeathListener command) {
 		super(equipo);
@@ -49,7 +52,8 @@ public abstract class UnidadConVida extends Unidad{
     	if(atacante.es(equipo)){//Este if estï¿½ mal, cï¿½mo puedo volarlo?
     		throw new FriendlyFireException();
     	}
-        this.disminuirVida(danio);
+    	
+    	this.disminuirVida(danio);
         if (getVida() <= 0){
     		command.murio(this);//Death.getInstance().unidadMuerta(a);
     	}
@@ -61,7 +65,8 @@ public abstract class UnidadConVida extends Unidad{
     }
     
     public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{
-    	    	receptor.recibirDanio(this,getPuntosAtaque());
+    	int danio = (int)Math.ceil(getPuntosAtaque()*modificadores.coeficienteAtaque());
+    	receptor.recibirDanio(this,danio);
     }
     public void atacarA(Unidad receptor,Posicion a, Posicion desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException{
     	if(!this.puedeAtacar(a, desde)) throw new AtaqueInvalidoPorDistanciaException();
@@ -74,13 +79,34 @@ public abstract class UnidadConVida extends Unidad{
     public boolean puedeMoverse(Posicion a, Posicion desde){
     	return a.distanciaA(desde)<=getDistanciaMovimiento();
     }
+    public int getVelocidad(){
+    	if(modificadores.puedeMoverse()){
+    		//capaz sería mejor que si está afectado por la nebulosa coso 
+    		//devuelva 0 coeficienteVelocidad, por ahora lo dejo así por las dudas.
+    		return (int) Math.ceil(getDistanciaMovimiento()*modificadores.coeficienteVelocidad());
+    	}else{
+    		return 0;
+    	}
+    }
     protected abstract int getDistanciaMovimiento();
 
     public void recibirAtaqueEspinas(){
-        this.disminuirVida((vida*5)/100);
+        this.disminuirVida((getVidaMaxima()*5)/100);//cambié vida por getVidaMaxima()
     }
 
     private void disminuirVida(int danio) {
-        vida -= danio;
+    	if(modificadores.recibeDanio()){
+    		vida -= danio;
+    	}
     }
+    
+    //------------------------modificadores------------------//
+    public void agregarModificador(Modificador m){
+    	modificadores.agregar(m);
+    }
+    //esto se delega para abajo
+    protected float coeficienteAtaqueModoVehiculo(){
+    	return modificadores.coeficienteAtaqueModoVehiculo();
+    }
+    
 }

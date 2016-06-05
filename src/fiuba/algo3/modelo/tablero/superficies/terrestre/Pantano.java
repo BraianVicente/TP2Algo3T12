@@ -20,8 +20,8 @@ public class Pantano extends Superficie {
     public void aplicarPenalizacion(Transformer unidad) {
         if (unidad.esTerrestre() ){
             if ( unidad.esVehiculo()){
-                FormaTerrestre terrestre = (FormaTerrestre)unidad.getFormaActual();
-                terrestre.movimientoPenalizado();
+                FormaTerrestre terrestre = (FormaTerrestre)unidad.getFormaActual();//castear es pecado
+                terrestre.movimientoPenalizado();//es a la unidad
             } 
             throw new MovimientoInvalidoException() ;
         }

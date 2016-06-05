@@ -30,14 +30,14 @@ public abstract class Transformer extends UnidadConVida {
 
 	@Override
 	public int getPuntosAtaque() {
-		return forma.getPuntosAtaque();
+		return (int) Math.ceil(forma.getPuntosAtaque()*forma.coeficienteAtaqueVehiculo(coeficienteAtaqueModoVehiculo()));
 	}
 
 	@Override
 	public int getDistanciaMovimiento() {
 		return forma.getDistanciaMovimiento();
 	}
-
+	///lo ideal es volar éstos
 	public boolean esVehiculo() {
 		return forma.esVehiculo();
 	}
@@ -48,9 +48,9 @@ public abstract class Transformer extends UnidadConVida {
 	}
 
     
-    public abstract boolean esTerrestre() ;
+    public abstract boolean esTerrestre();//lo ideal es volar ésto
 
-    @Override
+    //esto también habría que volarlo
     public Forma getFormaActual() {
         return this.forma;
     }

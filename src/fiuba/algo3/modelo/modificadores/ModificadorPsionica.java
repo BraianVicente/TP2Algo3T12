@@ -2,11 +2,15 @@ package fiuba.algo3.modelo.modificadores;
 
 public class ModificadorPsionica extends ModificadorPermanente {
 	@Override
-	protected float coeficienteAtaqueModoVehiculo(){
+	public float coeficienteAtaqueModoVehiculo(){
 		return 0.4f;
 	}
 	@Override
-	protected boolean afectadoPorPsionica(){
+	public boolean afectadoPorPsionica(){
 		return true;
+	}
+	@Override
+	public Object clone() {
+		return new ModificadorPsionica();
 	}
 }

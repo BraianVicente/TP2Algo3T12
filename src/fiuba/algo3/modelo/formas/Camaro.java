@@ -46,10 +46,4 @@ public class Camaro extends FormaTerrestre {
         this.distanciaMovimiento = 5;
     }
 
-    @Override
-    public void movimientoPenalizado() {
-        this.distanciaMovimiento = (5/2) ;
-    }
-
-
 }

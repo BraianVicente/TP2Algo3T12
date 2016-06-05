@@ -7,8 +7,12 @@ public class ModificadorBurbuja extends ModificadorTransitorio {
 		return 2;
 	}
 	@Override
-	protected boolean recibeDanio(){
+	public boolean recibeDanio(){
 		return false;
+	}
+	@Override
+	public Object clone() {
+		return new ModificadorBurbuja();
 	}
 
 }
