@@ -10,6 +10,7 @@ import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
@@ -34,7 +35,7 @@ public abstract class UnidadConVida extends Unidad{
 		chispa = new ChispaHolder();
 		this.command = command;
 		modificadores=new ContenedorModificadores();
-		movimientosRestantes=getVelocidad();
+		movimientosRestantes=getDistanciaMovimiento();
 	}
 	@Override
 	public boolean existe(){
@@ -84,17 +85,13 @@ public abstract class UnidadConVida extends Unidad{
     }
     
     //------------------ataque-----------------
-    public boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde){
+    public boolean puedeAtacar(Posicion a, Posicion desde){
     	return a.distanciaA(desde)<=getDistanciaAtaque();
     }
     
     public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{
     	int danio = (int)Math.ceil(getPuntosAtaque()*modificadores.coeficienteAtaque());
     	receptor.recibirDanio(this,danio);
-    }
-    public void atacarA(Unidad receptor,PosicionEnElPlano a, PosicionEnElPlano desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException{
-    	if(!this.puedeAtacar(a, desde)) throw new AtaqueInvalidoPorDistanciaException();
-    	this.atacarA(receptor);
     }
     protected abstract int getDistanciaAtaque();
     protected abstract int getPuntosAtaque();
@@ -119,10 +116,15 @@ public abstract class UnidadConVida extends Unidad{
     	 if (getVida() <= 0)	command.murio(this);
     }
     
-    public void restaurarMovimientosRestantes() {
-		movimientosRestantes=getVelocidad();
+    public void restaurarMovimientosRestantes(int nuevoMovimientosRestantes) {
+    	if(nuevoMovimientosRestantes>getDistanciaMovimiento()) throw new IllegalArgumentException();
+		movimientosRestantes=nuevoMovimientosRestantes;
 		
 	}
+    public void restaurarMovimientosRestantes() {
+  		movimientosRestantes=getDistanciaMovimiento();
+  		
+  	}
     public void descontarMovimiento(int movimientosADescontar){
     	if(movimientosRestantes<movimientosADescontar) throw new IllegalArgumentException();
     	movimientosRestantes-=movimientosADescontar;

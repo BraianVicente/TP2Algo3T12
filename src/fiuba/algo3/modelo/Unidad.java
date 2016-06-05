@@ -26,7 +26,7 @@ public abstract class Unidad {
     	return this.equipo;
     }
 
-    public abstract boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde);
+    public abstract boolean puedeAtacar(Posicion a, Posicion desde);
 
 
     public abstract void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException;

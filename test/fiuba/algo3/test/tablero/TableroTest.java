@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.Death;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
@@ -33,39 +33,41 @@ public class TableroTest {
     @Test
     public void test01crearTablero(){
         Tablero tablero = new Tablero();
-        Assert.assertTrue(tablero.isEmpty(new PosicionEnElPlano(0,0)));
+        Assert.assertTrue(tablero.isEmpty(new Posicion(0,0)));
     }
     
     @Test
     public void test02ocuparPosicionTablero(){
         Tablero tab = new Tablero();
-        tab.agregarUnidad(new PosicionEnElPlano(2,2),new Bumblebee());
-        Assert.assertFalse(tab.isEmpty(new PosicionEnElPlano(2,2)));
+        tab.agregarUnidad(new Posicion(2,2),new Bumblebee());
+        Assert.assertFalse(tab.isEmpty(new Posicion(2,2)));
     }
     
     @Test(expected=PosicionOcupadaException.class)
     public void test03PosicionOcupadaNoSePuedeOcupar(){
         Tablero tab = new Tablero();
-        tab.agregarUnidad(new PosicionEnElPlano(5,5), new Bumblebee());
-        Assert.assertFalse(tab.isEmpty(new PosicionEnElPlano(5,5)));
-        tab.agregarUnidad(new PosicionEnElPlano(5,5),new Frenzy());
+        tab.agregarUnidad(new Posicion(5,5), new Bumblebee());
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,5)));
+        tab.agregarUnidad(new Posicion(5,5),new Frenzy());
     }
     
     @Test
     public void test04SeMueveUnidad(){
         Tablero tab = new Tablero();
-        tab.agregarUnidad(new PosicionEnElPlano(5,5), new Bumblebee());    
-        tab.mover(new PosicionEnElPlano(5,5), new PosicionEnElPlano(6,6));
-        Assert.assertTrue(tab.isEmpty(new PosicionEnElPlano(5,5)));
-        Assert.assertFalse(tab.isEmpty(new PosicionEnElPlano(6,6)));
+        Bumblebee bum= new Bumblebee();
+        tab.agregarUnidad(new Posicion(5,5),bum);    
+        tab.mover(bum, new Posicion(6,6));
+        Assert.assertTrue(tab.isEmpty(new Posicion(5,5)));
+        Assert.assertFalse(tab.isEmpty(new Posicion(6,6)));
     }
     
     @Test(expected=MovimientoInvalidoException.class)
     public void test05NoSePuedeMoverAPosicionOcupada(){
         Tablero tab = new Tablero();
-        tab.agregarUnidad(new PosicionEnElPlano(5,5), new Bumblebee());
-        tab.agregarUnidad(new PosicionEnElPlano(6,6),new Frenzy());    
-        tab.mover(new PosicionEnElPlano(5,5), new PosicionEnElPlano(6,6));
+        Bumblebee bum=new Bumblebee();
+        tab.agregarUnidad(new Posicion(5,5), bum);
+        tab.agregarUnidad(new Posicion(6,6),new Frenzy());    
+        tab.mover(bum, new Posicion(6,6));
         Assert.fail("No se lanzo la excepcion como debia ser");
     }
     
@@ -73,32 +75,32 @@ public class TableroTest {
     public void test06UnitDeathSinChispa() throws FriendlyFireException, AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException {
     	Tablero tab = new Tablero();
     	Death command = new Death(tab); 
-    	PosicionEnElPlano posB = new PosicionEnElPlano(5, 5);
-    	PosicionEnElPlano posM = new PosicionEnElPlano(4, 4);
+    	Posicion posB = new Posicion(5, 5);
+    	Posicion posM = new Posicion(4, 4);
     	Bumblebee bee = new Bumblebee(command);
     	Megatron tron = new Megatron(command);
     	tab.agregarUnidad(posB, bee);
     	tab.agregarUnidad(posM, tron);
     	while(bee.getVida()>0)
-    		tron.atacarA(bee, posB, posM);
+    		tab.atacar(tron,bee);
     	Assert.assertEquals(true, tab.isEmpty(posB));
     }
     
     @Test
     public void test07UnitDeathConChispa() throws FriendlyFireException, AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException {
     	Tablero tab = new Tablero();
-    	PosicionEnElPlano pos = new PosicionEnElPlano(5, 5);
+    	Posicion pos = new Posicion(5, 5);
     	Death command = new Death(tab); 
     	
     	Bumblebee bee = new Bumblebee(command);
     	Megatron tron = new Megatron(command);
-    	PosicionEnElPlano posM = new PosicionEnElPlano(4, 4);
+    	Posicion posM = new Posicion(4, 4);
     	bee.darChispa();
     	tab.agregarUnidad(pos, bee);
     	tab.agregarUnidad(posM, tron);
     	
     	while(bee.getVida()>0)
-    		tron.atacarA(bee, pos, posM);
+    		tab.atacar(tron, bee);
     	Assert.assertEquals(true, tab.isEmpty(pos));
     	Assert.assertEquals(true, tab.tieneChispa(pos));
     }

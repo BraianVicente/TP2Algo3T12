@@ -14,6 +14,7 @@ import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
+import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**
  *
@@ -110,5 +111,10 @@ public class ContenedorCasilleros {
 			throw new NoSeEncuentraUnidadException(u);
 		}
 		return buscada;
+	}
+
+	public boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

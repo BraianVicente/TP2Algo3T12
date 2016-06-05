@@ -18,17 +18,17 @@ public class UnidadConVidaTest {
 	@Test
 	public void testDistanciaAtaque() {
 		MentiPrime prime = new MentiPrime();//distancia de ataque: 3
-		Assert.assertTrue(prime.puedeAtacar(new PosicionEnElPlano(1,1), new PosicionEnElPlano(3,1)));
-		Assert.assertTrue(prime.puedeAtacar(new PosicionEnElPlano(1,1), new PosicionEnElPlano(4,1)));
-		Assert.assertFalse(prime.puedeAtacar(new PosicionEnElPlano(1,1), new PosicionEnElPlano(5,1)));
+		Assert.assertTrue(prime.getDistanciaMovimiento()==3);
+		
+
 	}
 	
 	@Test
 	public void testDistanciaMovimiento() {
 		MentiTron tron = new MentiTron();//distancia de movimiento: 2
-		Assert.assertTrue(tron.puedeMoverse(new PosicionEnElPlano(1,1), new PosicionEnElPlano(2,2)));
-		Assert.assertTrue(tron.puedeMoverse(new PosicionEnElPlano(1,1), new PosicionEnElPlano(2,3)));
-		Assert.assertFalse(tron.puedeMoverse(new PosicionEnElPlano(1,1), new PosicionEnElPlano(2,4)));
+		Assert.assertTrue(tron.getDistanciaMovimiento()==2);
+		
+
 	}
 	@Test
 	public void testMentiPrimeAtacaAMentiTron() throws FriendlyFireException, NoSeEncuentraUnidadException{

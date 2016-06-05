@@ -5,9 +5,12 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import java.util.LinkedList;
+
 import fiuba.algo3.modelo.Unidad;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 
@@ -38,9 +41,10 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
+	private ChispaSuprema chispa;
+	private Posicion posicionChispa;
 
     private static final Integer MAX_DISTANCE = null; //definir distancia maxima entre units para hacer la combinacion
-	private ContenedorCasilleros tablero;
 
 
     public Tablero() {
@@ -142,16 +146,48 @@ public class Tablero {
 		
 	}
 
-	private UnidadConVida obtenerUnidad(Posicion p) {
+	public UnidadConVida obtenerUnidad(Posicion p) {
 		return contenedorUnidades.obtenerUnidad(p);
 	}
 
-	private void agregarUnidad(Posicion p, UnidadConVida u) {
+	public void agregarUnidad(Posicion p, UnidadConVida u) {
 		contenedorUnidades.agregarUnidad(u, p);
 	}
 
 	private void quitarUnidadActual(Posicion p) {
 		UnidadConVida u=contenedorUnidades.obtenerUnidad(p);
 		contenedorUnidades.removerUnidad(u);
+	}
+
+	public void murio(UnidadConVida u) {
+		contenedorUnidades.removerUnidad(u);
+	}
+
+	public void agregarChispa(Posicion posicion) {
+		posicionChispa=posicion;
+		chispa= (ChispaSuprema) ChispaSuprema.getInstance();
+	}
+
+	public void atacar(UnidadConVida atacante, UnidadConVida atacado) {
+		if(!this.puedeAtacar(atacante,atacado)) throw new AtaqueInvalidoException();
+		atacante.atacarA(atacado);
+	}
+
+	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
+		if(!atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))) return false;
+		LinkedList<Posicion> posicionesQueDeberianEstarVacias= new LinkedList<Posicion>();
+		
+		return estanVacias(posicionesQueDeberianEstarVacias);	
+	}
+
+	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {
+		for(Posicion p: posicionesQueDeberianEstarVacias){
+			if(contenedorUnidades.ocupada(p))return false;
+		}
+		return true;
+	}
+
+	public boolean tieneChispa(Posicion pos) {
+		return posicionChispa==pos;
 	}
 }

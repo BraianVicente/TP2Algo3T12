@@ -25,15 +25,11 @@ public class MegatronTest {
 	public void testCambiaMovilidad(){
 		Megatron transformer = new Megatron();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,7)));
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,8)));
-		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,9)));
+		Assert.assertTrue(transformer.getDistanciaMovimiento()==8);
 		
 		transformer.transformar();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,0)));
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,1)));
-		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,2)));
+		Assert.assertTrue(transformer.getDistanciaMovimiento()==1);
 	}
 	
 	@Test(expected = FriendlyFireException.class)

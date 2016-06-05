@@ -26,15 +26,11 @@ public class OptimusprimeTest {
 	public void testCambiaMovilidad(){
 		Optimusprime transformer = new Optimusprime();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,4)));
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,5)));
-		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,6)));
+		Assert.assertTrue(transformer.getDistanciaMovimiento()==5);
 		
 		transformer.transformar();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,1)));
-		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,2)));
-		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,3)));
+		Assert.assertTrue(transformer.getDistanciaMovimiento()==2);
 	}
 	
 	@Test(expected = FriendlyFireException.class)
