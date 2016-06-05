@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fiuba.algo3.modelo.tablero.contenedorUnidades;
-
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionException;
+package fiuba.algo3.modelo.tablero;
 
 public class PosicionOcupadaException extends PosicionException{
 	public PosicionOcupadaException(Posicion p) {

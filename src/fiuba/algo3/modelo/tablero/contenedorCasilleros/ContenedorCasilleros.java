@@ -10,8 +10,8 @@ import java.util.Map;
 
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 
 /**

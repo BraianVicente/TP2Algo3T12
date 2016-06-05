@@ -10,9 +10,9 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidadesVivientes.AtaqueInvalidoPorDistanciaException;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
