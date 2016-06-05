@@ -3,6 +3,8 @@ package fiuba.algo3.modelo.unidadesVivientes;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.*;
+import fiuba.algo3.modelo.tablero.superficies.aerea.*;
 
 public abstract class Transformer extends UnidadConVida {
 	Forma forma;

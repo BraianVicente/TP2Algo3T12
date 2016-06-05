@@ -15,6 +15,8 @@ public abstract class Superficie {
     
     public Superficie(){ }
     
-    public abstract void aplicarPenalizacion(Transformer unidad);
+    public void aplicarPenalizacion(UnidadConVida unidad){
+    	unidad.serAfectadoPorSuperficie(this);
+    }
 
 }

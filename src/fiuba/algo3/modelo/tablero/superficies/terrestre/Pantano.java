@@ -16,15 +16,5 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Pantano extends Superficie {
 
-    @Override
-    public void aplicarPenalizacion(Transformer unidad) {
-        if (unidad.esTerrestre() ){
-            if ( unidad.esVehiculo()){
-                FormaTerrestre terrestre = (FormaTerrestre)unidad.getFormaActual();
-                terrestre.movimientoPenalizado();
-            } 
-            throw new MovimientoInvalidoException() ;
-        }
-    }
-    
+
 }

@@ -15,12 +15,5 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Espinas extends Superficie {
 
-    @Override
-    public void aplicarPenalizacion(Transformer unidad) {
-        if (unidad.esTerrestre()){
-            FormaTerrestre terrestre = (FormaTerrestre)unidad.getFormaActual();
-            terrestre.recibirDanioEspinas();
-        }
-    }
-    
+
 }

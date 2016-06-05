@@ -15,10 +15,5 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class TormentaPsionica extends Superficie{
 
-    @Override
-    public void aplicarPenalizacion(Transformer unidad) {
-        FormaAerea aereo = (FormaAerea) unidad.getFormaActual() ;
-        aereo.disminuirPuntosAtaque();
-    }
-    
+
 }

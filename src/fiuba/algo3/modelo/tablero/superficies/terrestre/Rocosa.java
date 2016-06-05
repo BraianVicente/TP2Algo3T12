@@ -14,9 +14,5 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Rocosa extends Superficie {
 
-    @Override
-    public void aplicarPenalizacion(Transformer unidad) {
-        return ;
-    }
 
 }

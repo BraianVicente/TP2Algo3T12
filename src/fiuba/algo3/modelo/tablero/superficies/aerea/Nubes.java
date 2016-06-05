@@ -14,9 +14,6 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Nubes extends Superficie {
 
-    @Override
-    public void aplicarPenalizacion(Transformer unidad) {
-        return ;
-    }
+
     
 }
