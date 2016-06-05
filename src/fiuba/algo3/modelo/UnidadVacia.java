@@ -7,7 +7,7 @@ package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Ninguno;
 import fiuba.algo3.modelo.formas.Forma;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 
 /**
  *
@@ -25,12 +25,12 @@ public class UnidadVacia extends Unidad {
     }
 
     @Override
-    public boolean puedeAtacar(Posicion a, Posicion desde) {
+    public boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde) {
         return false;
     }
 
     @Override
-    public boolean puedeMoverse(Posicion a, Posicion desde) {
+    public boolean puedeMoverse(PosicionEnElPlano a, PosicionEnElPlano desde) {
         return false;
     }
 

@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 
 public class CasilleroInexistenteException extends RuntimeException {
 

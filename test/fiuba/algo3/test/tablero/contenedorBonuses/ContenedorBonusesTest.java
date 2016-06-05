@@ -8,7 +8,7 @@ import org.junit.Test;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.BonusYaContenidoException;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
@@ -28,9 +28,9 @@ public class ContenedorBonusesTest {
 	final BonusFlash flash1=new BonusFlash(null);
 	final BonusDobleCanion canion1=new BonusDobleCanion(null);
 	
-	final Posicion p1 =new Posicion(-5,10);
-	final Posicion p2 =new Posicion(10000000,3);
-	final Posicion p3 =new Posicion(0,0);
+	final PosicionEnElPlano p1 =new PosicionEnElPlano(-5,10);
+	final PosicionEnElPlano p2 =new PosicionEnElPlano(10000000,3);
+	final PosicionEnElPlano p3 =new PosicionEnElPlano(0,0);
 	
 	@Test(expected = BonusYaContenidoException.class)
 	public void testElMismoDosVecesDaError() throws BonusYaContenidoException {

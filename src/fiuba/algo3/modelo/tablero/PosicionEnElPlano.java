@@ -18,17 +18,23 @@ import java.util.Objects;
  * @author Jos� Sb
  *
  */
-public class Posicion implements Cloneable {
-
+public class PosicionEnElPlano implements Cloneable {
+	
+	
     private Integer x;
     private Integer y;
 
-    public Posicion(Integer x, Integer y) {
+    public PosicionEnElPlano(Integer x, Integer y) {
         this.x = x;
         this.y = y;
     }
-
-    public Posicion() {
+    public Integer getX(){
+    	return x;
+    }
+    public Integer getY(){
+    	return y;
+    }
+    public PosicionEnElPlano() {
         this.x = 0;
         this.y = 0;
     }
@@ -41,10 +47,10 @@ public class Posicion implements Cloneable {
         if (otra == this) {
             return true;
         }
-        if (!(otra instanceof Posicion)) {
+        if (!(otra instanceof PosicionEnElPlano)) {
             return false;
         }
-        Posicion p = (Posicion) otra;
+        PosicionEnElPlano p = (PosicionEnElPlano) otra;
         return ((x.equals(p.x)) && (y.equals(p.y)));
     }
 
@@ -57,11 +63,11 @@ public class Posicion implements Cloneable {
     }
 
     @Override
-    public Posicion clone() {
-        return new Posicion(x, y);
+    public PosicionEnElPlano clone() {
+        return new PosicionEnElPlano(x, y);
     }
 
-    public Integer distanciaA(Posicion otra) {
+    public Integer distanciaA(PosicionEnElPlano otra) {
         if (otra == null) {
             throw new IllegalArgumentException();
         }
@@ -73,7 +79,7 @@ public class Posicion implements Cloneable {
         return "(x=" + x + ", y=" + y + ")";
     }
 
-    public boolean contiguoAPosicion(Posicion actual) {
+    public boolean contiguoAPosicion(PosicionEnElPlano actual) {
         return this.distanciaA(actual) == 1 ;
     }
 }

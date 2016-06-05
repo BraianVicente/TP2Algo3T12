@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.IgnorarMuerte;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
@@ -13,9 +13,9 @@ import fiuba.algo3.modelo.tablero.contenedorUnidades.UnidadYaContenidaException;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 
 public class ContenedorUnidadesTest {
-	private final Posicion pos1 = new Posicion(0,0);
-	private final Posicion pos2 = new Posicion(1,0);
-	private final Posicion pos1b = new Posicion(0,0);
+	private final PosicionEnElPlano pos1 = new PosicionEnElPlano(0,0);
+	private final PosicionEnElPlano pos2 = new PosicionEnElPlano(1,0);
+	private final PosicionEnElPlano pos1b = new PosicionEnElPlano(0,0);
 	
 	private final Bumblebee trans1 = new Bumblebee(new IgnorarMuerte());
 	private final Bumblebee trans2 = new Bumblebee(new IgnorarMuerte());

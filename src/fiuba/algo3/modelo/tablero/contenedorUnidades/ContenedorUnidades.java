@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
+import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 public class ContenedorUnidades {
@@ -51,5 +54,20 @@ public class ContenedorUnidades {
 		Posicion p = obtenerPosicion(u);
 		posicionesPorUnidad.remove(u);
 		unidadesPorPosicion.remove(p);
+	}
+	public void cambiarPlano(Transformer transformer, Plano planoPerteneciente) {
+		Posicion nuevaPosicion=posicionesPorUnidad.get(transformer).nuevaPosicionConDistintoPlano(planoPerteneciente);
+		mover(transformer,nuevaPosicion);
+	}
+	private void mover(Transformer transformer, Posicion nuevaPosicion) {
+		Posicion posicionVieja=obtenerPosicion(transformer);
+		try{
+			removerUnidad(transformer);
+			agregarUnidad(transformer, nuevaPosicion);
+		}catch(PosicionOcupadaException e){
+			agregarUnidad(transformer,posicionVieja);
+			throw new MovimientoInvalidoException();
+		}
+		
 	}
 }

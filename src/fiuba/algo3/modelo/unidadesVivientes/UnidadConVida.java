@@ -9,7 +9,8 @@ import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
@@ -53,6 +54,11 @@ public abstract class UnidadConVida extends Unidad{
 	//-------------------------------------
 	public abstract boolean esAerea();
 	public abstract boolean esTerrestre();
+	public Plano getPlanoPerteneciente() {
+		if(esAerea())return Plano.AEREO;
+		if(esTerrestre())return Plano.TERRESTRE;
+		return null;
+	}
 	//-------------------vida---------------
     private int vida;
     public abstract int getVidaMaxima();
@@ -76,7 +82,7 @@ public abstract class UnidadConVida extends Unidad{
     }
     
     //------------------ataque-----------------
-    public boolean puedeAtacar(Posicion a, Posicion desde){
+    public boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde){
     	return a.distanciaA(desde)<=getDistanciaAtaque();
     }
     
@@ -84,7 +90,7 @@ public abstract class UnidadConVida extends Unidad{
     	int danio = (int)Math.ceil(getPuntosAtaque()*modificadores.coeficienteAtaque());
     	receptor.recibirDanio(this,danio);
     }
-    public void atacarA(Unidad receptor,Posicion a, Posicion desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException{
+    public void atacarA(Unidad receptor,PosicionEnElPlano a, PosicionEnElPlano desde) throws FriendlyFireException,AtaqueInvalidoPorDistanciaException, NoSeEncuentraUnidadException{
     	if(!this.puedeAtacar(a, desde)) throw new AtaqueInvalidoPorDistanciaException();
     	this.atacarA(receptor);
     }
@@ -92,7 +98,7 @@ public abstract class UnidadConVida extends Unidad{
     protected abstract int getPuntosAtaque();
     
 	//-----------------movimiento--------------
-    public boolean puedeMoverse(Posicion a, Posicion desde){
+    public boolean puedeMoverse(PosicionEnElPlano a, PosicionEnElPlano desde){
     	return a.distanciaA(desde)<=getDistanciaMovimiento();
     }
     public int getVelocidad(){

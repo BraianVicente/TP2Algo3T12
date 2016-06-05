@@ -10,6 +10,7 @@ import java.util.Map;
 
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
@@ -27,7 +28,7 @@ public class ContenedorCasilleros {
     }
 
     public void agregarCasilleroVacio(Posicion posicion) {
-        this.misCasilleros.put(posicion, new Casillero(posicion));
+        this.misCasilleros.put(posicion, new Casillero());
     }
     
     public boolean isEmpty(Posicion posicion) {
@@ -51,7 +52,7 @@ public class ContenedorCasilleros {
 
     private Casillero obtenerCasillero(Posicion posicion) {
         if ( ! this.misCasilleros.containsKey(posicion) ) {
-            throw new CasilleroInexistenteException(posicion);
+            throw new CasilleroInexistenteException();
         }
         Casillero casillero = this.misCasilleros.get(posicion);
         return casillero;
@@ -94,7 +95,7 @@ public class ContenedorCasilleros {
         }
     }
 
-	public boolean tieneChispa(Posicion posicion) {
+	public boolean tieneChispa(PosicionEnElPlano posicion) {
 		return misCasilleros.get(posicion).tieneChispa();
 	}
 	

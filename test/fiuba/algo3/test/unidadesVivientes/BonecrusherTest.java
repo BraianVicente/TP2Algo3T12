@@ -3,7 +3,7 @@ package fiuba.algo3.test.unidadesVivientes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
@@ -25,15 +25,15 @@ public class BonecrusherTest {
 	public void testCambiaMovilidad(){
 		Bonecrusher transformer = new Bonecrusher();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,7)));
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,8)));
-		Assert.assertFalse(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,9)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,7)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,8)));
+		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,9)));
 		
 		transformer.transformar();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,0)));
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,1)));
-		Assert.assertFalse(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,2)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,0)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,1)));
+		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,2)));
 	}
 	
 	@Test(expected = FriendlyFireException.class)

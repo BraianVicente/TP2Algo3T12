@@ -2,7 +2,7 @@ package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 
@@ -21,9 +21,9 @@ public abstract class Unidad {
         return equipo.equals(e);
     }
 
-    public abstract boolean puedeAtacar(Posicion a, Posicion desde);
+    public abstract boolean puedeAtacar(PosicionEnElPlano a, PosicionEnElPlano desde);
 
-    public abstract boolean puedeMoverse(Posicion a, Posicion desde);
+    public abstract boolean puedeMoverse(PosicionEnElPlano a, PosicionEnElPlano desde);
 
     public abstract void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException;
 

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.*;
@@ -21,8 +21,8 @@ public class PrimeraEntregaTest {
 	public void test01AgregarTransformerYMoverValidamenteEnVehiculo() {
 		Transformer bumblebee=new Bumblebee();
 		Tablero tablero=new Tablero();
-		Posicion posicionInicio=new Posicion(0,0);
-		Posicion posicionFin=new Posicion(5,3);
+		PosicionEnElPlano posicionInicio=new PosicionEnElPlano(0,0);
+		PosicionEnElPlano posicionFin=new PosicionEnElPlano(5,3);
 		tablero.agregarUnidad(posicionInicio, bumblebee);
 		
 		tablero.mover(posicionInicio,posicionFin);
@@ -34,8 +34,8 @@ public class PrimeraEntregaTest {
 		Transformer bumblebee=new Bumblebee();
 		bumblebee.transformar();
 		Tablero tablero=new Tablero();
-		Posicion posicionInicio=new Posicion(0,0);
-		Posicion posicionFin=new Posicion(2,1);
+		PosicionEnElPlano posicionInicio=new PosicionEnElPlano(0,0);
+		PosicionEnElPlano posicionFin=new PosicionEnElPlano(2,1);
 		tablero.agregarUnidad(posicionInicio, bumblebee);
 		
 		tablero.mover(posicionInicio,posicionFin);
@@ -47,8 +47,8 @@ public class PrimeraEntregaTest {
 		Transformer bumblebee=new Bumblebee();
 		bumblebee.transformar();
 		Tablero tablero=new Tablero();
-		Posicion posicionInicio=new Posicion(0,0);
-		Posicion posicionFin=new Posicion(3,1);
+		PosicionEnElPlano posicionInicio=new PosicionEnElPlano(0,0);
+		PosicionEnElPlano posicionFin=new PosicionEnElPlano(3,1);
 		tablero.agregarUnidad(posicionInicio, bumblebee);
 		
 		tablero.mover(posicionInicio,posicionFin);
@@ -58,8 +58,8 @@ public class PrimeraEntregaTest {
 	public void test04AgregarTransformerYMoverInvalidamenteEnVehiculo() {
 		Transformer bumblebee=new Bumblebee();
 		Tablero tablero=new Tablero();
-		Posicion posicionInicio=new Posicion(0,0);
-		Posicion posicionFin=new Posicion(6,1);
+		PosicionEnElPlano posicionInicio=new PosicionEnElPlano(0,0);
+		PosicionEnElPlano posicionFin=new PosicionEnElPlano(6,1);
 		tablero.agregarUnidad(posicionInicio, bumblebee);
 		
 		tablero.mover(posicionInicio,posicionFin);
@@ -70,8 +70,8 @@ public class PrimeraEntregaTest {
 	public void test05AgregarTransformerYMoverInvalidamenteEnVehiculo() {
 		Transformer bumblebee=new Bumblebee();
 		Tablero tablero=new Tablero();
-		Posicion posicionInicio=new Posicion(0,0);
-		Posicion posicionFin=new Posicion(6,1);
+		PosicionEnElPlano posicionInicio=new PosicionEnElPlano(0,0);
+		PosicionEnElPlano posicionFin=new PosicionEnElPlano(6,1);
 		tablero.agregarUnidad(posicionInicio, bumblebee);
 		
 		tablero.mover(posicionInicio,posicionFin);
@@ -81,7 +81,7 @@ public class PrimeraEntregaTest {
 	@Test
 	public void test06AgregarTransformerEmpiezaComoVehiculoYLoTransformoVariasVeces(){
 		Tablero tablero=new Tablero();
-		Posicion posicion=new Posicion(0,0);
+		PosicionEnElPlano posicion=new PosicionEnElPlano(0,0);
 		Transformer optimusPrime = new Optimusprime();
 		tablero.agregarUnidad(posicion, optimusPrime);
 		
@@ -104,29 +104,29 @@ public class PrimeraEntregaTest {
 		Transformer bonecrusher = new Bonecrusher();
 		Chispa chispa=ChispaSuprema.getInstance();
 		
-		Posicion posicion= new Posicion(1,1);
+		PosicionEnElPlano posicion= new PosicionEnElPlano(1,1);
 		tablero.agregarUnidad(posicion, optimusPrime);
-		posicion =new Posicion(0,0);
+		posicion =new PosicionEnElPlano(0,0);
 		tablero.agregarUnidad(posicion, bumblebee);
-		posicion =new Posicion(0,2);
+		posicion =new PosicionEnElPlano(0,2);
 		tablero.agregarUnidad(posicion, ratchet);
 		
-		posicion =new Posicion(4,4);
+		posicion =new PosicionEnElPlano(4,4);
 		tablero.agregarChispa(posicion);
 		
-		posicion =new Posicion(8,8);
+		posicion =new PosicionEnElPlano(8,8);
 		tablero.agregarUnidad(posicion, megatron);
-		posicion =new Posicion(9,9);
+		posicion =new PosicionEnElPlano(9,9);
 		tablero.agregarUnidad(posicion,frenzy);
-		posicion =new Posicion(9,7);
+		posicion =new PosicionEnElPlano(9,7);
 		tablero.agregarUnidad(posicion, bonecrusher);
 		
-		Assert.assertEquals(bumblebee,tablero.obtenerUnidad(new Posicion(0,0)));
-		Assert.assertEquals(optimusPrime,tablero.obtenerUnidad(new Posicion(1,1)));
-		Assert.assertEquals(ratchet,tablero.obtenerUnidad(new Posicion(0,2)));
-		Assert.assertEquals(megatron,tablero.obtenerUnidad(new Posicion(8,8)));
-		Assert.assertEquals(frenzy,tablero.obtenerUnidad(new Posicion(9,9)));
-		Assert.assertEquals(bonecrusher,tablero.obtenerUnidad(new Posicion(9,7)));
+		Assert.assertEquals(bumblebee,tablero.obtenerUnidad(new PosicionEnElPlano(0,0)));
+		Assert.assertEquals(optimusPrime,tablero.obtenerUnidad(new PosicionEnElPlano(1,1)));
+		Assert.assertEquals(ratchet,tablero.obtenerUnidad(new PosicionEnElPlano(0,2)));
+		Assert.assertEquals(megatron,tablero.obtenerUnidad(new PosicionEnElPlano(8,8)));
+		Assert.assertEquals(frenzy,tablero.obtenerUnidad(new PosicionEnElPlano(9,9)));
+		Assert.assertEquals(bonecrusher,tablero.obtenerUnidad(new PosicionEnElPlano(9,7)));
 		
 		
 	}
@@ -150,9 +150,9 @@ public class PrimeraEntregaTest {
 		Transformer optimusPrime = new Optimusprime();
 		Transformer bumblebee = new Bumblebee();
 
-		Posicion posicion= new Posicion(1,1);
+		PosicionEnElPlano posicion= new PosicionEnElPlano(1,1);
 		tablero.agregarUnidad(posicion, optimusPrime);
-		posicion =new Posicion(0,0);
+		posicion =new PosicionEnElPlano(0,0);
 		tablero.agregarUnidad(posicion, bumblebee);
 		
 		optimusPrime.atacarA(bumblebee);
@@ -166,9 +166,9 @@ public class PrimeraEntregaTest {
 		Transformer megatron = new Megatron();
 		Transformer  frenzy= new Frenzy();
 
-		Posicion posicion= new Posicion(1,0);
+		PosicionEnElPlano posicion= new PosicionEnElPlano(1,0);
 		tablero.agregarUnidad(posicion, megatron);
-		posicion =new Posicion(0,1);
+		posicion =new PosicionEnElPlano(0,1);
 		tablero.agregarUnidad(posicion,frenzy);
 		int vidaOriginalMegatron=megatron.getVida();
 		try{
@@ -187,9 +187,9 @@ public class PrimeraEntregaTest {
 		Transformer megatron = new Megatron();
 		Transformer  optimusPrime= new Optimusprime();
 
-		Posicion posicion= new Posicion(1,0);
+		PosicionEnElPlano posicion= new PosicionEnElPlano(1,0);
 		tablero.agregarUnidad(posicion, megatron);
-		posicion =new Posicion(0,1);
+		posicion =new PosicionEnElPlano(0,1);
 		tablero.agregarUnidad(posicion,optimusPrime);
 		int vidaOriginalMegatron=megatron.getVida();
 		optimusPrime.atacarA(megatron);
@@ -204,9 +204,9 @@ public class PrimeraEntregaTest {
 		Transformer  optimusPrime= new Optimusprime();
 		optimusPrime.transformar();
 
-		Posicion posicionMegatron= new Posicion(3,0);
+		PosicionEnElPlano posicionMegatron= new PosicionEnElPlano(3,0);
 		tablero.agregarUnidad(posicionMegatron, megatron);
-		Posicion posicionOptimus =new Posicion(0,1);
+		PosicionEnElPlano posicionOptimus =new PosicionEnElPlano(0,1);
 		tablero.agregarUnidad(posicionOptimus,optimusPrime);
 		int vidaOriginalMegatron=megatron.getVida();
 		try{
@@ -228,9 +228,9 @@ public class PrimeraEntregaTest {
 		Transformer  optimusPrime= new Optimusprime();
 		optimusPrime.transformar();
 
-		Posicion posicionMegatron= new Posicion(3,0);
+		PosicionEnElPlano posicionMegatron= new PosicionEnElPlano(3,0);
 		tablero.agregarUnidad(posicionMegatron, megatron);
-		Posicion posicionOptimus =new Posicion(0,1);
+		PosicionEnElPlano posicionOptimus =new PosicionEnElPlano(0,1);
 		tablero.agregarUnidad(posicionOptimus,optimusPrime);
 		int vidaOriginalMegatron=megatron.getVida();
 		try{

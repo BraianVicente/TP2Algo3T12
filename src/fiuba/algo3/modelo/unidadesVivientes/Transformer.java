@@ -5,6 +5,7 @@ import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 
 import fiuba.algo3.modelo.tablero.superficies.terrestre.*;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.superficies.aerea.*;
 
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
@@ -78,9 +79,6 @@ public abstract class Transformer extends UnidadConVida {
     		agregarModificador(new ModificadorNebulosa());
     	}
     }
-	public void serAfectadoPor(Nubes s){
-		//nada
-	}
 	
 	public void serAfectadoPor(TormentaPsionica s){
 		if(esAerea()){//////!!!!!!!!!!
@@ -90,15 +88,12 @@ public abstract class Transformer extends UnidadConVida {
 	public void serAfectadoPor(Espinas s){
 		disminuirVida((int)forma.danioRealPorEspinas((getVidaMaxima()*5)/100));
 	}
-	public void serAfectadoPor(Pantano s){
-		//nada
-	}
-	public void serAfectadoPor(Rocosa s){
-		//nada
-	}
+
 
 	public float coeficienteMovimientoEn(Pantano s){
 		return forma.coeficienteMovimientoEnPantano();
 	}
+
+	
 
 }

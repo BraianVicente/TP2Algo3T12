@@ -3,7 +3,7 @@ package fiuba.algo3.test.unidadesVivientes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
@@ -25,15 +25,15 @@ public class FrenzyTest {
 	public void testCambiaMovilidad(){
 		Frenzy transformer = new Frenzy();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,5)));
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,6)));
-		Assert.assertFalse(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,7)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,5)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,6)));
+		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,7)));
 		
 		transformer.transformar();
 		
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,1)));
-		Assert.assertTrue(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,2)));
-		Assert.assertFalse(transformer.puedeMoverse(new Posicion(0,0), new Posicion(0,3)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,1)));
+		Assert.assertTrue(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,2)));
+		Assert.assertFalse(transformer.puedeMoverse(new PosicionEnElPlano(0,0), new PosicionEnElPlano(0,3)));
 	}
 	
 	@Test(expected = FriendlyFireException.class)
