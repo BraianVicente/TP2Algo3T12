@@ -3,11 +3,11 @@ package fiuba.algo3.modelo.unidadesVivientes;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
-import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideMenasor;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
-public class Menasor extends Transformer {
+public class Menasor extends UnidadConVida {
 	
 	private int vidaMax;
 
@@ -26,16 +26,6 @@ public class Menasor extends Transformer {
 	}
 
 	@Override
-	protected Forma getVehiculo() {
-		return new HumanoideMenasor();
-	}
-
-	@Override
-	protected Forma getHumanoide() {
-		return new HumanoideMenasor();
-	}
-
-	@Override
 	public boolean esTerrestre() {
 		return true;
 	}
@@ -43,6 +33,36 @@ public class Menasor extends Transformer {
 	@Override
 	public int getVidaMaxima() {
 		return vidaMax;
+	}
+
+	@Override
+	public boolean esAerea() {
+		return false;
+	}
+
+	@Override
+	protected int getDistanciaAtaque() {
+		return 2;
+	}
+
+	@Override
+	protected int getPuntosAtaque() {
+		return 115;
+	}
+
+	@Override
+	protected int getDistanciaMovimiento() {
+		return 2;
+	}
+
+	@Override
+	public float coeficienteMovimientoEn(Pantano s) {
+		return 0;
+	}
+
+	@Override
+	public Forma getFormaActual() {
+		return new HumanoideMenasor();
 	}
 
 }

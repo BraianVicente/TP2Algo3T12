@@ -3,12 +3,11 @@ package fiuba.algo3.modelo.unidadesVivientes;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
-import fiuba.algo3.modelo.formas.FormaHumanoide;
 import fiuba.algo3.modelo.formas.HumanoideSuperion;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
-public class Superion extends Transformer {
+public class Superion extends UnidadConVida {
 	
 	private int vidaMax;
 
@@ -27,16 +26,6 @@ public class Superion extends Transformer {
 	}
 
 	@Override
-	protected Forma getVehiculo() {
-		return new HumanoideSuperion();
-	}
-
-	@Override
-	protected Forma getHumanoide() {
-		return new HumanoideSuperion();
-	}
-
-	@Override
 	public boolean esTerrestre() {
 		return true;
 	}
@@ -44,6 +33,36 @@ public class Superion extends Transformer {
 	@Override
 	public int getVidaMaxima() {
 		return vidaMax;
+	}
+
+	@Override
+	public boolean esAerea() {
+		return false;
+	}
+
+	@Override
+	protected int getDistanciaAtaque() {
+		return 2;
+	}
+
+	@Override
+	protected int getPuntosAtaque() {
+		return 100;
+	}
+
+	@Override
+	protected int getDistanciaMovimiento() {
+		return 2;
+	}
+
+	@Override
+	public float coeficienteMovimientoEn(Pantano s) {
+		return 0;
+	}
+
+	@Override
+	public Forma getFormaActual() {
+		return new HumanoideSuperion();
 	}
 	
 }
