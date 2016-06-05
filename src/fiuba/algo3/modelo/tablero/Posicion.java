@@ -82,4 +82,16 @@ public class Posicion {
 	public Posicion nuevaPosicionConDistintoPlano(Plano plano) {
 		return new Posicion(this.posicionEnElPlano,plano);
 	}
+	public Plano getPlano() {
+		return plano;
+	}
+	public Posicion obtenerMismaPosicionDesplazada(int desplazamientoX, int desplazamientoY) {
+		return new Posicion(getX()+desplazamientoX,getY()+desplazamientoY,plano);
+	}
+	public int distanciaEnYA(Posicion posicionFin) {
+		return posicionFin.getY()-this.getY();
+	}
+	public int distanciaEnXA(Posicion posicionFin) {
+		return posicionFin.getX()-this.getX();
+	}
 }

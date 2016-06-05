@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.bonuses;
 
-public abstract class BonusException extends Exception {
+public abstract class BonusException extends RuntimeException {
 	/**
 	 * 
 	 */

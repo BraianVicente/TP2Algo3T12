@@ -26,6 +26,7 @@ public abstract class UnidadConVida extends Unidad{
 	private Chispa chispa;
 	private DeathListener command;
 	ContenedorModificadores modificadores;
+	private int movimientosRestantes;
 	
 	protected UnidadConVida(Equipo equipo, DeathListener command) {
 		super(equipo);
@@ -33,6 +34,7 @@ public abstract class UnidadConVida extends Unidad{
 		chispa = new ChispaHolder();
 		this.command = command;
 		modificadores=new ContenedorModificadores();
+		movimientosRestantes=getVelocidad();
 	}
 	@Override
 	public boolean existe(){
@@ -98,9 +100,7 @@ public abstract class UnidadConVida extends Unidad{
     protected abstract int getPuntosAtaque();
     
 	//-----------------movimiento--------------
-    public boolean puedeMoverse(PosicionEnElPlano a, PosicionEnElPlano desde){
-    	return a.distanciaA(desde)<=getDistanciaMovimiento();
-    }
+    
     public int getVelocidad(){
     	if(modificadores.puedeMoverse()){
     		//capaz ser�a mejor que si est� afectado por la nebulosa coso 
@@ -110,7 +110,7 @@ public abstract class UnidadConVida extends Unidad{
     		return 0;
     	}
     }
-   
+    
   
     protected void disminuirVida(int danio) {
     	if(modificadores.recibeDanio()){
@@ -119,6 +119,14 @@ public abstract class UnidadConVida extends Unidad{
     	 if (getVida() <= 0)	command.murio(this);
     }
     
+    public void restaurarMovimientosRestantes() {
+		movimientosRestantes=getVelocidad();
+		
+	}
+    public void descontarMovimiento(int movimientosADescontar){
+    	if(movimientosRestantes<movimientosADescontar) throw new IllegalArgumentException();
+    	movimientosRestantes-=movimientosADescontar;
+    }
     //------------------------modificadores------------------//
     
     protected void agregarModificador(Modificador m){
@@ -135,7 +143,9 @@ public abstract class UnidadConVida extends Unidad{
 	
 	public void avanzarTurno() {
 		modificadores.pasaTurno();
+		restaurarMovimientosRestantes();
 	}
+	
 	
 	//-------------------------interacci�n con superf�cies--------------------//
 	public void serAfectadoPor(Superficie s){
@@ -173,5 +183,10 @@ public abstract class UnidadConVida extends Unidad{
 	}
 	
 	public abstract float coeficienteMovimientoEn(Pantano s);
+	public int getCoeficienteMovimientoActual() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
     
 }
