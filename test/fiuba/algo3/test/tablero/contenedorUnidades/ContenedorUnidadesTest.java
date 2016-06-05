@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionLibreException;
+import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
-import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.contenedorUnidades.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.UnidadNoContenidaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.UnidadYaContenidaException;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;

@@ -29,6 +29,7 @@ public abstract class UnidadConVida extends Unidad{
 		vida = getVidaMaxima();
 		chispa = new ChispaHolder();
 		this.command = command;
+		modificadores=new ContenedorModificadores();
 	}
 	@Override
 	public boolean existe(){
@@ -117,6 +118,10 @@ public abstract class UnidadConVida extends Unidad{
     }
 	public void recibirBonus(Bonus bonus) {
 		agregarModificador(bonus.obtenerModificador());
+	}
+	
+	public void avanzarTurno() {
+		modificadores.pasaTurno();
 	}
 	
 	//-------------------------interacción con superfícies--------------------//

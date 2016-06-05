@@ -1,7 +1,4 @@
-package fiuba.algo3.modelo.tablero.contenedorUnidades;
-
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionException;
+package fiuba.algo3.modelo.tablero;
 
 public class PosicionLibreException extends PosicionException {
 
