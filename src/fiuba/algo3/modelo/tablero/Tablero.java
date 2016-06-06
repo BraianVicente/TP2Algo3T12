@@ -50,7 +50,6 @@ public class Tablero {
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
         }
-        //Death.getInstance().asignarTablero(this);
     }
 
     public boolean isEmpty(Posicion posicion) {
