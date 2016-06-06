@@ -7,28 +7,20 @@ package fiuba.algo3.modelo.tablero;
 
 import java.util.LinkedList;
 
-import fiuba.algo3.modelo.Unidad;
-
 import fiuba.algo3.modelo.bonuses.Bonus;
-import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
-
-import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.equipos.Equipo;
-
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
-import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
+<<<<<<< HEAD
 import fiuba.algo3.modelo.unidadesVivientes.Menasor;
 
+=======
+>>>>>>> 0a615261891274dd323b66253bd2764622fc855b
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Superion;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
@@ -127,9 +119,9 @@ public class Tablero {
 	public void combinar(Posicion a, Posicion b, Posicion c) {
 		UnidadConVida unita, unitb, unitc;
 		
-		unita =obtenerUnidad(a);
-		unitb =obtenerUnidad(b);
-		unitc =obtenerUnidad(c);
+		unita = obtenerUnidad(a);
+		unitb = obtenerUnidad(b);
+		unitc = obtenerUnidad(c);
 		
 		// check the distance between units
 		if ( (a.distanciaA(b) > MAX_DISTANCE) || (b.distanciaA(c) > MAX_DISTANCE) || (c.distanciaA(a) > MAX_DISTANCE) ) {
@@ -213,5 +205,10 @@ public class Tablero {
 
 	public boolean tieneChispa(Posicion pos) {
 		return posicionChispa.equals(pos);
+	}
+
+	public void agarrado(Bonus b) {
+		// TODO Auto-generated method stub
+		
 	}
 }

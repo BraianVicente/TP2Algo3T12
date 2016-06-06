@@ -14,14 +14,15 @@ import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.AtaqueInvalidoPorDistanciaException;
+import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Megatron;
+import fiuba.algo3.modelo.unidadesVivientes.Menasor;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
 import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
-import fiuba.algo3.test.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.Superion;
 
 /**
@@ -122,6 +123,71 @@ public class TableroTest {
     	Assert.assertEquals(true, tab.isEmpty(posb));
     	Assert.assertEquals(true, tab.isEmpty(posc));
     	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Superion);
+    }
+    
+    @Test
+    public void test09CombinacionSuperionConChispa() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(6,6), posc = new Posicion(6,5);
+    	Optimusprime op = new Optimusprime();
+    	Bumblebee bee = new Bumblebee();
+    	Ratchet rat = new Ratchet();
+    	
+    	op.darChispa();
+    	
+    	tab.agregarUnidad(posa, op);
+    	tab.agregarUnidad(posb, bee);
+    	tab.agregarUnidad(posc, rat);
+    	
+    	tab.combinar(posa, posb, posc);
+    	
+    	Assert.assertEquals(true, tab.isEmpty(posb));
+    	Assert.assertEquals(true, tab.isEmpty(posc));
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Superion);
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa).tieneChispa());
+    }
+    
+    @Test
+    public void test10CombinacionMenasorSinChispa() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(6,6), posc = new Posicion(6,5);
+    	Megatron mega = new Megatron();
+    	Bonecrusher bone = new Bonecrusher();
+    	Frenzy fren = new Frenzy();
+    	
+    	tab.agregarUnidad(posa, mega);
+    	tab.agregarUnidad(posb, bone);
+    	tab.agregarUnidad(posc, fren);
+    	
+    	tab.combinar(posa, posb, posc);
+    	
+    	Assert.assertEquals(true, tab.isEmpty(posb));
+    	Assert.assertEquals(true, tab.isEmpty(posc));
+    	Assert.assertEquals(false, tab.obtenerUnidad(posa) instanceof Superion);
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Menasor);
+    }
+    
+    @Test
+    public void test11CombinacionMenasorConChispa() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(6,6), posc = new Posicion(6,5);
+    	Megatron mega = new Megatron();
+    	Bonecrusher bone = new Bonecrusher();
+    	Frenzy fren = new Frenzy();
+    	
+    	tab.agregarUnidad(posa, mega);
+    	tab.agregarUnidad(posb, bone);
+    	tab.agregarUnidad(posc, fren);
+    	
+    	mega.darChispa();
+    	
+    	tab.combinar(posa, posb, posc);
+    	
+    	Assert.assertEquals(true, tab.isEmpty(posb));
+    	Assert.assertEquals(true, tab.isEmpty(posc));
+    	Assert.assertEquals(false, tab.obtenerUnidad(posa) instanceof Superion);
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Menasor);
+    	Assert.assertEquals(true, tab.obtenerUnidad(posa).tieneChispa());
     }
 }
 

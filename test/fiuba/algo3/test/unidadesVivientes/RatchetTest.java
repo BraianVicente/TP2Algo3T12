@@ -3,7 +3,6 @@ package fiuba.algo3.test.unidadesVivientes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Ratchet;

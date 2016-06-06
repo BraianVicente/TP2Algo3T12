@@ -5,9 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero.superficies.aerea;
 
-import fiuba.algo3.modelo.formas.FormaAerea;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
-import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**

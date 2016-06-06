@@ -3,7 +3,6 @@ package fiuba.algo3.modelo;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 
