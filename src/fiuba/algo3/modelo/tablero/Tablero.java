@@ -15,11 +15,10 @@ import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
-<<<<<<< HEAD
+
 import fiuba.algo3.modelo.unidadesVivientes.Menasor;
 
-=======
->>>>>>> 0a615261891274dd323b66253bd2764622fc855b
+
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
@@ -184,14 +183,32 @@ public class Tablero {
 
 	private LinkedList<Posicion> posicionesQueTocaLaRectaQueVa(Posicion p1, Posicion p2) {
 		LinkedList<Posicion> posiciones=new LinkedList<Posicion>();
-		float pendiente=(p1.getY()-p2.getY())/(p1.getX()-p2.getX());
-		int menorX=Math.min(p1.getX(), p2.getX());
-		int mayorX=Math.max(p1.getX(), p2.getX());
-		for(float i=menorX+0.5f;i<mayorX;i++) {
-			yDeInterseccion=pendiente
-			if()
+		Plano plano=p2.getPlano();
+		float diferenciaEnX=p1.distanciaEnXA(p2);
+		float diferenciaEnY=p2.distanciaEnYA(p2);
+		float pendiente=diferenciaEnY/diferenciaEnX;
+		for(float i=p1.getX()+Math.signum(diferenciaEnX)*0.5f;Math.signum(diferenciaEnX)*i<Math.signum(diferenciaEnX)*p2.getX();i=i+1*Math.signum(diferenciaEnX)) {
+			float yDeInterseccion=pendiente*(i-p1.getX())+p1.getY();
+			if(yDeInterseccion-Math.floor(yDeInterseccion)-0.5f<0.001f) {
+				posiciones.add(new Posicion((int)Math.floor(i), (int)Math.floor(yDeInterseccion),plano));
+				posiciones.add(new Posicion((int)Math.ceil(i), (int)Math.ceil(yDeInterseccion),plano));
+			}
+			else{
+				posiciones.add(new Posicion((int)Math.floor(i), (int)Math.round(yDeInterseccion),plano));
+				posiciones.add(new Posicion((int)Math.ceil(i), (int)Math.round(yDeInterseccion),plano));
+			}
 		}
-		for()
+		for(float i=p1.getX()+Math.signum(diferenciaEnY)*0.5f;Math.signum(diferenciaEnY)*i<Math.signum(diferenciaEnY)*p2.getX();i=i+1*Math.signum(diferenciaEnY)) {
+			float xDeInterseccion=(1/pendiente)*(i-p1.getX())+p1.getY();
+			if(xDeInterseccion-Math.floor(xDeInterseccion)-0.5f<0.001f) {
+				posiciones.add(new Posicion((int)Math.floor(xDeInterseccion), (int)Math.floor(i),plano));
+				posiciones.add(new Posicion((int)Math.ceil(xDeInterseccion), (int)Math.ceil(i),plano));
+			}
+			else{
+				posiciones.add(new Posicion((int)Math.round(xDeInterseccion), (int)Math.floor(i),plano));
+				posiciones.add(new Posicion((int)Math.round(xDeInterseccion), (int)Math.ceil(i),plano));
+			}
+		}
 		
 		return posiciones;
 	}
