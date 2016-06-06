@@ -50,7 +50,6 @@ public class Tablero {
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
         }
-        //Death.getInstance().asignarTablero(this);
     }
 
     public boolean isEmpty(Posicion posicion) {
@@ -129,7 +128,7 @@ public class Tablero {
 		
 		// check they're in the same team
 		if (!unita.equipo().mismoEquipo(unitb.equipo(), unitc.equipo())) {
-			// throw exception or something
+			throw new CombinacionInvalidaException();
 		}
 		
 		UnidadConVida comb = (UnidadConVida) unita.equipo().getCombination();
