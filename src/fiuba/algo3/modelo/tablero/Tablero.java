@@ -39,6 +39,9 @@ public class Tablero {
 
     private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 
+    public void configurarSuperficie(Posicion pos, Superficie cual){
+    	contenedorSuperficies.agregarSuperficie(cual, pos);
+    }
 
     public Tablero() {
         this.contenedorUnidades = new ContenedorUnidades();
@@ -85,7 +88,7 @@ public class Tablero {
     		}catch(RuntimeException e2){} 
     		contenedorUnidades.agregarUnidad(unidad, posicionInicio);
     		unidad.restaurarMovimientosRestantes();
-    		throw new MovimientoInvalidoException();
+    		throw e;
     	}
     }
 
