@@ -23,7 +23,6 @@ import fiuba.algo3.modelo.unidadesVivientes.Menasor;
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
 import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
-import fiuba.algo3.test.unidadesVivientes.MentiTron;
 import fiuba.algo3.modelo.unidadesVivientes.Superion;
 
 /**

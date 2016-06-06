@@ -5,7 +5,6 @@ import java.util.Map;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 

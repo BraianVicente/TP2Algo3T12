@@ -1,6 +1,5 @@
 package fiuba.algo3.modelo.tablero;
 
-import java.lang.IllegalArgumentException;
 import java.util.Objects;
 
 /**

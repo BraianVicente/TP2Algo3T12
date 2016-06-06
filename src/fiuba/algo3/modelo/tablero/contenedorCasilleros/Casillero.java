@@ -7,9 +7,9 @@ package fiuba.algo3.modelo.tablero.contenedorCasilleros;
 
 import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.UnidadVacia;
-import fiuba.algo3.modelo.chispa.*;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.chispa.Chispa;
+import fiuba.algo3.modelo.chispa.ChispaHolder;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;

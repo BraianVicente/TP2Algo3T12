@@ -2,7 +2,6 @@ package fiuba.algo3.modelo.tablero.contenedorSuperficies;
 
 import java.util.HashMap;
 
-
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 

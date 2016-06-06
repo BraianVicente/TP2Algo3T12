@@ -3,19 +3,12 @@ package fiuba.algo3.modelo.unidadesVivientes;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
-
-import fiuba.algo3.modelo.tablero.superficies.terrestre.*;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.tablero.superficies.aerea.*;
-
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
-import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
-import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 
 
 public abstract class Transformer extends UnidadConVida {
@@ -53,7 +46,7 @@ public abstract class Transformer extends UnidadConVida {
 	public int getDistanciaMovimiento() {
 		return forma.getDistanciaMovimiento();
 	}
-	///lo ideal es volar éstos
+	///lo ideal es volar ï¿½stos
 	public boolean esVehiculo() {
 		return forma.esVehiculo();
 	}
@@ -70,12 +63,12 @@ public abstract class Transformer extends UnidadConVida {
     public boolean esAerea(){
     	return forma.esAerea();
     }
-    //esto también habría que volarlo
+    //esto tambiï¿½n habrï¿½a que volarlo
     public Forma getFormaActual() {
         return this.forma;
     }
     
-    //--------------------------superfícies-----------------------------//
+    //--------------------------superfï¿½cies-----------------------------//
     public void serAfectadoPor(NebulosaAndromeda s){
     	if(esAerea()){//////!!!!!!!!!!
     		agregarModificador(new ModificadorNebulosa());

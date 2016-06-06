@@ -5,9 +5,10 @@
  */
 package fiuba.algo3.test.tablero;
 
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import org.junit.Assert;
 import org.junit.Test;
+
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 
 /**
  *

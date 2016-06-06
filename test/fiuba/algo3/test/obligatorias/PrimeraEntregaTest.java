@@ -11,10 +11,17 @@ import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.tablero.AtaqueInvalidoException;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.unidadesVivientes.*;
+import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
+import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
+import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
+import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
+import fiuba.algo3.modelo.unidadesVivientes.Megatron;
+import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
+import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
+import fiuba.algo3.modelo.unidadesVivientes.Transformer;
 
 
 public class PrimeraEntregaTest {

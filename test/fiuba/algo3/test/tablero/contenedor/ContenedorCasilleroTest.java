@@ -1,14 +1,5 @@
 package fiuba.algo3.test.tablero.contenedor;
 
-
-import org.junit.Assert;
-import org.junit.Test;
-
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.CasilleroInexistenteException;
-import fiuba.algo3.modelo.tablero.contenedorCasilleros.ContenedorCasilleros;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-
 public class ContenedorCasilleroTest {
 
 //	@Test
