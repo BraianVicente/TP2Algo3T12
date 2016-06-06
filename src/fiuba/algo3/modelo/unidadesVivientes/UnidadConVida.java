@@ -5,6 +5,7 @@ import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.*;
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
@@ -26,7 +27,7 @@ public abstract class UnidadConVida extends Unidad{
 	
 	private Chispa chispa;
 	private DeathListener command;
-	private ContenedorModificadores modificadores;
+	protected ContenedorModificadores modificadores;
 	protected int movimientosRestantes;
 	
 	protected UnidadConVida(Equipo equipo, DeathListener command) {
@@ -129,6 +130,8 @@ public abstract class UnidadConVida extends Unidad{
     	if(movimientosRestantes<movimientosADescontar) throw new IllegalArgumentException();
     	movimientosRestantes-=movimientosADescontar;
     }
+    
+    public abstract float getCoeficienteMovimientoActual() ;
     //------------------------modificadores------------------//
     
     protected void agregarModificador(Modificador m){
@@ -185,10 +188,7 @@ public abstract class UnidadConVida extends Unidad{
 	}
 	
 	public abstract float coeficienteMovimientoEn(Pantano s);
-	public float getCoeficienteMovimientoActual() {
-		// TODO Auto-generated method stub
-		return modificadores.coeficienteVelocidad();
-	}
+	
 	
     
 }

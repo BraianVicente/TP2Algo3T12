@@ -1,5 +1,9 @@
 package fiuba.algo3.modelo.modificadores;
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
+
 /**
  * Modela:
  * -Nebulosa de andrómeda
@@ -44,4 +48,20 @@ public abstract class Modificador {
 	public boolean afectadoPorPsionica(){
 		return false;
 	}
+
+	public boolean esPantano() {
+		
+		return false;
+	}
+	public float coeficienteVelocidadPorForma(Forma forma ){
+		return 1;
+	}
+	public float coeficienteVelocidadPorForma(FormaVehiculo vehiculo) {
+		return 1;
+	}
+	public float coeficienteVelocidadPorForma(FormaHumanoide humanoide) {
+		return 1;
+	}
+
+	
 }

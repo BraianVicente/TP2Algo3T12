@@ -185,9 +185,23 @@ public class Tablero {
 
 	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
 
-		LinkedList<Posicion> posicionesQueDeberianEstarVacias= new LinkedList<Posicion>();
+		LinkedList<Posicion> posicionesQueDeberianEstarVacias=posicionesQueTocaLaRectaQueVa(this.contenedorUnidades.obtenerPosicion(atacante),this.contenedorUnidades.obtenerPosicion(atacante));
 		
 		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	
+	}
+
+	private LinkedList<Posicion> posicionesQueTocaLaRectaQueVa(Posicion p1, Posicion p2) {
+		LinkedList<Posicion> posiciones=new LinkedList<Posicion>();
+		float pendiente=(p1.getY()-p2.getY())/(p1.getX()-p2.getX());
+		int menorX=Math.min(p1.getX(), p2.getX());
+		int mayorX=Math.max(p1.getX(), p2.getX());
+		for(float i=menorX+0.5f;i<mayorX;i++) {
+			yDeInterseccion=pendiente
+			if()
+		}
+		for()
+		
+		return posiciones;
 	}
 
 	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {

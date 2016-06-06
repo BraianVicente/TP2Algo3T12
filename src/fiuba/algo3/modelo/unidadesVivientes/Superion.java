@@ -4,6 +4,7 @@ import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.formas.HumanoideSuperion;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
@@ -65,4 +66,8 @@ public class Superion extends UnidadConVida {
 		return new HumanoideSuperion();
 	}
 	
+	@Override
+	public float getCoeficienteMovimientoActual() {
+	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
+	}
 }

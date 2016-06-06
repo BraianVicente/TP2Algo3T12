@@ -3,6 +3,7 @@ package fiuba.algo3.test.unidadesVivientes;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
@@ -92,5 +93,9 @@ public class MentiTron extends UnidadConVida {
 	@Override
 	public boolean esTerrestre(){
 		return true;
+	}
+	@Override
+	public float getCoeficienteMovimientoActual() {
+	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
 	}
 }

@@ -4,6 +4,7 @@ import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.formas.HumanoideMenasor;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
@@ -64,5 +65,9 @@ public class Menasor extends UnidadConVida {
 	public Forma getFormaActual() {
 		return new HumanoideMenasor();
 	}
-
+	
+	@Override
+	public float getCoeficienteMovimientoActual() {
+	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
+	}
 }

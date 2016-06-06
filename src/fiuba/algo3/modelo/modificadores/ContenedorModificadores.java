@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
+
 public class ContenedorModificadores {
 	List<Modificador> modificadores;
 	public ContenedorModificadores(){
@@ -20,7 +24,11 @@ public class ContenedorModificadores {
 				.filter(a->a.haceEfecto())
 				.collect(Collectors.toList());
 	}
-
+	public void sacarModificadorPantano(){
+		modificadores=modificadores.parallelStream()
+				.filter(a->!a.esPantano())
+				.collect(Collectors.toList());
+	}
 	public float coeficienteAtaqueModoVehiculo(){
 		return modificadores.parallelStream()
 				.map(a->a.coeficienteAtaqueModoVehiculo())
@@ -55,5 +63,22 @@ public class ContenedorModificadores {
 		return modificadores.parallelStream()
 				.map(a->a.afectadoPorPsionica())
 				.reduce(false,(a,b)->a||b);//true pisa a false
+	}
+	
+	public float coeficienteVelocidadPorForma(FormaHumanoide humanoide){
+		return modificadores.parallelStream()
+				.map(a->a.coeficienteVelocidadPorForma(humanoide))
+				.reduce(1f,(a,b)->a*b);	
+	}
+	
+	public float coeficienteVelocidadPorForma(FormaVehiculo vehiculo ){
+		return modificadores.parallelStream()
+				.map(a->a.coeficienteVelocidadPorForma(vehiculo))
+				.reduce(1f,(a,b)->a*b);	
+	}
+	public float coeficienteVelocidadPorForma(Forma forma ){
+		return modificadores.parallelStream()
+				.map(a->a.coeficienteVelocidadPorForma(forma))
+				.reduce(1f,(a,b)->a*b);	
 	}
 }
