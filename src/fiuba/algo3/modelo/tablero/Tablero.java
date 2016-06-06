@@ -176,7 +176,7 @@ public class Tablero {
 
 	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
 
-		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacante));
+		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacado));
 		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacante));
 		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacado));
 		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	

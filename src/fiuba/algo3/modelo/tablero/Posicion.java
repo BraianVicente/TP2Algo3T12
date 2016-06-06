@@ -128,7 +128,7 @@ public class Posicion {
 		posiciones.addAll(posicionesAuxiliar);
 		
 	}
-	private List<Posicion> posicionesQueSonTocadasPorUnSegmentoDeRecta(float x, float y, Plano plano2, float pendiente) {
+	private List<Posicion> posicionesQueSonTocadasPorUnSegmentoDeRecta(float x, float y, Plano plano, float pendiente) {
 		List<Posicion> posiciones =new ArrayList<Posicion>();
 		if(Math.abs(y-Math.floor(y)-0.5f)<0.001f&&Math.abs(x-Math.floor(x)-0.5f)<0.001f) {
 			//caso interseccion de 4 casilleros

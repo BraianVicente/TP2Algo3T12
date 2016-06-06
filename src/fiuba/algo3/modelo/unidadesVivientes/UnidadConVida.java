@@ -29,7 +29,7 @@ public abstract class UnidadConVida extends Unidad{
 	private Chispa chispa;
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
-	protected int movimientosRestantes;
+	protected float movimientosRestantes;
 	
 	protected UnidadConVida(Equipo equipo, DeathListener command) {
 		super(equipo);
@@ -118,7 +118,7 @@ public abstract class UnidadConVida extends Unidad{
     	 if (getVida() <= 0)	command.murio(this);
     }
     
-    public void restaurarMovimientosRestantes(int nuevoMovimientosRestantes) {
+    public void restaurarMovimientosRestantes(float nuevoMovimientosRestantes) {
     	if(nuevoMovimientosRestantes>getDistanciaMovimiento()) throw new IllegalArgumentException();
 		movimientosRestantes=nuevoMovimientosRestantes;
 		
@@ -127,7 +127,7 @@ public abstract class UnidadConVida extends Unidad{
   		movimientosRestantes=getDistanciaMovimiento();
   		
   	}
-    public void descontarMovimiento(int movimientosADescontar){
+    public void descontarMovimiento(float movimientosADescontar){
     	if(movimientosRestantes<movimientosADescontar) throw new IllegalArgumentException();
     	movimientosRestantes-=movimientosADescontar;
     }
