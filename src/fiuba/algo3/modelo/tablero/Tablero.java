@@ -24,7 +24,7 @@ import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadExceptio
 
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
-
+import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidadesVivientes.Menasor;
 
 import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
@@ -86,7 +86,7 @@ public class Tablero {
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
     		}
-    	}catch(MovimientoInvalidoException e){
+    	}catch(RuntimeException e){
     		//si quedo en alguna posicion, lo saco y lo vuelvo a donde estaba en un principio
     		try{
     			contenedorUnidades.removerUnidad(unidad);
@@ -133,7 +133,7 @@ public class Tablero {
 		
 		// check the distance between units
 		if ( (a.distanciaA(b) > MAX_DISTANCE) || (b.distanciaA(c) > MAX_DISTANCE) || (c.distanciaA(a) > MAX_DISTANCE) ) {
-			// throw an exception or something
+			throw new CombinacionInvalidaException();
 		}
 		
 		// check they're in the same team
@@ -169,7 +169,9 @@ public class Tablero {
 	}
 
 	public void murio(UnidadConVida u) {
+		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
+		
 	}
 
 	public void agregarChispa(Posicion posicion) {
