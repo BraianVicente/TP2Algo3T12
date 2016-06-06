@@ -12,6 +12,7 @@ import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
@@ -37,6 +38,9 @@ public class Tablero {
 
     private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 
+    public void configurarSuperficie(Posicion pos, Superficie cual){
+    	contenedorSuperficies.agregarSuperficie(cual, pos);
+    }
 
     public Tablero() {
         this.contenedorUnidades = new ContenedorUnidades();
@@ -83,7 +87,7 @@ public class Tablero {
     		}catch(RuntimeException e2){} 
     		contenedorUnidades.agregarUnidad(unidad, posicionInicio);
     		unidad.restaurarMovimientosRestantes();
-    		throw new MovimientoInvalidoException();
+    		throw e;
     	}
     }
 
