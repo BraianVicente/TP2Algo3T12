@@ -11,6 +11,7 @@ import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
+import fiuba.algo3.modelo.modificadores.ModificadorPantano;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
@@ -160,27 +161,33 @@ public abstract class UnidadConVida extends Unidad{
 
 
 	public void serAfectadoPor(NebulosaAndromeda s){
+		modificadores.sacarModificadorPantano();
 	    if(esAerea()){//////!!!!!!!!!!
 	    	agregarModificador(new ModificadorNebulosa());
 	   	}
 	}
 	public void serAfectadoPor(Nubes s){
-			//nada
+		modificadores.sacarModificadorPantano();	
+		//nada
 	}
 		
 	public void serAfectadoPor(TormentaPsionica s){
+		modificadores.sacarModificadorPantano();
 		if(esAerea()){//////!!!!!!!!!!
 	    	agregarModificador(new ModificadorPsionica());
 	    }
 	}
 	public void serAfectadoPor(Espinas s){
+		modificadores.sacarModificadorPantano();
 		disminuirVida(getVidaMaxima()*5/100);
 	}
 	public void serAfectadoPor(Pantano s){
+		modificadores.sacarModificadorPantano();
+		modificadores.agregar(new ModificadorPantano());
 		//nada
 	}
 	public void serAfectadoPor(Rocosa s){
-		//nada
+		modificadores.sacarModificadorPantano();
 	}
 	
 	public float coeficienteMovimientoEn(Superficie s){
