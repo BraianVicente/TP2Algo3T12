@@ -129,7 +129,7 @@ public class Tablero {
 		
 		// check they're in the same team
 		if (!unita.equipo().mismoEquipo(unitb.equipo(), unitc.equipo())) {
-			// throw exception or something
+			throw new CombinacionInvalidaException();
 		}
 		
 		UnidadConVida comb = (UnidadConVida) unita.equipo().getCombination();
