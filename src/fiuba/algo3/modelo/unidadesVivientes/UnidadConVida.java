@@ -185,9 +185,9 @@ public abstract class UnidadConVida extends Unidad{
 	}
 	
 	public abstract float coeficienteMovimientoEn(Pantano s);
-	public int getCoeficienteMovimientoActual() {
+	public float getCoeficienteMovimientoActual() {
 		// TODO Auto-generated method stub
-		return 0;
+		return modificadores.coeficienteVelocidad();
 	}
 	
     

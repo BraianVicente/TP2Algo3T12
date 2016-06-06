@@ -41,7 +41,7 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
-	private ChispaSuprema chispa;
+
 	private Posicion posicionChispa;
 
     private static final Integer MAX_DISTANCE = null; //definir distancia maxima entre units para hacer la combinacion
@@ -51,6 +51,8 @@ public class Tablero {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
+        alto=10;
+        ancho=10;
         for (int i = 0; i < alto; i++) {
         	for(int j=0;i<ancho;j++){
             this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
@@ -69,6 +71,8 @@ public class Tablero {
     	Posicion posicionInicio= contenedorUnidades.obtenerPosicion(unidad);
     	if(posicionInicio.getPlano()!=posicionFin.getPlano()) throw new MovimientoInvalidoException();
     	try{
+    		Posicion posicionActual=posicionInicio;
+    		while(!posicionActual.equals(posicionFin)){
     		Posicion posicionSiguiente;
     		posicionSiguiente=obtenerPosicionADondeMoverse(unidad,posicionFin);
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
@@ -76,7 +80,8 @@ public class Tablero {
     		desplazarPosicionContigua(unidad, posicionSiguiente);
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
-    		
+    		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
+    		}
     	}catch(MovimientoInvalidoException e){
     		//si quedo en alguna posicion, lo saco y lo vuelvo a donde estaba en un principio
     		try{
@@ -165,7 +170,6 @@ public class Tablero {
 
 	public void agregarChispa(Posicion posicion) {
 		posicionChispa=posicion;
-		chispa= (ChispaSuprema) ChispaSuprema.getInstance();
 	}
 
 	public void atacar(UnidadConVida atacante, UnidadConVida atacado) {
@@ -188,6 +192,6 @@ public class Tablero {
 	}
 
 	public boolean tieneChispa(Posicion pos) {
-		return posicionChispa==pos;
+		return posicionChispa.equals(pos);
 	}
 }

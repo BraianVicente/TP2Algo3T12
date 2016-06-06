@@ -36,7 +36,7 @@ public class Posicion {
         if (otra == this) {
             return true;
         }
-        if (!(otra instanceof PosicionEnElPlano)) {
+        if (!(otra instanceof Posicion)) {
             return false;
         }
         Posicion p = (Posicion) otra;
