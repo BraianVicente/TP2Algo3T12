@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
+import fiuba.algo3.modelo.tablero.AtaqueInvalidoException;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
@@ -216,7 +217,7 @@ public class PrimeraEntregaTest {
 			fail("Deberia lanzar excepcion de distancia");
 			
 				
-			}catch(AtaqueInvalidoPorDistanciaException e){
+			}catch(AtaqueInvalidoException e){
 				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
 			}
 	}
@@ -239,7 +240,7 @@ public class PrimeraEntregaTest {
 			tablero.atacar(optimusPrime, megatron);
 			fail("Deberia lanzar excepcion de distancia");
 				
-			}catch(AtaqueInvalidoPorDistanciaException e){
+			}catch(AtaqueInvalidoException e){
 				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
 			}
 		optimusPrime.transformar();

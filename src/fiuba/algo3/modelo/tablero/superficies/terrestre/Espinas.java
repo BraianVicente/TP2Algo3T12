@@ -8,12 +8,17 @@ package fiuba.algo3.modelo.tablero.superficies.terrestre;
 import fiuba.algo3.modelo.formas.FormaTerrestre;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
+import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**
  *
  * @author brahvic
  */
 public class Espinas extends Superficie {
+	public void afectarA(UnidadConVida unidadConVida) {
+		unidadConVida.serAfectadoPor(this);
+		
+	}
 
 
 }

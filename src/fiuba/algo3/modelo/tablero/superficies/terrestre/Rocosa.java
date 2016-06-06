@@ -7,6 +7,7 @@ package fiuba.algo3.modelo.tablero.superficies.terrestre;
 
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidadesVivientes.Transformer;
+import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
 
 /**
  *
@@ -14,5 +15,9 @@ import fiuba.algo3.modelo.unidadesVivientes.Transformer;
  */
 public class Rocosa extends Superficie {
 
+	public void afectarA(UnidadConVida unidadConVida) {
+		unidadConVida.serAfectadoPor(this);
+		
+	}
 
 }

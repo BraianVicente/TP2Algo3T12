@@ -76,7 +76,11 @@ public class Tablero {
     		Posicion posicionSiguiente;
     		posicionSiguiente=obtenerPosicionADondeMoverse(unidad,posicionFin);
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
-    		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
+    		try{
+    			unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
+    		}catch(IllegalArgumentException e){
+    			throw new MovimientoInvalidoException();
+    		}
     		desplazarPosicionContigua(unidad, posicionSiguiente);
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
@@ -178,10 +182,10 @@ public class Tablero {
 	}
 
 	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
-		if(!atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))) return false;
+
 		LinkedList<Posicion> posicionesQueDeberianEstarVacias= new LinkedList<Posicion>();
 		
-		return estanVacias(posicionesQueDeberianEstarVacias);	
+		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	
 	}
 
 	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {

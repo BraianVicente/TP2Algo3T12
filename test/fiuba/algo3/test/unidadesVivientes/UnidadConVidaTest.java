@@ -18,7 +18,7 @@ public class UnidadConVidaTest {
 	@Test
 	public void testDistanciaAtaque() {
 		MentiPrime prime = new MentiPrime();//distancia de ataque: 3
-		Assert.assertTrue(prime.getDistanciaMovimiento()==3);
+		Assert.assertTrue(prime.getDistanciaAtaque()==3);
 		
 
 	}
