@@ -70,7 +70,7 @@ public abstract class Transformer extends UnidadConVida {
     
     public float getCoeficienteMovimientoActual() {
   		// TODO Auto-generated method stub
-  		return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(forma);
+  		return modificadores.coeficienteVelocidad()*forma.obtenerCoeficientePorVelocidad(modificadores);
   	}
     //--------------------------superfícies-----------------------------//
 

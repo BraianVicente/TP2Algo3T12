@@ -1,7 +1,13 @@
 package fiuba.algo3.modelo.modificadores;
 
-public class ModificadorNebulosa extends ModificadorTransitorio {
+import fiuba.algo3.modelo.formas.FormaAerea;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
 
+public class ModificadorNebulosa extends ModificadorTransitorio {
+	@Override
+	public float coeficienteVelocidadPorForma(FormaVehiculo  vehiculo){
+		return 0;
+	}
 	@Override
 	protected int turnosDuracion() {
 		return 3;

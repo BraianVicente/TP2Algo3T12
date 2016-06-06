@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
@@ -47,4 +49,29 @@ public class TableroMovimientoTest {
         Assert.assertFalse(tab.isEmpty(new Posicion(7,8,Plano.TERRESTRE)));
 
     }
+	
+	@Test(expected=MovimientoInvalidoException.class)
+	public void test05QuieroMoverHumanoideEnPantano(){
+		Tablero tab=new Tablero();
+		Posicion pos= new Posicion(3,3,Plano.TERRESTRE);
+		tab.agregarSuperficie(new Pantano(),pos);
+		Bumblebee bum=new Bumblebee();
+		bum.transformar();
+		tab.agregarUnidad(pos.obtenerMismaPosicionDesplazada(1, 0), bum);
+		tab.mover(bum,pos);
+		tab.mover(bum, pos.obtenerMismaPosicionDesplazada(1, 0));
+		
+	}
+	@Test(expected=MovimientoInvalidoException.class)
+	public void test06QuieroMoverAereoEnNebulosa(){
+		Tablero tab=new Tablero();
+		Posicion pos= new Posicion(3,3,Plano.AEREO);
+		tab.agregarSuperficie(new NebulosaAndromeda(),pos);
+		Ratchet bum=new Ratchet();
+		tab.agregarUnidad(pos.obtenerMismaPosicionDesplazada(1, 0), bum);
+		tab.mover(bum,pos);
+		float f=bum.getCoeficienteMovimientoActual();
+		tab.mover(bum, pos.obtenerMismaPosicionDesplazada(1, 0));
+		
+	}
 }

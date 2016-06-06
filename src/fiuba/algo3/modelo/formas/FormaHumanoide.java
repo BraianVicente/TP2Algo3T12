@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.formas;
 
+import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
+
 public abstract class FormaHumanoide extends Forma {
 	@Override
 	public boolean esHumanoide() {
@@ -32,5 +34,10 @@ public abstract class FormaHumanoide extends Forma {
 	public boolean esTerrestre(){
 		return true;
 	}
+	@Override
+	public  float obtenerCoeficientePorVelocidad(ContenedorModificadores modificadores){
+		return modificadores.coeficienteVelocidadPorForma(this);
+	}
+
 
 }

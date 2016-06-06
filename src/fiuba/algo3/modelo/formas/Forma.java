@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.formas;
 
+import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
+
 public abstract class Forma {
 
     /**
@@ -32,4 +34,5 @@ public abstract class Forma {
 
 	public abstract boolean esTerrestre();
 
+	public abstract float obtenerCoeficientePorVelocidad(ContenedorModificadores modificadores) ;
 }

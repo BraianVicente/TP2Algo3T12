@@ -12,7 +12,9 @@ import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
 
@@ -197,5 +199,9 @@ public class Tablero {
 	public void agarrado(Bonus b) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void agregarSuperficie(Superficie sup, Posicion pos) {
+		contenedorSuperficies.agregarSuperficie(sup,pos);
 	}
 }
