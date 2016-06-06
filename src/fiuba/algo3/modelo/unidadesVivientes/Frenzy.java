@@ -2,7 +2,6 @@ package fiuba.algo3.modelo.unidadesVivientes;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
-import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Duster;
 import fiuba.algo3.modelo.formas.Forma;
