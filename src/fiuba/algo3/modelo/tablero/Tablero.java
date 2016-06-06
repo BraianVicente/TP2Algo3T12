@@ -176,42 +176,13 @@ public class Tablero {
 
 	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
 
-		LinkedList<Posicion> posicionesQueDeberianEstarVacias=posicionesQueTocaLaRectaQueVa(this.contenedorUnidades.obtenerPosicion(atacante),this.contenedorUnidades.obtenerPosicion(atacante));
-		
+		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacante));
+		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacante));
+		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacado));
 		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	
 	}
 
-	private LinkedList<Posicion> posicionesQueTocaLaRectaQueVa(Posicion p1, Posicion p2) {
-		LinkedList<Posicion> posiciones=new LinkedList<Posicion>();
-		Plano plano=p2.getPlano();
-		float diferenciaEnX=p1.distanciaEnXA(p2);
-		float diferenciaEnY=p2.distanciaEnYA(p2);
-		float pendiente=diferenciaEnY/diferenciaEnX;
-		for(float i=p1.getX()+Math.signum(diferenciaEnX)*0.5f;Math.signum(diferenciaEnX)*i<Math.signum(diferenciaEnX)*p2.getX();i=i+1*Math.signum(diferenciaEnX)) {
-			float yDeInterseccion=pendiente*(i-p1.getX())+p1.getY();
-			if(yDeInterseccion-Math.floor(yDeInterseccion)-0.5f<0.001f) {
-				posiciones.add(new Posicion((int)Math.floor(i), (int)Math.floor(yDeInterseccion),plano));
-				posiciones.add(new Posicion((int)Math.ceil(i), (int)Math.ceil(yDeInterseccion),plano));
-			}
-			else{
-				posiciones.add(new Posicion((int)Math.floor(i), (int)Math.round(yDeInterseccion),plano));
-				posiciones.add(new Posicion((int)Math.ceil(i), (int)Math.round(yDeInterseccion),plano));
-			}
-		}
-		for(float i=p1.getX()+Math.signum(diferenciaEnY)*0.5f;Math.signum(diferenciaEnY)*i<Math.signum(diferenciaEnY)*p2.getX();i=i+1*Math.signum(diferenciaEnY)) {
-			float xDeInterseccion=(1/pendiente)*(i-p1.getX())+p1.getY();
-			if(xDeInterseccion-Math.floor(xDeInterseccion)-0.5f<0.001f) {
-				posiciones.add(new Posicion((int)Math.floor(xDeInterseccion), (int)Math.floor(i),plano));
-				posiciones.add(new Posicion((int)Math.ceil(xDeInterseccion), (int)Math.ceil(i),plano));
-			}
-			else{
-				posiciones.add(new Posicion((int)Math.round(xDeInterseccion), (int)Math.floor(i),plano));
-				posiciones.add(new Posicion((int)Math.round(xDeInterseccion), (int)Math.ceil(i),plano));
-			}
-		}
-		
-		return posiciones;
-	}
+	
 
 	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {
 		for(Posicion p: posicionesQueDeberianEstarVacias){

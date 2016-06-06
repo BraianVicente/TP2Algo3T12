@@ -1,6 +1,12 @@
 package fiuba.algo3.modelo.tablero;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 
 public class Posicion {
 	public enum Plano{
@@ -93,5 +99,60 @@ public class Posicion {
 	}
 	public int distanciaEnXA(Posicion posicionFin) {
 		return posicionFin.getX()-this.getX();
+	}
+	
+	public LinkedList<Posicion> posicionesQueTocaLaRectaQueVaA(Posicion p2) {
+		LinkedList<Posicion> posiciones=new LinkedList<Posicion>();
+		Plano plano=p2.getPlano();
+		float diferenciaEnX=this.distanciaEnXA(p2);
+		float diferenciaEnY=this.distanciaEnYA(p2);
+		posiciones.add(this);
+		posiciones.add(p2);
+		float pendiente=diferenciaEnY/diferenciaEnX;
+		for(float i=this.getX()+Math.signum(diferenciaEnX)*0.5f;Math.signum(diferenciaEnX)*i<Math.signum(diferenciaEnX)*p2.getX();i=i+1*Math.signum(diferenciaEnX)) {
+			float yDeInterseccion=pendiente*(i-this.getX())+this.getY();
+			posiciones.addAll(posicionesQueSonTocadasPorUnSegmentoDeRecta(i,yDeInterseccion,plano, pendiente));
+		}
+		pendiente=1/pendiente;
+		for(float i=this.getY()+Math.signum(diferenciaEnY)*0.5f;Math.signum(diferenciaEnY)*i<Math.signum(diferenciaEnY)*p2.getY();i=i+1*Math.signum(diferenciaEnY)) {
+			float xDeInterseccion=pendiente*(i-this.getY())+this.getX();
+			posiciones.addAll(posicionesQueSonTocadasPorUnSegmentoDeRecta(xDeInterseccion,i,plano, pendiente));
+			
+		}
+		removerRepetidos(posiciones);
+		return posiciones;
+	}
+	private void removerRepetidos(LinkedList<Posicion> posiciones) {
+		HashSet<Posicion> posicionesAuxiliar=new HashSet<Posicion>(posiciones);
+		posiciones.clear();
+		posiciones.addAll(posicionesAuxiliar);
+		
+	}
+	private List<Posicion> posicionesQueSonTocadasPorUnSegmentoDeRecta(float x, float y, Plano plano2, float pendiente) {
+		List<Posicion> posiciones =new ArrayList<Posicion>();
+		if(Math.abs(y-Math.floor(y)-0.5f)<0.001f&&Math.abs(x-Math.floor(x)-0.5f)<0.001f) {
+			//caso interseccion de 4 casilleros
+			if(pendiente>0){
+				posiciones.add(new Posicion((int)Math.floor(x), (int)Math.floor(y),plano));
+				posiciones.add(new Posicion((int)Math.ceil(x), (int)Math.ceil(y),plano));
+			}else{
+				posiciones.add(new Posicion((int)Math.ceil(x), (int)Math.floor(y),plano));
+				posiciones.add(new Posicion((int)Math.floor(x), (int)Math.ceil(y),plano));
+			}
+		
+		}
+		
+		else{
+			//caso intrseccion de 2 casilleros, verifico si fue en x o en y
+			if(Math.abs(x-Math.floor(x)-0.5f)<0.001f){
+				posiciones.add(new Posicion((int)Math.floor(x), (int)Math.round(y),plano));
+				posiciones.add(new Posicion((int)Math.ceil(x), (int)Math.round(y),plano));
+		
+			}else{
+				posiciones.add(new Posicion((int)Math.round(x), (int)Math.floor(y),plano));
+				posiciones.add(new Posicion((int)Math.round(x), (int)Math.ceil(y),plano));
+			}
+		}
+		return posiciones;	
 	}
 }
