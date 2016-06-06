@@ -54,7 +54,7 @@ public class Tablero {
         alto=10;
         ancho=10;
         for (int i = 0; i < alto; i++) {
-        	for(int j=0;i<ancho;j++){
+        	for(int j=0;j<ancho;j++){
             this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
