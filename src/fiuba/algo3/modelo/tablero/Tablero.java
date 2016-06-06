@@ -44,7 +44,7 @@ public class Tablero {
 
 	private Posicion posicionChispa;
 
-    private static final Integer MAX_DISTANCE = null; //definir distancia maxima entre units para hacer la combinacion
+    private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 
 
     public Tablero() {
@@ -127,9 +127,9 @@ public class Tablero {
 	public void combinar(Posicion a, Posicion b, Posicion c) {
 		UnidadConVida unita, unitb, unitc;
 		
-		unita =obtenerUnidad(a);
-		unitb =obtenerUnidad(b);
-		unitc =obtenerUnidad(c);
+		unita = obtenerUnidad(a);
+		unitb = obtenerUnidad(b);
+		unitc = obtenerUnidad(c);
 		
 		// check the distance between units
 		if ( (a.distanciaA(b) > MAX_DISTANCE) || (b.distanciaA(c) > MAX_DISTANCE) || (c.distanciaA(a) > MAX_DISTANCE) ) {
