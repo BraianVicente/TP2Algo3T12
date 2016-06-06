@@ -16,6 +16,7 @@ import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadExceptio
 import fiuba.algo3.modelo.unidadesVivientes.AtaqueInvalidoPorDistanciaException;
 import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
 import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
+import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
 import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
 import fiuba.algo3.modelo.unidadesVivientes.Megatron;
@@ -188,6 +189,37 @@ public class TableroTest {
     	Assert.assertEquals(false, tab.obtenerUnidad(posa) instanceof Superion);
     	Assert.assertEquals(true, tab.obtenerUnidad(posa) instanceof Menasor);
     	Assert.assertEquals(true, tab.obtenerUnidad(posa).tieneChispa());
+    }
+    
+    @Test(expected=CombinacionInvalidaException.class)
+    public void test12CombinacionConDifferentesEquipos() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(6,6), posc = new Posicion(6,5);
+    	Optimusprime op = new Optimusprime();
+    	Bonecrusher bone = new Bonecrusher();
+    	Frenzy fren = new Frenzy();
+    	
+    	tab.agregarUnidad(posa, op);
+    	tab.agregarUnidad(posb, bone);
+    	tab.agregarUnidad(posc, fren);
+    	
+    	tab.combinar(posa, posb, posc);
+
+    }
+    
+    @Test(expected=CombinacionInvalidaException.class)
+    public void test13CombinacionFueraDeRango() {
+    	Tablero tab = new Tablero();
+    	Posicion posa = new Posicion(5, 5), posb = new Posicion(1, 1), posc = new Posicion(10, 12);
+    	Megatron mega = new Megatron();
+    	Bonecrusher bone = new Bonecrusher();
+    	Frenzy fren = new Frenzy();
+    	
+    	tab.agregarUnidad(posa, mega);
+    	tab.agregarUnidad(posb, bone);
+    	tab.agregarUnidad(posc, fren);
+    	
+    	tab.combinar(posa, posb, posc);
     }
 }
 
