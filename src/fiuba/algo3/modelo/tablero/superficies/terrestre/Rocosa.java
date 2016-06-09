@@ -14,6 +14,7 @@ import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
  */
 public class Rocosa extends Superficie {
 
+        @Override
 	public void afectarA(UnidadConVida unidadConVida) {
 		unidadConVida.serAfectadoPor(this);
 		

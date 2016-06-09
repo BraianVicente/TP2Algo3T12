@@ -76,7 +76,13 @@ public class Tablero {
     		}catch(IllegalArgumentException e){
     			throw new MovimientoInvalidoException();
     		}
-    		desplazarPosicionContigua(unidad, posicionSiguiente);
+            try {
+                desplazarPosicionContigua(unidad, posicionSiguiente);
+            } catch (PosicionOcupadaException e ){
+                throw new MovimientoInvalidoException() ;
+                
+            }
+                
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
@@ -116,7 +122,12 @@ public class Tablero {
 	
 	public void desplazarPosicionContigua(UnidadConVida unidad, Posicion posicionSiguiente){
 		contenedorUnidades.removerUnidad(unidad);
-		contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);
+		try {
+            contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);        
+        } catch (PosicionOcupadaException e ){
+            throw new MovimientoInvalidoException();
+            
+        }
 	}
 	
 	public void combinar(Posicion a, Posicion b, Posicion c) {

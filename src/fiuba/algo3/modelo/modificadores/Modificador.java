@@ -6,13 +6,13 @@ import fiuba.algo3.modelo.formas.FormaVehiculo;
 
 /**
  * Modela:
- * -Nebulosa de andrómeda
- * -tormenta psiónica
- * -doble cañón
- * -burbuja inmaculada
+ * -Nebulosa de andromeda
+ * -tormenta psiï¿½nica
+ * -doble canion
+ * -burbuja inmaculadao
  * -flash
  * 
- * @author José Sb
+ * @author Jose Sb
  *
  */
 public abstract class Modificador {
@@ -22,8 +22,8 @@ public abstract class Modificador {
 	@Override
 	public abstract Object clone();
 	
-	//-----------métodos de efectos--------------------//
-	//-----------se definen los valores "default" aquí pero la idea es
+	//-----------metodos de efectos--------------------//
+	//-----------se definen los valores "default" aqui pero la idea es
 	//que los hijos los sobreescriban
 	public boolean puedeMoverse(){
 		return true;

@@ -23,8 +23,4 @@ public class NaveCybertroniana extends FormaAerea {
     }
 
 
-    @Override
-    public Integer disminuirEnUnMovimiento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

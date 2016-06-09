@@ -40,7 +40,7 @@ public class SuperficieTest {
     }
 	
 	@Test
-    public void test04TormentaPsionciaSacaDañoNave(){
+    public void test04TormentaPsionciaSacaDanioNave(){
         Ratchet bee=new Ratchet();
         Superficie sup=new TormentaPsionica();
         float puntosAtaqueOriginal=bee.getPuntosAtaque();
@@ -49,7 +49,7 @@ public class SuperficieTest {
     }
 	
 	@Test
-    public void test05TormentaPsionciaNoSacaDañoHumanoide(){
+    public void test05TormentaPsionciaNoSacaDanioHumanoide(){
         Ratchet bee=new Ratchet();
         Superficie sup=new TormentaPsionica();
         bee.transformar();

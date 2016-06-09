@@ -16,7 +16,7 @@ public class UnidadYaContenidaException extends UnidadException {
 
 	@Override
 	public String descripcion() {
-		return "Ya está contenida la unidad";
+		return "Ya esta contenida la unidad";
 	}
 
 }
