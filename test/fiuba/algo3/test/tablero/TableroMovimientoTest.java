@@ -70,7 +70,6 @@ public class TableroMovimientoTest {
 		Ratchet bum=new Ratchet();
 		tab.agregarUnidad(pos.obtenerMismaPosicionDesplazada(1, 0), bum);
 		tab.mover(bum,pos);
-		float f=bum.getCoeficienteMovimientoActual();
 		tab.mover(bum, pos.obtenerMismaPosicionDesplazada(1, 0));
 		
 	}
