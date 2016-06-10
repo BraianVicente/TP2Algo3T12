@@ -13,7 +13,7 @@ public class PosicionLibreException extends PosicionException {
 
 	@Override
 	public String descripcion() {
-		return "La posicion está libre";
+		return "La posicion esta libre";
 	}
 
 }

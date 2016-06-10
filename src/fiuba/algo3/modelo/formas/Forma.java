@@ -24,7 +24,6 @@ public abstract class Forma {
 
     public abstract boolean esVehiculo();
 
-    public abstract Integer disminuirEnUnMovimiento() ;
 
 	public abstract float coeficienteAtaqueVehiculo(float posible);
 	public abstract float coeficienteMovimientoEnPantano();

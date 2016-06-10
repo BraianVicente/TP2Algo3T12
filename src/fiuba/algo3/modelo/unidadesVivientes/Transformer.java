@@ -72,7 +72,7 @@ public abstract class Transformer extends UnidadConVida {
   		// TODO Auto-generated method stub
   		return modificadores.coeficienteVelocidad()*forma.obtenerCoeficientePorVelocidad(modificadores);
   	}
-    //--------------------------superfícies-----------------------------//
+    //--------------------------superficies-----------------------------//
 
     public void serAfectadoPor(NebulosaAndromeda s){
     	if(esAerea()){//////!!!!!!!!!!
