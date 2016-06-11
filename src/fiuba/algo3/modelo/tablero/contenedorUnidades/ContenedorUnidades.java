@@ -1,5 +1,6 @@
 package fiuba.algo3.modelo.tablero.contenedorUnidades;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,5 +70,12 @@ public class ContenedorUnidades {
 			throw new MovimientoInvalidoException();
 		}
 		
+	}
+	public ArrayList<Unidad> obtenerUnidades() {
+		ArrayList<Unidad> ret = new ArrayList<Unidad>();
+		for(Map.Entry<Unidad, Posicion> entry : posicionesPorUnidad.entrySet()){
+			ret.add(entry.getKey());
+		}
+		return ret;
 	}
 }

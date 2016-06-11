@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -220,5 +221,13 @@ public class Tablero {
 
 	public void agregarSuperficie(Superficie sup, Posicion pos) {
 		contenedorSuperficies.agregarSuperficie(sup,pos);
+	}
+
+	public ArrayList<Unidad> obtenerUnidades() {
+		return contenedorUnidades.obtenerUnidades();
+	}
+
+	public Posicion posicion(Unidad u) {
+		return contenedorUnidades.obtenerPosicion(u);
 	}
 }
