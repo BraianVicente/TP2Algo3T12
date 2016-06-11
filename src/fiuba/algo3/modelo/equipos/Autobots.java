@@ -1,7 +1,7 @@
 package fiuba.algo3.modelo.equipos;
 
-import fiuba.algo3.modelo.Unidad;
-import fiuba.algo3.modelo.unidadesVivientes.Superion;
+import fiuba.algo3.modelo.unidades.Superion;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public class Autobots extends Equipo {
 

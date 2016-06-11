@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
+import fiuba.algo3.modelo.unidades.FriendlyFireException;
+import fiuba.algo3.modelo.unidades.Megatron;
 
 public class MegatronTest {
 

@@ -1,13 +1,12 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
-import fiuba.algo3.modelo.Unidad;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaHolder;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
-import fiuba.algo3.modelo.formas.HumanoideBumblebee;
+import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
@@ -24,27 +23,44 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 
-public abstract class UnidadConVida extends Unidad{
+public abstract class Unidad {
 	
 	private Chispa chispa;
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosRestantes;
 	
-	protected UnidadConVida(Equipo equipo, DeathListener command) {
-		super(equipo);
+    //-------------------equipo-------------
+    protected final Equipo equipo;//equipo no tiene estado y es Final! Fontela, hago getter?
+
+    protected Unidad(Equipo equipo){
+        this.equipo = equipo ;
+    }
+    
+	protected Unidad(Equipo equipo, DeathListener command) {
+        this(equipo);
 		vida = getVidaMaxima();
 		chispa = new ChispaHolder();
 		this.command = command;
 		modificadores=new ContenedorModificadores();
 	
 	}
-	@Override
+
+    public abstract Forma getFormaActual() ;
+
+    public boolean es(Equipo e) {
+        return equipo.equals(e);
+    }
+    
+    public Equipo equipo() {
+    	return this.equipo;
+    }
+   
+    
 	public boolean existe(){
 		return true;
 	}
 	
-	@Override
 	public boolean tieneChispa() {
 		return (chispa instanceof ChispaSuprema);
 	}
@@ -68,7 +84,6 @@ public abstract class UnidadConVida extends Unidad{
     private int vida;
     public abstract int getVidaMaxima();
     
-    @Override
     public int getVida(){
     	return vida;
     }
@@ -77,7 +92,6 @@ public abstract class UnidadConVida extends Unidad{
     	this.vida = vida;
     }
     
-    @Override
 	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException {
     	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
     		throw new FriendlyFireException();

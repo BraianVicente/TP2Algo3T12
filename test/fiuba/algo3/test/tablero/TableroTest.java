@@ -13,18 +13,19 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.unidadesVivientes.AtaqueInvalidoPorDistanciaException;
-import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
-import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
-import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
-import fiuba.algo3.modelo.unidadesVivientes.Menasor;
-import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Optimusprime;
-import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
-import fiuba.algo3.modelo.unidadesVivientes.Superion;
+import fiuba.algo3.modelo.unidades.AtaqueInvalidoPorDistanciaException;
+import fiuba.algo3.modelo.unidades.Bonecrusher;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
+import fiuba.algo3.modelo.unidades.Frenzy;
+import fiuba.algo3.modelo.unidades.FriendlyFireException;
+import fiuba.algo3.modelo.unidades.Megatron;
+import fiuba.algo3.modelo.unidades.Menasor;
+import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidades.Optimusprime;
+import fiuba.algo3.modelo.unidades.Ratchet;
+import fiuba.algo3.modelo.unidades.Superion;
+import fiuba.algo3.modelo.unidades.Unidad ;
 
 /**
  *

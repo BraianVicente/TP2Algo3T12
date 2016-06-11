@@ -1,44 +1,39 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.formas.Camaro;
 import fiuba.algo3.modelo.formas.Forma;
-import fiuba.algo3.modelo.formas.HumanoideBumblebee;
+import fiuba.algo3.modelo.formas.HumanoideOptimusprime;
+import fiuba.algo3.modelo.formas.Peterbilt;
 
-public class Bumblebee extends Transformer {
+public class Optimusprime extends Transformer {
 
-    public Bumblebee(DeathListener command) {
+    public Optimusprime(DeathListener command) {
         super(new Autobots(), command);
     }
-
-    public Bumblebee() {
+    public Optimusprime() {
         super(new Autobots(), new IgnorarMuerte());
     }
+
     @Override
     protected Forma getVehiculo() {
-        return new Camaro();
+        return new Peterbilt();
     }
 
     @Override
     protected Forma getHumanoide() {
-        return new HumanoideBumblebee();
+        return new HumanoideOptimusprime();
     }
 
     @Override
     public int getVidaMaxima() {
-        return 350;
+        return 500;
     }
 
     @Override
     public boolean esTerrestre() {
         return true;
-    }
-
-    @Override
-    public Forma getFormaActual() {
-        return this.forma;
     }
 
 }

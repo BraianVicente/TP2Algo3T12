@@ -1,11 +1,11 @@
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public class IgnorarMuerte implements DeathListener {
 
 	@Override
-	public void murio(UnidadConVida u) {
+	public void murio(Unidad u) {
 
 	}
 

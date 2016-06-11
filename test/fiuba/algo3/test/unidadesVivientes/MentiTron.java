@@ -10,9 +10,9 @@ import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.Unidad;
 
-public class MentiTron extends UnidadConVida {
+public class MentiTron extends Unidad {
 
 	public MentiTron() {
 		super(new Decepticons(), new IgnorarMuerte());

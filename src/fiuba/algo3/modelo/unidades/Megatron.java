@@ -1,39 +1,39 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.equipos.Decepticons;
-import fiuba.algo3.modelo.formas.Blindado;
 import fiuba.algo3.modelo.formas.Forma;
-import fiuba.algo3.modelo.formas.HumanoideBonecrusher;
+import fiuba.algo3.modelo.formas.HumanoideMegatron;
+import fiuba.algo3.modelo.formas.NaveCybertroniana;
 
-public class Bonecrusher extends Transformer {
+public class Megatron extends Transformer {
 
-	public Bonecrusher(DeathListener command) {
+    public Megatron(DeathListener command) {
         super(new Decepticons(), command);
+        // TODO Auto-generated constructor stub
     }
-	public Bonecrusher() {
+    public Megatron() {
         super(new Decepticons(), new IgnorarMuerte());
     }
-
     @Override
     protected Forma getVehiculo() {
-        return new Blindado();
+        return new NaveCybertroniana();
     }
 
     @Override
     protected Forma getHumanoide() {
-        return new HumanoideBonecrusher();
+        return new HumanoideMegatron();
     }
 
     @Override
     public int getVidaMaxima() {
-        return 200;
+        return 550;
     }
 
     @Override
     public boolean esTerrestre() {
-		return true;
+		return false;
     }
 
 }

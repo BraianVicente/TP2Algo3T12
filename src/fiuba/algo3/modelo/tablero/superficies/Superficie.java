@@ -6,7 +6,7 @@
 package fiuba.algo3.modelo.tablero.superficies;
 
 
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 /**
  *
@@ -17,7 +17,7 @@ public abstract class Superficie {
     public Superficie(){ }
 
     
-	public void afectarA(UnidadConVida unidadConVida) {
+	public void afectarA(Unidad unidadConVida) {
 		unidadConVida.serAfectadoPor(this);
 		
 	}

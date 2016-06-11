@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.FriendlyFireException;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.FriendlyFireException;
 
 public class BumblebeeTest {
 

@@ -8,6 +8,7 @@ package fiuba.algo3.modelo.tablero;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
@@ -16,14 +17,11 @@ import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
-import fiuba.algo3.modelo.unidadesVivientes.CombinacionInvalidaException;
-
-import fiuba.algo3.modelo.unidadesVivientes.Menasor;
-
-
-import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Transformer;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
+import fiuba.algo3.modelo.unidades.Menasor;
+import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidades.Transformer;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 /**
  *
@@ -62,7 +60,12 @@ public class Tablero {
     }
 
    
-    public void mover(UnidadConVida unidad, Posicion posicionFin) {
+    public void moverUnidadDeEqupipo(Equipo equipo,Unidad unidad,Posicion posFin){
+        
+        
+    }
+    
+    public void mover(Unidad unidad, Posicion posicionFin) {
     	Posicion posicionInicio= contenedorUnidades.obtenerPosicion(unidad);
     	if(posicionInicio.getPlano()!=posicionFin.getPlano()) throw new MovimientoInvalidoException();
     	try{
@@ -98,7 +101,7 @@ public class Tablero {
     	}
     }
 
-	private Posicion obtenerPosicionADondeMoverse(UnidadConVida unidad, Posicion posicionFin) {
+	private Posicion obtenerPosicionADondeMoverse(Unidad unidad, Posicion posicionFin) {
 		Posicion posicionActual=contenedorUnidades.obtenerPosicion(unidad);
 		int distanciaEnX, distanciaEnY;
 		distanciaEnX=posicionActual.distanciaEnXA(posicionFin);
@@ -106,7 +109,7 @@ public class Tablero {
 		return posicionActual.obtenerMismaPosicionDesplazada((int)Math.signum(distanciaEnX),(int)Math.signum(distanciaEnY));
 	}
 
-	private void darBonus(UnidadConVida unidad,Posicion posicion){
+	private void darBonus(Unidad unidad,Posicion posicion){
 		Bonus bonus=contenedorBonuses.obtenerBonus(posicion);
 		unidad.recibirBonus(bonus);
 		contenedorBonuses.removerBonus(bonus);
@@ -120,7 +123,7 @@ public class Tablero {
 		}
 	}
 	
-	public void desplazarPosicionContigua(UnidadConVida unidad, Posicion posicionSiguiente){
+	public void desplazarPosicionContigua(Unidad unidad, Posicion posicionSiguiente){
 		contenedorUnidades.removerUnidad(unidad);
 		try {
             contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);        
@@ -131,8 +134,8 @@ public class Tablero {
 	}
 	
 	public void combinar(Posicion a, Posicion b, Posicion c) {
-		UnidadConVida unita, unitb, unitc;
-		
+        Unidad unita,unitb, unitc;
+	
 		unita = obtenerUnidad(a);
 		unitb = obtenerUnidad(b);
 		unitc = obtenerUnidad(c);
@@ -147,7 +150,7 @@ public class Tablero {
 			throw new CombinacionInvalidaException();
 		}
 		
-		UnidadConVida comb = (UnidadConVida) unita.equipo().getCombination();
+		Unidad comb = unita.equipo().getCombination();
 		
 		if ( (unita.tieneChispa()) || (unitb.tieneChispa()) || (unitc.tieneChispa())) {
 			comb.darChispa();
@@ -161,20 +164,20 @@ public class Tablero {
 		
 	}
 
-	public UnidadConVida obtenerUnidad(Posicion p) {
+	public Unidad obtenerUnidad(Posicion p) {
 		return contenedorUnidades.obtenerUnidad(p);
 	}
 
-	public void agregarUnidad(Posicion p, UnidadConVida u) {
+	public void agregarUnidad(Posicion p, Unidad u) {
 		contenedorUnidades.agregarUnidad(u, p);
 	}
 
 	private void quitarUnidadActual(Posicion p) {
-		UnidadConVida u=contenedorUnidades.obtenerUnidad(p);
+		Unidad u=contenedorUnidades.obtenerUnidad(p);
 		contenedorUnidades.removerUnidad(u);
 	}
 
-	public void murio(UnidadConVida u) {
+	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
 		
@@ -184,12 +187,12 @@ public class Tablero {
 		posicionChispa=posicion;
 	}
 
-	public void atacar(UnidadConVida atacante, UnidadConVida atacado) {
+	public void atacar(Unidad atacante, Unidad atacado) {
 		if(!this.puedeAtacar(atacante,atacado)) throw new AtaqueInvalidoException();
 		atacante.atacarA(atacado);
 	}
 
-	private boolean puedeAtacar(UnidadConVida atacante, UnidadConVida atacado) {
+	private boolean puedeAtacar(Unidad atacante, Unidad atacado) {
 
 		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacado));
 		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacante));

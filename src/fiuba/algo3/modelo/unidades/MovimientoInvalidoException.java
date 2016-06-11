@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 public class MovimientoInvalidoException extends RuntimeException {
 

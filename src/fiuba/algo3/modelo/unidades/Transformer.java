@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
@@ -11,7 +11,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 
-public abstract class Transformer extends UnidadConVida {
+public abstract class Transformer extends Unidad {
 	Forma forma;
 	
 	Transformer(Equipo equipo,DeathListener command){

@@ -7,19 +7,19 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
-import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Transformer;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidades.Transformer;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public class ContenedorUnidades {
-	private Map<Posicion,UnidadConVida> unidadesPorPosicion;
-	private Map<UnidadConVida,Posicion> posicionesPorUnidad;
+	private Map<Posicion,Unidad> unidadesPorPosicion;
+	private Map<Unidad,Posicion> posicionesPorUnidad;
 	
 	public ContenedorUnidades(){
-		unidadesPorPosicion = new HashMap<Posicion,UnidadConVida>();
-		posicionesPorUnidad = new HashMap<UnidadConVida,Posicion>();
+		unidadesPorPosicion = new HashMap<Posicion,Unidad>();
+		posicionesPorUnidad = new HashMap<Unidad,Posicion>();
 	}
-	public void agregarUnidad(UnidadConVida u, Posicion p) throws UnidadYaContenidaException{
+	public void agregarUnidad(Unidad u, Posicion p) throws UnidadYaContenidaException{
 		if(contiene(u)){
 			throw new UnidadYaContenidaException(u);
 		}
@@ -33,24 +33,24 @@ public class ContenedorUnidades {
 	public boolean ocupada(Posicion p){
 		return unidadesPorPosicion.containsKey(p);
 	}
-	public boolean contiene(UnidadConVida u){
+	public boolean contiene(Unidad u){
 		return posicionesPorUnidad.containsKey(u);
 	}
-	public Posicion obtenerPosicion(UnidadConVida u) throws UnidadNoContenidaException{
+	public Posicion obtenerPosicion(Unidad u) throws UnidadNoContenidaException{
 		if(!contiene(u)){
 			throw new UnidadNoContenidaException(u);
 		}
 		return posicionesPorUnidad.get(u);
 	}
 	
-	public UnidadConVida obtenerUnidad(Posicion p) throws PosicionLibreException{
+	public Unidad obtenerUnidad(Posicion p) throws PosicionLibreException{
 		if(!ocupada(p)){
 			throw new PosicionLibreException(p);
 		}
 		return unidadesPorPosicion.get(p);
 	}
 	
-	public void removerUnidad(UnidadConVida u) throws UnidadNoContenidaException{
+	public void removerUnidad(Unidad u) throws UnidadNoContenidaException{
 		Posicion p = obtenerPosicion(u);
 		posicionesPorUnidad.remove(u);
 		unidadesPorPosicion.remove(p);

@@ -13,10 +13,10 @@ import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
-import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Megatron;
+import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidades.Ratchet;
 
 public class SegundaEntregaTest {
 

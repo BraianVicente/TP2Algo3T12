@@ -1,5 +1,8 @@
 package fiuba.algo3.test.superficie;
 
+import fiuba.algo3.modelo.unidades.Transformer;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Ratchet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +13,6 @@ import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.*;
-import fiuba.algo3.modelo.unidadesVivientes.*;
 
 public class SuperficieTest {
 

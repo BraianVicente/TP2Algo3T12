@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
@@ -8,7 +8,7 @@ import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.formas.HumanoideSuperion;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
-public class Superion extends UnidadConVida {
+public class Superion extends Unidad {
 	
 	private int vidaMax;
 

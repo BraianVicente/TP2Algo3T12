@@ -8,11 +8,11 @@ import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
-import fiuba.algo3.modelo.unidadesVivientes.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Frenzy;
+import fiuba.algo3.modelo.unidades.Megatron;
+import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
+import fiuba.algo3.modelo.unidades.Ratchet;
 
 public class TableroMovimientoTest {
 	@Test

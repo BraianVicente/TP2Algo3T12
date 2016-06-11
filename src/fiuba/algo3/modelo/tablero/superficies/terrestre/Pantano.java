@@ -6,7 +6,7 @@
 package fiuba.algo3.modelo.tablero.superficies.terrestre;
 
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 /**
  *
@@ -14,7 +14,7 @@ import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
  */
 public class Pantano extends Superficie {
 
-	public void afectarA(UnidadConVida unidadConVida) {
+	public void afectarA(Unidad unidadConVida) {
 		unidadConVida.serAfectadoPor(this);
 		
 	}

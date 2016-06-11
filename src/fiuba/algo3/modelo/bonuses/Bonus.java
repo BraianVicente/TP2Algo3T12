@@ -3,7 +3,7 @@ package fiuba.algo3.modelo.bonuses;
 import fiuba.algo3.modelo.IgnorarLevantado;
 import fiuba.algo3.modelo.LevantadoDeBonusListener;
 import fiuba.algo3.modelo.modificadores.Modificador;
-import fiuba.algo3.modelo.unidadesVivientes.UnidadConVida;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public abstract class Bonus {
 	private LevantadoDeBonusListener command;
@@ -14,7 +14,7 @@ public abstract class Bonus {
 		}
 	}
 	public abstract Modificador obtenerModificador();
-	public void serAgarradoPor(UnidadConVida u){
+	public void serAgarradoPor(Unidad u){
 		u.recibirBonus(this);
 		command.agarrado(this);
 	}

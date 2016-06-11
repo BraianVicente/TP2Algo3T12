@@ -10,7 +10,7 @@ import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.UnidadNoContenidaException;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.UnidadYaContenidaException;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
+import fiuba.algo3.modelo.unidades.Bumblebee;
 
 public class ContenedorUnidadesTest {
 	private final Posicion pos1 = new Posicion(0,0);

@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 public class FriendlyFireException extends RuntimeException {
 

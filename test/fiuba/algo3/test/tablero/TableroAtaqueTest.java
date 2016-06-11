@@ -8,11 +8,11 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.unidadesVivientes.Bonecrusher;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.Frenzy;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
-import fiuba.algo3.modelo.unidadesVivientes.Ratchet;
+import fiuba.algo3.modelo.unidades.Bonecrusher;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Frenzy;
+import fiuba.algo3.modelo.unidades.Megatron;
+import fiuba.algo3.modelo.unidades.Ratchet;
 
 public class TableroAtaqueTest {
 	   @Test(expected=AtaqueInvalidoException.class)

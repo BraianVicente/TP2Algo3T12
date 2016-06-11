@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo.unidadesVivientes;
+package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;

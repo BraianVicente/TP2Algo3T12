@@ -1,4 +1,6 @@
-package fiuba.algo3.modelo;
+package fiuba.algo3.modelo.unidades;
+
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public abstract class UnidadException extends RuntimeException {
 	/**

@@ -7,8 +7,8 @@ import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;
-import fiuba.algo3.modelo.unidadesVivientes.Bumblebee;
-import fiuba.algo3.modelo.unidadesVivientes.Megatron;
+import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Megatron;
 
 public class InteraccionConBonusesTest {
 

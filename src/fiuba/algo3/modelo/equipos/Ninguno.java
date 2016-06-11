@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.equipos;
 
-import fiuba.algo3.modelo.Unidad;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public class Ninguno extends Equipo {
 
