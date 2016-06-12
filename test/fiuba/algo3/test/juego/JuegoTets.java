@@ -11,6 +11,7 @@ import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.FriendlyFireException;
 import fiuba.algo3.modelo.unidades.Optimusprime;
+import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
 import org.junit.Assert;
 import org.junit.Test;
@@ -137,6 +138,21 @@ public class JuegoTets {
         juego.cambiarTurno();
         juego.transformarUnidad(new Posicion(8,8));
         
+    }
+    
+    @Test
+    public void testJugadorCombinaUnidades(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        j1.agregarUnidad(new Posicion(9,9), new Optimusprime());
+        j1.agregarUnidad(new Posicion(8,9), new Ratchet());
+        juego.combinarUnidades();
+        Assert.assertTrue(tab.isEmpty(new Posicion(8,9)));
+        Assert.assertTrue(tab.isEmpty(new Posicion(9,9)));
+        Assert.assertFalse(tab.isEmpty(new Posicion(8,8)));
     }
     
 
