@@ -60,14 +60,11 @@ public class Superion extends Unidad {
 	public float coeficienteMovimientoEn(Pantano s) {
 		return 0;
 	}
-
-	@Override
-	public Forma getFormaActual() {
-		return new HumanoideSuperion();
-	}
 	
 	@Override
 	public float getCoeficienteMovimientoActual() {
 	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
 	}
+
+    
 }

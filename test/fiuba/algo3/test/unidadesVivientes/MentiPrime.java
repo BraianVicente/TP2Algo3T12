@@ -39,11 +39,6 @@ public class MentiPrime extends Unidad {
 	}
 
 	@Override
-	public Forma getFormaActual() {
-		return null;
-	}
-
-	@Override
 	public void serAfectadoPor(NebulosaAndromeda s) {
 		// TODO Auto-generated method stub
 		

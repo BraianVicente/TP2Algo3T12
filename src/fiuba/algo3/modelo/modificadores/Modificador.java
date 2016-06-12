@@ -16,7 +16,8 @@ import fiuba.algo3.modelo.formas.FormaVehiculo;
  *
  */
 public abstract class Modificador {
-	public abstract void pasaTurno();
+	
+    public abstract void pasaTurno();
 	
 	abstract boolean haceEfecto();//visibilidad de paquete
 	@Override

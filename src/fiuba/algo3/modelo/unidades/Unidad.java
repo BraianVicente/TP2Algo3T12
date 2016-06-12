@@ -6,7 +6,6 @@ import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaHolder;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
-import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
@@ -45,9 +44,6 @@ public abstract class Unidad {
 		modificadores=new ContenedorModificadores();
 	
 	}
-
-    public abstract Forma getFormaActual() ;
-
     public boolean es(Equipo e) {
         return equipo.equals(e);
     }
@@ -93,7 +89,7 @@ public abstract class Unidad {
     }
     
 	public void recibirDanio(Unidad atacante, int danio) throws FriendlyFireException, NoSeEncuentraUnidadException {
-    	if(atacante.es(equipo)){//Este if est� mal, c�mo puedo volarlo?
+    	if(atacante.es(equipo)){//Este if esta mal, como puedo volarlo?
     		throw new FriendlyFireException();
     	}
         this.disminuirVida(danio);

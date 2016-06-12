@@ -36,9 +36,4 @@ public class Bumblebee extends Transformer {
         return true;
     }
 
-    @Override
-    public Forma getFormaActual() {
-        return this.forma;
-    }
-
 }

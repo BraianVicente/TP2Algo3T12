@@ -9,6 +9,7 @@ public class RemoverLevantado implements LevantadoDeBonusListener {
 	public RemoverLevantado(Tablero t){
 		tablero = t;
 	}
+    
 	@Override
 	public void agarrado(Bonus b) {
 		tablero.agarrado(b);

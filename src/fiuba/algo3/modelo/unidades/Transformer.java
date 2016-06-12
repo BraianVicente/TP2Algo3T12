@@ -64,9 +64,6 @@ public abstract class Transformer extends Unidad {
     	return forma.esAerea();
     }
     //esto tambi�n habr�a que volarlo
-    public Forma getFormaActual() {
-        return this.forma;
-    }
     
     public float getCoeficienteMovimientoActual() {
   		// TODO Auto-generated method stub

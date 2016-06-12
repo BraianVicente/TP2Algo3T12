@@ -22,6 +22,8 @@ import fiuba.algo3.modelo.unidades.Menasor;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -57,12 +59,6 @@ public class Tablero {
 
     public boolean isEmpty(Posicion posicion) {
         return !(this.contenedorUnidades.ocupada(posicion));
-    }
-
-   
-    public void moverUnidadDeEqupipo(Equipo equipo,Unidad unidad,Posicion posFin){
-        
-        
     }
     
     public void mover(Unidad unidad, Posicion posicionFin) {
@@ -114,10 +110,12 @@ public class Tablero {
 		unidad.recibirBonus(bonus);
 		contenedorBonuses.removerBonus(bonus);
 	}
-	public void transformar(Transformer transformer){
-		try{
+    
+	public void transformar(Unidad unidad){
+		Transformer transformer = (Transformer) unidad ;
+        try{
 			transformer.transformar();
-			contenedorUnidades.cambiarPlano(transformer,transformer.getPlanoPerteneciente());
+			contenedorUnidades.cambiarPlano(transformer,unidad.getPlanoPerteneciente());
 		}catch(MovimientoInvalidoException e){
 			throw new TransformacionInvalida();
 		}
@@ -200,8 +198,6 @@ public class Tablero {
 		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	
 	}
 
-	
-
 	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {
 		for(Posicion p: posicionesQueDeberianEstarVacias){
 			if(contenedorUnidades.ocupada(p))return false;
@@ -221,4 +217,30 @@ public class Tablero {
 	public void agregarSuperficie(Superficie sup, Posicion pos) {
 		contenedorSuperficies.agregarSuperficie(sup,pos);
 	}
+
+    public void combinarUnidadesEquipo(Equipo equipo) {
+        ArrayList<Posicion> unidadesEquipo  = this.obtenerPosicionesUnidadesVivasEquipo(equipo) ;
+        if (unidadesEquipo.size() == 3 ){
+            combinar(unidadesEquipo.get(0), unidadesEquipo.get(1),unidadesEquipo.get(2));
+        }
+        
+    }
+
+    private ArrayList<Posicion> obtenerPosicionesUnidadesVivasEquipo(Equipo equipo) {
+        return contenedorUnidades.obtenerPosicionesUnidadesVivasEquipo(equipo); 
+    }
+    
+    public void pasarTurnoEquipo(Equipo equipo) {
+        ArrayList<Posicion> posU = this.obtenerPosicionesUnidadesVivasEquipo(equipo);
+        for (Posicion pos : posU) {
+            Unidad unidad = this.obtenerUnidad(pos);
+            if (unidad.es(equipo)){
+                unidad.avanzarTurno();
+            }
+        }    
+    }
+
+    public boolean existenUnidadeDeEquipo(Equipo equipo) {
+        return (this.obtenerPosicionesUnidadesVivasEquipo(equipo).size() > 0) ;
+    }
 }

@@ -1,5 +1,6 @@
 package fiuba.algo3.modelo.tablero.contenedorUnidades;
 
+import fiuba.algo3.modelo.equipos.Equipo;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,8 +11,9 @@ import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
+import java.util.ArrayList;
 
-public class ContenedorUnidades {
+public class ContenedorUnidades  {
 	private Map<Posicion,Unidad> unidadesPorPosicion;
 	private Map<Unidad,Posicion> posicionesPorUnidad;
 	
@@ -70,4 +72,14 @@ public class ContenedorUnidades {
 		}
 		
 	}
+    public ArrayList<Posicion> obtenerPosicionesUnidadesVivasEquipo(Equipo equipo) {
+        ArrayList<Posicion> posicionesUnidades = new ArrayList<Posicion>();
+        for (Unidad unidad : posicionesPorUnidad.keySet()) {
+            if(unidad.es(equipo)){
+                posicionesUnidades.add(posicionesPorUnidad.get(unidad));
+            }
+        }
+        return posicionesUnidades ;
+        
+    }
 }

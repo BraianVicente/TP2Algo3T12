@@ -38,10 +38,6 @@ public class MentiTron extends Unidad {
 		return 2;
 	}
 
-	@Override
-	public Forma getFormaActual() {
-		return null;
-	}
 
 	@Override
 	public void serAfectadoPor(NebulosaAndromeda s) {
