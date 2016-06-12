@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
@@ -41,14 +42,14 @@ public class SegundaEntregaTest {
             tab.configurarSuperficie(new Posicion(x,5), new Espinas());
         }
         Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
-        tab.agregarUnidad(new Posicion(5,5),rat );
-        tab.mover(rat,new Posicion(5,6));
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,6)));
-        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,6)).getVida());
-        rat.transformar();
-        tab.mover(rat,new Posicion(5,5));
-        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,5)).getVida());
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,5)));
+        tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),rat );
+        tab.mover(rat,new Posicion(5,6,Plano.AEREO));
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,6,Plano.AEREO)));
+        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,6,Plano.AEREO)).getVida());
+
+        tab.mover(rat,new Posicion(5,5,Plano.AEREO));
+        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,5,Plano.AEREO)).getVida());
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,5,Plano.AEREO)));
         
     }
     
@@ -56,17 +57,16 @@ public class SegundaEntregaTest {
     public void testMegatronAtraviezaEspinasSinProblemas(){
         Tablero tab = new Tablero();
         for(int x = 0; x<10;x++){
-            tab.configurarSuperficie(new Posicion(x,10), new Espinas());
+            tab.configurarSuperficie(new Posicion(x,10,Plano.AEREO), new Espinas());
         }
         Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
-        tab.agregarUnidad(new Posicion(5,5),uAerea );
-        tab.mover(uAerea,new Posicion(5,10));
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,10)));
-        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,10)).getVida());
-        uAerea.transformar();
-        tab.mover(uAerea,new Posicion(5,9));
-        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,9)).getVida());
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,9)));
+        tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),uAerea );
+        tab.mover(uAerea,new Posicion(5,10,Plano.AEREO));
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,10,Plano.AEREO)));
+        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,10,Plano.AEREO)).getVida());
+        tab.mover(uAerea,new Posicion(5,9,Plano.AEREO));
+        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,9,Plano.AEREO)).getVida());
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,9,Plano.AEREO)));
     }
     
     @Test
@@ -74,17 +74,16 @@ public class SegundaEntregaTest {
 
         Tablero tab = new Tablero();
         for(int x = 0; x<10;x++){
-            tab.configurarSuperficie(new Posicion(x,5), new Nubes());
+            tab.configurarSuperficie(new Posicion(x,5,Plano.AEREO), new Nubes());
         }
         Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
-        tab.agregarUnidad(new Posicion(5,5),rat );
-        tab.mover(rat,new Posicion(5,6));
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,6)));
-        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,6)).getVida());
-        rat.transformar();
-        tab.mover(rat,new Posicion(5,5));
-        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,5)).getVida());
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,5)));
+        tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),rat );
+        tab.mover(rat,new Posicion(5,6,Plano.AEREO));
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,6,Plano.AEREO)));
+        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,6,Plano.AEREO)).getVida());
+        tab.mover(rat,new Posicion(5,5,Plano.AEREO));
+        Assert.assertEquals(150, tab.obtenerUnidad(new Posicion(5,5,Plano.AEREO)).getVida());
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,5,Plano.AEREO)));
         
     }
     
@@ -92,17 +91,16 @@ public class SegundaEntregaTest {
     public void testMegatronAtraviezaNubesSinProblemas(){
         Tablero tab = new Tablero();
         for(int x = 0; x<10;x++){
-            tab.configurarSuperficie(new Posicion(x,10), new Nubes());
+            tab.configurarSuperficie(new Posicion(x,10,Plano.AEREO), new Nubes());
         }
         Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
-        tab.agregarUnidad(new Posicion(5,5),uAerea );
-        tab.mover(uAerea,new Posicion(5,10));
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,10)));
-        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,10)).getVida());
-        uAerea.transformar();
-        tab.mover(uAerea,new Posicion(5,9));
-        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,9)).getVida());
-        Assert.assertFalse(tab.isEmpty(new Posicion(5,9)));
+        tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),uAerea );
+        tab.mover(uAerea,new Posicion(5,10,Plano.AEREO));
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,10,Plano.AEREO)));
+        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,10,Plano.AEREO)).getVida());
+        tab.mover(uAerea,new Posicion(5,9,Plano.AEREO));
+        Assert.assertEquals(550, tab.obtenerUnidad(new Posicion(5,9,Plano.AEREO)).getVida());
+        Assert.assertFalse(tab.isEmpty(new Posicion(5,9,Plano.AEREO)));
     }
     
     @Test(expected=MovimientoInvalidoException.class)

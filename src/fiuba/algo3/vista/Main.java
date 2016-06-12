@@ -33,6 +33,7 @@ public class Main extends Application {
 		stage.setTitle("Algoformers");
 		stage.setScene(scene);
 		stage.show();
+		stage.setFullScreen(true);
 	}
 	
 	public static void main(String[] args) {
