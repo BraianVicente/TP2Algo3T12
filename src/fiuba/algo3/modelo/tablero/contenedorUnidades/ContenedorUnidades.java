@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.tablero.contenedorUnidades;
 
 import fiuba.algo3.modelo.equipos.Equipo;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class ContenedorUnidades  {
 	private Map<Posicion,Unidad> unidadesPorPosicion;
 	private Map<Unidad,Posicion> posicionesPorUnidad;
-	
+
 	public ContenedorUnidades(){
 		unidadesPorPosicion = new HashMap<Posicion,Unidad>();
 		posicionesPorUnidad = new HashMap<Unidad,Posicion>();
@@ -31,7 +32,7 @@ public class ContenedorUnidades  {
 		unidadesPorPosicion.put(p,u);
 		posicionesPorUnidad.put(u, p);
 	}
-	
+
 	public boolean ocupada(Posicion p){
 		return unidadesPorPosicion.containsKey(p);
 	}
@@ -44,14 +45,14 @@ public class ContenedorUnidades  {
 		}
 		return posicionesPorUnidad.get(u);
 	}
-	
+
 	public Unidad obtenerUnidad(Posicion p) throws PosicionLibreException{
 		if(!ocupada(p)){
 			throw new PosicionLibreException(p);
 		}
 		return unidadesPorPosicion.get(p);
 	}
-	
+
 	public void removerUnidad(Unidad u) throws UnidadNoContenidaException{
 		Posicion p = obtenerPosicion(u);
 		posicionesPorUnidad.remove(u);
@@ -70,8 +71,9 @@ public class ContenedorUnidades  {
 			agregarUnidad(transformer,posicionVieja);
 			throw new MovimientoInvalidoException();
 		}
-		
+
 	}
+
     public ArrayList<Posicion> obtenerPosicionesUnidadesVivasEquipo(Equipo equipo) {
         ArrayList<Posicion> posicionesUnidades = new ArrayList<Posicion>();
         for (Unidad unidad : posicionesPorUnidad.keySet()) {
@@ -80,6 +82,15 @@ public class ContenedorUnidades  {
             }
         }
         return posicionesUnidades ;
-        
+
     }
+
+	public ArrayList<Unidad> obtenerUnidades() {
+		ArrayList<Unidad> ret = new ArrayList<Unidad>();
+		for(Map.Entry<Unidad, Posicion> entry : posicionesPorUnidad.entrySet()){
+			ret.add(entry.getKey());
+		}
+		return ret;
+	}
+
 }

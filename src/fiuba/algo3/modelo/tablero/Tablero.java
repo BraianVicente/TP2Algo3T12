@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -60,7 +61,7 @@ public class Tablero {
     public boolean isEmpty(Posicion posicion) {
         return !(this.contenedorUnidades.ocupada(posicion));
     }
-    
+
     public void mover(Unidad unidad, Posicion posicionFin) {
     	Posicion posicionInicio= contenedorUnidades.obtenerPosicion(unidad);
     	if(posicionInicio.getPlano()!=posicionFin.getPlano()) throw new MovimientoInvalidoException();
@@ -79,9 +80,9 @@ public class Tablero {
                 desplazarPosicionContigua(unidad, posicionSiguiente);
             } catch (PosicionOcupadaException e ){
                 throw new MovimientoInvalidoException() ;
-                
+
             }
-                
+
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
@@ -90,7 +91,7 @@ public class Tablero {
     		//si quedo en alguna posicion, lo saco y lo vuelvo a donde estaba en un principio
     		try{
     			contenedorUnidades.removerUnidad(unidad);
-    		}catch(RuntimeException e2){} 
+    		}catch(RuntimeException e2){}
     		contenedorUnidades.agregarUnidad(unidad, posicionInicio);
     		unidad.restaurarMovimientosRestantes();
     		throw e;
@@ -110,7 +111,7 @@ public class Tablero {
 		unidad.recibirBonus(bonus);
 		contenedorBonuses.removerBonus(bonus);
 	}
-    
+
 	public void transformar(Unidad unidad){
 		Transformer transformer = (Transformer) unidad ;
         try{
@@ -120,46 +121,46 @@ public class Tablero {
 			throw new TransformacionInvalida();
 		}
 	}
-	
+
 	public void desplazarPosicionContigua(Unidad unidad, Posicion posicionSiguiente){
 		contenedorUnidades.removerUnidad(unidad);
 		try {
-            contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);        
+            contenedorUnidades.agregarUnidad(unidad, posicionSiguiente);
         } catch (PosicionOcupadaException e ){
             throw new MovimientoInvalidoException();
-            
+
         }
 	}
-	
+
 	public void combinar(Posicion a, Posicion b, Posicion c) {
         Unidad unita,unitb, unitc;
-	
+
 		unita = obtenerUnidad(a);
 		unitb = obtenerUnidad(b);
 		unitc = obtenerUnidad(c);
-		
+
 		// check the distance between units
 		if ( (a.distanciaA(b) > MAX_DISTANCE) || (b.distanciaA(c) > MAX_DISTANCE) || (c.distanciaA(a) > MAX_DISTANCE) ) {
 			throw new CombinacionInvalidaException();
 		}
-		
+
 		// check they're in the same team
 		if (!unita.equipo().mismoEquipo(unitb.equipo(), unitc.equipo())) {
 			throw new CombinacionInvalidaException();
 		}
-		
+
 		Unidad comb = unita.equipo().getCombination();
-		
+
 		if ( (unita.tieneChispa()) || (unitb.tieneChispa()) || (unitc.tieneChispa())) {
 			comb.darChispa();
 		}
-		
+
 		quitarUnidadActual(a);
 		quitarUnidadActual(b);
 		quitarUnidadActual(c);
-		
-		agregarUnidad(a, comb); // or get avg distance? 
-		
+
+		agregarUnidad(a, comb); // or get avg distance?
+
 	}
 
 	public Unidad obtenerUnidad(Posicion p) {
@@ -178,7 +179,7 @@ public class Tablero {
 	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
-		
+
 	}
 
 	public void agregarChispa(Posicion posicion) {
@@ -195,7 +196,7 @@ public class Tablero {
 		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacado));
 		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacante));
 		posicionesQueDeberianEstarVacias.remove(contenedorUnidades.obtenerPosicion(atacado));
-		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);	
+		return atacante.puedeAtacar(contenedorUnidades.obtenerPosicion(atacante), contenedorUnidades.obtenerPosicion(atacado))&&estanVacias(posicionesQueDeberianEstarVacias);
 	}
 
 	private boolean estanVacias(LinkedList<Posicion> posicionesQueDeberianEstarVacias) {
@@ -211,25 +212,26 @@ public class Tablero {
 
 	public void agarrado(Bonus b) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void agregarSuperficie(Superficie sup, Posicion pos) {
 		contenedorSuperficies.agregarSuperficie(sup,pos);
 	}
 
+
     public void combinarUnidadesEquipo(Equipo equipo) {
         ArrayList<Posicion> unidadesEquipo  = this.obtenerPosicionesUnidadesVivasEquipo(equipo) ;
         if (unidadesEquipo.size() == 3 ){
             combinar(unidadesEquipo.get(0), unidadesEquipo.get(1),unidadesEquipo.get(2));
         }
-        
+
     }
 
     private ArrayList<Posicion> obtenerPosicionesUnidadesVivasEquipo(Equipo equipo) {
-        return contenedorUnidades.obtenerPosicionesUnidadesVivasEquipo(equipo); 
+        return contenedorUnidades.obtenerPosicionesUnidadesVivasEquipo(equipo);
     }
-    
+
     public void pasarTurnoEquipo(Equipo equipo) {
         ArrayList<Posicion> posU = this.obtenerPosicionesUnidadesVivasEquipo(equipo);
         for (Posicion pos : posU) {
@@ -237,10 +239,19 @@ public class Tablero {
             if (unidad.es(equipo)){
                 unidad.avanzarTurno();
             }
-        }    
+        }
     }
 
     public boolean existenUnidadeDeEquipo(Equipo equipo) {
         return (this.obtenerPosicionesUnidadesVivasEquipo(equipo).size() > 0) ;
     }
+
+	public ArrayList<Unidad> obtenerUnidades() {
+		return contenedorUnidades.obtenerUnidades();
+	}
+
+	public Posicion posicion(Unidad u) {
+		return contenedorUnidades.obtenerPosicion(u);
+	}
+
 }
