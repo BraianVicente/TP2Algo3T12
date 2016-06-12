@@ -43,6 +43,10 @@ public class Tablero {
     public void configurarSuperficie(Posicion pos, Superficie cual){
     	contenedorSuperficies.agregarSuperficie(cual, pos);
     }
+    
+    public void agregarBonus(Bonus b, Posicion p){
+    	contenedorBonuses.agregarBonus(b, p);
+    }
 
     public Tablero() {
         this.contenedorUnidades = new ContenedorUnidades();
@@ -84,7 +88,8 @@ public class Tablero {
             }
 
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
-    		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
+    		if(contenedorBonuses.ocupada(posicionSiguiente)) 
+    			this.darBonus(unidad,posicionSiguiente);
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
     		}
     	}catch(RuntimeException e){
@@ -209,7 +214,7 @@ public class Tablero {
 	public boolean tieneChispa(Posicion pos) {
 		return posicionChispa.equals(pos);
 	}
-
+	//VOLAR
 	public void agarrado(Bonus b) {
 		// TODO Auto-generated method stub
 

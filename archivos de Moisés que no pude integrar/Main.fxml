@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Juego">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Volver Atras" />
+                  <MenuItem mnemonicParsing="false" text="Salir" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sobre">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Equipo" />
+                  <MenuItem mnemonicParsing="false" text="Como Jugar" />
+              </items>
+            </Menu>
+         </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label fx:id="labelTurno" alignment="CENTER" layoutX="14.0" layoutY="61.0" prefHeight="21.0" prefWidth="146.0" style="&#10;" text="TURNO" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Label>
+            <Canvas fx:id="canvasTablero" height="364.0" layoutX="244.0" layoutY="5.0" width="395.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="21.0" prefWidth="146.0" style="&#10;" text="TURNO ACTUAL" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imageTurno" fitHeight="81.0" fitWidth="82.0" layoutX="46.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+            <Text layoutX="14.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ver" />
+            <ChoiceBox fx:id="DropBox" value="Tierra" layoutX="53.0" layoutY="181.0" prefHeight="25.0" prefWidth="101.0">
+            	<String fx:value="Tierra"/>
+            	<String fx:value="Cielo"/>
+            	<String fx:value="Combinacion"/>  	
+            </ChoiceBox>
+            <SubScene height="128.0" layoutX="14.0" layoutY="212.0" width="177.0" AnchorPane.bottomAnchor="18.0">
+              <root>
+                <Region />
+              </root>
+            </SubScene>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

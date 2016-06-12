@@ -17,6 +17,7 @@ import javafx.stage.Stage;
  *
  * @author brahvic
  */
+
 public class visual extends Application {
     
     @Override
@@ -44,8 +45,10 @@ public class visual extends Application {
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String[] args) {
         launch(args);
     }
+    */
     
 }

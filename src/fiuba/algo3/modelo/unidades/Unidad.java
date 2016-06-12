@@ -30,7 +30,7 @@ public abstract class Unidad {
 	protected float movimientosRestantes;
 	
     //-------------------equipo-------------
-    protected final Equipo equipo;//equipo no tiene estado y es Final! Fontela, hago getter?
+    protected final Equipo equipo;
 
     protected Unidad(Equipo equipo){
         this.equipo = equipo ;
