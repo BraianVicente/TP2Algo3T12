@@ -1,5 +1,8 @@
 package fiuba.algo3.vista.CanvasJuego;
 
+import java.util.ArrayList;
+
+import fiuba.algo3.modelo.tablero.Posicion;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
@@ -21,6 +24,7 @@ public class MueveVista {
 	
 	private double ancho;
 	private double alto;
+	private ArrayList<SeleccionCallback> seleccionCallbacks;
 	
 	public MueveVista(double ancho, double alto){
 		x=0;
@@ -29,6 +33,7 @@ public class MueveVista {
 		escala = 1;
 		this.ancho = ancho;
 		this.alto = alto;
+		seleccionCallbacks = new ArrayList<SeleccionCallback>();
 	}
 	public void presionado(MouseEvent e){
 		x_m_inicial=e.getX();
@@ -40,10 +45,27 @@ public class MueveVista {
 	
 	public void soltado(MouseEvent e){
 		presionando = false;
+		double difx = x_m_inicial-e.getX();
+		double dify = y_m_inicial-e.getY();
+		double dis = Math.sqrt(difx*difx+dify*dify);//esta distancia es sin escalar nada!
+		if(dis<5){
+			for(SeleccionCallback c: seleccionCallbacks){
+				c.seleccion(obtenerPosicion(e));
+			}
+		}
 	}
-	
+	private Posicion obtenerPosicion(MouseEvent e) {
+		double escala = getEscala();
+		double mxAbs = e.getX()/escala-getX();
+		double myAbs = e.getY()/escala-getY();
+		
+		double posX = mxAbs/80;
+		double posY = myAbs/80;
+		
+		return new Posicion((int)Math.floor(posX),(int)Math.floor(posY));
+	}
 	public void salio(MouseEvent e){
-		soltado(e);
+		presionando = false;
 	}
 
 	public void movido(MouseEvent e){
@@ -65,8 +87,8 @@ public class MueveVista {
 			double ancho_inicial = ancho*escala_inicial;
 			double ancho_final = ancho*escala;
 			
-			double alto_inicial = ancho*escala_inicial;
-			double alto_final = ancho*escala;
+			double alto_inicial = alto*escala_inicial;
+			double alto_final = alto*escala;
 			//System.out.println("delta ancho: "+(ancho_final-ancho_inicial)+" el inicial: "+ancho_inicial+" el final: "+ancho_final);
 			
 			//x+=(ancho_final-ancho_inicial)/2;//O NO ME SALEN LAS CUENTAS O EL CENTRO NO ES 
@@ -90,6 +112,9 @@ public class MueveVista {
 		synchronized(lock){
 			return escala;
 		}
+	}
+	public void seleccionaPosicion(SeleccionCallback seleccionCallback) {
+		this.seleccionCallbacks.add(seleccionCallback);
 	}
 
 }

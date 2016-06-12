@@ -259,4 +259,8 @@ public class Tablero {
 		return contenedorUnidades.obtenerPosicion(u);
 	}
 
+	public Superficie obtenerSuperficie(Posicion p) {
+		return contenedorSuperficies.obtenerSuperficie(p);
+	}
+
 }
