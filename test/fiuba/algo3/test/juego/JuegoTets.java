@@ -146,13 +146,19 @@ public class JuegoTets {
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
-        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
-        j1.agregarUnidad(new Posicion(9,9), new Optimusprime());
-        j1.agregarUnidad(new Posicion(8,9), new Ratchet());
+        Posicion p1= new Posicion(8,8);
+        Posicion p2=new Posicion(8,9);
+        Posicion p3= new Posicion(9,9);
+        j1.agregarUnidad(p1, new Bumblebee());
+        j1.agregarUnidad(p2, new Optimusprime());
+        j1.agregarUnidad(p3, new Ratchet());
         juego.combinarUnidades();
-        Assert.assertTrue(tab.isEmpty(new Posicion(8,9)));
-        Assert.assertTrue(tab.isEmpty(new Posicion(9,9)));
-        Assert.assertFalse(tab.isEmpty(new Posicion(8,8)));
+        //una llena, las otras dos vacias no importa cuales
+        boolean todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
+        boolean dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
+        						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
+        						(tab.isEmpty(p1)&&tab.isEmpty(p3));
+        Assert.assertTrue(!todasVacias&&dosEstanVacias);
     }
     
 
