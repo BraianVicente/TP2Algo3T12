@@ -11,6 +11,7 @@ import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.FriendlyFireException;
 import fiuba.algo3.modelo.unidades.Optimusprime;
+import fiuba.algo3.modelo.unidades.Unidad;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -112,6 +113,30 @@ public class JuegoTets {
         j2.agregarUnidad(new Posicion(7,7), new Frenzy());
         juego.atacarUnidad(new Posicion(7,7), new Posicion(8,8));
         Assert.assertEquals(tab.obtenerUnidad(new Posicion(7,7)).getVidaMaxima(), tab.obtenerUnidad(new Posicion(7,7)).getVida());
+    }
+    
+    @Test
+    public void testJugadorTransformaUnidad(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    }
+    
+    @Test(expected=EquipoInvalidoException.class)
+    public void testJugadorNoTransformaUnidadAjena(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.cambiarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        
     }
     
 

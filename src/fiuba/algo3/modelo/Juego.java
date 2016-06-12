@@ -29,7 +29,8 @@ public class Juego {
     private Tablero tablero ;
 
     public Juego(Tablero tab,Jugador autobots,Jugador decepticons){
-        // 
+        // el juego debe iniciarse vacio, ir agregando primero los jugadores
+        // y una vez tenga el tablero, las unidades en sus correspondientes cuadrantes
         this.tablero = tab;
         this.tablero.agregarChispa(new Posicion(5,5));
         this.jugadorAutobots = autobots;
