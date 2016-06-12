@@ -52,7 +52,7 @@ public class JuegoTets {
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
-        juego.agregarJugadorAutobots("J1", tab);
+        juego.agregarJugadorAutobots("J1");
         Assert.assertFalse(j1.derrotado());
     }
     

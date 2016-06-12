@@ -1,8 +1,11 @@
 package fiuba.algo3.vista.CanvasJuego;
 
+
 import java.util.ArrayList;
 import java.util.Timer;
 
+import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
+import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
@@ -11,6 +14,7 @@ import fiuba.algo3.modelo.unidades.Unidad;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
@@ -19,18 +23,22 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	MueveVista mueveVista;
 	Tablero tablero;
 	Image seleccionador;
+	TeclaEnCanvasEventHandler teclaEventHandler;
+	Juego juego;
 	private Posicion seleccionada;
 	
 	private ArrayList<CallbackSeleccionCasillero> callbacksCasilleros;
 	
-	public CanvasJuego(Tablero tablero){
+	public CanvasJuego(Tablero tablero, Juego juego){
 		super(800,600);
 		mueveVista = new MueveVista(800,600);
+		this.juego=juego;
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
 		this.setOnMouseDragged(e->mueveVista.movido(e));
+		this.setFocusTraversable(true);
 		
 		mueveVista.seleccionaPosicion(p->selecciona(p));
 		Timer timer = new Timer();
@@ -57,9 +65,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(0+xv*escala, 0+yv*escala, 10*80*escala, 10*80*escala);
-		
-		gc.setFill(Color.GREEN);
+
 		for(Unidad u: unidades){
+			if(u.esAerea()) gc.setFill(Color.LIGHTBLUE);
+			else gc.setFill(Color.GREEN);
 			Posicion p = tablero.posicion(u);
 			gc.fillRect(
 					(p.getX()*80+xv)*escala, 
@@ -80,8 +89,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	public void selecciona(Posicion p){
 		seleccionada = (Posicion)p.clone();
 		Posicion seleccionadaAerea = seleccionada.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO); 
-		
+		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionada,juego);		
+		this.setOnKeyPressed(teclaEventHandler);
 		//ningún try, si no hay superficie estamos fritos
+		System.out.println("seleccion");
 		Superficie supTerrestre = tablero.obtenerSuperficie(seleccionada);
 		Superficie supAerea = tablero.obtenerSuperficie(seleccionadaAerea);
 		Unidad u;
@@ -100,4 +111,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public Posicion getSeleccionada() {
+		return seleccionada;
+	}
 }
