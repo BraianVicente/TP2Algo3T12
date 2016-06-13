@@ -2,6 +2,7 @@ package fiuba.algo3.modelo.equipos;
 
 import fiuba.algo3.modelo.unidades.Superion;
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 public class Autobots extends Equipo {
 
@@ -26,7 +27,7 @@ public class Autobots extends Equipo {
     }
 
 	@Override
-	public Unidad getCombination() {
+	public UnidadCombinable getCombination() {
 		return new Superion();
 	}
 

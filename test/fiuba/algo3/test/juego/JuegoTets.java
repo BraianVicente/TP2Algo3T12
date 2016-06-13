@@ -43,7 +43,7 @@ public class JuegoTets {
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
-        Assert.assertTrue(j1.derrotado());
+        Assert.assertTrue(j1.esDerrotado());
     }
     
     @Test
@@ -53,7 +53,7 @@ public class JuegoTets {
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
         juego.agregarJugadorAutobots("J1", tab);
-        Assert.assertFalse(j1.derrotado());
+        Assert.assertFalse(j1.esDerrotado());
     }
     
     
@@ -153,15 +153,42 @@ public class JuegoTets {
         j1.agregarUnidad(p2, new Optimusprime());
         j1.agregarUnidad(p3, new Ratchet());
         juego.combinarUnidades();
-        //una llena, las otras dos vacias no importa cuales
         boolean todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
         boolean dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
         						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
         						(tab.isEmpty(p1)&&tab.isEmpty(p3));
-        Assert.assertTrue(!todasVacias&&dosEstanVacias);
+        Assert.assertFalse(!todasVacias&&dosEstanVacias);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
+        dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
+        						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
+        						(tab.isEmpty(p1)&&tab.isEmpty(p3));
+        Assert.assertFalse(!todasVacias&&dosEstanVacias);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
+        dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
+        						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
+        						(tab.isEmpty(p1)&&tab.isEmpty(p3));
+        Assert.assertFalse(!todasVacias&&dosEstanVacias);
+        
+        //una llena, las otras dos vacias no importa cuales
     }
     
-
+    @Test
+    public void testJugadorQueConsigueChispaGana(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        tab.colocarChispa();
+        tab.agregarUnidad(new Posicion(6,6), new Bumblebee());
+        juego.moverUnidad(new Posicion(6,6), new Posicion(5,5));
+        Assert.assertTrue(j1.esVictorioso());
+        
+        
+    }
     
     
 }

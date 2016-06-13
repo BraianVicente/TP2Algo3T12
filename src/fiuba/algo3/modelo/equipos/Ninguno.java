@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.equipos;
 
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 public class Ninguno extends Equipo {
 
@@ -25,7 +26,7 @@ public class Ninguno extends Equipo {
     }
 
 	@Override
-	public Unidad getCombination() {
+	public UnidadCombinable getCombination() {
 		return null; // throw exception
 	}
 
