@@ -30,7 +30,7 @@ public class MueveVista {
 		x=0;
 		y=0;
 		presionando=false;
-		escala = 1;
+		escala = 0.75;
 		this.ancho = ancho;
 		this.alto = alto;
 		seleccionCallbacks = new ArrayList<SeleccionCallback>();

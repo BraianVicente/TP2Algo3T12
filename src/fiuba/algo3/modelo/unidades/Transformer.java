@@ -5,6 +5,7 @@ import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
+import fiuba.algo3.modelo.tablero.TransformacionInvalida;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
@@ -23,6 +24,7 @@ public abstract class Transformer extends Unidad {
 	}
 	
 	public void transformar(){
+			if(seTransformoEnEsteTurno) throw new TransformacionInvalida();
 			forma = forma.getAlternativa();
 			seTransformoEnEsteTurno=true;
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
@@ -92,7 +94,12 @@ public abstract class Transformer extends Unidad {
 	public float coeficienteMovimientoEn(Pantano s){
 		return forma.coeficienteMovimientoEnPantano();
 	}
-
+	
+	@Override
+	public void avanzarTurno(){
+		super.avanzarTurno();
+		this.seTransformoEnEsteTurno=false;
+	}
 	
 
 }
