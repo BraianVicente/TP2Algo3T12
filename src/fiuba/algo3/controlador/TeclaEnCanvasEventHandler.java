@@ -73,7 +73,7 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
         if (e.getCode() == KeyCode.DOWN)    	posActual=posActual.nuevaPosicionConDistintoPlano(Plano.TERRESTRE);  
         canvas.selecciona(posActual);}
     	catch(RuntimeException e2){
-    		Alert alert = new Alert(AlertType.ERROR,"Lo que trató de realizar es contra las reglas.\n"
+    		Alert alert = new Alert(AlertType.ERROR,"Lo que trato de realizar es contra las reglas.\n"
     				+ " Posibles motivos:\n"
     				+ "	No se puede transformar porque la otra posicion esta ocupada\n"
     				+ "	No se puede mover\n"
