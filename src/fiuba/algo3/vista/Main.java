@@ -13,6 +13,7 @@ import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Megatron;
+import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.bienvenida.EscenaBienvenida;
 import javafx.application.Application;
@@ -35,7 +36,7 @@ public class Main extends Application {
 
 		Tablero tablero = new Tablero();
 		Juego juego=new Juego(tablero,new Jugador("auto", new Autobots()),new Jugador("dece", new Decepticons()));
-		juego.agregarUnidad(new Posicion(8,8,Plano.TERRESTRE), new Bumblebee());
+		juego.agregarUnidad(new Posicion(8,8,Plano.TERRESTRE), new Optimusprime());
 		juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
 		BorderPane contenedor = new BorderPane();
 		CanvasJuego canvas = new CanvasJuego(juego);

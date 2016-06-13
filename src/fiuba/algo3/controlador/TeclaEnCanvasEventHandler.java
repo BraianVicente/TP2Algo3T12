@@ -16,10 +16,12 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
 		private Posicion posActual;
 		private Juego juego;
 		private CanvasJuego canvas;
+		private Posicion posObjetivo;
 
 		
-    public TeclaEnCanvasEventHandler(Posicion seleccionada,Juego juego,CanvasJuego canvas) {
+    public TeclaEnCanvasEventHandler(Posicion seleccionada,Posicion objetivo, Juego juego,CanvasJuego canvas) {
     	this.posActual=seleccionada;
+    	this.posObjetivo=objetivo;
     	this.juego=juego;
     	this.canvas=canvas;
     }
@@ -68,6 +70,30 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
         	juego.transformarUnidad(posActual);
         	posActual=juego.obtenerPosicion(unidad);
         }
+        
+        if (e.getCode() == KeyCode.F) {
+        	juego.atacarUnidad(posActual, posObjetivo);
+        }
+        
+        if (e.getCode()== KeyCode.NUMPAD8)   {
+        	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(0, -1);
+        	canvas.seleccionarObjetivo(posObjetivo);
+        }
+        if (e.getCode()== KeyCode.NUMPAD4)   {
+        	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(-1, 0);
+        	canvas.seleccionarObjetivo(posObjetivo);
+        }
+        if (e.getCode()== KeyCode.NUMPAD6)   {
+        	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(1, 0);
+        	canvas.seleccionarObjetivo(posObjetivo);
+        }
+        if (e.getCode()== KeyCode.NUMPAD2)   {
+        	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(0, 1);
+        	canvas.seleccionarObjetivo(posObjetivo);
+        }
+        
+        if	(e.getCode()==KeyCode.NUMPAD1) posObjetivo=posObjetivo.nuevaPosicionConDistintoPlano(Plano.AEREO);
+        if	(e.getCode()==KeyCode.NUMPAD0) posObjetivo=posObjetivo.nuevaPosicionConDistintoPlano(Plano.TERRESTRE);
         if (e.getCode() == KeyCode.P)     	juego.avanzarTurno();
         if (e.getCode() == KeyCode.UP)    	posActual=posActual.nuevaPosicionConDistintoPlano(Plano.AEREO);
         if (e.getCode() == KeyCode.DOWN)    	posActual=posActual.nuevaPosicionConDistintoPlano(Plano.TERRESTRE);  

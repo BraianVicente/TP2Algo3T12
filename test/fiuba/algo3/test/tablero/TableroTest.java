@@ -84,8 +84,10 @@ public class TableroTest {
     	Megatron tron = new Megatron(command);
     	tab.agregarUnidad(posB, bee);
     	tab.agregarUnidad(posM, tron);
-    	while(bee.getVida()>0)
+    	while(bee.getVida()>0){
     		tab.atacar(tron,bee);
+    		tron.avanzarTurno();
+    	}
     	Assert.assertEquals(true, tab.isEmpty(posB));
     }
     
@@ -102,8 +104,10 @@ public class TableroTest {
     	tab.agregarUnidad(pos, bee);
     	tab.agregarUnidad(posM, tron);
     	
-    	while(bee.getVida()>0)
+    	while(bee.getVida()>0){
     		tab.atacar(tron, bee);
+    		tron.avanzarTurno();
+    		}
     	Assert.assertEquals(true, tab.isEmpty(pos));
     	Assert.assertEquals(true, tab.tieneChispa(pos));
     }

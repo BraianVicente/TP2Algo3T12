@@ -56,8 +56,10 @@ public class SuperficieTest {
         Superficie sup=new TormentaPsionica();
         bee.transformar();
         float puntosAtaqueOriginal=bee.getPuntosAtaque();
+        bee.avanzarTurno();
         bee.transformar();
         sup.afectarA(bee);
+        bee.avanzarTurno();
         bee.transformar();
         Assert.assertTrue(bee.getPuntosAtaque()==0.4f*puntosAtaqueOriginal);
     }

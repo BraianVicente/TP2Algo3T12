@@ -15,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
@@ -22,9 +23,11 @@ import javafx.scene.paint.Color;
 public class CanvasJuego extends Canvas implements Actualizable{
 	MueveVista mueveVista;
 	Image seleccionador;
+	Image seleccionadorObjetivo;
 	TeclaEnCanvasEventHandler teclaEventHandler;
 	Juego juego;
 	private Posicion seleccionada;
+	private Posicion objetivo;
 
 	private ArrayList<CallbackSeleccionCasillero> callbacksCasilleros;
 	
@@ -33,21 +36,27 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		mueveVista = new MueveVista(800,600);
 		this.juego=juego;
 		seleccionada = new Posicion(0,0);
+		objetivo =seleccionada;
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
 		this.setOnMouseDragged(e->mueveVista.movido(e));
 		this.setFocusTraversable(true);
-		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionada,juego,this);	
+		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionada,objetivo,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
 		mueveVista.seleccionaPosicion(p->selecciona(p));
 		Timer timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
 	
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
-
+		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionadorObjetivo.png");
+		
 		callbacksCasilleros = new ArrayList<CallbackSeleccionCasillero>();
+	}
+
+	public void seleccionarObjetivo(Posicion p) {
+		objetivo=p;
 	}
 
 	public void agregarCallback(CallbackSeleccionCasillero call){
@@ -81,6 +90,14 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			gc.drawImage(seleccionador,
 				(seleccionada.getX()*80+xv)*escala,
 				(seleccionada.getY()*80+yv)*escala,
+				80*escala,
+				80*escala);
+		}
+
+		if(objetivo != null){
+			gc.drawImage(seleccionadorObjetivo,
+				(objetivo.getX()*80+xv)*escala,
+				(objetivo.getY()*80+yv)*escala,
 				80*escala,
 				80*escala);
 		}

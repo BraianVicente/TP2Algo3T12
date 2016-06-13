@@ -54,7 +54,7 @@ public class MueveVista {
 			}
 		}
 	}
-	private Posicion obtenerPosicion(MouseEvent e) {
+	public Posicion obtenerPosicion(MouseEvent e) {
 		double escala = getEscala();
 		double mxAbs = e.getX()/escala-getX();
 		double myAbs = e.getY()/escala-getY();

@@ -96,6 +96,7 @@ public class PrimeraEntregaTest {
 		
 		Assert.assertTrue(optimusPrime.esVehiculo());
 		optimusPrime.transformar();
+        optimusPrime.avanzarTurno();
 		Assert.assertTrue(optimusPrime.esHumanoide());
 		optimusPrime.transformar();
 		Assert.assertTrue(optimusPrime.esVehiculo());
@@ -250,6 +251,7 @@ public class PrimeraEntregaTest {
 			}catch(AtaqueInvalidoException e){
 				Assert.assertTrue(vidaOriginalMegatron==megatron.getVida());
 			}
+		optimusPrime.avanzarTurno();
 		optimusPrime.transformar();
 		optimusPrime.atacarA(megatron);
 		Assert.assertTrue(vidaOriginalMegatron-optimusPrime.getPuntosAtaque()==megatron.getVida());
