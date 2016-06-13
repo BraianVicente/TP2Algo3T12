@@ -15,6 +15,7 @@ import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.Megatron;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.modelo.unidades.Ratchet;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 /**
  *
@@ -58,7 +59,7 @@ public class Juego {
         this.tablero.colocarChispa();
     }
     
-    public void agregarJugadorDecepticons(String nombre,Tablero tablero){
+    public void agregarJugadorDecepticons(String nombre){
         this.jugadorDecepticons = new Jugador(nombre,new Decepticons());
         // La idea es cambiarlo para que el jugador lo agrege aleatoriamente 
         // en una zona predeterminada segun el tamanio del tablero
@@ -69,7 +70,7 @@ public class Juego {
         
     }
     
-    public void agregarJugadorAutobots(String nombre, Tablero tablero){
+    public void agregarJugadorAutobots(String nombre){
         this.jugadorAutobots = new Jugador(nombre,new Decepticons());
         // La idea es cambiarlo para que el jugador lo agrege aleatoriamente 
         // en una zona predeterminada segun el tamanio del tablero
@@ -124,5 +125,10 @@ public class Juego {
             turnoDe = jugadorDecepticons;
         }     
     }
+
+	public Unidad obtenerUnidad(Posicion posActual) {
+		return tablero.obtenerUnidad(posActual);
+		
+	}
     
 }

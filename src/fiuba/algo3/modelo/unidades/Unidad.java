@@ -27,7 +27,7 @@ public abstract class Unidad {
 	private Chispa chispa;
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
-	protected float movimientosRestantes;
+	protected float movimientosUsados;
 	
     //-------------------equipo-------------
     protected final Equipo equipo;
@@ -130,16 +130,16 @@ public abstract class Unidad {
     
     public void restaurarMovimientosRestantes(float nuevoMovimientosRestantes) {
     	if(nuevoMovimientosRestantes>getDistanciaMovimiento()) throw new IllegalArgumentException();
-		movimientosRestantes=nuevoMovimientosRestantes;
+		movimientosUsados=getDistanciaMovimiento()-nuevoMovimientosRestantes;
 		
 	}
     public void restaurarMovimientosRestantes() {
-  		movimientosRestantes=getDistanciaMovimiento();
+  		movimientosUsados=0;
   		
   	}
     public void descontarMovimiento(float movimientosADescontar){
-    	if(movimientosRestantes<movimientosADescontar) throw new IllegalArgumentException();
-    	movimientosRestantes-=movimientosADescontar;
+    	if(movimientosUsados+movimientosADescontar>getDistanciaMovimiento()) throw new IllegalArgumentException();
+    	movimientosUsados+=movimientosADescontar;
     }
     
     public abstract float getCoeficienteMovimientoActual() ;

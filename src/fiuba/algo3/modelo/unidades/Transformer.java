@@ -17,12 +17,11 @@ public abstract class Transformer extends Unidad {
 	Transformer(Equipo equipo,DeathListener command){
 		super(equipo,command);
 		forma = getVehiculo();
-		movimientosRestantes=getDistanciaMovimiento();
+		movimientosUsados=0;
 	}
 	
 	public void transformar(){
 		forma = forma.getAlternativa();
-		restaurarMovimientosRestantes();
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
 		//(y porque son los que acordamos, y porque 
 		//se me hace que tiene m�s sentido aunque esta soluci�n me guste m�s porque ahorra un if (if esVehiculo()))

@@ -17,7 +17,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JuegoTets {
-    
+
     @Test
     public void testJuegoCreaJuego(){
         Tablero tab = new Tablero();
@@ -26,7 +26,7 @@ public class JuegoTets {
         Juego juego = new Juego(tab,j1,j2);
         Assert.assertEquals(juego.jugadorEnTurno(),j1);
     }
-    
+
     @Test
     public void testJuegoPasaTurno(){
         Tablero tab = new Tablero();
@@ -45,18 +45,18 @@ public class JuegoTets {
         Juego juego = new Juego(tab,j1,j2);
         Assert.assertTrue(j1.esDerrotado());
     }
-    
+
     @Test
     public void testJuegoAgregaUnidadesJugadorEnTablero(){
         Tablero tab = new Tablero();
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
-        juego.agregarJugadorAutobots("J1", tab);
+        juego.agregarJugadorAutobots("J1");
         Assert.assertFalse(j1.esDerrotado());
     }
-    
-    
+
+
     @Test
     public void testJugadorRealizaMovimientoUnidad(){
         Tablero tab = new Tablero();
@@ -67,8 +67,8 @@ public class JuegoTets {
         juego.moverUnidad(new Posicion(8,8), new Posicion(8,9));
         Assert.assertTrue(tab.isEmpty(new Posicion(8,8)));
     }
-    
-    
+
+
     @Test(expected=EquipoInvalidoException.class)
     public void testJugadorNoPuedeRealizarMovimientoUnidadContraria(){
         Tablero tab = new Tablero();
@@ -79,7 +79,7 @@ public class JuegoTets {
         juego.moverUnidad(new Posicion(8,8), new Posicion(8,9));
         Assert.assertFalse(tab.isEmpty(new Posicion(8,8)));
     }
-    
+
     @Test
     public void testJugadorPuedeAtacarUnidadContraria(){
         Tablero tab = new Tablero();
@@ -91,7 +91,7 @@ public class JuegoTets {
         juego.atacarUnidad(new Posicion(8,8), new Posicion(7,7));
         Assert.assertNotEquals(tab.obtenerUnidad(new Posicion(7,7)).getVidaMaxima(), tab.obtenerUnidad(new Posicion(7,7)).getVida());
     }
-    
+
     @Test(expected=FriendlyFireException.class)
     public void testJugadorNoPuedeAtacarUnidadPropia(){
         Tablero tab = new Tablero();
@@ -103,7 +103,7 @@ public class JuegoTets {
         juego.atacarUnidad(new Posicion(8,8), new Posicion(7,7));
         Assert.assertEquals(tab.obtenerUnidad(new Posicion(7,7)).getVidaMaxima(), tab.obtenerUnidad(new Posicion(7,7)).getVida());
     }
-    
+
     @Test(expected=EquipoInvalidoException.class)
     public void testJugadorNoPuedeAtacarConUnidadAjena(){
         Tablero tab = new Tablero();
@@ -115,7 +115,7 @@ public class JuegoTets {
         juego.atacarUnidad(new Posicion(7,7), new Posicion(8,8));
         Assert.assertEquals(tab.obtenerUnidad(new Posicion(7,7)).getVidaMaxima(), tab.obtenerUnidad(new Posicion(7,7)).getVida());
     }
-    
+
     @Test
     public void testJugadorTransformaUnidad(){
         Tablero tab = new Tablero();
@@ -127,7 +127,7 @@ public class JuegoTets {
         Unidad bumblee = new Bumblebee();
         Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
     }
-    
+
     @Test(expected=EquipoInvalidoException.class)
     public void testJugadorNoTransformaUnidadAjena(){
         Tablero tab = new Tablero();
@@ -137,11 +137,11 @@ public class JuegoTets {
         j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
         juego.cambiarTurno();
         juego.transformarUnidad(new Posicion(8,8));
-        
+
     }
-    
+
     @Test
-    public void testJugadorCombinaUnidades(){
+    public void testJugadorCombinaUnidadesEsperaDosTurnos(){
         Tablero tab = new Tablero();
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
@@ -172,10 +172,10 @@ public class JuegoTets {
         						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
         						(tab.isEmpty(p1)&&tab.isEmpty(p3));
         Assert.assertFalse(!todasVacias&&dosEstanVacias);
-        
+
         //una llena, las otras dos vacias no importa cuales
     }
-    
+
     @Test
     public void testJugadorQueConsigueChispaGana(){
         Tablero tab = new Tablero();
@@ -186,9 +186,9 @@ public class JuegoTets {
         tab.agregarUnidad(new Posicion(6,6), new Bumblebee());
         juego.moverUnidad(new Posicion(6,6), new Posicion(5,5));
         Assert.assertTrue(j1.esVictorioso());
-        
-        
+
+
     }
-    
-    
+
+
 }
