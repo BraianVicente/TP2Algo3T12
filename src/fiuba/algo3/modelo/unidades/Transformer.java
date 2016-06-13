@@ -13,24 +13,27 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 public abstract class Transformer extends Unidad {
 	Forma forma;
+	boolean seTransformoEnEsteTurno;
 	
 	Transformer(Equipo equipo,DeathListener command){
 		super(equipo,command);
 		forma = getVehiculo();
 		movimientosUsados=0;
+		seTransformoEnEsteTurno=false;
 	}
 	
 	public void transformar(){
-		forma = forma.getAlternativa();
+			forma = forma.getAlternativa();
+			seTransformoEnEsteTurno=true;
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
 		//(y porque son los que acordamos, y porque 
-		//se me hace que tiene m�s sentido aunque esta soluci�n me guste m�s porque ahorra un if (if esVehiculo()))
+		//se me hace que tiene mas sentido aunque esta solucion me guste mas porque ahorra un if (if esVehiculo()))
 	}
 	//------------------formas--------------------//
 	protected abstract Forma getVehiculo();
 	protected abstract Forma getHumanoide();
 	
-	//-----------------estad�sticas---------------//
+	//-----------------estadisticas---------------//
 	@Override
 	public int getDistanciaAtaque() {
 		return forma.getDistanciaAtaque();

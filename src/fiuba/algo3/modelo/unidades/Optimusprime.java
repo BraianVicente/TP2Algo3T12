@@ -31,9 +31,6 @@ public class Optimusprime extends Transformer {
         return 500;
     }
 
-    @Override
-    public boolean esTerrestre() {
-        return true;
-    }
+  
 
 }

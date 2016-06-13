@@ -74,6 +74,7 @@ public abstract class Unidad {
 	public Plano getPlanoPerteneciente() {
 		if(esAerea())return Plano.AEREO;
 		if(esTerrestre())return Plano.TERRESTRE;
+		System.out.println("no encontro el plano");
 		return null;
 	}
 	//-------------------vida---------------
@@ -205,6 +206,11 @@ public abstract class Unidad {
 	}
 	
 	public abstract float coeficienteMovimientoEn(Pantano s);
+
+	public float getMovimientosRestantes() {
+		return getDistanciaMovimiento()-movimientosUsados;
+		
+	}
 	
 	
     
