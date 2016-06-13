@@ -1,9 +1,11 @@
 package fiuba.algo3.modelo.equipos;
 
-import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 
 public abstract class Equipo {
+
+    private UnidadCombinable combinacion;
 
     @Override
     public boolean equals(Object otro) {
@@ -31,5 +33,17 @@ public abstract class Equipo {
 
     public abstract boolean mismoEquipo(Ninguno otro);
     
-    public abstract Unidad getCombination();
+    public abstract UnidadCombinable getCombination();
+
+    public void crearCombinacion() {
+        this.combinacion = this.getCombination() ;
+    }
+
+    public UnidadCombinable obtenerUnidadCombinada(){
+        return this.combinacion ;
+    }
+
+    public boolean tieneCombinacion() {
+        return (this.combinacion != null) ; 
+    }
 }

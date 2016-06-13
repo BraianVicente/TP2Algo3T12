@@ -8,7 +8,7 @@ import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.formas.HumanoideSuperion;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
-public class Superion extends Unidad {
+public class Superion extends UnidadCombinable {
 	
 	private int vidaMax;
 

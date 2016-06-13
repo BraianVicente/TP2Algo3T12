@@ -5,7 +5,6 @@
  */
 package fiuba.algo3.modelo.tablero;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -19,12 +18,10 @@ import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
-import fiuba.algo3.modelo.unidades.Menasor;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -48,20 +45,26 @@ public class Tablero {
     	contenedorBonuses.agregarBonus(b, p);
     }
 
-    public Tablero() {
+    public Tablero(Integer x,Integer y) {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
-        alto=10;
-        ancho=10;
+        alto=x;
+        ancho=y;
         for (int i = 0; i < alto; i++) {
         	for(int j=0;j<ancho;j++){
             this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
         }
+        this.colocarChispa();
     }
 
+    
+    public Tablero(){
+        this(10,10);
+    }
+    
     public boolean isEmpty(Posicion posicion) {
         return !(this.contenedorUnidades.ocupada(posicion));
     }
@@ -87,7 +90,7 @@ public class Tablero {
                 throw new MovimientoInvalidoException() ;
 
             }
-
+            if (this.tieneChispa(posicionSiguiente)) unidad.darChispa();
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) 
     			this.darBonus(unidad,posicionSiguiente);
@@ -138,6 +141,10 @@ public class Tablero {
         }
 	}
 
+    public void combinarUnidades(Equipo equipo){
+        equipo.crearCombinacion() ;
+    }
+    
 	public void combinar(Posicion a, Posicion b, Posicion c) {
         Unidad unita,unitb, unitc;
 
@@ -246,6 +253,12 @@ public class Tablero {
                 unidad.avanzarTurno();
             }
         }
+        if ((equipo.tieneCombinacion()) &&
+            equipo.obtenerUnidadCombinada().creacionFinalizada() )  
+            
+             {
+                this.combinarUnidadesEquipo(equipo);
+        }
     }
 
     public boolean existenUnidadeDeEquipo(Equipo equipo) {
@@ -263,5 +276,31 @@ public class Tablero {
 	public Superficie obtenerSuperficie(Posicion p) {
 		return contenedorSuperficies.obtenerSuperficie(p);
 	}
+
+    public boolean unidadesContieneChispa(Equipo equipo) {
+        ArrayList<Unidad> unidades = this.obtenerUnidades();
+        for (Unidad unidad:unidades){
+            if(unidad.tieneChispa()){
+                return true ;
+            }
+        }
+        return false ;
+    }
+
+    public void colocarChispaCentrada(){
+        Integer enX,rangoMayorX,rangoMenorX,enY,rangoMayorY,rangoMenorY;
+        rangoMayorY = (alto/5) + (alto/2);
+        rangoMenorY = (alto/2) - (alto/5) ;
+        rangoMayorX = (ancho/2) + (ancho/5) ;
+        rangoMenorX = (ancho/2) - (ancho/5) ;
+        enX = (int)(Math.random()*(rangoMayorX-rangoMenorX+1)+rangoMenorX);
+        enY = (int)(Math.random()*(rangoMayorY-rangoMenorY+1)+rangoMenorY);
+        this.agregarChispa(new Posicion(enX,enY));
+    }
+    
+    public void colocarChispa() {
+        
+        this.agregarChispa(new Posicion(this.alto/2,this.ancho/2));
+    }
 
 }

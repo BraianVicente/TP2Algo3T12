@@ -25,7 +25,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	TeclaEnCanvasEventHandler teclaEventHandler;
 	Juego juego;
 	private Posicion seleccionada;
-	
+
 	private ArrayList<CallbackSeleccionCasillero> callbacksCasilleros;
 	
 	public CanvasJuego(Juego juego){
@@ -44,17 +44,16 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		mueveVista.seleccionaPosicion(p->selecciona(p));
 		Timer timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
-		
+	
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 
-		
 		callbacksCasilleros = new ArrayList<CallbackSeleccionCasillero>();
 	}
-	
+
 	public void agregarCallback(CallbackSeleccionCasillero call){
 		callbacksCasilleros.add(call);
 	}
-	
+
 	public void actualizar(){
 		double xv = mueveVista.getX();
 		double yv = mueveVista.getY();
@@ -62,7 +61,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		ArrayList<Unidad> unidades = juego.obtenerUnidades();
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
-		
+
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(0+xv*escala, 0+yv*escala, 10*80*escala, 10*80*escala);
 
@@ -71,29 +70,29 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			else gc.setFill(Color.GREEN);
 			Posicion p = juego.posicion(u);
 			gc.fillRect(
-					(p.getX()*80+xv)*escala, 
-					(p.getY()*80+yv)*escala, 
-					80*escala, 
+					(p.getX()*80+xv)*escala,
+					(p.getY()*80+yv)*escala,
+					80*escala,
 					80*escala
 			);
 		}
-		
+
 		if(seleccionada != null){
-			gc.drawImage(seleccionador, 
+			gc.drawImage(seleccionador,
 				(seleccionada.getX()*80+xv)*escala,
 				(seleccionada.getY()*80+yv)*escala,
-				80*escala, 
+				80*escala,
 				80*escala);
 		}
 	}
 	public void selecciona(Posicion p){
 		seleccionada = (Posicion)p.clone();
-		Posicion seleccionadaAerea = seleccionada.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO); 
+		Posicion seleccionadaAerea = seleccionada.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
 		teclaEventHandler.cambiarSeleccionada(seleccionada);
-		
 		//ningun try, si no hay superficie estamos fritos
 		Superficie supTerrestre = juego.obtenerSuperficie(seleccionada);
 		Superficie supAerea = juego.obtenerSuperficie(seleccionadaAerea);
+
 		Unidad u;
 		try{
 
@@ -103,13 +102,13 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			u=null;
 		}
 		Casillero c = new Casillero(supAerea,supTerrestre,p,u);
-		
+
 		for(CallbackSeleccionCasillero calls : callbacksCasilleros){
 			calls.execute(c);
 		}
 	}
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

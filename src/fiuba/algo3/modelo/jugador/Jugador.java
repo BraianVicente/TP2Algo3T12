@@ -5,6 +5,8 @@
  */
 package fiuba.algo3.modelo.jugador;
 
+import fiuba.algo3.modelo.AgarrarChispa;
+import fiuba.algo3.modelo.WinListener;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
@@ -23,16 +25,27 @@ public class Jugador {
     private String nombre ;
     private Equipo equipo ;
     private Tablero tablero;
+    private WinListener condicionVictoria ;
     
 
     public Jugador(String nombre, Equipo equipo) {
         this.nombre = nombre;
         this.equipo = equipo;
+        this.condicionVictoria = new AgarrarChispa();
     }
 
     public Jugador(String nombre, Equipo equipo, Tablero tab) {
         this(nombre,equipo);
         this.tablero = tab ;
+        this.condicionVictoria = new AgarrarChispa();
+
+    }
+    
+    public Jugador(String nombre,Equipo equipo, Tablero tab, WinListener condicionVictoria){
+        this.nombre = nombre;
+        this.equipo = equipo;
+        this.tablero = tab ;
+        this.condicionVictoria = condicionVictoria ;
     }
     
     public void setTablero(Tablero tab){
@@ -56,7 +69,8 @@ public class Jugador {
     }
     
     public void combinarUnidades(){
-        this.tablero.combinarUnidadesEquipo(this.equipo);
+        this.equipo.crearCombinacion();
+        this.tablero.combinarUnidades(this.equipo);
     }
     
     public void pasarTurno(){
@@ -86,15 +100,13 @@ public class Jugador {
         if (!this.nombre.equals(other.nombre)) {
             return false;
         }
-        if (!this.equipo.equals(other.equipo)) {
-            return false;
-        }
-        return true;
+        return this.equipo.equals(other.equipo);
         
     }
 
-    public boolean derrotado() {
-        return !tablero.existenUnidadeDeEquipo(this.equipo) ;
+    public boolean esDerrotado() {
+        return this.condicionVictoria.derrotado(this.tablero,this.equipo);
+        
     }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
@@ -102,6 +114,10 @@ public class Jugador {
             this.tablero.agregarUnidad(posicion, unidad);
         }
         
+    }
+
+    public boolean esVictorioso() {
+        return this.condicionVictoria.victoria(this.tablero, this.equipo) ;
     }
     
 }

@@ -32,12 +32,14 @@ public class Juego {
     private Jugador jugadorAutobots ;
     private Jugador turnoDe ;
     private Tablero tablero ;
-
+    private WinListener condVictoria ;
+    private Jugador ganador;
+    
     public Juego(Tablero tab,Jugador autobots,Jugador decepticons){
         // el juego debe iniciarse vacio, ir agregando primero los jugadores
         // y una vez tenga el tablero, las unidades en sus correspondientes cuadrantes
         this.tablero = tab;
-        this.tablero.agregarChispa(new Posicion(5,5));
+        this.tablero.colocarChispa();
         this.jugadorAutobots = autobots;
         autobots.setTablero(tab);
         this.jugadorDecepticons = decepticons;
@@ -45,10 +47,15 @@ public class Juego {
         this.turnoDe = autobots;
     }
     
-    public void crearTablero(){
-        this.tablero = new Tablero();
-        tablero.agregarChispa(new Posicion(5,5));
+    public Juego(Tablero tab,Jugador autobots,Jugador decepticons,WinListener victoria){
+        this.tablero = tab;
+        this.tablero.colocarChispa();
+        this.jugadorAutobots = autobots;
+        this.jugadorDecepticons = decepticons;
+        this.turnoDe = autobots;
+        this.condVictoria = victoria;
     }
+    
     
     public void agregarJugadorDecepticons(String nombre){
         this.jugadorDecepticons = new Jugador(nombre,new Decepticons());
@@ -74,12 +81,11 @@ public class Juego {
     public void avanzarTurno(){
         Jugador victorioso = this.jugadorEnTurno();
         this.cambiarTurno();
-        if(this.turnoDe.derrotado()){
-            throw new VictoriaException(victorioso);
+        if(this.turnoDe.esDerrotado() || victorioso.esVictorioso()){
+            this.ganador = victorioso ;
+            // throw new JuegoFinalizadoException(Jugador ganador) ;
         }
         this.turnoDe.pasarTurno();
-        
-       
     }
 
     public Jugador jugadorEnTurno(){
@@ -90,12 +96,14 @@ public class Juego {
         if (turnoDe.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.mover(tablero.obtenerUnidad(origen), destino);
         }
+        this.jugadorEnTurno().esVictorioso();
     }
 
     public void atacarUnidad(Posicion origen, Posicion destino){
         if (turnoDe.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.atacar(tablero.obtenerUnidad(origen), tablero.obtenerUnidad(destino));
         }
+        this.jugadorEnTurno().esVictorioso();
     }
     
     public void transformarUnidad(Posicion origen){

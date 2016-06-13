@@ -5,16 +5,10 @@
  */
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.jugador.Jugador;
-
 /**
  *
  * @author brahvic
  */
-class VictoriaException extends RuntimeException {
-
-    public VictoriaException(Jugador victorioso) {
-        
-    }
+public class JugadorSinUnidadesException {
     
 }

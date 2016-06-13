@@ -6,7 +6,7 @@ import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
-public class Menasor extends Unidad {
+public class Menasor extends UnidadCombinable {
 	
 	private int vidaMax;
 

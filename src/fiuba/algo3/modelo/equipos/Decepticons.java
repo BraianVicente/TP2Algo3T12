@@ -2,6 +2,7 @@ package fiuba.algo3.modelo.equipos;
 
 import fiuba.algo3.modelo.unidades.Menasor;
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 public class Decepticons extends Equipo {
 
@@ -26,7 +27,7 @@ public class Decepticons extends Equipo {
     }
 
 	@Override
-	public Unidad getCombination() {
+	public UnidadCombinable getCombination() {
 		return new Menasor();
 	}
 
