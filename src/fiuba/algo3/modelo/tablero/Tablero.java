@@ -5,7 +5,6 @@
  */
 package fiuba.algo3.modelo.tablero;
 
-import fiuba.algo3.modelo.Escenario;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -61,10 +60,6 @@ public class Tablero {
         this.colocarChispa();
     }
 
-    //Preparando cambios para agregar los escenarios distintos en el juego ;
-    public Tablero(Escenario escenario){
-        
-    }
     
     public Tablero(){
         this(10,10);

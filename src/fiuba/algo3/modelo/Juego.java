@@ -50,14 +50,6 @@ public class Juego {
         this.condVictoria = victoria;
     }
     
-    public Juego(){
-        
-    }
-    
-    public void crearTablero(Escenario escenarioCreator){
-        this.tablero = new Tablero(escenarioCreator);
-        this.tablero.colocarChispa();
-    }
     
     public void agregarJugadorDecepticons(String nombre){
         this.jugadorDecepticons = new Jugador(nombre,new Decepticons());

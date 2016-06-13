@@ -141,7 +141,7 @@ public class JuegoTets {
     }
 
     @Test
-    public void testJugadorCombinaUnidadesEsperaDosTurnos(){
+    public void testJugadorCombinaUnidades(){
         Tablero tab = new Tablero();
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
