@@ -5,10 +5,14 @@ import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadExceptio
 import fiuba.algo3.modelo.unidades.Unidad;
 
 public class Death implements DeathListener {
-	private Tablero aInformar;
-	public Death(Tablero aInformar){
+	
+    private Tablero aInformar;
+	
+    public Death(Tablero aInformar){
 		this.aInformar = aInformar;
 	}
+    
+    @Override
 	public void murio(Unidad u) throws NoSeEncuentraUnidadException{
 		aInformar.murio(u);
 	}

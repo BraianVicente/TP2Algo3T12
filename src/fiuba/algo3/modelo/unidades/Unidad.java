@@ -42,8 +42,8 @@ public abstract class Unidad {
 		chispa = new ChispaHolder();
 		this.command = command;
 		modificadores=new ContenedorModificadores();
-	
-	}
+    
+    }
     public boolean es(Equipo e) {
         return equipo.equals(e);
     }

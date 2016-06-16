@@ -11,10 +11,16 @@ import fiuba.algo3.modelo.equipos.Equipo;
  *
  * @author brahvic
  */
-public interface WinListener {
-    
-    public void gano(Equipo equipo);
+public class SinVictoria implements WinListener {
 
-    public void perdio(Equipo equipo);
+    @Override
+    public void gano(Equipo equipo) {
+
+    }
+
+    @Override
+    public void perdio(Equipo equipo) {
+
+    }
     
 }

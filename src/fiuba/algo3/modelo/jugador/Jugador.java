@@ -5,15 +5,11 @@
  */
 package fiuba.algo3.modelo.jugador;
 
-import fiuba.algo3.modelo.AgarrarChispa;
 import fiuba.algo3.modelo.WinListener;
-import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
-import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Unidad;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -31,21 +27,12 @@ public class Jugador {
     public Jugador(String nombre, Equipo equipo) {
         this.nombre = nombre;
         this.equipo = equipo;
-        this.condicionVictoria = new AgarrarChispa();
     }
 
-    public Jugador(String nombre, Equipo equipo, Tablero tab) {
-        this(nombre,equipo);
-        this.tablero = tab ;
-        this.condicionVictoria = new AgarrarChispa();
-
-    }
-    
-    public Jugador(String nombre,Equipo equipo, Tablero tab, WinListener condicionVictoria){
+    public Jugador(String nombre,Equipo equipo, Tablero tab ){
         this.nombre = nombre;
         this.equipo = equipo;
         this.tablero = tab ;
-        this.condicionVictoria = condicionVictoria ;
     }
     
     public void setTablero(Tablero tab){
@@ -80,7 +67,6 @@ public class Jugador {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.nombre);
         hash = 97 * hash + Objects.hashCode(this.equipo);
         return hash;
     }
@@ -97,17 +83,10 @@ public class Jugador {
             return false;
         }
         final Jugador other = (Jugador) obj;
-        if (!this.nombre.equals(other.nombre)) {
-            return false;
-        }
         return this.equipo.equals(other.equipo);
         
     }
 
-    public boolean esDerrotado() {
-        return this.condicionVictoria.derrotado(this.tablero,this.equipo);
-        
-    }
 
     public void agregarUnidad(Posicion posicion, Unidad unidad) {
         if (this.perteneceEquipo(unidad)){
@@ -116,8 +95,4 @@ public class Jugador {
         
     }
 
-    public boolean esVictorioso() {
-        return this.condicionVictoria.victoria(this.tablero, this.equipo) ;
-    }
-    
 }

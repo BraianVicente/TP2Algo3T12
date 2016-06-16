@@ -12,14 +12,14 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 
 public abstract class Transformer extends Unidad {
-	Forma forma;
+	private Forma forma;
 	
 	Transformer(Equipo equipo,DeathListener command){
 		super(equipo,command);
 		forma = getVehiculo();
 		movimientosUsados=0;
 	}
-	
+    
 	public void transformar(){
 		forma = forma.getAlternativa();
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
@@ -62,7 +62,7 @@ public abstract class Transformer extends Unidad {
     public boolean esAerea(){
     	return forma.esAerea();
     }
-    //esto tambi�n habr�a que volarlo
+    //esto tambien habria que volarlo
     
     public float getCoeficienteMovimientoActual() {
   		// TODO Auto-generated method stub
