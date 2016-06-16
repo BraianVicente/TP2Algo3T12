@@ -30,7 +30,7 @@ public class MueveVista {
 		x=0;
 		y=0;
 		presionando=false;
-		escala = 1;
+		escala = 0.75;
 		this.ancho = ancho;
 		this.alto = alto;
 		seleccionCallbacks = new ArrayList<SeleccionCallback>();
@@ -54,7 +54,7 @@ public class MueveVista {
 			}
 		}
 	}
-	private Posicion obtenerPosicion(MouseEvent e) {
+	public Posicion obtenerPosicion(MouseEvent e) {
 		double escala = getEscala();
 		double mxAbs = e.getX()/escala-getX();
 		double myAbs = e.getY()/escala-getY();

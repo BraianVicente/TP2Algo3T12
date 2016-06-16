@@ -32,10 +32,6 @@ public class Ratchet extends Transformer {
         return 150;
     }
 
-    @Override
-    public boolean esTerrestre() {
-        return false;
-    }
 
 
 }

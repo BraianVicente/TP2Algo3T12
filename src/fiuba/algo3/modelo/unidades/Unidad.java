@@ -28,6 +28,7 @@ public abstract class Unidad {
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
+	private boolean yaAtaco;
 	
     //-------------------equipo-------------
     protected final Equipo equipo;
@@ -74,6 +75,7 @@ public abstract class Unidad {
 	public Plano getPlanoPerteneciente() {
 		if(esAerea())return Plano.AEREO;
 		if(esTerrestre())return Plano.TERRESTRE;
+		System.out.println("no encontro el plano");
 		return null;
 	}
 	//-------------------vida---------------
@@ -98,12 +100,14 @@ public abstract class Unidad {
     
     //------------------ataque-----------------
     public boolean puedeAtacar(Posicion a, Posicion desde){
-    	return a.distanciaA(desde)<=getDistanciaAtaque();
+    	return a.distanciaA(desde)<=getDistanciaAtaque()&&!yaAtaco;
     }
     
     public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{
+
     	int danio = (int)Math.ceil(getPuntosAtaque()*modificadores.coeficienteAtaque());
     	receptor.recibirDanio(this,danio);
+    	yaAtaco=true;
     }
     protected abstract int getDistanciaAtaque();
     protected abstract int getPuntosAtaque();
@@ -160,6 +164,7 @@ public abstract class Unidad {
 	public void avanzarTurno() {
 		modificadores.pasaTurno();
 		restaurarMovimientosRestantes();
+		yaAtaco=false;
 	}
 	
 	
@@ -205,6 +210,11 @@ public abstract class Unidad {
 	}
 	
 	public abstract float coeficienteMovimientoEn(Pantano s);
+
+	public float getMovimientosRestantes() {
+		return getDistanciaMovimiento()-movimientosUsados;
+		
+	}
 	
 	
     

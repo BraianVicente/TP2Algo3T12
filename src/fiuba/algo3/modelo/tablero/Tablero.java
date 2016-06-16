@@ -91,6 +91,7 @@ public class Tablero {
 
     public void mover(Unidad unidad, Posicion posicionFin) {
     	Posicion posicionInicio= contenedorUnidades.obtenerPosicion(unidad);
+    	float movimientosRestantes=unidad.getMovimientosRestantes();
     	if(posicionInicio.getPlano()!=posicionFin.getPlano()) throw new MovimientoInvalidoException();
     	try{
     		Posicion posicionActual=posicionInicio;
@@ -123,7 +124,7 @@ public class Tablero {
     			contenedorUnidades.removerUnidad(unidad);
     		}catch(RuntimeException e2){}
     		contenedorUnidades.agregarUnidad(unidad, posicionInicio);
-    		unidad.restaurarMovimientosRestantes();
+    		unidad.restaurarMovimientosRestantes(movimientosRestantes);
     		throw e;
     	}
         
@@ -147,7 +148,7 @@ public class Tablero {
 	public void transformar(Unidad unidad){
 		Transformer transformer = (Transformer) unidad ;
         try{
-			transformer.transformar();
+        	transformer.transformar();
 			contenedorUnidades.cambiarPlano(transformer,unidad.getPlanoPerteneciente());
 		}catch(MovimientoInvalidoException e){
 			throw new TransformacionInvalida();

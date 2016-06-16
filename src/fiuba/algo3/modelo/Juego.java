@@ -5,11 +5,15 @@
  */
 package fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;
@@ -55,9 +59,9 @@ public class Juego {
         // La idea es cambiarlo para que el jugador lo agrege aleatoriamente 
         // en una zona predeterminada segun el tamanio del tablero
         // se va a agregar el comportamiento con nuevos Tableros
-        tablero.agregarUnidad(new Posicion(0,0), new Megatron());
-        tablero.agregarUnidad(new Posicion(2,2), new Bonecrusher());
-        tablero.agregarUnidad(new Posicion(3,1), new Frenzy());
+        tablero.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
+        tablero.agregarUnidad(new Posicion(2,2,Plano.AEREO), new Bonecrusher());
+        tablero.agregarUnidad(new Posicion(3,1,Plano.TERRESTRE), new Frenzy());
         
     }
     
@@ -66,9 +70,9 @@ public class Juego {
         // La idea es cambiarlo para que el jugador lo agrege aleatoriamente 
         // en una zona predeterminada segun el tamanio del tablero
         // se va a agregae el comportamiento con nuevos tableros
-        tablero.agregarUnidad(new Posicion(8,9), new Optimusprime());
-        tablero.agregarUnidad(new Posicion(8,8), new Bumblebee());
-        tablero.agregarUnidad(new Posicion(7,8), new Ratchet());
+        tablero.agregarUnidad(new Posicion(8,9,Plano.TERRESTRE), new Optimusprime());
+        tablero.agregarUnidad(new Posicion(8,8,Plano.TERRESTRE), new Bumblebee());
+        tablero.agregarUnidad(new Posicion(7,8,Plano.AEREO), new Ratchet());
     }
     
     public void avanzarTurno(){
@@ -113,6 +117,29 @@ public class Juego {
 		
 	}
 
+	public ArrayList<Unidad> obtenerUnidades() {
+		// TODO Auto-generated method stub
+		return tablero.obtenerUnidades();
+	}
+
+	public Posicion posicion(Unidad u) {
+		return tablero.posicion(u);
+	}
+
+	public Superficie obtenerSuperficie(Posicion seleccionada) {
+		return tablero.obtenerSuperficie(seleccionada);
+	}
+
+	public void agregarUnidad(Posicion posicion, Unidad unidad) {
+		tablero.agregarUnidad(posicion,unidad);
+		
+	}
+
+	public Posicion obtenerPosicion(Unidad unidad) {
+		// TODO Auto-generated method stub
+		return tablero.posicion(unidad);
+	}
+    
     public boolean jugadorGanadorEs(Jugador jugador) {
         return jugador.equals(this.ganador) ;
     }

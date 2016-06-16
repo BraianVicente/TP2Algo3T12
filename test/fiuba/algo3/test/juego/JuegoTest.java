@@ -10,6 +10,7 @@ import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.TransformacionInvalida;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.FriendlyFireException;
@@ -110,6 +111,36 @@ public class JuegoTest {
         juego.transformarUnidad(new Posicion(8,8));
         Unidad bumblee = new Bumblebee();
         Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    }
+    
+    
+    @Test(expected=TransformacionInvalida.class)
+    public void testJugadorTransormaUnidadSoloUnaVezPorTurno(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    }
+    
+    @Test
+    public void testPermiteTransformarUnidadSiguienteTurno(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    
     }
 
     @Test(expected=EquipoInvalidoException.class)
