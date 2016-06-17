@@ -35,6 +35,19 @@ public class Tablero {
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
     private WinListener commandWin;
+	
+	public int obtenerAncho(){
+		return ancho;
+	}
+	
+	public int obtenerAlto(){
+		return alto;
+	}
+	
+	public Superficie obtenerSuperficieEn(Posicion pos){
+		return contenedorSuperficies.obtenerSuperficie(pos);
+	}
+
 	private Posicion posicionChispa;
 
     private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
@@ -65,6 +78,7 @@ public class Tablero {
 
         
     //Preparando cambios para agregar los escenarios distintos en el juego ;
+    //
     public Tablero(Escenario e){
         this(e.getAnchoEscenario(),e.getLargoEscenario());
         Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;

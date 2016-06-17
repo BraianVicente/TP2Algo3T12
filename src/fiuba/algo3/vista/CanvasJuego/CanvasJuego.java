@@ -7,6 +7,7 @@ import java.util.Timer;
 import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
@@ -28,8 +29,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	Juego juego;
 	private Posicion seleccionada;
 	private Posicion objetivo;
+	CacheImagenes cacheImagenes = new CacheImagenes();
 
-	private ArrayList<CallbackSeleccionCasillero> callbacksCasilleros;
+	private ArrayList<CallbackCasillero> callbacksSeleccion;
+	private ArrayList<CallbackCasillero> callbacksHover;
 	
 	public CanvasJuego(Juego juego){
 		super(800,600);
@@ -41,7 +44,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		this.setOnMouseDragged(e->mueveVista.movido(e));
+		this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		this.setOnMouseMoved(e->mouseMovido(e));
 		this.setFocusTraversable(true);
 		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionada,objetivo,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
@@ -50,41 +54,59 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		timer.schedule(new Actualizador(this), 0, 33);
 	
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
-		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionadorObjetivo.png");
+		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		
-		callbacksCasilleros = new ArrayList<CallbackSeleccionCasillero>();
+		callbacksSeleccion = new ArrayList<CallbackCasillero>();
+		callbacksHover = new ArrayList<CallbackCasillero>();
+	}
+	
+	public void mouseMovido(MouseEvent e){
+		Posicion p = mueveVista.obtenerPosicion(e);
+		Casillero construido = construirCasillero(p);
+		for(CallbackCasillero calls : callbacksHover){
+			calls.execute(construido);
+		}
 	}
 
 	public void seleccionarObjetivo(Posicion p) {
 		objetivo=p;
 	}
 
-	public void agregarCallback(CallbackSeleccionCasillero call){
-		callbacksCasilleros.add(call);
+	public void agregarCallbackSeleccion(CallbackCasillero call){
+		callbacksSeleccion.add(call);
+	}
+	
+	public void agregarCallbackHover(CallbackCasillero call){
+		callbacksHover.add(call);
 	}
 
 	public void actualizar(){
 		double xv = mueveVista.getX();
 		double yv = mueveVista.getY();
 		double escala = mueveVista.getEscala();
+		
 		ArrayList<Unidad> unidades = juego.obtenerUnidades();
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
 
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(0+xv*escala, 0+yv*escala, 10*80*escala, 10*80*escala);
+		
+		dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
 
 		for(Unidad u: unidades){
 			if(u.esAerea()) gc.setFill(Color.LIGHTBLUE);
 			else gc.setFill(Color.GREEN);
 			Posicion p = juego.posicion(u);
 			gc.fillRect(
-					(p.getX()*80+xv)*escala,
-					(p.getY()*80+yv)*escala,
-					80*escala,
-					80*escala
+					mueveVista.xPantalla(p),
+					mueveVista.yPantalla(p),
+					mueveVista.anchoCasillero(),
+					mueveVista.altoCasillero()
 			);
 		}
+		
+		dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
 
 		if(seleccionada != null){
 			gc.drawImage(seleccionador,
@@ -102,26 +124,66 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				80*escala);
 		}
 	}
-	public void selecciona(Posicion p){
-		seleccionada = (Posicion)p.clone();
-		Posicion seleccionadaAerea = seleccionada.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
-		teclaEventHandler.cambiarSeleccionada(seleccionada);
-		//ningun try, si no hay superficie estamos fritos
-		Superficie supTerrestre = juego.obtenerSuperficie(seleccionada);
-		Superficie supAerea = juego.obtenerSuperficie(seleccionadaAerea);
-
-		Unidad u;
-		try{
-
-			u = juego.obtenerUnidad(p);
-
-		}catch(PosicionLibreException e){
-			u=null;
+	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
+		gc.save();
+		gc.setGlobalAlpha(opacidad);
+		
+		for(int x = 0; x<juego.obtenerAncho(); x+=1){
+			for(int y = 0; y<juego.obtenerAlto(); y+=1){
+				Posicion obtener = new Posicion(x,y,plano);
+				try{
+					Superficie aDibujar = juego.obtenerSuperficie(obtener);
+					Image imgSup = cacheImagenes.obtenerImagen(aDibujar.nombreImagen());
+					
+					
+					gc.drawImage(imgSup,
+							mueveVista.xPantalla(obtener), 
+							mueveVista.yPantalla(obtener), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero()
+					);
+					
+				}catch(ImagenInexistenteExcption e){
+					
+				}
+				
+			}
+			
 		}
-		Casillero c = new Casillero(supAerea,supTerrestre,p,u);
+		gc.restore();
+	}
+	
+	public Casillero construirCasillero(Posicion pos){
+		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
+		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
+		
+		//ningun try, si no hay superficie estamos fritos
+		Superficie supTerrestre = juego.obtenerSuperficie(terrestre);
+		Superficie supAerea = juego.obtenerSuperficie(aerea);
+		
+		Unidad uTerrestre;
+		try{
+			uTerrestre = juego.obtenerUnidad(terrestre);
+		}catch(PosicionLibreException e){
+			uTerrestre=null;
+		}
+		
+		Unidad uAerea;
+		try{
+			uAerea = juego.obtenerUnidad(aerea);
+		}catch(PosicionLibreException e){
+			uAerea=null;
+		}
+		
+		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
 
-		for(CallbackSeleccionCasillero calls : callbacksCasilleros){
-			calls.execute(c);
+	}
+
+	public void selecciona(Posicion p){
+		teclaEventHandler.cambiarSeleccionada(p);
+		Casillero construido = construirCasillero(p);
+		for(CallbackCasillero calls : callbacksSeleccion){
+			calls.execute(construido);
 		}
 	}
 	/**
