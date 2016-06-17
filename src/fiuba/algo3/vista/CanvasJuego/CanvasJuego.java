@@ -142,6 +142,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	}
 
 	private void clickea(Posicion p){
+		System.out.println(p);
 		if(juego.enTablero(p)){
 			teclaEventHandler.cambiarSeleccionada(p);
 			Casillero construido = construirCasillero(p);
@@ -257,18 +258,16 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 		
 		//el cartelito
-		//if(!mueveVista.draggeando()){
-			String accion = juego.accionPosibleEn(hovereando);
-			Bounds bounds = (new Text(accion)).getLayoutBounds();
-			double offsetX=20;
-			double offsetY=20;
-			gc.save();
-			gc.setFill(Color.BEIGE);
-			gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
-			gc.setFill(Color.BLACK);
-			gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
-			gc.restore();
-		//}
+		String accion = juego.accionPosibleEn(hovereando);
+		Bounds bounds = (new Text(accion)).getLayoutBounds();
+		double offsetX=20;
+		double offsetY=20;
+		gc.save();
+		gc.setFill(Color.BEIGE);
+		gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
+		gc.setFill(Color.BLACK);
+		gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
+		gc.restore();
 		
 	}
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {

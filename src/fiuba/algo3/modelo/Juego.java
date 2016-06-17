@@ -176,6 +176,6 @@ public class Juego {
     }
     
     public String accionPosibleEn(PosicionEnElPlano posicion){
-    	return "No estoy seguro";
+    	return "Juego::accionPosibleEn";
     }
 }
