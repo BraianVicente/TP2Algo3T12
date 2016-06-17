@@ -10,24 +10,21 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
- * SOBRE CANVASJUEGO:CÓMO USAR
+ * SOBRE CANVASJUEGO:COMO USAR
  * 
- * Desde afuera, sólo se deben usar los siguientes métodos:
+ * Desde afuera, solo se deben usar los siguientes métodos:
  * 
  * +agregarCallbackClickeo(!!!!!!)
  * +agregarCallbackHovereo(!!!!!!!!!!)
@@ -37,15 +34,15 @@ import javafx.scene.text.Text;
  * (hace que se deje de actualizar la ventana y se pueda destruir el canvas, 
  * así no sigue corriendo una vez cerrada la ventana
  * OJO: el Canvas no se destruye ni se lo lleva el recolector 
- * 	de basura hasta que no se llama éste método!!!!)
+ * 	de basura hasta que no se llama este metodo!!!!)
  * +getModoVista
  * +setModoVista
  * 
- * Algunos los tuve que dejar públicos pero ___les pido que no los usen__ !!
- * Si hace falta algo de interfaz, por favor déjenme escrito acá lo que cambiaron!!
+ * Algunos los tuve que dejar publicos pero ___les pido que no los usen__ !!
+ * Si hace falta algo de interfaz, por favor dejenme escrito aca lo que cambiaron!!
  * 
  * CanvasJuego
- * @author José Sb
+ * @author Jose Sb
  *
  */
 
