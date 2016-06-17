@@ -11,6 +11,7 @@ import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
@@ -158,6 +159,16 @@ public class Juego {
 
 	public int obtenerAlto() {
 		return tablero.obtenerAlto();
+	}
+
+	public boolean enTablero(Posicion p) {
+		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
+				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
+	}
+	
+	public boolean enTablero(PosicionEnElPlano p) {
+		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
+				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
 	}
     
 }

@@ -21,6 +21,11 @@ public class NaveCybertroniana extends FormaAerea {
     public int getDistanciaMovimiento() {
         return 8;
     }
+    
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/MegatronVehiculo.png";
+	}
 
 
 }

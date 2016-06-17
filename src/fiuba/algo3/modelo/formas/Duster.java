@@ -21,6 +21,11 @@ public class Duster extends FormaTerrestre {
     public int getDistanciaMovimiento() {
         return 6;
     }
+    
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/FrenzyVehiculo.png";
+	}
 
 
 }

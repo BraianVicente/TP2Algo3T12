@@ -8,6 +8,7 @@ import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
@@ -27,8 +28,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	Image seleccionadorObjetivo;
 	TeclaEnCanvasEventHandler teclaEventHandler;
 	Juego juego;
-	private Posicion seleccionada;
-	private Posicion objetivo;
+	private Posicion seleccionadaViejaSeraBorrada;
+	private Posicion objetivoVIEJOSERABORRADO;
 	CacheImagenes cacheImagenes = new CacheImagenes();
 
 	private ArrayList<CallbackCasillero> callbacksSeleccion;
@@ -38,8 +39,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		super(800,600);
 		mueveVista = new MueveVista(800,600);
 		this.juego=juego;
-		seleccionada = new Posicion(0,0);
-		objetivo =seleccionada;
+		seleccionadaViejaSeraBorrada = new Posicion(0,0);
+		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
@@ -47,7 +48,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setOnMouseMoved(e->mouseMovido(e));
 		this.setFocusTraversable(true);
-		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionada,objetivo,juego,this);	
+		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
 		mueveVista.seleccionaPosicion(p->selecciona(p));
 		Timer timer = new Timer();
@@ -58,18 +59,22 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		callbacksSeleccion = new ArrayList<CallbackCasillero>();
 		callbacksHover = new ArrayList<CallbackCasillero>();
+		
+		modoVista = ModoVista.AMBAS;
 	}
 	
 	public void mouseMovido(MouseEvent e){
 		Posicion p = mueveVista.obtenerPosicion(e);
-		Casillero construido = construirCasillero(p);
-		for(CallbackCasillero calls : callbacksHover){
-			calls.execute(construido);
+		if(juego.enTablero(p)){
+			Casillero construido = construirCasillero(p);
+			for(CallbackCasillero calls : callbacksHover){
+				calls.execute(construido);
+			}
 		}
 	}
 
 	public void seleccionarObjetivo(Posicion p) {
-		objetivo=p;
+		objetivoVIEJOSERABORRADO=p;
 	}
 
 	public void agregarCallbackSeleccion(CallbackCasillero call){
@@ -89,37 +94,75 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
 
-		gc.setFill(Color.YELLOW);
-		gc.fillRect(0+xv*escala, 0+yv*escala, 10*80*escala, 10*80*escala);
+		//primero, el fondo blanco
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0+xv*escala, 0+yv*escala, 
+				juego.obtenerAncho()*mueveVista.anchoCasillero(),
+				juego.obtenerAlto()*mueveVista.altoCasillero());
 		
-		dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
-
-		for(Unidad u: unidades){
-			if(u.esAerea()) gc.setFill(Color.LIGHTBLUE);
-			else gc.setFill(Color.GREEN);
-			Posicion p = juego.posicion(u);
-			gc.fillRect(
-					mueveVista.xPantalla(p),
-					mueveVista.yPantalla(p),
-					mueveVista.anchoCasillero(),
-					mueveVista.altoCasillero()
-			);
+		//la tierra
+		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
+			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
 		}
 		
-		dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
-
-		if(seleccionada != null){
+		//las unidades terrestres
+		
+		for(Unidad u: unidades){
+			Posicion p = juego.posicion(u);
+			if(!u.esAerea()){
+				try{
+					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
+					gc.drawImage(imgU,
+							mueveVista.xPantalla(p), 
+							mueveVista.yPantalla(p), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero()
+					);
+				}catch(ImagenInexistenteExcption e){
+					
+				}
+			}
+		}
+		//el cielo
+		if(modoVista==ModoVista.AMBAS){
+			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
+		}else if(modoVista==ModoVista.SOLOAIRE){
+			dibujarSuperficies(gc,Posicion.Plano.AEREO,1);
+		}
+		
+		//las unidades aereas
+		
+				for(Unidad u: unidades){
+					Posicion p = juego.posicion(u);
+					if(u.esAerea()){
+						try{
+							Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
+							gc.drawImage(imgU,
+									mueveVista.xPantalla(p), 
+									mueveVista.yPantalla(p), 
+									mueveVista.anchoCasillero(),
+									mueveVista.altoCasillero()
+							);
+						}catch(ImagenInexistenteExcption e){
+							
+						}
+					}
+				}
+		
+		
+		//el cuadrado seleccionado
+		if(seleccionadaViejaSeraBorrada != null){
 			gc.drawImage(seleccionador,
-				(seleccionada.getX()*80+xv)*escala,
-				(seleccionada.getY()*80+yv)*escala,
+				(seleccionadaViejaSeraBorrada.getX()*80+xv)*escala,
+				(seleccionadaViejaSeraBorrada.getY()*80+yv)*escala,
 				80*escala,
 				80*escala);
 		}
 
-		if(objetivo != null){
+		if(objetivoVIEJOSERABORRADO != null){
 			gc.drawImage(seleccionadorObjetivo,
-				(objetivo.getX()*80+xv)*escala,
-				(objetivo.getY()*80+yv)*escala,
+				(objetivoVIEJOSERABORRADO.getX()*80+xv)*escala,
+				(objetivoVIEJOSERABORRADO.getY()*80+yv)*escala,
 				80*escala,
 				80*escala);
 		}
@@ -180,10 +223,12 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	}
 
 	public void selecciona(Posicion p){
-		teclaEventHandler.cambiarSeleccionada(p);
-		Casillero construido = construirCasillero(p);
-		for(CallbackCasillero calls : callbacksSeleccion){
-			calls.execute(construido);
+		if(juego.enTablero(p)){
+			teclaEventHandler.cambiarSeleccionada(p);
+			Casillero construido = construirCasillero(p);
+			for(CallbackCasillero calls : callbacksSeleccion){
+				calls.execute(construido);
+			}
 		}
 	}
 	/**
@@ -191,7 +236,33 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Posicion getSeleccionada() {
-		return seleccionada;
+	public Posicion getSeleccionadaESTAFUNCIONHAYQUEBORRARLA() {
+		return seleccionadaViejaSeraBorrada;
 	}
+	
+	//---------------------------------------selección----------------------
+	private PosicionEnElPlano seleccionada;
+	public void seleccionar(PosicionEnElPlano pos){
+		seleccionada = (PosicionEnElPlano) pos.clone();
+	}
+	public void seleccionar(Posicion pos){
+		seleccionada = new PosicionEnElPlano(pos.getX(),pos.getY());
+	}
+	public void deSeleccionar(){
+		seleccionada = null;
+	}
+	
+	//no debría haber getter ya que VentanaJuego se ocupa sólo de lo gráfico
+	
+	//-----------------------------------modos--------------------------------//
+	private ModoVista modoVista;
+
+	public ModoVista getModoVista() {
+		return modoVista;
+	}
+
+	public void setModoVista(ModoVista modoVista) {
+		this.modoVista = modoVista;
+	}
+	
 }

@@ -34,4 +34,6 @@ public abstract class Forma {
 	public abstract boolean esTerrestre();
 
 	public abstract float obtenerCoeficientePorVelocidad(ContenedorModificadores modificadores) ;
+
+	public abstract String nombreImagen();
 }

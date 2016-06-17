@@ -66,5 +66,10 @@ public class Superion extends UnidadCombinable {
 	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
 	}
 
+	@Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/Superion.png";
+	}
+
     
 }

@@ -101,5 +101,10 @@ public abstract class Transformer extends Unidad {
 		this.seTransformoEnEsteTurno=false;
 	}
 	
+	//------------------------------dibujo---------------------------------//
+	public String nombreImagen(){
+		return forma.nombreImagen();
+	}
+	
 
 }

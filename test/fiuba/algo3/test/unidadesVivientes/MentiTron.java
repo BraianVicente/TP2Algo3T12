@@ -94,4 +94,10 @@ public class MentiTron extends Unidad {
 	public float getCoeficienteMovimientoActual() {
 	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
 	}
+
+	@Override
+	public String nombreImagen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

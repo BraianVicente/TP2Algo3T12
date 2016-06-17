@@ -215,6 +215,8 @@ public abstract class Unidad {
 		return getDistanciaMovimiento()-movimientosUsados;
 		
 	}
+
+	public abstract String nombreImagen();
 	
 	
     

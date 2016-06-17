@@ -21,6 +21,11 @@ public class HumanoideFrenzy extends FormaHumanoide {
     public int getDistanciaMovimiento() {
         return 2;
     }
+    
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png";
+	}
 
 
 }

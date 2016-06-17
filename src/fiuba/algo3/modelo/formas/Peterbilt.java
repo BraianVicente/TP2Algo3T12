@@ -22,5 +22,8 @@ public class Peterbilt extends FormaTerrestre {
         return 5;
     }
 
-
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/OptimusVehiculo.png";
+	}
 }

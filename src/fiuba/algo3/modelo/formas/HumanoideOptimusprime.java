@@ -31,6 +31,11 @@ public class HumanoideOptimusprime extends FormaTerrestre {
     public boolean esVehiculo() {
         return false;
     }
+    
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/OptimusHumanoide.png";
+	}
 
 
 }

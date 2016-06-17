@@ -63,4 +63,9 @@ public class Menasor extends UnidadCombinable {
 	public float getCoeficienteMovimientoActual() {
 	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/Menasor.png";
+	}
 }

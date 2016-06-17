@@ -21,6 +21,11 @@ public class HumanoideMenasor extends FormaHumanoide {
 	public int getDistanciaMovimiento() {
 		return 2;
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/Menasor.png";
+	}
 
 
 }

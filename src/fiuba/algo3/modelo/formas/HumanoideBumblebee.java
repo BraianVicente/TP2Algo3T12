@@ -22,6 +22,9 @@ public class HumanoideBumblebee extends FormaHumanoide {
         return 2;
     }
 
- 
+    @Override
+	public String nombreImagen() {
+		return "fiuba/algo3/vista/imagenes/transformers/BumblebeeHumanoide.png";
+	}
 
 }
