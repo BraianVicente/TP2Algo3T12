@@ -13,6 +13,7 @@ import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * SOBRE CANVASJUEGO:CÓMO USAR
@@ -246,13 +248,28 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		//el cuadrado hovereando
 		synchronized(hovereando){
-			System.out.println(hovereando);
 			gc.drawImage(hovereador,
 					mueveVista.xPantalla(hovereando),
 					mueveVista.yPantalla(hovereando),
 					mueveVista.anchoCasillero(),
 					mueveVista.altoCasillero());
+			
 		}
+		
+		//el cartelito
+		//if(!mueveVista.draggeando()){
+			String accion = juego.accionPosibleEn(hovereando);
+			Bounds bounds = (new Text(accion)).getLayoutBounds();
+			double offsetX=20;
+			double offsetY=20;
+			gc.save();
+			gc.setFill(Color.BEIGE);
+			gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
+			gc.setFill(Color.BLACK);
+			gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
+			gc.restore();
+		//}
+		
 	}
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
 		gc.save();

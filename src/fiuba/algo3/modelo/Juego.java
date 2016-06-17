@@ -174,4 +174,8 @@ public class Juego {
     public void jugadorDerrotado(Equipo equipo) {
         this.ganador = this.enTurno ;
     }
+    
+    public String accionPosibleEn(PosicionEnElPlano posicion){
+    	return "No estoy seguro";
+    }
 }

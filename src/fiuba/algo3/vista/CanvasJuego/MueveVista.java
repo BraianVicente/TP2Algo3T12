@@ -18,6 +18,9 @@ public class MueveVista {
 	private double x_m_inicial;
 	private double y_m_inicial;
 	
+	private double x_mouse;
+	private double y_mouse;
+	
 	private double x_inicial;
 	private double y_inicial;
 	
@@ -78,6 +81,7 @@ public class MueveVista {
 				y = (e.getY()-y_m_inicial)/escala+y_inicial;
 			}
 		}
+		movido(e);
 	}
 	
 	
@@ -152,10 +156,27 @@ public class MueveVista {
 		// TODO Auto-generated method stub
 	}
 	public void movido(MouseEvent e) {
-		for(CallbackPosicion c: cllbacksHovereo){
-			c.execute(obtenerPosicion(e));
+		synchronized(lock){
+			x_mouse = e.getX();
+			y_mouse = e.getY();
+			for(CallbackPosicion c: cllbacksHovereo){
+				c.execute(obtenerPosicion(e));
+			}
 		}
-		
+	}
+	public boolean draggeando(){
+		return presionando;
+	}
+	
+	public double getYMouse() {
+		synchronized(lock){
+			return y_mouse;
+		}
+	}
+	public double getXMouse() {
+		synchronized(lock){
+			return x_mouse;
+		}
 	}
 
 }
