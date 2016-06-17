@@ -14,8 +14,10 @@ import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Megatron;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
+import fiuba.algo3.vista.CanvasJuego.ModoVista;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -43,6 +45,9 @@ public class GameboardController {
     private Button combinarButton;
     
     @FXML
+    private ChoiceBox<String> vistaChoiceBox;
+    
+    @FXML
     private ImageView jugandoImage;
     
     private Tablero tablero;
@@ -55,6 +60,8 @@ public class GameboardController {
         assert transformarButton != null : "fx:id=\"transformarButton\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert combinarButton != null : "fx:id=\"combinarButton\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert StatsPane != null : "fx:id=\"StatsPane\" was not injected: check your FXML file 'MainJuego.fxml'.";
+        assert vistaChoiceBox != null : "fx:id=\"vistaChoiceBox\" was not injected: check your FXML file 'MainJuego.fxml'.";
+        assert jugandoImage != null : "fx:id=\"jugandoImage\" was not injected: check your FXML file 'MainJuego.fxml'.";
         
         finTurnoController ftc = new finTurnoController(finTurnoButton);
         finTurnoButton.setOnAction(ftc);
@@ -68,6 +75,10 @@ public class GameboardController {
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
 		CanvasJuego cj = new CanvasJuego(juego);
+		cj.setModoVista(ModoVista.AMBAS);
+		
+		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
+		vistaChoiceBox.setOnAction(cbc);
 		
 		GamePane.getChildren().add(cj);
     }
