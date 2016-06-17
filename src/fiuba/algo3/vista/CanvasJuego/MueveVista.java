@@ -68,6 +68,7 @@ public class MueveVista {
 		presionando = false;
 	}
 
+	
 	public void draggeado(MouseEvent e){
 		if(presionando){
 			synchronized(lock){
