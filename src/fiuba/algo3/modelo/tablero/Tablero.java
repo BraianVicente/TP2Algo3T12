@@ -23,6 +23,8 @@ import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
+
+import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -104,44 +106,27 @@ public class Tablero {
     }
 
     public void mover(Unidad unidad, Posicion posicionFin) {
+    	if(!this.sePuedeMover(unidad, posicionFin)) throw new MovimientoInvalidoException();
     	Posicion posicionInicio= contenedorUnidades.obtenerPosicion(unidad);
     	float movimientosRestantes=unidad.getMovimientosRestantes();
     	if(posicionInicio.getPlano()!=posicionFin.getPlano()) throw new MovimientoInvalidoException();
-    	try{
-    		Posicion posicionActual=posicionInicio;
-    		while(!posicionActual.equals(posicionFin)){
+    		
+    	Posicion posicionActual=posicionInicio;
+    	while(!posicionActual.equals(posicionFin)){
     		Posicion posicionSiguiente;
     		posicionSiguiente=obtenerPosicionADondeMoverse(unidad,posicionFin);
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
-    		try{
-    			unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
-    		}catch(IllegalArgumentException e){
-    			throw new MovimientoInvalidoException();
+    		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
+    		this.desplazarPosicionContigua(unidad, posicionSiguiente);
+    		if (this.tieneChispa(posicionSiguiente)) {
+             unidad.darChispa();
     		}
-            try {
-                desplazarPosicionContigua(unidad, posicionSiguiente);
-            } catch (PosicionOcupadaException e ){
-                throw new MovimientoInvalidoException() ;
-
-            }
-            if (this.tieneChispa(posicionSiguiente)) {
-                unidad.darChispa();
-            }
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
-    		if(contenedorBonuses.ocupada(posicionSiguiente)) 
-    			this.darBonus(unidad,posicionSiguiente);
+    		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
+    	
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
-    		}
-    	}catch(RuntimeException e){
-    		//si quedo en alguna posicion, lo saco y lo vuelvo a donde estaba en un principio
-    		try{
-    			contenedorUnidades.removerUnidad(unidad);
-    		}catch(RuntimeException e2){}
-    		contenedorUnidades.agregarUnidad(unidad, posicionInicio);
-    		unidad.restaurarMovimientosRestantes(movimientosRestantes);
-    		throw e;
     	}
-        
+
         this.commandWin.gano(unidad.equipo());
     }
 
@@ -242,7 +227,15 @@ public class Tablero {
 		if(!this.puedeAtacar(atacante,atacado)) throw new AtaqueInvalidoException();
 		atacante.atacarA(atacado);
 	}
-
+	
+	public boolean puedeAtacar(Unidad atacante, Posicion atacado){
+		Unidad objetivo=obtenerUnidad(atacado);
+		return puedeAtacar(atacante, objetivo)&&!atacante.esDelMismoEquipo(objetivo);
+	}
+	
+	public boolean sePuedeTransformar(Unidad u){
+		return u.sePuedeTransformar();
+	}
 	private boolean puedeAtacar(Unidad atacante, Unidad atacado) {
 
 		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacado));
@@ -341,5 +334,37 @@ public class Tablero {
         
         this.agregarChispa(new Posicion(this.alto/2,this.ancho/2));
     }
+
+	public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal) {
+		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.posicion(unidad).posicionesUsadasParaMoverseEnOrden(posicion(unidad),posicionFinal);
+		posicionesQueDeberianEstarVacias.remove(posicion(unidad));
+		
+		return (unidad.getCoeficienteMovimientoActual()!=0)&&
+				this.estanVacias(posicionesQueDeberianEstarVacias)&&
+				alcanzanCantidadDeMovimientos(unidad,posicionFinal);
+	}
+
+	private boolean alcanzanCantidadDeMovimientos(Unidad unidad, Posicion posicionFinal) {
+		float cantidadDeMovimientosNecesarios=0;
+		Posicion posicionActual;
+		float coeficienteEnSuperficieActual;
+		float coeficienteInicial=unidad.getCoeficienteMovimientoActual();
+		float coeficienteTotal;
+		LinkedList<Posicion> posicionesPorLasQueSeMueve=posicion(unidad).posicionesUsadasParaMoverseEnOrden(posicion(unidad), posicionFinal);
+		for(int i=0;i<posicionesPorLasQueSeMueve.size()-1;i++){
+		posicionActual=posicionesPorLasQueSeMueve.get(i);
+		coeficienteEnSuperficieActual=unidad.coeficienteVelocidadParaSuperficie(this.contenedorSuperficies.obtenerSuperficie(posicionActual));
+		coeficienteTotal=coeficienteInicial*coeficienteEnSuperficieActual;
+		if(coeficienteTotal==0) return false;
+		cantidadDeMovimientosNecesarios+=1/(coeficienteInicial*coeficienteEnSuperficieActual);
+		}
+		
+		//si la unidad estaba afectada por pantano en un principio		
+		//la cantidad de movimientos dara el doble de lo real
+		if(unidad.estaAfectadaPorPantano()) cantidadDeMovimientosNecesarios=cantidadDeMovimientosNecesarios/2;
+		return cantidadDeMovimientosNecesarios<=unidad.getMovimientosRestantes();
+		
+		
+	}
 
 }

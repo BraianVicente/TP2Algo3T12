@@ -6,6 +6,8 @@ import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaHolder;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.Peterbilt;
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
@@ -217,7 +219,16 @@ public abstract class Unidad {
 	}
 
 	public abstract String nombreImagen();
-	
-	
-    
+
+	public boolean esDelMismoEquipo(Unidad objetivo) {
+		return objetivo.es(equipo);
+	}
+
+	abstract public boolean sePuedeTransformar() ;
+
+	public boolean estaAfectadaPorPantano() {
+		return modificadores.afectadoPorPantano();
+	}
+
+	abstract public float coeficienteVelocidadParaSuperficie(Superficie superficie);
 }

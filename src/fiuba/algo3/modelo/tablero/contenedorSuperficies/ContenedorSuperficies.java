@@ -17,9 +17,6 @@ public class ContenedorSuperficies {
 		}
 		
 		public void agregarSuperficie(Superficie s, Posicion p) {
-			if(superficies.containsKey(p)){
-				throw new PosicionOcupadaException(p);
-			}
 			superficies.put(p, s);
 		}
 		

@@ -49,9 +49,8 @@ public abstract class Modificador {
 	public boolean afectadoPorPsionica(){
 		return false;
 	}
-
+	
 	public boolean esPantano() {
-		
 		return false;
 	}
 	public float coeficienteVelocidadPorForma(Forma forma ){

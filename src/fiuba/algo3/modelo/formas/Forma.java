@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.formas;
 
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 public abstract class Forma {
 
@@ -36,4 +37,8 @@ public abstract class Forma {
 	public abstract float obtenerCoeficientePorVelocidad(ContenedorModificadores modificadores) ;
 
 	public abstract String nombreImagen();
+
+	public float obtenerCoeficienteVelocidad(Superficie superficie) {
+		return superficie.obtenerVelocidadParaForma(this);
+	}
 }

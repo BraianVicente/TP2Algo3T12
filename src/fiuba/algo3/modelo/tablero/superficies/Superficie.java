@@ -6,6 +6,10 @@
 package fiuba.algo3.modelo.tablero.superficies;
 
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
+import fiuba.algo3.modelo.formas.Peterbilt;
 import fiuba.algo3.modelo.unidades.Unidad;
 
 /**
@@ -21,6 +25,20 @@ public abstract class Superficie {
 		unidadConVida.serAfectadoPor(this);
 	}
 	
-	public abstract String nombreImagen(); 
+	public abstract String nombreImagen();
+
+
+	public float obtenerVelocidadParaForma(Forma forma) {
+		return 1;
+	}
+	
+	public float obtenerVelocidadParaForma(FormaVehiculo forma) {
+		return 1;
+	}
+	
+	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
+		return 1;
+	}
+
 
 }

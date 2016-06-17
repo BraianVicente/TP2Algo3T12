@@ -5,6 +5,9 @@
  */
 package fiuba.algo3.modelo.tablero.superficies.aerea;
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 

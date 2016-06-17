@@ -5,6 +5,11 @@
  */
 package fiuba.algo3.modelo.tablero.superficies.aerea;
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
+import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
+import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 
@@ -24,4 +29,18 @@ public class TormentaPsionica extends Superficie{
 		return "/fiuba/algo3/vista/imagenes/cielo/tormenta.png";
 	}
 
+	@Override
+	public float obtenerVelocidadParaForma(Forma forma) {
+		return (new ModificadorPsionica()).coeficienteVelocidadPorForma(forma);
+	}
+	
+	@Override
+	public float obtenerVelocidadParaForma(FormaVehiculo forma) {
+		return (new ModificadorPsionica()).coeficienteVelocidadPorForma(forma);
+	}
+	
+	@Override
+	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
+		return (new ModificadorPsionica()).coeficienteVelocidadPorForma(forma);
+	}
 }

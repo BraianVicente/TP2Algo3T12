@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.formas;
 
-public class HumanoideOptimusprime extends FormaTerrestre {
+public class HumanoideOptimusprime extends FormaHumanoide {
 
     @Override
     public Forma getAlternativa() {

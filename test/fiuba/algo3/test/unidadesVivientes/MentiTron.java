@@ -12,7 +12,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidades.Unidad;
 
-public class MentiTron extends Unidad {
+public class MentiTron extends MentiUnidad {
 
 	public MentiTron() {
 		super(new Decepticons(), new IgnorarMuerte());
@@ -39,65 +39,4 @@ public class MentiTron extends Unidad {
 	}
 
 
-	@Override
-	public void serAfectadoPor(NebulosaAndromeda s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void serAfectadoPor(Nubes s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void serAfectadoPor(TormentaPsionica s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void serAfectadoPor(Espinas s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void serAfectadoPor(Pantano s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void serAfectadoPor(Rocosa s) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float coeficienteMovimientoEn(Pantano s) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean esAerea(){
-		return false;
-	}
-	
-	@Override
-	public boolean esTerrestre(){
-		return true;
-	}
-	@Override
-	public float getCoeficienteMovimientoActual() {
-	  	return modificadores.coeficienteVelocidad()*modificadores.coeficienteVelocidadPorForma(new HumanoideBumblebee());
-	}
-
-	@Override
-	public String nombreImagen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -178,4 +178,15 @@ public class Juego {
     public String accionPosibleEn(PosicionEnElPlano posicion){
     	return "Juego::accionPosibleEn";
     }
+    
+    public boolean sePuedeTransformar(Unidad u){
+    	return tablero.sePuedeTransformar(u);
+    }
+    public boolean puedeAtacar(Unidad atacante, Posicion posicionObjetivo){
+    	return tablero.puedeAtacar(atacante,posicionObjetivo);
+    }
+    
+    public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal){
+    	return tablero.sePuedeMover(unidad, posicionFinal);
+    }
 }

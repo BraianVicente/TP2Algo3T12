@@ -7,6 +7,10 @@ package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.HumanoideOptimusprime;
+import fiuba.algo3.modelo.formas.Peterbilt;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 /**
  *
@@ -32,6 +36,17 @@ public abstract class UnidadCombinable extends Unidad {
     @Override
     public boolean existe(){
         return (this.turnosCreacion == 0) ;
+    }
+    
+    @Override 
+    public boolean sePuedeTransformar(){
+    	return false;
+    }
+    
+    public float coeficienteVelocidadParaSuperficie(Superficie superficie){
+    	FormaHumanoide formaGenerica=new HumanoideOptimusprime();
+    	return superficie.obtenerVelocidadParaForma(formaGenerica);
+    	
     }
     
 }

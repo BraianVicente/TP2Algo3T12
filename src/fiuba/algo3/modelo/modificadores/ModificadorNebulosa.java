@@ -5,7 +5,7 @@ import fiuba.algo3.modelo.formas.FormaVehiculo;
 
 public class ModificadorNebulosa extends ModificadorTransitorio {
 	@Override
-	public float coeficienteVelocidadPorForma(FormaVehiculo  vehiculo){
+	public float coeficienteVelocidad(){
 		return 0;
 	}
 	@Override

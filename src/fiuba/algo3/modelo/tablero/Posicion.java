@@ -155,4 +155,14 @@ public class Posicion {
 		}
 		return posiciones;	
 	}
+	public LinkedList<Posicion> posicionesUsadasParaMoverseEnOrden(Posicion posicionInicial, Posicion posicionFinal) {
+		LinkedList<Posicion> posiciones = new LinkedList<Posicion>();
+		Posicion posicionSiguiente=posicionInicial;
+		while(!posicionSiguiente.equals(posicionFinal)){
+			posiciones.add(posicionSiguiente);
+			posicionSiguiente=posicionSiguiente.obtenerMismaPosicionDesplazada((int)Math.signum(posicionSiguiente.distanciaEnXA(posicionFinal)), (int) Math.signum(posicionSiguiente.distanciaEnYA(posicionFinal)));
+		}
+		posiciones.add(posicionFinal);
+		return posiciones;
+	}
 }

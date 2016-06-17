@@ -5,6 +5,10 @@
  */
 package fiuba.algo3.modelo.tablero.superficies.aerea;
 
+import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.FormaHumanoide;
+import fiuba.algo3.modelo.formas.FormaVehiculo;
+import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 
@@ -22,6 +26,21 @@ public class NebulosaAndromeda extends Superficie {
 	@Override
 	public String nombreImagen() {
 		return "/fiuba/algo3/vista/imagenes/cielo/nebulosa.png";
+	}
+
+	@Override
+	public float obtenerVelocidadParaForma(Forma forma) {
+		return (new ModificadorNebulosa()).coeficienteVelocidadPorForma(forma);
+	}
+	
+	@Override
+	public float obtenerVelocidadParaForma(FormaVehiculo forma) {
+		return (new ModificadorNebulosa()).coeficienteVelocidadPorForma(forma);
+	}
+	
+	@Override
+	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
+		return (new ModificadorNebulosa()).coeficienteVelocidadPorForma(forma);
 	}
 
 }

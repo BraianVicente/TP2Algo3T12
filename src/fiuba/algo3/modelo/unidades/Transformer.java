@@ -3,9 +3,11 @@ package fiuba.algo3.modelo.unidades;
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
+import fiuba.algo3.modelo.formas.Peterbilt;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.TransformacionInvalida;
+import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Espinas;
@@ -50,7 +52,7 @@ public abstract class Transformer extends Unidad {
 	public int getDistanciaMovimiento() {
 		return forma.getDistanciaMovimiento();
 	}
-	///lo ideal es volar �stos
+	///lo ideal es volar estos
 	public boolean esVehiculo() {
 		return forma.esVehiculo();
 	}
@@ -81,6 +83,11 @@ public abstract class Transformer extends Unidad {
     	}
     }
 	
+    @Override
+    public boolean sePuedeTransformar(){
+    	return !this.seTransformoEnEsteTurno;
+    }
+    
 	public void serAfectadoPor(TormentaPsionica s){
 		if(esAerea()){//////!!!!!!!!!!
     		agregarModificador(new ModificadorPsionica());
@@ -100,7 +107,10 @@ public abstract class Transformer extends Unidad {
 		super.avanzarTurno();
 		this.seTransformoEnEsteTurno=false;
 	}
-	
+	@Override
+	public float coeficienteVelocidadParaSuperficie(Superficie superficie) {
+		return		forma.obtenerCoeficienteVelocidad(superficie);
+	}	
 	//------------------------------dibujo---------------------------------//
 	public String nombreImagen(){
 		return forma.nombreImagen();

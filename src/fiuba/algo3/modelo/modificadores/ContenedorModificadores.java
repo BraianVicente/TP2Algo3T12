@@ -81,4 +81,10 @@ public class ContenedorModificadores {
 				.map(a->a.coeficienteVelocidadPorForma(forma))
 				.reduce(1f,(a,b)->a*b);	
 	}
+
+	public boolean afectadoPorPantano() {
+		return modificadores.parallelStream()
+				.map(a->a.esPantano())
+				.reduce(false,(a,b)->a||b);//true pisa a false
+	}
 }

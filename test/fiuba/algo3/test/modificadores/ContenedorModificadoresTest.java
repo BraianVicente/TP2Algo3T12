@@ -106,14 +106,16 @@ public class ContenedorModificadoresTest {
 		c.agregar(new ModificadorBurbuja());
 		c.agregar(new ModificadorDoble());
 		c.agregar(new ModificadorFlash());
-		c.agregar(new ModificadorNebulosa());
 		c.agregar(new ModificadorPsionica());
+		Assert.assertEquals(c.coeficienteVelocidad(), 3,0.001);
+		c.agregar(new ModificadorNebulosa());
 		
 		Assert.assertEquals(c.coeficienteAtaque(), 2,0.001);
 		Assert.assertEquals(c.coeficienteAtaqueModoVehiculo(), 0.4,0.00001);
 		Assert.assertEquals(c.afectadoPorPsionica(), true);
 		Assert.assertEquals(c.puedeMoverse(), false);
-		Assert.assertEquals(c.coeficienteVelocidad(), 3,0.001);
+		float coef=c.coeficienteVelocidad();
+		Assert.assertEquals(c.coeficienteVelocidad(), 0,0.001);
 		Assert.assertFalse(c.recibeDanio());
 	}
 
