@@ -25,7 +25,8 @@ public class MueveVista {
 	
 	private double ancho;
 	private double alto;
-	private ArrayList<SeleccionCallback> seleccionCallbacks;
+	private ArrayList<CallbackPosicion> cllbacksClickeo;
+	private ArrayList<CallbackPosicion> cllbacksHovereo;
 	
 	public MueveVista(double ancho, double alto){
 		x=0;
@@ -34,7 +35,8 @@ public class MueveVista {
 		escala = 0.75;
 		this.ancho = ancho;
 		this.alto = alto;
-		seleccionCallbacks = new ArrayList<SeleccionCallback>();
+		cllbacksClickeo = new ArrayList<CallbackPosicion>();
+		cllbacksHovereo = new ArrayList<CallbackPosicion>();
 	}
 	public void presionado(MouseEvent e){
 		x_m_inicial=e.getX();
@@ -50,8 +52,8 @@ public class MueveVista {
 		double dify = y_m_inicial-e.getY();
 		double dis = Math.sqrt(difx*difx+dify*dify);//esta distancia es sin escalar nada!
 		if(dis<5){
-			for(SeleccionCallback c: seleccionCallbacks){
-				c.seleccion(obtenerPosicion(e));
+			for(CallbackPosicion c: cllbacksClickeo){
+				c.execute(obtenerPosicion(e));
 			}
 		}
 	}
@@ -68,7 +70,6 @@ public class MueveVista {
 	public void salio(MouseEvent e){
 		presionando = false;
 	}
-
 	
 	public void draggeado(MouseEvent e){
 		if(presionando){
@@ -116,9 +117,6 @@ public class MueveVista {
 			return escala;
 		}
 	}
-	public void seleccionaPosicion(SeleccionCallback seleccionCallback) {
-		this.seleccionCallbacks.add(seleccionCallback);
-	}
 	
 	public double xPantalla(Posicion p){
 		return (p.getX()*80+getX())*getEscala();
@@ -141,6 +139,23 @@ public class MueveVista {
 	
 	public double altoCasillero(){
 		return 80*getEscala();
+	}
+	public void agregarCallbackClickeo(CallbackPosicion call) {
+		cllbacksClickeo.add(call);
+		
+	}
+	public void agregarCallbackHover(CallbackPosicion call) {
+		cllbacksHovereo.add(call);
+		
+	}
+	public void clickeado(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+	public void movido(MouseEvent e) {
+		for(CallbackPosicion c: cllbacksHovereo){
+			c.execute(obtenerPosicion(e));
+		}
+		
 	}
 
 }

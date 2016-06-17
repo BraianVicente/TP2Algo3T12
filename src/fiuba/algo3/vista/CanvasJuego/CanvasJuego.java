@@ -22,45 +22,94 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * SOBRE CANVASJUEGO:CÓMO USAR
+ * 
+ * Desde afuera, sólo se deben usar los siguientes métodos:
+ * 
+ * +agregarCallbackClickeo(!!!!!!)
+ * +agregarCallbackHovereo(!!!!!!!!!!)
+ * +seleccionadorEn
+ * +esconderSeleccionador
+ * +destruir() 
+ * (hace que se deje de actualizar la ventana y se pueda destruir el canvas, 
+ * así no sigue corriendo una vez cerrada la ventana
+ * OJO: el Canvas no se destruye ni se lo lleva el recolector 
+ * 	de basura hasta que no se llama éste método!!!!)
+ * +getModoVista
+ * +setModoVista
+ * 
+ * Algunos los tuve que dejar públicos pero ___les pido que no los usen__ !!
+ * Si hace falta algo de interfaz, por favor déjenme escrito acá lo que cambiaron!!
+ * 
+ * CanvasJuego
+ * @author José Sb
+ *
+ */
+
+
 public class CanvasJuego extends Canvas implements Actualizable{
-	MueveVista mueveVista;
-	Image seleccionador;
-	Image seleccionadorObjetivo;
-	TeclaEnCanvasEventHandler teclaEventHandler;
-	Juego juego;
+	private MueveVista mueveVista;
+	private Image seleccionador;
+	private Image seleccionadorObjetivo;
+	private TeclaEnCanvasEventHandler teclaEventHandler;
+	private Juego juego;
 	private Posicion seleccionadaViejaSeraBorrada;
 	private Posicion objetivoVIEJOSERABORRADO;
 	CacheImagenes cacheImagenes = new CacheImagenes();
 
-	private ArrayList<CallbackCasillero> callbacksSeleccion;
+	private ArrayList<CallbackCasillero> callbacksClickeo;
 	private ArrayList<CallbackCasillero> callbacksHover;
+	
+	private PosicionEnElPlano hovereando;
+	
+	
+	private Image hovereador;
+	
+	private Timer timer;
 	
 	public CanvasJuego(Juego juego){
 		super(340, 371);
-		mueveVista = new MueveVista(340, 371);
+		
 		this.juego=juego;
-		seleccionadaViejaSeraBorrada = new Posicion(0,0);
-		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
+		
+		mueveVista = new MueveVista(340, 371);
+		this.addEventHandler(MouseEvent.MOUSE_MOVED, e->mueveVista.movido(e));
+		this.addEventHandler(MouseEvent.MOUSE_CLICKED, e->mueveVista.clickeado(e));
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
-		this.setOnMouseMoved(e->mouseMovido(e));
+		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
+		
+		seleccionadaViejaSeraBorrada = new Posicion(0,0);
+		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
+		
 		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
-		mueveVista.seleccionaPosicion(p->selecciona(p));
-		Timer timer = new Timer();
+		
+		timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
 	
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
+		hovereador = new Image("/fiuba/algo3/vista/CanvasJuego/hovereador.png");
 		
-		callbacksSeleccion = new ArrayList<CallbackCasillero>();
+		callbacksClickeo = new ArrayList<CallbackCasillero>();
 		callbacksHover = new ArrayList<CallbackCasillero>();
 		
 		modoVista = ModoVista.AMBAS;
+		hovereando = new PosicionEnElPlano(0,0); 
+		
+		mueveVista.agregarCallbackClickeo(p->clickea(p));
+		mueveVista.agregarCallbackHover(p->hoverea(p));
+	}
+	
+	//--------------------MANEJO DE CONCURRENCIA/LIMPIEZA----------------------//
+	public void destruir(){
+		timer.cancel();
+		timer.purge();
 	}
 	
 	//------------------------INPUT----------------------------------------------//
@@ -90,28 +139,32 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	}
 
-	public void selecciona(Posicion p){
+	private void clickea(Posicion p){
 		if(juego.enTablero(p)){
 			teclaEventHandler.cambiarSeleccionada(p);
 			Casillero construido = construirCasillero(p);
-			for(CallbackCasillero calls : callbacksSeleccion){
+			for(CallbackCasillero calls : callbacksClickeo){
 				calls.execute(construido);
 			}
 		}
 	}
 	
-	public void mouseMovido(MouseEvent e){
-		Posicion p = mueveVista.obtenerPosicion(e);
+	private void hoverea(Posicion p){
+		
+		//Posicion p = mueveVista.obtenerPosicion(e);
 		if(juego.enTablero(p)){
 			Casillero construido = construirCasillero(p);
 			for(CallbackCasillero calls : callbacksHover){
 				calls.execute(construido);
 			}
 		}
+		synchronized(hovereando){
+			hovereando = new PosicionEnElPlano(p.getX(),p.getY());
+		}
 	}
 
-	public void agregarCallbackSeleccion(CallbackCasillero call){
-		callbacksSeleccion.add(call);
+	public void agregarCallbackClickeo(CallbackCasillero call){
+		callbacksClickeo.add(call);
 	}
 	
 	public void agregarCallbackHover(CallbackCasillero call){
@@ -137,8 +190,9 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		ArrayList<Unidad> unidades = juego.obtenerUnidades();
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
+		
 
-		//primero, el fondo blanco
+		//el fondo blanco
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0+xv*escala, 0+yv*escala, 
 				juego.obtenerAncho()*mueveVista.anchoCasillero(),
@@ -182,11 +236,22 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 		*/
 		if(seleccionada != null){
+			
 			gc.drawImage(seleccionador,
 				mueveVista.xPantalla(seleccionada),
 				mueveVista.yPantalla(seleccionada),
 				mueveVista.anchoCasillero(),
 				mueveVista.altoCasillero());
+		}
+		
+		//el cuadrado hovereando
+		synchronized(hovereando){
+			System.out.println(hovereando);
+			gc.drawImage(hovereador,
+					mueveVista.xPantalla(hovereando),
+					mueveVista.yPantalla(hovereando),
+					mueveVista.anchoCasillero(),
+					mueveVista.altoCasillero());
 		}
 	}
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {

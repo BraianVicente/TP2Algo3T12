@@ -96,8 +96,14 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
         if	(e.getCode()==KeyCode.NUMPAD0) posObjetivo=posObjetivo.nuevaPosicionConDistintoPlano(Plano.TERRESTRE);
         if (e.getCode() == KeyCode.P)     	juego.avanzarTurno();
         if (e.getCode() == KeyCode.UP)    	posActual=posActual.nuevaPosicionConDistintoPlano(Plano.AEREO);
+    	}
+        /*
         if (e.getCode() == KeyCode.DOWN)    	posActual=posActual.nuevaPosicionConDistintoPlano(Plano.TERRESTRE);  
         canvas.selecciona(posActual);}
+        */
+        
+        //----------------------------------------------COMENTÉ ARRIBA-----------------------------//
+        
     	catch(RuntimeException e2){
     		Alert alert = new Alert(AlertType.ERROR,"Lo que trat\u00f3 de realizar es contra las reglas.\n"
     				+ " Posibles motivos:\n"
