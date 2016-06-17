@@ -13,6 +13,7 @@ public class ContenedorSuperficies {
 			superficies = new HashMap<Posicion,Superficie>();
 
 		}
+		
 		public void agregarSuperficie(Superficie s, Posicion p) {
 			superficies.put(p, s);
 		}
