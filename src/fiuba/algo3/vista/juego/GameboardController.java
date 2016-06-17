@@ -45,7 +45,8 @@ public class GameboardController {
         assert GamePane != null : "fx:id=\"GamePane\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert finTurnoButton != null : "fx:id=\"finTurnoButton\" was not injected: check your FXML file 'MainJuego.fxml'.";
         
-        finTurnoButton.setOnMouseClicked(null);
+        finTurnoController ftc = new finTurnoController(finTurnoButton);
+        finTurnoButton.setOnAction(ftc);
         
 		tablero = new Tablero();
 		// TODO: Get player names
