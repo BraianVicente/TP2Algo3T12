@@ -106,23 +106,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 		
 		//las unidades terrestres
+		dibujarUnidades(gc,false);
 		
-		for(Unidad u: unidades){
-			Posicion p = juego.posicion(u);
-			if(!u.esAerea()){
-				try{
-					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
-					gc.drawImage(imgU,
-							mueveVista.xPantalla(p), 
-							mueveVista.yPantalla(p), 
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero()
-					);
-				}catch(ImagenInexistenteExcption e){
-					
-				}
-			}
-		}
 		//el cielo
 		if(modoVista==ModoVista.AMBAS){
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
@@ -131,26 +116,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 		
 		//las unidades aereas
-		
-				for(Unidad u: unidades){
-					Posicion p = juego.posicion(u);
-					if(u.esAerea()){
-						try{
-							Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
-							gc.drawImage(imgU,
-									mueveVista.xPantalla(p), 
-									mueveVista.yPantalla(p), 
-									mueveVista.anchoCasillero(),
-									mueveVista.altoCasillero()
-							);
-						}catch(ImagenInexistenteExcption e){
-							
-						}
-					}
-				}
+		dibujarUnidades(gc,true);
 		
 		
 		//el cuadrado seleccionado
+		/*
 		if(seleccionadaViejaSeraBorrada != null){
 			gc.drawImage(seleccionador,
 				(seleccionadaViejaSeraBorrada.getX()*80+xv)*escala,
@@ -165,6 +135,14 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				(objetivoVIEJOSERABORRADO.getY()*80+yv)*escala,
 				80*escala,
 				80*escala);
+		}
+		*/
+		if(seleccionada != null){
+			gc.drawImage(seleccionador,
+				mueveVista.xPantalla(seleccionada),
+				mueveVista.yPantalla(seleccionada),
+				mueveVista.anchoCasillero(),
+				mueveVista.altoCasillero());
 		}
 	}
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
@@ -194,6 +172,25 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			
 		}
 		gc.restore();
+	}
+	
+	private void dibujarUnidades(GraphicsContext gc, boolean aereas){
+		for(Unidad u: juego.obtenerUnidades()){
+			Posicion p = juego.posicion(u);
+			if(u.esAerea() == aereas){
+				try{
+					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
+					gc.drawImage(imgU,
+							mueveVista.xPantalla(p), 
+							mueveVista.yPantalla(p), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero()
+					);
+				}catch(ImagenInexistenteExcption e){
+					
+				}
+			}
+		}
 	}
 	
 	public Casillero construirCasillero(Posicion pos){
@@ -242,13 +239,13 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	//---------------------------------------selección----------------------
 	private PosicionEnElPlano seleccionada;
-	public void seleccionar(PosicionEnElPlano pos){
+	public void seleccionadorEn(PosicionEnElPlano pos){
 		seleccionada = (PosicionEnElPlano) pos.clone();
 	}
-	public void seleccionar(Posicion pos){
+	public void seleccionadorEn(Posicion pos){
 		seleccionada = new PosicionEnElPlano(pos.getX(),pos.getY());
 	}
-	public void deSeleccionar(){
+	public void esconderSeleccionador(){
 		seleccionada = null;
 	}
 	

@@ -3,6 +3,7 @@ package fiuba.algo3.vista.CanvasJuego;
 import java.util.ArrayList;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
@@ -121,8 +122,15 @@ public class MueveVista {
 	public double xPantalla(Posicion p){
 		return (p.getX()*80+getX())*getEscala();
 	}
+	public double xPantalla(PosicionEnElPlano p){
+		return (p.getX()*80+getX())*getEscala();
+	}
 	
 	public double yPantalla(Posicion p){
+		return (p.getY()*80+getY())*getEscala();
+	}
+	
+	public double yPantalla(PosicionEnElPlano p){
 		return (p.getY()*80+getY())*getEscala();
 	}
 	
