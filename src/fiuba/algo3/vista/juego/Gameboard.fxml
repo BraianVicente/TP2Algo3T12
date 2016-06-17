@@ -33,10 +33,10 @@
       			<children>
             		<Label layoutX="34.0" layoutY="23.0" text="Jugando" />
             		<ImageView id="jugandoImage" fitHeight="91.0" fitWidth="93.0" layoutX="14.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
-           			<ChoiceBox id="vistaChoiceBox" value="Combinacion" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="93.0">
+           			<ChoiceBox id="vistaChoiceBox" value="Ambas" layoutX="14.0" layoutY="198.0" prefHeight="25.0" prefWidth="93.0">
             			<String fx:value="Tierra"/>
             			<String fx:value="Cielo"/>
-            			<String fx:value="Combinacion"/> 
+            			<String fx:value="Ambas"/> 
             		</ChoiceBox>
             		<Label layoutX="44.0" layoutY="162.0" text="Vista" />
             		<Label layoutX="29.0" layoutY="244.0" text="Controles" />
