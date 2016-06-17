@@ -3,6 +3,8 @@ package fiuba.algo3.modelo.tablero.contenedorSuperficies;
 import java.util.HashMap;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionLibreException;
+import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 public class ContenedorSuperficies {
@@ -15,6 +17,9 @@ public class ContenedorSuperficies {
 		}
 		
 		public void agregarSuperficie(Superficie s, Posicion p) {
+			if(superficies.containsKey(p)){
+				throw new PosicionOcupadaException(p);
+			}
 			superficies.put(p, s);
 		}
 		
@@ -23,6 +28,9 @@ public class ContenedorSuperficies {
 		}
 		
 		public Superficie obtenerSuperficie(Posicion p){
+			if(!superficies.containsKey(p)){
+				throw new PosicionLibreException(p);
+			}
 			return superficies.get(p);
 		}
 		

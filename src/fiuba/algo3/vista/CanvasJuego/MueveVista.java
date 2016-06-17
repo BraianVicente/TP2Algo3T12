@@ -68,7 +68,7 @@ public class MueveVista {
 		presionando = false;
 	}
 
-	public void movido(MouseEvent e){
+	public void draggeado(MouseEvent e){
 		if(presionando){
 			synchronized(lock){
 				x = (e.getX()-x_m_inicial)/escala+x_inicial;
@@ -76,6 +76,7 @@ public class MueveVista {
 			}
 		}
 	}
+	
 	
 	public void scrolleado(ScrollEvent e){
 		synchronized(lock){
@@ -115,6 +116,22 @@ public class MueveVista {
 	}
 	public void seleccionaPosicion(SeleccionCallback seleccionCallback) {
 		this.seleccionCallbacks.add(seleccionCallback);
+	}
+	
+	public double xPantalla(Posicion p){
+		return (p.getX()*80+getX())*getEscala();
+	}
+	
+	public double yPantalla(Posicion p){
+		return (p.getY()*80+getY())*getEscala();
+	}
+	
+	public double anchoCasillero(){
+		return 80*getEscala();
+	}
+	
+	public double altoCasillero(){
+		return 80*getEscala();
 	}
 
 }

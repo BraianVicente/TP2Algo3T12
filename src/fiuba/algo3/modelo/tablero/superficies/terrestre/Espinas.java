@@ -17,6 +17,11 @@ public class Espinas extends Superficie {
 		unidadConVida.serAfectadoPor(this);
 		
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/tierra/espinas.png";
+	}
 
 
 }

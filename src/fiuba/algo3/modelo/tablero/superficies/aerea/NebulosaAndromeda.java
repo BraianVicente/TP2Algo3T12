@@ -19,4 +19,9 @@ public class NebulosaAndromeda extends Superficie {
 		
 	}
 
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/cielo/nebulosa.png";
+	}
+
 }

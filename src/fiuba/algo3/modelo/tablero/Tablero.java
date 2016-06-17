@@ -32,6 +32,18 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
+	
+	public int obtenerAncho(){
+		return ancho;
+	}
+	
+	public int obtenerAlto(){
+		return alto;
+	}
+	
+	public Superficie obtenerSuperficieEn(Posicion pos){
+		return contenedorSuperficies.obtenerSuperficie(pos);
+	}
 
 	private Posicion posicionChispa;
 

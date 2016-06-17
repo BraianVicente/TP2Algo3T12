@@ -1,36 +1,49 @@
 package fiuba.algo3.vista.CanvasJuego;
 
 import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 
 public class Casillero {
-	private Superficie aerea;
-	private Superficie terrestre;
-	private Posicion pos;
-	private Unidad u;
+	private Superficie sAerea;
+	private Superficie sTerrestre;
+	private Unidad uAerea;
+	private Unidad uTerrestre;
+	private PosicionEnElPlano pos;
 	
-	public Casillero(Superficie aerea, Superficie terrestre, Posicion pos, Unidad u){
-		this.aerea = aerea;
-		this.terrestre = terrestre;
-		this.pos = pos;
-		this.u=u;
+	
+	public Casillero(Superficie supAerea, Superficie supTerrestre, Posicion pos2, Unidad uAerea, Unidad uTerrestre) {
+		this.sAerea=supAerea;
+		this.sTerrestre=supTerrestre;
+		this.pos =new PosicionEnElPlano(pos2.getX(),pos2.getY());
+		this.uAerea=uAerea;
+		this.uTerrestre=uTerrestre;
 	}
-	
-	public Superficie getAerea(){
-		return aerea;
+
+
+	public Superficie getsAerea() {
+		return sAerea;
 	}
-	
-	public Superficie getTerrestre(){
-		return terrestre;
+
+
+	public Superficie getsTerrestre() {
+		return sTerrestre;
 	}
-	
-	public Posicion getPosicion(){
+
+
+	public Unidad getuAerea() {
+		return uAerea;
+	}
+
+
+	public Unidad getuTerrestre() {
+		return uTerrestre;
+	}
+
+
+	public PosicionEnElPlano getPos() {
 		return pos;
-	}
-	
-	public Unidad getUnidad(){
-		return u;
 	}
 	
 }

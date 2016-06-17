@@ -151,5 +151,13 @@ public class Juego {
 		// TODO Auto-generated method stub
 		return tablero.posicion(unidad);
 	}
+
+	public int obtenerAncho() {
+		return tablero.obtenerAncho();
+	}
+
+	public int obtenerAlto() {
+		return tablero.obtenerAlto();
+	}
     
 }

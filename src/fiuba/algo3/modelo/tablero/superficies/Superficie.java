@@ -19,7 +19,8 @@ public abstract class Superficie {
     
 	public void afectarA(Unidad unidadConVida) {
 		unidadConVida.serAfectadoPor(this);
-		
 	}
+	
+	public abstract String nombreImagen(); 
 
 }
