@@ -30,5 +30,10 @@ public class Decepticons extends Equipo {
 	public UnidadCombinable getCombination() {
 		return new Menasor();
 	}
+	
+	@Override
+	public String toString() {
+		return "Decepticons";
+	}
 
 }
