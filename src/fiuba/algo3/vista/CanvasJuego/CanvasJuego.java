@@ -327,7 +327,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 
 	
-	//---------------------------------------selección----------------------
+	//---------------------------------------selecciï¿½n----------------------
 	private PosicionEnElPlano seleccionada;
 	public void seleccionadorEn(PosicionEnElPlano pos){
 		seleccionada = (PosicionEnElPlano) pos.clone();
@@ -339,7 +339,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		seleccionada = null;
 	}
 	
-	//no debría haber getter ya que VentanaJuego se ocupa sólo de lo gráfico
+	//no debrï¿½a haber getter ya que VentanaJuego se ocupa sï¿½lo de lo grï¿½fico
 	
 	//-----------------------------------modos--------------------------------//
 	private ModoVista modoVista;

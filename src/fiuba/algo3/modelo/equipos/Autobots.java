@@ -30,5 +30,11 @@ public class Autobots extends Equipo {
 	public UnidadCombinable getCombination() {
 		return new Superion();
 	}
+	
+	@Override
+	public String toString() {
+		return "Autobots";
+		
+	}
 
 }

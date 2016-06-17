@@ -18,7 +18,7 @@ public class CacheImagenes {
 				
 				"fiuba/algo3/vista/imagenes/transformers/Menasor.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/BonecrusherVehiculo.png",
+				"fiuba/algo3/vista/imagenes/transformers/BoneCrusherVehiculo.png",
 				"fiuba/algo3/vista/imagenes/transformers/BonecrusherHumanoide.png",
 				
 				"fiuba/algo3/vista/imagenes/transformers/BumblebeeVehiculo.png",
