@@ -102,7 +102,7 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
         canvas.selecciona(posActual);}
         */
         
-        //----------------------------------------------COMENTÉ ARRIBA-----------------------------//
+        //----------------------------------------------COMENTE ARRIBA-----------------------------//
         
     	catch(RuntimeException e2){
     		Alert alert = new Alert(AlertType.ERROR,"Lo que trat\u00f3 de realizar es contra las reglas.\n"
