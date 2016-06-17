@@ -18,7 +18,6 @@ public class ChoiceBoxController implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent ev) {
-		System.out.println("ModoVista Changed! " + vista.getValue());
 		if (vista.getValue().equals("Tierra")) {
 			cj.setModoVista(ModoVista.SOLOTIERRA);
 		} else if (vista.getValue().equals("Aire")) {
