@@ -8,6 +8,7 @@ package fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 import fiuba.algo3.modelo.equipos.Decepticons;
+import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
@@ -31,32 +32,28 @@ public class Juego {
     
     private Jugador jugadorDecepticons ;
     private Jugador jugadorAutobots ;
-    private Jugador turnoDe ;
+    private Jugador enTurno ;
+    private Jugador enEspera ;
     private Tablero tablero ;
-    private WinListener condVictoria ;
     private Jugador ganador;
     
-    public Juego(Tablero tab,Jugador autobots,Jugador decepticons){
+
+    public Juego(Tablero tab,Jugador autobots,Jugador decepticons ){
         // el juego debe iniciarse vacio, ir agregando primero los jugadores
         // y una vez tenga el tablero, las unidades en sus correspondientes cuadrantes
         this.tablero = tab;
         this.tablero.colocarChispa();
         this.jugadorAutobots = autobots;
-        autobots.setTablero(tab);
+        this.enTurno = autobots ;   
         this.jugadorDecepticons = decepticons;
-        decepticons.setTablero(tab);
-        this.turnoDe = autobots;
+        this.enEspera = decepticons ;
     }
     
-    public Juego(Tablero tab,Jugador autobots,Jugador decepticons,WinListener victoria){
-        this.tablero = tab;
+   
+    public void crearTablero(Escenario escenarioCreator){
+        this.tablero = new Tablero(escenarioCreator);
         this.tablero.colocarChispa();
-        this.jugadorAutobots = autobots;
-        this.jugadorDecepticons = decepticons;
-        this.turnoDe = autobots;
-        this.condVictoria = victoria;
     }
-    
     
     public void agregarJugadorDecepticons(String nombre){
         this.jugadorDecepticons = new Jugador(nombre,new Decepticons());
@@ -80,49 +77,40 @@ public class Juego {
     }
     
     public void avanzarTurno(){
-        Jugador victorioso = this.jugadorEnTurno();
         this.cambiarTurno();
-        if(this.turnoDe.esDerrotado() || victorioso.esVictorioso()){
-            this.ganador = victorioso ;
-            // throw new JuegoFinalizadoException(Jugador ganador) ;
-        }
-        this.turnoDe.pasarTurno();
+        this.enTurno.pasarTurno();
     }
 
     public Jugador jugadorEnTurno(){
-        return turnoDe;
+        return enTurno;
     }
     
     public void moverUnidad(Posicion origen,Posicion destino){
-        if (turnoDe.perteneceEquipo(tablero.obtenerUnidad(origen))){
+        if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.mover(tablero.obtenerUnidad(origen), destino);
         }
-        this.jugadorEnTurno().esVictorioso();
     }
 
     public void atacarUnidad(Posicion origen, Posicion destino){
-        if (turnoDe.perteneceEquipo(tablero.obtenerUnidad(origen))){
+        if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.atacar(tablero.obtenerUnidad(origen), tablero.obtenerUnidad(destino));
         }
-        this.jugadorEnTurno().esVictorioso();
     }
     
     public void transformarUnidad(Posicion origen){
-        if (turnoDe.perteneceEquipo(tablero.obtenerUnidad(origen))){
+        if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.transformar(tablero.obtenerUnidad(origen));
         }
     }
     
     public void combinarUnidades(){
-        turnoDe.combinarUnidades();
+        enTurno.combinarUnidades();
     }
 
     public void cambiarTurno() {
-        if (turnoDe.equals(jugadorDecepticons)) {
-            turnoDe = jugadorAutobots;
-        } else {
-            turnoDe = jugadorDecepticons;
-        }     
+        Jugador aux = enTurno ;
+        enTurno = enEspera;
+        enEspera = aux ;
     }
 
 	public Unidad obtenerUnidad(Posicion posActual) {
@@ -171,4 +159,19 @@ public class Juego {
 				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
 	}
     
+    public boolean jugadorGanadorEs(Jugador jugador) {
+        return jugador.equals(this.ganador) ;
+    }
+
+    public void jugadorGanador(Equipo equipo) {
+        if (equipo.equals(jugadorDecepticons.getEquipo())) {
+            ganador = jugadorDecepticons;
+        } else {
+            ganador = jugadorAutobots;
+        }
+    }
+
+    public void jugadorDerrotado(Equipo equipo) {
+        this.ganador = this.enTurno ;
+    }
 }

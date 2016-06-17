@@ -36,8 +36,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private ArrayList<CallbackCasillero> callbacksHover;
 	
 	public CanvasJuego(Juego juego){
-		super(800,600);
-		mueveVista = new MueveVista(800,600);
+		super(340, 371);
+		mueveVista = new MueveVista(340, 371);
 		this.juego=juego;
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
 		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
@@ -45,7 +45,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setOnMouseMoved(e->mouseMovido(e));
 		this.setFocusTraversable(true);
 		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	

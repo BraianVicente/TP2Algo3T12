@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.modelo;
 
+import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Tablero;
 
@@ -14,14 +15,38 @@ import fiuba.algo3.modelo.tablero.Tablero;
  */
 public class AgarrarChispa implements WinListener {
 
+    private Tablero tablero;
+    private Juego juego;
+
+    public AgarrarChispa(){
+        
+    }    
+    public AgarrarChispa(Tablero tab,Juego juego){
+        this.tablero = tab ;
+        this.juego = juego ;
+    }
+    
+    public void setTablero(Tablero tab){
+        this.tablero = tab ;
+    }
+    
+    public void setJuego(Juego juego){
+        this.juego = juego ;
+    }
+    
     @Override
-    public boolean victoria(Tablero tab, Equipo equipo) {
-       return tab.unidadesContieneChispa(equipo);
+    public void perdio(Equipo equipo) {
+        if( ! this.tablero.existenUnidadeDeEquipo(equipo) ){
+            this.juego.jugadorDerrotado(equipo) ;
+            
+        }
     }
 
     @Override
-    public boolean derrotado(Tablero tab,Equipo equipo) {
-        return !tab.existenUnidadeDeEquipo(equipo) ;
+    public void gano(Equipo equipo) {
+        if (this.tablero.unidadesContieneChispa(equipo)){
+            this.juego.jugadorGanador(equipo);
+        }
     }
     
     

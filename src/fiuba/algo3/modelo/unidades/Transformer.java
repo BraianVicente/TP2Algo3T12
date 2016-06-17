@@ -22,7 +22,7 @@ public abstract class Transformer extends Unidad {
 		movimientosUsados=0;
 		seTransformoEnEsteTurno=false;
 	}
-	
+    
 	public void transformar(){
 			if(seTransformoEnEsteTurno) throw new TransformacionInvalida();
 			forma = forma.getAlternativa();
@@ -67,7 +67,7 @@ public abstract class Transformer extends Unidad {
     public boolean esAerea(){
     	return forma.esAerea();
     }
-    //esto tambi�n habr�a que volarlo
+    //esto tambien habria que volarlo
     
     public float getCoeficienteMovimientoActual() {
   		// TODO Auto-generated method stub

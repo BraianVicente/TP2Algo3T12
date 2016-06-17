@@ -1,22 +1,27 @@
 package fiuba.algo3.test.juego;
 
+import fiuba.algo3.modelo.AgarrarChispa;
+import fiuba.algo3.modelo.EscenarioDefault;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.jugador.EquipoInvalidoException;
 import fiuba.algo3.modelo.jugador.Jugador;
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
+import fiuba.algo3.modelo.tablero.TransformacionInvalida;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.FriendlyFireException;
+import fiuba.algo3.modelo.unidades.Megatron;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class JuegoTets {
+public class JuegoTest {
 
     @Test
     public void testJuegoCreaJuego(){
@@ -36,26 +41,6 @@ public class JuegoTets {
         juego.cambiarTurno();
         Assert.assertEquals(juego.jugadorEnTurno(),j2);
     }
-
-    @Test
-    public void testJugadorSinUnidadesPierde(){
-        Tablero tab = new Tablero();
-        Jugador j1 = new Jugador("J1", new Autobots(),tab);
-        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
-        Juego juego = new Juego(tab,j1,j2);
-        Assert.assertTrue(j1.esDerrotado());
-    }
-
-    @Test
-    public void testJuegoAgregaUnidadesJugadorEnTablero(){
-        Tablero tab = new Tablero();
-        Jugador j1 = new Jugador("J1", new Autobots(),tab);
-        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
-        Juego juego = new Juego(tab,j1,j2);
-        juego.agregarJugadorAutobots("J1");
-        Assert.assertFalse(j1.esDerrotado());
-    }
-
 
     @Test
     public void testJugadorRealizaMovimientoUnidad(){
@@ -127,6 +112,36 @@ public class JuegoTets {
         Unidad bumblee = new Bumblebee();
         Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
     }
+    
+    
+    @Test(expected=TransformacionInvalida.class)
+    public void testJugadorTransormaUnidadSoloUnaVezPorTurno(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    }
+    
+    @Test
+    public void testPermiteTransformarUnidadSiguienteTurno(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    
+    }
 
     @Test(expected=EquipoInvalidoException.class)
     public void testJugadorNoTransformaUnidadAjena(){
@@ -175,20 +190,49 @@ public class JuegoTets {
 
         //una llena, las otras dos vacias no importa cuales
     }
-
     @Test
     public void testJugadorQueConsigueChispaGana(){
-        Tablero tab = new Tablero();
+        AgarrarChispa condition = new AgarrarChispa();
+        Tablero tab = new Tablero(new EscenarioDefault(),condition);
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
-        tab.colocarChispa();
+        condition.setJuego(juego);
+        condition.setTablero(tab);
         tab.agregarUnidad(new Posicion(6,6), new Bumblebee());
         juego.moverUnidad(new Posicion(6,6), new Posicion(5,5));
-        Assert.assertTrue(j1.esVictorioso());
-
-
+        Assert.assertTrue(juego.jugadorGanadorEs(j1));
     }
 
+    @Test
+    public void testJugadorConUnidadesMuertasPierde(){
+        AgarrarChispa condition = new AgarrarChispa();
+        Tablero tab = new Tablero(new EscenarioDefault(),condition);
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        condition.setJuego(juego);
+        condition.setTablero(tab);
+        Posicion origen = new Posicion(6,6);
+        Posicion destino = new Posicion(7,7) ;
+        Ratchet uniJ1 = new Ratchet(new Death(tab));
+        Megatron uniJ2 = new Megatron(new Death(tab));
+        j1.agregarUnidad(origen, uniJ1);
+        
+        j2.agregarUnidad(destino,uniJ2 );
+        juego.atacarUnidad(origen,destino);
+        
+        juego.avanzarTurno();
+        juego.atacarUnidad(destino, origen);
+        juego.avanzarTurno();
+        juego.atacarUnidad(origen,destino);
+        juego.avanzarTurno();
+        juego.atacarUnidad(destino, origen);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.atacarUnidad(destino, origen);
+        
+        Assert.assertTrue(juego.jugadorGanadorEs(j2));
+    }
 
 }

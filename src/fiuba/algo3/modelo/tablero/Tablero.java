@@ -5,6 +5,9 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import fiuba.algo3.modelo.Escenario;
+import fiuba.algo3.modelo.SinVictoria;
+import fiuba.algo3.modelo.WinListener;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -15,7 +18,6 @@ import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
-import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
@@ -32,6 +34,7 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
+    private WinListener commandWin;
 	
 	public int obtenerAncho(){
 		return ancho;
@@ -70,8 +73,27 @@ public class Tablero {
         	}
         }
         this.colocarChispa();
+        this.commandWin = new SinVictoria();
     }
 
+        
+    //Preparando cambios para agregar los escenarios distintos en el juego ;
+    //
+    public Tablero(Escenario e){
+        this(e.getAnchoEscenario(),e.getLargoEscenario());
+        Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
+        Integer posX,posY ;
+        for(Integer i = 0; i < limite;i ++ ){
+            posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
+            posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
+            this.agregarSuperficie(e.agregarSuperficiesAleatoria(posX, posY), new Posicion(posX,posY));
+        }
+    }
+    
+    public Tablero(Escenario escenario,WinListener commandWin){
+        this(escenario);
+        this.commandWin = commandWin;
+    }
     
     public Tablero(){
         this(10,10);
@@ -102,7 +124,9 @@ public class Tablero {
                 throw new MovimientoInvalidoException() ;
 
             }
-            if (this.tieneChispa(posicionSiguiente)) unidad.darChispa();
+            if (this.tieneChispa(posicionSiguiente)) {
+                unidad.darChispa();
+            }
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) 
     			this.darBonus(unidad,posicionSiguiente);
@@ -117,6 +141,8 @@ public class Tablero {
     		unidad.restaurarMovimientosRestantes(movimientosRestantes);
     		throw e;
     	}
+        
+        this.commandWin.gano(unidad.equipo());
     }
 
 	private Posicion obtenerPosicionADondeMoverse(Unidad unidad, Posicion posicionFin) {
@@ -204,6 +230,7 @@ public class Tablero {
 	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
+        this.commandWin.perdio(u.equipo());
 
 	}
 
