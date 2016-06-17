@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 /**
  * SOBRE CANVASJUEGO:COMO USAR
  * 
- * Desde afuera, solo se deben usar los siguientes métodos:
+ * Desde afuera, solo se deben usar los siguientes metodos:
  * 
  * +agregarCallbackClickeo(!!!!!!)
  * +agregarCallbackHovereo(!!!!!!!!!!)
@@ -32,7 +32,7 @@ import javafx.scene.text.Text;
  * +esconderSeleccionador
  * +destruir() 
  * (hace que se deje de actualizar la ventana y se pueda destruir el canvas, 
- * así no sigue corriendo una vez cerrada la ventana
+ * asi no sigue corriendo una vez cerrada la ventana
  * OJO: el Canvas no se destruye ni se lo lleva el recolector 
  * 	de basura hasta que no se llama este metodo!!!!)
  * +getModoVista
