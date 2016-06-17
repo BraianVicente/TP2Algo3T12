@@ -63,6 +63,43 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		modoVista = ModoVista.AMBAS;
 	}
 	
+	//------------------------INPUT----------------------------------------------//
+	public Casillero construirCasillero(Posicion pos){
+		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
+		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
+		
+		//ningun try, si no hay superficie estamos fritos
+		Superficie supTerrestre = juego.obtenerSuperficie(terrestre);
+		Superficie supAerea = juego.obtenerSuperficie(aerea);
+		
+		Unidad uTerrestre;
+		try{
+			uTerrestre = juego.obtenerUnidad(terrestre);
+		}catch(PosicionLibreException e){
+			uTerrestre=null;
+		}
+		
+		Unidad uAerea;
+		try{
+			uAerea = juego.obtenerUnidad(aerea);
+		}catch(PosicionLibreException e){
+			uAerea=null;
+		}
+		
+		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+
+	}
+
+	public void selecciona(Posicion p){
+		if(juego.enTablero(p)){
+			teclaEventHandler.cambiarSeleccionada(p);
+			Casillero construido = construirCasillero(p);
+			for(CallbackCasillero calls : callbacksSeleccion){
+				calls.execute(construido);
+			}
+		}
+	}
+	
 	public void mouseMovido(MouseEvent e){
 		Posicion p = mueveVista.obtenerPosicion(e);
 		if(juego.enTablero(p)){
@@ -73,10 +110,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 	}
 
-	public void seleccionarObjetivo(Posicion p) {
-		objetivoVIEJOSERABORRADO=p;
-	}
-
 	public void agregarCallbackSeleccion(CallbackCasillero call){
 		callbacksSeleccion.add(call);
 	}
@@ -84,6 +117,17 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	public void agregarCallbackHover(CallbackCasillero call){
 		callbacksHover.add(call);
 	}
+	
+	//----------------------------COSAS QUE ESTAN DUPLICADAS/CAMBIARON----------------//
+	public void seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(Posicion p) {
+		objetivoVIEJOSERABORRADO=p;
+	}
+	
+	public Posicion getSeleccionadaESTAFUNCIONHAYQUEBORRARLA() {
+		return seleccionadaViejaSeraBorrada;
+	}
+	
+	//------------------------DIBUJADO----------------------------------------------//
 
 	public void actualizar(){
 		double xv = mueveVista.getX();
@@ -193,49 +237,13 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 	}
 	
-	public Casillero construirCasillero(Posicion pos){
-		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
-		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
-		
-		//ningun try, si no hay superficie estamos fritos
-		Superficie supTerrestre = juego.obtenerSuperficie(terrestre);
-		Superficie supAerea = juego.obtenerSuperficie(aerea);
-		
-		Unidad uTerrestre;
-		try{
-			uTerrestre = juego.obtenerUnidad(terrestre);
-		}catch(PosicionLibreException e){
-			uTerrestre=null;
-		}
-		
-		Unidad uAerea;
-		try{
-			uAerea = juego.obtenerUnidad(aerea);
-		}catch(PosicionLibreException e){
-			uAerea=null;
-		}
-		
-		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
-
-	}
-
-	public void selecciona(Posicion p){
-		if(juego.enTablero(p)){
-			teclaEventHandler.cambiarSeleccionada(p);
-			Casillero construido = construirCasillero(p);
-			for(CallbackCasillero calls : callbacksSeleccion){
-				calls.execute(construido);
-			}
-		}
-	}
+	
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Posicion getSeleccionadaESTAFUNCIONHAYQUEBORRARLA() {
-		return seleccionadaViejaSeraBorrada;
-	}
+
 	
 	//---------------------------------------selección----------------------
 	private PosicionEnElPlano seleccionada;

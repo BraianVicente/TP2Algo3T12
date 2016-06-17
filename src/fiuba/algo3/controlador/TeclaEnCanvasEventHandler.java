@@ -77,19 +77,19 @@ public class TeclaEnCanvasEventHandler implements EventHandler<KeyEvent>{
         
         if (e.getCode()== KeyCode.NUMPAD8)   {
         	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(0, -1);
-        	canvas.seleccionarObjetivo(posObjetivo);
+        	canvas.seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(posObjetivo);
         }
         if (e.getCode()== KeyCode.NUMPAD4)   {
         	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(-1, 0);
-        	canvas.seleccionarObjetivo(posObjetivo);
+        	canvas.seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(posObjetivo);
         }
         if (e.getCode()== KeyCode.NUMPAD6)   {
         	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(1, 0);
-        	canvas.seleccionarObjetivo(posObjetivo);
+        	canvas.seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(posObjetivo);
         }
         if (e.getCode()== KeyCode.NUMPAD2)   {
         	posObjetivo=posObjetivo.obtenerMismaPosicionDesplazada(0, 1);
-        	canvas.seleccionarObjetivo(posObjetivo);
+        	canvas.seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(posObjetivo);
         }
         
         if	(e.getCode()==KeyCode.NUMPAD1) posObjetivo=posObjetivo.nuevaPosicionConDistintoPlano(Plano.AEREO);
