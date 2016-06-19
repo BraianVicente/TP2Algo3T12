@@ -87,7 +87,6 @@ public class GameboardController {
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
 		CanvasJuego cj = new CanvasJuego(juego);
-		cj.setModoVista(ModoVista.AMBAS);
     	
     	GamePane.getChildren().add(cj);
 		
