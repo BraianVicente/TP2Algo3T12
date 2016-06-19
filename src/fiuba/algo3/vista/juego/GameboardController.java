@@ -18,6 +18,7 @@ import fiuba.algo3.vista.CanvasJuego.ModoVista;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -72,7 +73,8 @@ public class GameboardController {
     }
     
     public void setJugandoImage(Equipo equipo) {
-    	//jugandoImage.setImage(new Image("fiuba/algo3/vista/imagenes/equipos/" + equipo.toString() + ".jpg"));
+    	System.out.println(equipo.toString());
+    	jugandoImage.setImage(new Image("fiuba/algo3/vista/imagenes/equipos/" + equipo.toString() + ".png"));
     }
     
     public void setPlayerNames(String name1, String name2) {
