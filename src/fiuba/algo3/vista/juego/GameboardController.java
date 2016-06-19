@@ -66,9 +66,6 @@ public class GameboardController {
         assert StatsPane != null : "fx:id=\"StatsPane\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert vistaChoiceBox != null : "fx:id=\"vistaChoiceBox\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert jugandoImage != null : "fx:id=\"jugandoImage\" was not injected: check your FXML file 'MainJuego.fxml'.";
-        
-        finTurnoController ftc = new finTurnoController(finTurnoButton);
-        finTurnoButton.setOnAction(ftc);
 		
     }
     
@@ -96,5 +93,8 @@ public class GameboardController {
 		
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
 		vistaChoiceBox.setOnAction(cbc);
+		
+		finTurnoController ftc = new finTurnoController(juego, this);
+        finTurnoButton.setOnAction(ftc);
     }
 }
