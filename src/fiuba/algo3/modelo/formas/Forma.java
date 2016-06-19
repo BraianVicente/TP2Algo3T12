@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.formas;
 
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 public abstract class Forma {
@@ -40,5 +41,10 @@ public abstract class Forma {
 
 	public float obtenerCoeficienteVelocidad(Superficie superficie) {
 		return superficie.obtenerVelocidadParaForma(this);
+	}
+	public Plano getPlanoPerteneciente() {
+		if(esAerea())return Plano.AEREO;
+		if(esTerrestre())return Plano.TERRESTRE;
+		return null;
 	}
 }

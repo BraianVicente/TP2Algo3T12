@@ -7,6 +7,7 @@ import fiuba.algo3.modelo.formas.Peterbilt;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.tablero.TransformacionInvalida;
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
@@ -32,6 +33,24 @@ public abstract class Transformer extends Unidad {
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
 		//(y porque son los que acordamos, y porque 
 		//se me hace que tiene mas sentido aunque esta solucion me guste mas porque ahorra un if (if esVehiculo()))
+	}
+	
+    @Override
+    public boolean sePuedeTransformar(){
+    	return !this.seTransformoEnEsteTurno;
+    }
+    
+    @Override
+    public boolean cambiaDePlanoAlTransformase() {
+		return !(this.planoPertenecienteSiguienteForma()==this.getPlanoPerteneciente());
+	}
+    
+    @Override
+	public Plano planoPertenecienteSiguienteForma() {
+		return forma.getAlternativa().getPlanoPerteneciente();
+	}
+	public Plano getPlanoPerteneciente() {
+		return forma.getPlanoPerteneciente();
 	}
 	//------------------formas--------------------//
 	protected abstract Forma getVehiculo();
@@ -83,10 +102,8 @@ public abstract class Transformer extends Unidad {
     	}
     }
 	
-    @Override
-    public boolean sePuedeTransformar(){
-    	return !this.seTransformoEnEsteTurno;
-    }
+
+    
     
 	public void serAfectadoPor(TormentaPsionica s){
 		if(esAerea()){//////!!!!!!!!!!

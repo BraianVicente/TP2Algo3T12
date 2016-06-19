@@ -75,10 +75,7 @@ public abstract class Unidad {
 	public abstract boolean esAerea();
 	public abstract boolean esTerrestre();
 	public Plano getPlanoPerteneciente() {
-		if(esAerea())return Plano.AEREO;
-		if(esTerrestre())return Plano.TERRESTRE;
-		System.out.println("no encontro el plano");
-		return null;
+		return Plano.TERRESTRE;
 	}
 	//-------------------vida---------------
     private int vida;
@@ -231,4 +228,12 @@ public abstract class Unidad {
 	}
 
 	abstract public float coeficienteVelocidadParaSuperficie(Superficie superficie);
+
+	public boolean cambiaDePlanoAlTransformase() {
+		return false;
+	}
+
+	public Plano planoPertenecienteSiguienteForma() {
+		return Plano.TERRESTRE;
+	}
 }

@@ -145,13 +145,9 @@ public class Tablero {
 	}
 
 	public void transformar(Unidad unidad){
-		Transformer transformer = (Transformer) unidad ;
-        try{
-        	transformer.transformar();
-			contenedorUnidades.cambiarPlano(transformer,unidad.getPlanoPerteneciente());
-		}catch(MovimientoInvalidoException e){
-			throw new TransformacionInvalida();
-		}
+		if(!unidad.sePuedeTransformar())throw new TransformacionInvalida();
+        ((Transformer) unidad).transformar();
+
 	}
 
 	public void desplazarPosicionContigua(Unidad unidad, Posicion posicionSiguiente){
@@ -234,8 +230,9 @@ public class Tablero {
 	}
 	
 	public boolean sePuedeTransformar(Unidad u){
-		return u.sePuedeTransformar();
+		return u.sePuedeTransformar()&&(!u.cambiaDePlanoAlTransformase()||isEmpty(posicion(u).nuevaPosicionConDistintoPlano(u.planoPertenecienteSiguienteForma())));
 	}
+
 	private boolean puedeAtacar(Unidad atacante, Unidad atacado) {
 
 		LinkedList<Posicion> posicionesQueDeberianEstarVacias=this.contenedorUnidades.obtenerPosicion(atacante).posicionesQueTocaLaRectaQueVaA(this.contenedorUnidades.obtenerPosicion(atacado));
@@ -258,7 +255,7 @@ public class Tablero {
 	public void agarrado(Bonus b) {
 		// TODO Auto-generated method stub
 
-	}
+	} 
 
 	public void agregarSuperficie(Superficie sup, Posicion pos) {
 		contenedorSuperficies.agregarSuperficie(sup,pos);
