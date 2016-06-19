@@ -11,13 +11,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	@Override
-	public void start(Stage stage) {
+	FXMLLoader loader;
+	Parent root;
+	Scene scene;
+	
+	public void start(Stage stage, String name1, String name2) {
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Gameboard.fxml"));
+			loader = new FXMLLoader(getClass().getResource("Gameboard.fxml"));
+			root = loader.load();
+			
+			GameboardController controller = loader.getController();
+			controller.setPlayerNames(name1, name2);
+			controller.setUp();
 	    
-	        Scene scene = new Scene(root, 640, 400);
+	        scene = new Scene(root, 640, 400);
 	    
 	        stage.setTitle("Algoformers");
 	        stage.setScene(scene);
@@ -30,5 +38,11 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		System.out.println("Use the other method!!!");
+		
 	}
 }

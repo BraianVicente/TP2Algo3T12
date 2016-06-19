@@ -1,10 +1,10 @@
 package fiuba.algo3.vista.splash;
 
 import fiuba.algo3.vista.juego.Main;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class PlayController implements EventHandler<ActionEvent> {
 
@@ -18,7 +18,13 @@ public class PlayController implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent ev) {
-		Application.launch(Main.class, namePlayer1.getText(), namePlayer2.getText());
+		try {
+			Main.class.newInstance().start(new Stage(), namePlayer1.getText(), namePlayer2.getText());
+			Stage stage = (Stage) namePlayer1.getScene().getWindow();
+			stage.close();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

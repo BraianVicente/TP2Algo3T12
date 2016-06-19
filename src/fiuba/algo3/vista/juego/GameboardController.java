@@ -52,7 +52,10 @@ public class GameboardController {
     
     private Tablero tablero;
     private Juego juego;
-
+    
+    public String namePlayer1 = "";
+    public String namePlayer2 = "";
+    
     @FXML
     void initialize() {
         assert GamePane != null : "fx:id=\"GamePane\" was not injected: check your FXML file 'MainJuego.fxml'.";
@@ -65,10 +68,21 @@ public class GameboardController {
         
         finTurnoController ftc = new finTurnoController(finTurnoButton);
         finTurnoButton.setOnAction(ftc);
-        
-		tablero = new Tablero();
-		// TODO: Get player names
-		juego=new Juego(tablero,new Jugador("auto", new Autobots()),new Jugador("dece", new Decepticons()));
+		
+    }
+    
+    public void setJugandoImage(Equipo equipo) {
+    	//jugandoImage.setImage(new Image("fiuba/algo3/vista/imagenes/equipos/" + equipo.toString() + ".jpg"));
+    }
+    
+    public void setPlayerNames(String name1, String name2) {
+    	namePlayer1 = name1;
+    	namePlayer2 = name2;
+    }
+    
+    public void setUp() {    	
+    	tablero = new Tablero();
+		juego=new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
 		juego.agregarUnidad(new Posicion(8,8,Plano.TERRESTRE), new Optimusprime());
 		juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
 		
@@ -76,14 +90,10 @@ public class GameboardController {
 		
 		CanvasJuego cj = new CanvasJuego(juego);
 		cj.setModoVista(ModoVista.AMBAS);
+    	
+    	GamePane.getChildren().add(cj);
 		
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
 		vistaChoiceBox.setOnAction(cbc);
-		
-		GamePane.getChildren().add(cj);
-    }
-    
-    public void setJugandoImage(Equipo equipo) {
-    	//jugandoImage.setImage(new Image("fiuba/algo3/vista/imagenes/equipos/" + equipo.toString() + ".jpg"));
     }
 }
