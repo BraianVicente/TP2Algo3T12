@@ -41,8 +41,8 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage arg0) throws Exception {
-		System.out.println("Use the other method!!!");
+	public void start(Stage scene) throws Exception {
+		start(scene, "", "");
 		
 	}
 }
