@@ -54,8 +54,8 @@ public class GameboardController {
     private Tablero tablero;
     private Juego juego;
     
-    public String namePlayer1 = "";
-    public String namePlayer2 = "";
+    private String namePlayer1 = "";
+    private String namePlayer2 = "";
     
     @FXML
     void initialize() {
@@ -73,7 +73,6 @@ public class GameboardController {
     }
     
     public void setJugandoImage(Equipo equipo) {
-    	System.out.println(equipo.toString());
     	jugandoImage.setImage(new Image("fiuba/algo3/vista/imagenes/equipos/" + equipo.toString() + ".png"));
     }
     
