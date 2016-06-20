@@ -1,6 +1,8 @@
 package fiuba.algo3.controlador;
 
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CallbackCasillero;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
 
@@ -20,7 +22,12 @@ public class MoverController implements CallbackCasillero {
 		if (actual != null && cas.isEmpty()) {
 			anterior = actual;
 			actual = cas;
-			juego.moverUnidad(anterior.getPosicion(), actual.getPosicion());
+			
+			Unidad unit = anterior.getUnidad();
+			Posicion posActual = juego.obtenerPosicion(unit);
+			Posicion posNueva = new Posicion(actual.getPos().getX(), actual.getPos().getY(), unit.getPlanoPerteneciente());
+			
+			juego.moverUnidad(posActual, posNueva);
 		} else {
 			anterior = actual;
 			actual = cas;
