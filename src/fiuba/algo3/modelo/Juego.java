@@ -212,26 +212,37 @@ public class Juego {
     	return tablero.isEmpty(pos);
     }
     
+    private Unidad unidadReferenciada(Casillero c){
+    	if(c.getuAerea()!=null){
+    		return c.getuAerea();
+    	}else if(c.getuTerrestre()!=null){
+    		return c.getuTerrestre();
+    	}else{
+    		return null;
+    	}
+    }
+    
     public void clickeoCasillero(Casillero c,CanvasJuego canvas){
     	//acá estoy suponiendo que siempre que toás una unidad la querés seleccionar,
+    	Unidad referenciada = unidadReferenciada(c);
     	
-    	
-    	if(c.getuAerea()!=null){
-    		unidadSeleccionada = c.getuAerea();
-    	}else if(c.getuTerrestre()!=null){
-    		unidadSeleccionada = c.getuTerrestre();
+    	if(unidadSeleccionada == null){
+    		unidadSeleccionada =referenciada;
+    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
+        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
     	}else{
-    		unidadSeleccionada = null;
+    		//if(sePuedeAtacar...)atacar(...)
+    		//if(sePuedeMover...)mover(...)
+    		//if(sePuedeTransformar(...))transformar(...)
+    		//Estaría muy muy lindo una interfaz acción acá pero no hay T
+    		
+    		canvas.setHaloAtaque(null);
+        	canvas.setHaloMovimiento(null);
     	}
     	
-    	canvas.seleccionadorEn(c.getPos());
-    	//si acaba de seleccionar un bicho:
-    	canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
-    	canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
-    	//si acaba de deseleccionar un bicho:
-    	canvas.setHaloAtaque(null);
-    	canvas.setHaloMovimiento(null);
     	
+    	
+    	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego sólo sabe de dibujar cositas en la pantalla
     }
 }
