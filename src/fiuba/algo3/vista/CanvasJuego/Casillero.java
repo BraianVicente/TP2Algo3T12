@@ -54,4 +54,12 @@ public class Casillero {
 		return (getuTerrestre() == null && getuAerea() == null);
 	}
 	
+	public Unidad getUnidad() {
+		if (isEmpty()); // Do something here;
+		if (getuTerrestre() != null)
+			return getuTerrestre();
+		else
+			return getuAerea();
+	}
+	
 }

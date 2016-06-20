@@ -28,7 +28,7 @@ public abstract class Transformer extends Unidad {
     }
     
 	public void transformar(){
-			if(seTransformoEnEsteTurno) throw new TransformacionInvalida();
+			//if(seTransformoEnEsteTurno) throw new TransformacionInvalida();
 			forma = forma.getAlternativa();
 			seTransformoEnEsteTurno=true;
 		//sin embargo, creo q esta bueno que queden los getVehiculo() getHumanoide() por las dudas
@@ -38,7 +38,8 @@ public abstract class Transformer extends Unidad {
 	
     @Override
     public boolean sePuedeTransformar(){
-    	return !this.seTransformoEnEsteTurno;
+    	//return !this.seTransformoEnEsteTurno;
+    	return true;
     }
     
     @Override

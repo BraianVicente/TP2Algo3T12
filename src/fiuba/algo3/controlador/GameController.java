@@ -1,5 +1,7 @@
 package fiuba.algo3.controlador;
 
+import java.util.Iterator;
+
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.unidades.Unidad;
@@ -18,8 +20,8 @@ public class GameController {
 	}
 	
 	public void transformarUnidad() {
-		Posicion pos = manager.getPosicion();
-		Unidad unit = juego.obtenerUnidad(pos);
+		Unidad unit = manager.getUnidad();
+		Posicion pos = juego.obtenerPosicion(unit);
 		if (unit.sePuedeTransformar())
 			juego.transformarUnidad(pos);
 		cj.actualizar();
@@ -27,6 +29,7 @@ public class GameController {
 	
 	public void combinarUnidades() {
 		juego.combinarUnidades();
+		cj.actualizar();
 	}
 	
 }
