@@ -1,7 +1,7 @@
 package fiuba.algo3.vista.juego;
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.Random;
 import java.util.ResourceBundle;
 import fiuba.algo3.vista.statsPane.StatsPane ;
@@ -17,7 +17,7 @@ import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
+
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
@@ -25,7 +25,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
-import fiuba.algo3.vista.CanvasJuego.ModoVista;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -140,7 +140,7 @@ public class GameboardController {
     public void setUp() {    	
     	tablero = new Tablero(6, 6);
     	
-		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
+		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots(),tablero),new Jugador(namePlayer2, new Decepticons(),tablero));
 		setUpUnits(juego);
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());

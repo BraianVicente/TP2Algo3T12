@@ -13,6 +13,7 @@ import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
@@ -245,4 +246,31 @@ public class Juego {
     	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
     }
+    
+
+	public Casillero construirCasillero(Posicion pos) {
+
+		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
+		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
+		
+		//ningun try, si no hay superficie estamos fritos
+		Superficie supTerrestre = this.obtenerSuperficie(terrestre);
+		Superficie supAerea = this.obtenerSuperficie(aerea);
+		
+		Unidad uTerrestre;
+		try{
+			uTerrestre = this.obtenerUnidad(terrestre);
+		}catch(PosicionLibreException e){
+			uTerrestre=null;
+		}
+		
+		Unidad uAerea;
+		try{
+			uAerea = this.obtenerUnidad(aerea);
+		}catch(PosicionLibreException e){
+			uAerea=null;
+		}
+		
+		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+	}
 }

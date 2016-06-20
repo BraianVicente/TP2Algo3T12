@@ -120,28 +120,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	//------------------------INPUT----------------------------------------------//
 	public Casillero construirCasillero(Posicion pos){
-		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
-		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
-		
-		//ningun try, si no hay superficie estamos fritos
-		Superficie supTerrestre = juego.obtenerSuperficie(terrestre);
-		Superficie supAerea = juego.obtenerSuperficie(aerea);
-		
-		Unidad uTerrestre;
-		try{
-			uTerrestre = juego.obtenerUnidad(terrestre);
-		}catch(PosicionLibreException e){
-			uTerrestre=null;
-		}
-		
-		Unidad uAerea;
-		try{
-			uAerea = juego.obtenerUnidad(aerea);
-		}catch(PosicionLibreException e){
-			uAerea=null;
-		}
-		
-		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+		return juego.construirCasillero(pos);
 
 	}
 
