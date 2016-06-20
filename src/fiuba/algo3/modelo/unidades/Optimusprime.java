@@ -10,10 +10,10 @@ import fiuba.algo3.modelo.formas.Peterbilt;
 public class Optimusprime extends Transformer {
 
     public Optimusprime(DeathListener command) {
-        super(null, new Autobots(), command);
+        super(new Peterbilt(), new Autobots(), command);
     }
     public Optimusprime() {
-        super(null, new Autobots(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
     }
 
     @Override

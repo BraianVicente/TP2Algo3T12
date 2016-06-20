@@ -29,7 +29,7 @@ public class MentiTron extends MentiUnidad {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 15;
 	}
 
@@ -38,5 +38,9 @@ public class MentiTron extends MentiUnidad {
 		return 2;
 	}
 
+        @Override
+    public String nombre() {
+        return this.toString();
+    }
 
 }

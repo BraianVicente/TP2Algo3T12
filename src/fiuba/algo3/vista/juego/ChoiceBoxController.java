@@ -20,7 +20,7 @@ public class ChoiceBoxController implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent ev) {
 		if (vista.getValue().equals("Tierra")) {
 			cj.setModoVista(ModoVista.SOLOTIERRA);
-		} else if (vista.getValue().equals("Aire")) {
+		} else if (vista.getValue().equals("Cielo")) {
 			cj.setModoVista(ModoVista.SOLOAIRE);
 		} else if (vista.getValue().equals("Ambas")) {
 			cj.setModoVista(ModoVista.AMBAS);

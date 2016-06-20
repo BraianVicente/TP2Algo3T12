@@ -13,7 +13,7 @@ public class Bonecrusher extends Transformer {
         super(new Blindado(), new Decepticons(), command);
     }
 	public Bonecrusher() {
-        super(new Blindado(), new Decepticons(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
     }
 
     @Override

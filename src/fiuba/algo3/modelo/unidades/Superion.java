@@ -17,7 +17,7 @@ public class Superion extends UnidadCombinable {
 	}
 	
 	public Superion() {
-		super(new Autobots(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
 	}
 	
 	public Superion(Transformer a, Transformer b, Transformer c) {

@@ -37,8 +37,8 @@ public class Main extends Application {
 			root = loader.load();
 			
 			StatsPane controller = loader.getController();
-            controller.setUp();
-            scene = new Scene(root, 130, 370);
+            controller.setUpPreview();
+            scene = new Scene(root, 131, 371);
 	    
 	        stage.setTitle("StatsPane");
 	        stage.setScene(scene);

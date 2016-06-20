@@ -29,6 +29,8 @@ public class Main extends Application {
 	    
 	        stage.setTitle("Algoformers");
 	        stage.setScene(scene);
+	        stage.centerOnScreen();
+	        stage.setResizable(false);
 	        stage.show();
 	        
 		} catch (IOException e) {
@@ -42,6 +44,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage scene) throws Exception {
+		//Only for debugging porpuses, should use the method above...
 		start(scene, "", "");
 		
 	}

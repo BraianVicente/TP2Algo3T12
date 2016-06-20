@@ -61,7 +61,8 @@ public class SuperficieTest {
         sup.afectarA(bee);
         bee.avanzarTurno();
         bee.transformar();
-        Assert.assertTrue(bee.getPuntosAtaque()==0.4f*puntosAtaqueOriginal);
+        Assert.assertEquals(puntosAtaqueOriginal, (float) bee.getPuntosAtaque(), 0.5f);
+
     }
 	
 	@Test

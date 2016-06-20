@@ -48,6 +48,9 @@ import javafx.scene.text.Text;
 
 
 public class CanvasJuego extends Canvas implements Actualizable{
+	
+	
+	
 	private MueveVista mueveVista;
 	private Image seleccionador;
 	private Image seleccionadorObjetivo;
@@ -68,18 +71,18 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private Timer timer;
 	
 	public CanvasJuego(Juego juego){
-		super(340, 371);
+		super(360, 371);
 		
 		this.juego=juego;
 		
-		mueveVista = new MueveVista(340, 371);
+		mueveVista = new MueveVista(360, 371);
 		this.addEventHandler(MouseEvent.MOUSE_MOVED, e->mueveVista.movido(e));
 		this.addEventHandler(MouseEvent.MOUSE_CLICKED, e->mueveVista.clickeado(e));
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
@@ -88,9 +91,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
 		
+		/*
 		timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
-	
+		*/
+		
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		hovereador = new Image("/fiuba/algo3/vista/CanvasJuego/hovereador.png");
@@ -103,6 +108,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		mueveVista.agregarCallbackClickeo(p->clickea(p));
 		mueveVista.agregarCallbackHover(p->hoverea(p));
+		
+		actualizar();
 	}
 	
 	//--------------------MANEJO DE CONCURRENCIA/LIMPIEZA----------------------//
@@ -147,10 +154,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				calls.execute(construido);
 			}
 		}
+		actualizar();
 	}
 	
 	private void hoverea(Posicion p){
-		
 		//Posicion p = mueveVista.obtenerPosicion(e);
 		if(juego.enTablero(p)){
 			Casillero construido = construirCasillero(p);
@@ -158,6 +165,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				calls.execute(construido);
 			}
 		}
+		actualizar();
 		synchronized(hovereando){
 			hovereando = new PosicionEnElPlano(p.getX(),p.getY());
 		}
@@ -183,6 +191,9 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	//------------------------DIBUJADO----------------------------------------------//
 
 	public void actualizar(){
+		
+		//System.out.println("Still updating!");
+		
 		double xv = mueveVista.getX();
 		double yv = mueveVista.getY();
 		double escala = mueveVista.getEscala();
@@ -201,10 +212,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
+			dibujarUnidades(gc,Plano.TERRESTRE);
 		}
 		
 		//las unidades terrestres
-		dibujarUnidades(gc,false);
 		
 		//el cielo
 		if(modoVista==ModoVista.AMBAS){
@@ -213,8 +224,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,1);
 		}
 		
-		//las unidades aereas
-		dibujarUnidades(gc,true);
+		//las unidades aerea
+		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE)dibujarUnidades(gc,Plano.AEREO);
 		
 		
 		//el cuadrado seleccionado
@@ -253,20 +264,48 @@ public class CanvasJuego extends Canvas implements Actualizable{
 					mueveVista.altoCasillero());
 			
 		}
-		
 		//el cartelito
 		String accion = juego.accionPosibleEn(hovereando);
-		Bounds bounds = (new Text(accion)).getLayoutBounds();
-		double offsetX=20;
-		double offsetY=20;
-		gc.save();
-		gc.setFill(Color.BEIGE);
-		gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
-		gc.setFill(Color.BLACK);
-		gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
-		gc.restore();
+		if(accion!=""){
+			Bounds bounds = (new Text(accion)).getLayoutBounds();
+			double offsetX=20;
+			double offsetY=20;
+			gc.save();
+			gc.setFill(Color.BEIGE);
+			gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
+			gc.setFill(Color.BLACK);
+			gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
+			gc.restore();
+		}
 		
+		//el halo de ataque
+		if(haloAtaque!=null){
+			gc.save();
+			gc.setFill(Color.RED);
+			gc.setGlobalAlpha(0.3);
+			for(PosicionEnElPlano p : haloAtaque){
+				gc.fillRect(mueveVista.xPantalla(p),
+							mueveVista.yPantalla(p),
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			}
+			gc.restore();
+		}
+		//el halo de movimiento
+		if(haloMovimiento!=null){
+			gc.save();
+			gc.setFill(Color.YELLOW);
+			gc.setGlobalAlpha(0.3);
+			for(PosicionEnElPlano p : haloMovimiento){
+				gc.fillRect(mueveVista.xPantalla(p),
+							mueveVista.yPantalla(p),
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			}
+			gc.restore();
+		}
 	}
+
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
 		gc.save();
 		gc.setGlobalAlpha(opacidad);
@@ -296,10 +335,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		gc.restore();
 	}
 	
-	private void dibujarUnidades(GraphicsContext gc, boolean aereas){
+	private void dibujarUnidades(GraphicsContext gc, Plano plano){
 		for(Unidad u: juego.obtenerUnidades()){
 			Posicion p = juego.posicion(u);
-			if(u.esAerea() == aereas){
+			if(u.getPlanoPerteneciente() == plano){
 				try{
 					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
 					gc.drawImage(imgU,
@@ -327,6 +366,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private PosicionEnElPlano seleccionada;
 	public void seleccionadorEn(PosicionEnElPlano pos){
 		seleccionada = (PosicionEnElPlano) pos.clone();
+
 	}
 	public void seleccionadorEn(Posicion pos){
 		seleccionada = new PosicionEnElPlano(pos.getX(),pos.getY());
@@ -346,6 +386,19 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	public void setModoVista(ModoVista modoVista) {
 		this.modoVista = modoVista;
+		actualizar();
+	}
+	
+	//-----------------------------------mostrar halos de ataque/movimiento------//
+	private ArrayList<PosicionEnElPlano> haloAtaque;
+	private ArrayList<PosicionEnElPlano> haloMovimiento;
+	
+	public void setHaloAtaque(ArrayList<PosicionEnElPlano> haloAtaque){
+		this.haloAtaque = haloAtaque;
+	}
+	
+	public void setHaloMovimiento(ArrayList<PosicionEnElPlano> haloMovimiento){
+		this.haloMovimiento = haloMovimiento;
 	}
 	
 }

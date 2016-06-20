@@ -10,9 +10,14 @@ import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
+import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
+import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
 import fiuba.algo3.modelo.unidades.Bumblebee;
+import fiuba.algo3.modelo.unidades.Optimusprime;
+import fiuba.algo3.modelo.unidades.Ratchet;
+import fiuba.algo3.modelo.unidades.Superion;
 import fiuba.algo3.modelo.unidades.Unidad;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
@@ -40,6 +45,10 @@ public class StatsPane {
     @FXML
     private TextField ataqueUnidad ;
 
+    @FXML
+    
+    private TextField tieneChispa ;
+    
     @FXML
     private ImageView terrestreView ;
 
@@ -73,6 +82,7 @@ public class StatsPane {
         this.vidaUnidad(u);
         this.unidadNombre(u);
         this.ataqueUnidad(u);
+        this.tieneChispa(u);
     }
     
     public void setUnidadSeleccionada(Posicion p){
@@ -89,17 +99,15 @@ public class StatsPane {
     public void setSuperficieAerea(Superficie s){
         this.aereoView(s);
         this.aereoEfectos(s);
-
     }
     
-    
-    public void setUp(){
+    public void setUpPreview(){
 
-        Unidad u = new Bumblebee() ;
+        Unidad u = new Superion(new Optimusprime(),new Ratchet(),new Bumblebee()) ;
         this.setUnidadSeleccionada(u);
-        Superficie t = new Rocosa();
+        Superficie t = new Pantano();
         this.setSuperficieTerrestre(t);
-        Superficie a = new Nubes();
+        Superficie a = new TormentaPsionica();
         this.setSuperficieAerea(a);
         
 	}
@@ -137,11 +145,14 @@ public class StatsPane {
     private void aereoEfectos(Superficie s) {
         this.aereoEfectos.setText(s.efecto());
     }
-    
-    
 
     
+    private void tieneChispa(Unidad u) {
+        if(u.tieneChispa()){
+            this.tieneChispa.setText("Si");
+        }
+        this.tieneChispa.setText("No");
+        
+    }
     
-
-
 }

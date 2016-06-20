@@ -15,7 +15,7 @@ public class Menasor extends UnidadCombinable {
 	}
 	
 	public Menasor() {
-		super(new Decepticons(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
 	}
 	
 	public Menasor(Transformer a, Transformer b, Transformer c) {

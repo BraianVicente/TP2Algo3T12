@@ -107,9 +107,7 @@ public class Tablero {
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
     		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
     		this.desplazarPosicionContigua(unidad, posicionSiguiente);
-    		if (this.tieneChispa(posicionSiguiente)) {
-             unidad.darChispa();
-    		}
+    		if (this.tieneChispa(posicionSiguiente))       unidad.darChispa();
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
     	
@@ -217,6 +215,7 @@ public class Tablero {
 	}
 	
 	public boolean puedeAtacar(Unidad atacante, Posicion atacado){
+		if(isEmpty(atacado))return false;
 		Unidad objetivo=obtenerUnidad(atacado);
 		return puedeAtacar(atacante, objetivo)&&!atacante.esDelMismoEquipo(objetivo);
 	}

@@ -31,7 +31,7 @@ public class Posicion {
     }
 
     public Posicion(PosicionEnElPlano posicionEnElPlano, Plano plano) {
-		this.posicionEnElPlano=posicionEnElPlano.clone();
+		this.posicionEnElPlano=posicionEnElPlano;
     	this.plano=plano;
 	}
 	@Override
@@ -164,5 +164,8 @@ public class Posicion {
 		}
 		posiciones.add(posicionFinal);
 		return posiciones;
+	}
+	public PosicionEnElPlano obtenerPosicionEnElPlano() {
+		return this.posicionEnElPlano.clone();
 	}
 }

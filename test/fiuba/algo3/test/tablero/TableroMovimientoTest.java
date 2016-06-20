@@ -73,4 +73,21 @@ public class TableroMovimientoTest {
 		tab.mover(bum, pos.obtenerMismaPosicionDesplazada(1, 0));
 		
 	}
+    
+    @Test
+    public void test07MoverUnidadDesplazaChispa(){
+        Tablero tab = new Tablero();
+		Posicion pos = new Posicion(4,4);
+		Ratchet bum = new Ratchet();
+        bum.transformar();
+        tab.agregarUnidad(pos,bum);
+        tab.colocarChispa();
+        tab.colocarMontePerdicion(new Posicion(6,6));
+        tab.mover(bum, new Posicion(5,5));
+        tab.pasarTurnoEquipo(bum.equipo());
+        tab.mover(bum, new Posicion(6,6));
+        Assert.assertTrue(tab.unidadesContieneChispa(bum.equipo()));
+        Assert.assertEquals(tab.getPosicionChispa(),tab.posicion(bum));
+        
+    }
 }

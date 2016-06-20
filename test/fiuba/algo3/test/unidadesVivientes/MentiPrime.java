@@ -30,7 +30,7 @@ public class MentiPrime extends MentiUnidad {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 10;
 	}
 
@@ -112,4 +112,9 @@ public class MentiPrime extends MentiUnidad {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+    @Override
+    public String nombre() {
+        return this.toString();
+    }
 }
