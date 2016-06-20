@@ -15,17 +15,15 @@ public class ClickedUnitManager implements CallbackCasillero {
 	}
 	
 	public Unidad getUnidadTerrestre() {
-		if (casillero.getuTerrestre() != null)
-			return casillero.getuTerrestre();
-		else
-			return getUnidadAerea();
+		return casillero.getuTerrestre();
 	}
 	
 	public Unidad getUnidadAerea() {
-		if (casillero.getuAerea() != null)
-			return casillero.getuAerea();
-		else
-			return getUnidadTerrestre();
+		return casillero.getuAerea();
+	}
+	
+	public Unidad getUnidad() {
+		return casillero.getUnidad();
 	}
 	
 	public Posicion getPosicion() {
