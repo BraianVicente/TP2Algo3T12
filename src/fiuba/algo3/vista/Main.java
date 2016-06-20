@@ -1,32 +1,6 @@
 package fiuba.algo3.vista;
 
-	
-import java.io.IOException;
 
-import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
-import fiuba.algo3.modelo.Juego;
-import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.equipos.Decepticons;
-import fiuba.algo3.modelo.jugador.Jugador;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Tablero;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.unidades.Bumblebee;
-import fiuba.algo3.modelo.unidades.Megatron;
-import fiuba.algo3.modelo.unidades.Optimusprime;
-import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main /*extends Application*/ {
