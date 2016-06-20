@@ -26,9 +26,10 @@ public class AtacarController implements CallbackCasillero {
 	
 	@Override
 	public void execute(Casillero cas) {
-		if(atacante!=null)  {
+		if(atacante!=null&&atacante.getVida()>0)  {
 		Unidad objetivo=obtenerUnidadObjetivo(cas);
-		if(juego.puedeAtacar(atacante,juego.obtenerPosicion(objetivo))
+		if(objetivo!=null&&
+				juego.puedeAtacar(atacante,juego.obtenerPosicion(objetivo))
 				&&atacante.es(juego.jugadorEnTurno().getEquipo()))
 			juego.atacarUnidad(juego.obtenerPosicion(atacante), juego.obtenerPosicion(objetivo));
 		else atacante=cas.getUnidad();
@@ -37,7 +38,8 @@ public class AtacarController implements CallbackCasillero {
 		}
 	}
 	private Unidad obtenerUnidadObjetivo(Casillero cas) {
-		if(cj.getModoVista()!=ModoVista.SOLOAIRE) return cas.getuTerrestre();
-		else return cas.getuAerea();	
+		if(cj.getModoVista()!=ModoVista.SOLOAIRE&&cas.getuTerrestre()!=null) return cas.getuTerrestre();
+		if(cj.getModoVista()==ModoVista.SOLOAIRE) return cas.getuAerea();
+		return null;
 	}
 }
