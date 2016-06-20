@@ -27,6 +27,7 @@ public class GameController {
 	
 	public void combinarUnidades() {
 		juego.combinarUnidades();
+		cj.actualizar();
 	}
 	
 }
