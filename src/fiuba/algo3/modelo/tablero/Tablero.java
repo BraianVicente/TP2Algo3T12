@@ -151,7 +151,9 @@ public class Tablero {
 	}
 
     public void combinarUnidades(Equipo equipo){
-        equipo.crearCombinacion() ;
+        //equipo.crearCombinacion() ;
+    	combinarUnidadesEquipo(equipo);
+        
     }
     
 	public void combinar(Posicion a, Posicion b, Posicion c) {
