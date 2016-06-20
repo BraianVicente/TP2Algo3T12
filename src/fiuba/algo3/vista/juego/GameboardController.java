@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import fiuba.algo3.controlador.ClickedUnitManager;
+import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
 import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
@@ -128,6 +129,9 @@ public class GameboardController {
         
         TransformarController tc = new TransformarController(controller);
         transformarButton.setOnAction(tc);
+        
+        CombinarController cc = new CombinarController(controller);
+        combinarButton.setOnAction(cc);
     }
     
     public void hovereoCasillero(Casillero c){
