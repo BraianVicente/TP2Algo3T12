@@ -189,4 +189,8 @@ public class Juego {
     public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal){
     	return tablero.sePuedeMover(unidad, posicionFinal);
     }
+    
+    public boolean posicionVacia(Posicion pos) {
+    	return tablero.isEmpty(pos);
+    }
 }

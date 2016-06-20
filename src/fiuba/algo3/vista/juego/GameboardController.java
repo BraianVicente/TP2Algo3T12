@@ -1,6 +1,8 @@
 package fiuba.algo3.vista.juego;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import fiuba.algo3.modelo.Juego;
@@ -11,8 +13,7 @@ import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.Tablero;
-import fiuba.algo3.modelo.unidades.Megatron;
-import fiuba.algo3.modelo.unidades.Optimusprime;
+import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.ModoVista;
 import javafx.fxml.FXML;
@@ -57,6 +58,16 @@ public class GameboardController {
     private String namePlayer1 = "";
     private String namePlayer2 = "";
     
+    Unidad[] unitList = {
+    		new Optimusprime(),
+    		new Bumblebee(),
+    		new Ratchet(),
+    		
+    		new Megatron(),
+    		new Bonecrusher(),
+    		new Frenzy()
+    };
+    
     @FXML
     void initialize() {
         assert GamePane != null : "fx:id=\"GamePane\" was not injected: check your FXML file 'MainJuego.fxml'.";
@@ -80,9 +91,13 @@ public class GameboardController {
     
     public void setUp() {    	
     	tablero = new Tablero(6, 6);
+    	
 		juego=new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
-		juego.agregarUnidad(new Posicion(2,2,Plano.TERRESTRE), new Optimusprime());
-		juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
+		
+		//juego.agregarUnidad(new Posicion(2,2,Plano.TERRESTRE), new Optimusprime());
+		//juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
+		
+		setUpUnits(juego);
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
@@ -95,5 +110,18 @@ public class GameboardController {
 		
 		finTurnoController ftc = new finTurnoController(juego, this);
         finTurnoButton.setOnAction(ftc);
+    }
+    
+    public void setUpUnits(Juego juego) {
+    	Random generator = new Random();
+    	Posicion pos = null;
+    	
+    	for (Unidad unit: unitList) {
+    		while ((pos == null) || (!juego.posicionVacia(pos)))
+    			pos = new Posicion(generator.nextInt(6), generator.nextInt(6), unit.getPlanoPerteneciente());
+    		juego.agregarUnidad(pos, unit);
+    	}
+    	
+    	unitList = null;
     }
 }
