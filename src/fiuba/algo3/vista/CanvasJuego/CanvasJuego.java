@@ -78,8 +78,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
-		//this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
+		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
