@@ -20,9 +20,8 @@ public class GameController {
 	}
 	
 	public void transformarUnidad() {
-		Unidad unit = manager.getUnidadTerrestre(); // Fallback: returns UnidadAerea
+		Unidad unit = manager.getUnidad();
 		Posicion pos = juego.obtenerPosicion(unit);
-		System.out.println(pos.getPlano().toString());
 		if (unit.sePuedeTransformar())
 			juego.transformarUnidad(pos);
 		cj.actualizar();
