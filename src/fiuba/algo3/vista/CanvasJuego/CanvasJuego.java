@@ -78,7 +78,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
-		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
+		//this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
 		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
@@ -88,9 +88,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	
 		this.setOnKeyPressed(teclaEventHandler);
 		
+		/*
 		timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
-	
+		*/
+		
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		hovereador = new Image("/fiuba/algo3/vista/CanvasJuego/hovereador.png");
@@ -103,6 +105,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		mueveVista.agregarCallbackClickeo(p->clickea(p));
 		mueveVista.agregarCallbackHover(p->hoverea(p));
+		
+		actualizar();
 	}
 	
 	//--------------------MANEJO DE CONCURRENCIA/LIMPIEZA----------------------//
@@ -147,6 +151,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				calls.execute(construido);
 			}
 		}
+		actualizar();
 	}
 	
 	private void hoverea(Posicion p){
@@ -157,6 +162,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				calls.execute(construido);
 			}
 		}
+		actualizar();
 		synchronized(hovereando){
 			hovereando = new PosicionEnElPlano(p.getX(),p.getY());
 		}
@@ -360,6 +366,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	public void setModoVista(ModoVista modoVista) {
 		this.modoVista = modoVista;
+		actualizar();
 	}
 	
 }

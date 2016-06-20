@@ -44,6 +44,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage scene) throws Exception {
+		//Only for debugging porpuses, should use the method above...
 		start(scene, "", "");
 		
 	}
