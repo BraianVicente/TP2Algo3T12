@@ -46,4 +46,8 @@ public class Casillero {
 		return pos;
 	}
 	
+	public Posicion getPosicion() {
+		return (new Posicion(pos.getX(), pos.getY()));
+	}
+	
 }

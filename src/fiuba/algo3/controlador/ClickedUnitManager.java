@@ -29,6 +29,6 @@ public class ClickedUnitManager implements CallbackCasillero {
 	}
 	
 	public Posicion getPosicion() {
-		return new Posicion(casillero.getPos().getX(), casillero.getPos().getY());
+		return casillero.getPosicion();
 	}
 }

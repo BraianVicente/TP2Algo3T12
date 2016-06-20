@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import fiuba.algo3.controlador.ClickedUnitManager;
 import fiuba.algo3.controlador.GameController;
+import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
@@ -64,6 +65,7 @@ public class GameboardController {
     
     private GameController controller;
     private ClickedUnitManager manager;
+    MoverController mover;
     
     Unidad[] unitList = {
     		new Optimusprime(),
@@ -99,21 +101,19 @@ public class GameboardController {
     public void setUp() {    	
     	tablero = new Tablero(6, 6);
     	
-		juego=new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
-		
-		//juego.agregarUnidad(new Posicion(2,2,Plano.TERRESTRE), new Optimusprime());
-		//juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
-		
+		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
 		setUpUnits(juego);
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
-		manager = new ClickedUnitManager();
-		controller = new GameController(juego, manager);
-		
 		CanvasJuego cj = new CanvasJuego(juego);
 		
+		manager = new ClickedUnitManager();
+		controller = new GameController(juego, manager, cj);
+		mover = new MoverController(juego);
+		
 		cj.agregarCallbackClickeo(manager);
+		cj.agregarCallbackClickeo(mover);
     	
     	GamePane.getChildren().add(cj);
     	
@@ -131,7 +131,7 @@ public class GameboardController {
     }
     
     public void hovereoCasillero(Casillero c){
-    	// TODO acá le mandás las cosas a Braian
+    	// TODO acï¿½ le mandï¿½s las cosas a Braian
     }
     
     
