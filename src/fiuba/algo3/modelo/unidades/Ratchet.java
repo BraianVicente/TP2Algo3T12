@@ -10,11 +10,11 @@ import fiuba.algo3.modelo.formas.HumanoideRatchet;
 public class Ratchet extends Transformer {
 
     public Ratchet(DeathListener command) {
-        super(new Autobots(), command);
+        super(null, new Autobots(), command);
     }
     
     public Ratchet() {
-        super(new Autobots(), new IgnorarMuerte());
+        super(null, new Autobots(), new IgnorarMuerte());
     }
 
     @Override

@@ -24,7 +24,6 @@ import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +35,10 @@ public class Tablero {
 	private ContenedorUnidades contenedorUnidades;
 	private ContenedorBonuses contenedorBonuses;
 	private int ancho, alto;
-    private WinListener commandWin;
+    private WinListener strategiWin;
+    private Posicion posicionMontePerdicion;
+	private Posicion posicionChispa;
+    private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 	
 	public int obtenerAncho(){
 		return ancho;
@@ -46,14 +48,6 @@ public class Tablero {
 		return alto;
 	}
 	
-	public Superficie obtenerSuperficieEn(Posicion pos){
-		return contenedorSuperficies.obtenerSuperficie(pos);
-	}
-
-	private Posicion posicionChispa;
-
-    private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
-
     public void configurarSuperficie(Posicion pos, Superficie cual){
     	contenedorSuperficies.agregarSuperficie(cual, pos);
     }
@@ -75,26 +69,21 @@ public class Tablero {
         	}
         }
         this.colocarChispa();
-        this.commandWin = new SinVictoria();
+        this.strategiWin = new SinVictoria();
+        this.colocarMontePerdicion();
     }
 
         
     //Preparando cambios para agregar los escenarios distintos en el juego ;
-    //
     public Tablero(Escenario e){
         this(e.getAnchoEscenario(),e.getLargoEscenario());
-        Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
-        Integer posX,posY ;
-        for(Integer i = 0; i < limite;i ++ ){
-            posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
-            posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
-            this.agregarSuperficie(e.agregarSuperficiesAleatoria(posX, posY), new Posicion(posX,posY));
-        }
+        this.agregarSuperficiesAereas(e) ;
+        this.agregarSuperficiesTerrestres(e) ;
     }
-    
-    public Tablero(Escenario escenario,WinListener commandWin){
+
+    public Tablero(Escenario escenario,WinListener condicionVictoria){
         this(escenario);
-        this.commandWin = commandWin;
+        this.strategiWin = condicionVictoria;
     }
     
     public Tablero(){
@@ -126,8 +115,11 @@ public class Tablero {
     	
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
     	}
+        if (unidad.tieneChispa()){
+            this.posicionChispa = posicionActual;
+        }
 
-        this.commandWin.gano(unidad.equipo());
+        this.strategiWin.gano(unidad.equipo());
     }
 
 	private Posicion obtenerPosicionADondeMoverse(Unidad unidad, Posicion posicionFin) {
@@ -211,7 +203,7 @@ public class Tablero {
 	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
-        this.commandWin.perdio(u.equipo());
+        this.strategiWin.perdio(u.equipo());
 
 	}
 
@@ -262,7 +254,7 @@ public class Tablero {
 	}
 
 
-    public void combinarUnidadesEquipo(Equipo equipo) {
+    private void combinarUnidadesEquipo(Equipo equipo) {
         ArrayList<Posicion> unidadesEquipo  = this.obtenerPosicionesUnidadesVivasEquipo(equipo) ;
         if (unidadesEquipo.size() == 3 ){
             combinar(unidadesEquipo.get(0), unidadesEquipo.get(1),unidadesEquipo.get(2));
@@ -328,7 +320,6 @@ public class Tablero {
     }
     
     public void colocarChispa() {
-        
         this.agregarChispa(new Posicion(this.alto/2,this.ancho/2));
     }
 
@@ -363,5 +354,45 @@ public class Tablero {
 		
 		
 	}
+
+    public Posicion getPosicionChispa() {
+        return this.posicionChispa ;
+    }
+
+    public Posicion getPosicionMontePerdicion() {
+        return this.posicionMontePerdicion ;
+    }
+    
+    private void agregarSuperficiesAereas(Escenario e) {
+        Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
+        Integer posX,posY ;
+        for(Integer i = 0; i < limite/2;i ++ ){
+            posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
+            posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
+            this.agregarSuperficie(e.agregarSuperficieAereaAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
+        }
+    }
+
+    private void agregarSuperficiesTerrestres(Escenario e) {
+        Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
+        Integer posX,posY ;
+        for(Integer i = 0; i < limite/2;i ++ ){
+            posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
+            posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
+            this.agregarSuperficie(e.agregarSuperficieAereaAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
+            this.agregarSuperficie(e.agregarSuperficieTerrestreAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
+        }
+    }
+
+    private void colocarMontePerdicion() {
+        int posX = (int)(Math.random()*(ancho+1)); //random
+        int posY = (int)(Math.random()*(alto+1)); //random
+        this.posicionMontePerdicion = new Posicion(posX,posY);
+        
+    }
+
+    public void colocarMontePerdicion(Posicion posicion) {
+        this.posicionMontePerdicion = posicion ;
+    }
 
 }

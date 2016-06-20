@@ -32,5 +32,10 @@ public class HumanoideSuperion extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/Superion.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Superion";
+    }
+
 	
 }

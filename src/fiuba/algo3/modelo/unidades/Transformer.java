@@ -16,15 +16,16 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 
 public abstract class Transformer extends Unidad {
-	Forma forma;
+	private Forma forma;
 	boolean seTransformoEnEsteTurno;
 	
-	Transformer(Equipo equipo,DeathListener command){
+	Transformer(Forma f, Equipo equipo, DeathListener command){
 		super(equipo,command);
-		forma = getVehiculo();
 		movimientosUsados=0;
 		seTransformoEnEsteTurno=false;
-	}
+		this.forma = f;
+
+    }
     
 	public void transformar(){
 			if(seTransformoEnEsteTurno) throw new TransformacionInvalida();
@@ -82,9 +83,11 @@ public abstract class Transformer extends Unidad {
 	}
 
     
+    @Override
     public boolean esTerrestre(){
     	return forma.esTerrestre();
     }
+    @Override
     public boolean esAerea(){
     	return forma.esAerea();
     }
@@ -129,9 +132,15 @@ public abstract class Transformer extends Unidad {
 		return		forma.obtenerCoeficienteVelocidad(superficie);
 	}	
 	//------------------------------dibujo---------------------------------//
+    @Override
 	public String nombreImagen(){
 		return forma.nombreImagen();
 	}
 	
+    @Override
+    public String nombre(){
+        String n = forma.nombre() ;
+        return n;
+    }
 
 }

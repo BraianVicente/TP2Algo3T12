@@ -27,5 +27,10 @@ public class Camaro extends FormaTerrestre {
 		return "fiuba/algo3/vista/imagenes/transformers/BumblebeeVehiculo.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Camaro";
+    }
+
 
 }

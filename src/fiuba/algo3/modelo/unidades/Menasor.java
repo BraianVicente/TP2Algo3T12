@@ -45,7 +45,7 @@ public class Menasor extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 115;
 	}
 
@@ -68,4 +68,9 @@ public class Menasor extends UnidadCombinable {
 	public String nombreImagen() {
 		return "fiuba/algo3/vista/imagenes/transformers/Menasor.png";
 	}
+
+    @Override
+    public String nombre() {
+        return this.toString();
+    }
 }

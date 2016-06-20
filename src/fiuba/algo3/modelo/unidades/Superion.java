@@ -47,7 +47,7 @@ public class Superion extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 100;
 	}
 
@@ -70,6 +70,11 @@ public class Superion extends UnidadCombinable {
 	public String nombreImagen() {
 		return "fiuba/algo3/vista/imagenes/transformers/Superion.png";
 	}
+
+    @Override
+    public String nombre() {
+        return this.toString();
+    }
 
     
 }

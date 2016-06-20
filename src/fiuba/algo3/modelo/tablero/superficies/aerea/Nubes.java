@@ -28,4 +28,9 @@ public class Nubes extends Superficie {
 		return "/fiuba/algo3/vista/imagenes/cielo/nube.png";
 	}
 
+    @Override
+    public String efecto() {
+        return "Nubes: aqui cualquier unidad podra pasar sin ser afectada";
+    }
+
 }

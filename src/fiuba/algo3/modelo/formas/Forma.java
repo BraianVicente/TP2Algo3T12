@@ -47,4 +47,7 @@ public abstract class Forma {
 		if(esTerrestre())return Plano.TERRESTRE;
 		return null;
 	}
+
+    public abstract String nombre() ;
+    
 }

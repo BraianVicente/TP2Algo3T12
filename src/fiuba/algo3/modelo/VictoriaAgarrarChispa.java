@@ -5,7 +5,6 @@
  */
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Tablero;
 
@@ -13,17 +12,18 @@ import fiuba.algo3.modelo.tablero.Tablero;
  *
  * @author brahvic
  */
-public class AgarrarChispa implements WinListener {
+public class VictoriaAgarrarChispa implements WinListener {
 
     private Tablero tablero;
     private Juego juego;
 
-    public AgarrarChispa(){
-        
-    }    
-    public AgarrarChispa(Tablero tab,Juego juego){
+
+    public VictoriaAgarrarChispa(Tablero tab,Juego juego){
         this.tablero = tab ;
         this.juego = juego ;
+    }
+
+    public VictoriaAgarrarChispa() {
     }
     
     public void setTablero(Tablero tab){

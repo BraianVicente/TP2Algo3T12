@@ -43,4 +43,10 @@ public class Pantano extends Superficie {
 	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
 		return (new ModificadorPantano()).coeficienteVelocidadPorForma(forma);
 	}
+
+    @Override
+    public String efecto() {
+        return "Pantano: las unidades en forma alterna veran reducido su poder de velocidad a la mitan, mientras"
+            + "aquellas que lo intenten atravezar en formato humanoide no podran" ;
+    }
 }

@@ -107,7 +107,7 @@ public class Juego {
         enTurno.combinarUnidades();
     }
 
-    public void cambiarTurno() {
+    private void cambiarTurno() {
         Jugador aux = enTurno ;
         enTurno = enEspera;
         enEspera = aux ;
@@ -188,5 +188,10 @@ public class Juego {
     
     public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal){
     	return tablero.sePuedeMover(unidad, posicionFinal);
+    }
+    
+    public Jugador ganador(){
+        return this.ganador;
+        
     }
 }

@@ -109,7 +109,7 @@ public abstract class Unidad {
     	yaAtaco=true;
     }
     protected abstract int getDistanciaAtaque();
-    protected abstract int getPuntosAtaque();
+    public abstract int getPuntosAtaque();
     
 	//-----------------movimiento--------------
     
@@ -236,4 +236,6 @@ public abstract class Unidad {
 	public Plano planoPertenecienteSiguienteForma() {
 		return Plano.TERRESTRE;
 	}
+
+    public abstract String nombre() ;
 }

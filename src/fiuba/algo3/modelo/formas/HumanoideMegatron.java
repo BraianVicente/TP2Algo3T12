@@ -27,5 +27,10 @@ public class HumanoideMegatron extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/MegatronHumanoide.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Megatron";
+    }
+
 
 }

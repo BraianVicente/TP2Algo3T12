@@ -27,6 +27,11 @@ public class Blindado extends FormaTerrestre {
 		return "fiuba/algo3/vista/imagenes/transformers/BonecrusherVehiculo.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Blindado";
+    }
+
 
 
 

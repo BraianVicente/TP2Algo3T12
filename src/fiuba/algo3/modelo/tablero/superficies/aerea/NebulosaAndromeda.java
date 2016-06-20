@@ -43,4 +43,9 @@ public class NebulosaAndromeda extends Superficie {
 		return (new ModificadorNebulosa()).coeficienteVelocidadPorForma(forma);
 	}
 
+    @Override
+    public String efecto() {
+        return "Nebulosa de Andromeda, aqui la unidad aerea quedara retenira durante 3 turnos" ;
+    }
+
 }

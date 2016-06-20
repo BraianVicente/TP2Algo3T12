@@ -27,5 +27,10 @@ public class NaveCybertroniana extends FormaAerea {
 		return "fiuba/algo3/vista/imagenes/transformers/MegatronVehiculo.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "NaveCybertroniana";
+    }
+
 
 }

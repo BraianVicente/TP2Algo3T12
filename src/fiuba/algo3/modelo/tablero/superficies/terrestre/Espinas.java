@@ -23,5 +23,10 @@ public class Espinas extends Superficie {
 		return "/fiuba/algo3/vista/imagenes/tierra/espinas.png";
 	}
 
+    @Override
+    public String efecto() {
+        return "Espinas: las unidades terrestres en reduce su nivel de vida en %5";
+    }
+
 
 }

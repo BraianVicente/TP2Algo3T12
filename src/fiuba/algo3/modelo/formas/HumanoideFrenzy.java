@@ -27,5 +27,10 @@ public class HumanoideFrenzy extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Frenzy";
+    }
+
 
 }

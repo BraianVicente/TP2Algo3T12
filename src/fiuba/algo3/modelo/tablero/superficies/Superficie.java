@@ -40,5 +40,7 @@ public abstract class Superficie {
 		return 1;
 	}
 
+    public abstract String efecto() ;
+
 
 }

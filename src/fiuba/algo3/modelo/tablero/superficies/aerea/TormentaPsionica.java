@@ -43,4 +43,9 @@ public class TormentaPsionica extends Superficie{
 	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
 		return (new ModificadorPsionica()).coeficienteVelocidadPorForma(forma);
 	}
+
+    @Override
+    public String efecto() {
+        return "Tormenta Psionica:las unidades aereas veran reducido su poder de ataque al %40";
+    }
 }
