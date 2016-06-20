@@ -9,18 +9,24 @@ public class GameController {
 	
 	private Juego juego;
 	private ClickedUnitManager manager;
+	private CanvasJuego cj;
 	
-	public GameController(Juego juego, ClickedUnitManager manager) {
+	public GameController(Juego juego, ClickedUnitManager manager, CanvasJuego cj) {
 		this.juego = juego;
 		this.manager = manager;
+		this.cj = cj;
 	}
 	
 	public void transformarUnidad() {
 		Posicion pos = manager.getPosicion();
 		Unidad unit = juego.obtenerUnidad(pos);
-		System.out.println(unit.nombreImagen());
 		if (unit.sePuedeTransformar())
 			juego.transformarUnidad(pos);
+		cj.actualizar();
+	}
+	
+	public void combinarUnidades() {
+		juego.combinarUnidades();
 	}
 	
 }
