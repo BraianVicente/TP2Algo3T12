@@ -50,4 +50,8 @@ public class Casillero {
 		return (new Posicion(pos.getX(), pos.getY()));
 	}
 	
+	public boolean isEmpty() {
+		return (getuTerrestre() == null && getuAerea() == null);
+	}
+	
 }

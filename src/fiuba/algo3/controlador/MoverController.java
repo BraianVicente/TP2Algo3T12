@@ -17,13 +17,13 @@ public class MoverController implements CallbackCasillero {
 	public void execute(Casillero cas) {
 		if (actual == null) {
 			actual = cas;
-		} else if (anterior != null) {
-			anterior = actual;
-			actual = cas;
-		} else {
+		} else if (anterior != null && cas.isEmpty()) {
 			anterior = actual;
 			actual = cas;
 			juego.moverUnidad(anterior.getPosicion(), actual.getPosicion());
+		} else {
+			anterior = actual;
+			actual = cas;
 		}
 	}
 	
