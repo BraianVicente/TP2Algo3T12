@@ -25,9 +25,9 @@
     <TextField fx:id="tieneChispa" cache="true" editable="false" layoutX="84.0" layoutY="129.0" prefHeight="15.0" prefWidth="39.0" text="" />
     <Label fx:id="terrestreLabel" layoutX="11.0" layoutY="158.0" text="Tierra" />
     <ImageView fx:id="terrestreView" fitHeight="35.0" fitWidth="46.666666666666664" layoutX="63.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" />
-    <TextArea fx:id="terrestreEfectos" blendMode="DARKEN" cache="false" cacheHint="QUALITY" depthTest="DISABLE" disable="false" editable="false" focusTraversable="true" layoutX="-23.0" layoutY="188.0" mouseTransparent="false" pickOnBounds="false" prefHeight="71.0" prefWidth="174.74282836914062" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
+    <TextArea fx:id="terrestreEfectos" blendMode="DARKEN" cache="false" cacheHint="DEFAULT" depthTest="INHERIT" disable="false" editable="false" focusTraversable="true" layoutX="-23.0" layoutY="188.0" mouseTransparent="false" pickOnBounds="false" prefHeight="71.0" prefWidth="174.74282836914062" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
     <Label fx:id="aereoLabel" layoutX="13.0" layoutY="259.0" text="Aerea" />
     <ImageView fx:id="aereoView" fitHeight="35.00001525878906" fitWidth="46.66668701171875" layoutX="63.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-    <TextArea fx:id="aereoEfectos" cache="false" disable="false" editable="false" focusTraversable="true" layoutX="-15.0" layoutY="293.0" pickOnBounds="false" prefHeight="71.0" prefWidth="160.87141966819763" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
+    <TextArea fx:id="aereoEfectos" blendMode="DARKEN" cache="false" disable="false" editable="false" focusTraversable="true" layoutX="-15.0" layoutY="293.0" pickOnBounds="false" prefHeight="71.0" prefWidth="160.87141966819763" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
   </children>
 </AnchorPane>

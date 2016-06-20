@@ -1,6 +1,7 @@
 package fiuba.algo3.test.unidadesVivientes;
 
 import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
@@ -116,5 +117,10 @@ public class MentiPrime extends MentiUnidad {
     @Override
     public String nombre() {
         return this.toString();
+    }
+
+    @Override
+    public void darChispa() {
+        chispa = ChispaSuprema.getInstance();
     }
 }

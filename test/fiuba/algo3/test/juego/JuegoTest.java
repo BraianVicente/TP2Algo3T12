@@ -125,7 +125,9 @@ public class JuegoTest {
         juego.transformarUnidad(new Posicion(8,8));
         juego.transformarUnidad(new Posicion(8,8));
         Unidad bumblee = new Bumblebee();
-        Assert.assertNotEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+        Integer velNormal = bumblee.getVelocidad() ;
+        Integer velActual = tab.obtenerUnidad(new Posicion(8,8)).getVelocidad() ;
+        Assert.assertEquals(velNormal,velActual );
     }
     
     @Test
@@ -144,6 +146,27 @@ public class JuegoTest {
     
     }
 
+    @Test
+    public void testPermiteTransformarVariasVeces(){
+        Tablero tab = new Tablero();
+        Jugador j1 = new Jugador("J1", new Autobots(),tab);
+        Jugador j2 = new Jugador("J2",new Decepticons(),tab);
+        Juego juego = new Juego(tab,j1,j2);
+        j1.agregarUnidad(new Posicion(8,8), new Bumblebee());
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        juego.transformarUnidad(new Posicion(8,8));
+        Unidad bumblee = new Bumblebee();
+        Assert.assertEquals(bumblee.getVelocidad(), tab.obtenerUnidad(new Posicion(8,8)).getVelocidad());
+    }
+    
     @Test(expected=EquipoInvalidoException.class)
     public void testJugadorNoTransformaUnidadAjena(){
         Tablero tab = new Tablero();
@@ -201,6 +224,7 @@ public class JuegoTest {
         condition.setJuego(juego);
         condition.setTablero(tab);
         juego.agregarUnidad(new Posicion(6,6), new Bumblebee());
+        juego.transformarUnidad(new Posicion(6,6));
         juego.moverUnidad(new Posicion(6,6), new Posicion(5,5));
         Assert.assertTrue(tab.unidadesContieneChispa(j1.getEquipo()));
         Assert.assertTrue(juego.jugadorGanadorEs(j1));
@@ -301,9 +325,14 @@ public class JuegoTest {
         juego.avanzarTurno();
         juego.atacarUnidad(destino, origen);
         Assert.assertFalse(tab.unidadesContieneChispa(uniJ1.equipo()));
-        
+        juego.transformarUnidad(destino);
+        juego.avanzarTurno();
+        juego.avanzarTurno();
         juego.moverUnidad(destino,origen);
         Assert.assertTrue(tab.unidadesContieneChispa(uniJ2.equipo()));
+        juego.avanzarTurno();
+        juego.avanzarTurno();
+        
         juego.moverUnidad(origen,new Posicion(5,6));
         Assert.assertTrue(juego.jugadorGanadorEs(j2));
     }

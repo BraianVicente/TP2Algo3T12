@@ -138,7 +138,7 @@ public class TableroTest {
     	Optimusprime op = new Optimusprime();
     	Bumblebee bee = new Bumblebee();
     	Ratchet rat = new Ratchet();
-    	
+    	op.transformar();
     	op.darChispa();
     	
     	tab.agregarUnidad(posa, op);
@@ -184,7 +184,7 @@ public class TableroTest {
     	tab.agregarUnidad(posa, mega);
     	tab.agregarUnidad(posb, bone);
     	tab.agregarUnidad(posc, fren);
-    	
+    	mega.transformar();
     	mega.darChispa();
     	
     	tab.combinar(posa, posb, posc);

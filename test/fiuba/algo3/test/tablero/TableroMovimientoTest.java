@@ -90,4 +90,9 @@ public class TableroMovimientoTest {
         Assert.assertEquals(tab.getPosicionChispa(),tab.posicion(bum));
         
     }
+    
+    @Test
+    public void test08UnidadAgarraChispaEnModoAlterno(){
+        
+    }
 }

@@ -26,7 +26,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 
 public abstract class Unidad {
 	
-	private Chispa chispa;
+	protected Chispa chispa;
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
@@ -64,9 +64,7 @@ public abstract class Unidad {
 		return (chispa instanceof ChispaSuprema);
 	}
 	
-	public void darChispa() {
-		chispa = ChispaSuprema.getInstance();
-	}
+	public abstract void darChispa();
 	
 	public void quitarChispa() {
 		chispa = new ChispaHolder();

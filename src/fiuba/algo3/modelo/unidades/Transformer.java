@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.Peterbilt;
@@ -38,8 +39,8 @@ public abstract class Transformer extends Unidad {
 	
     @Override
     public boolean sePuedeTransformar(){
-    	//return !this.seTransformoEnEsteTurno;
-    	return true;
+    	return !this.seTransformoEnEsteTurno;
+    	//return true;
     }
     
     @Override
@@ -143,5 +144,12 @@ public abstract class Transformer extends Unidad {
         String n = forma.nombre() ;
         return n;
     }
+    
+    @Override
+    public void darChispa() {
+        if (this.forma.esHumanoide()){
+    		chispa = ChispaSuprema.getInstance();
+        }
+	}
 
 }

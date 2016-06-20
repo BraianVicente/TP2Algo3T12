@@ -2,6 +2,7 @@ package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
@@ -72,5 +73,10 @@ public class Menasor extends UnidadCombinable {
     @Override
     public String nombre() {
         return this.toString();
+    }
+
+    @Override
+    public void darChispa() {
+        chispa = ChispaSuprema.getInstance();
     }
 }
