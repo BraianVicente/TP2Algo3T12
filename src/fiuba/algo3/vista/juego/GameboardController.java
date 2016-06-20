@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import fiuba.algo3.vista.statsPane.StatsPane ;
 
 import fiuba.algo3.controlador.ClickedUnitManager;
 import fiuba.algo3.controlador.CombinarController;
@@ -140,7 +139,10 @@ public class GameboardController {
     public void setUp() {    	
     	tablero = new Tablero(6, 6);
     	
-		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
+    	Jugador j1 = new Jugador(namePlayer1, new Autobots(), tablero);
+    	Jugador j2 = new Jugador(namePlayer2, new Decepticons(), tablero);
+    	
+		juego = new Juego(tablero, j1, j2);
 		setUpUnits(juego);
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
