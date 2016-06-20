@@ -3,7 +3,7 @@ package fiuba.algo3.controlador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class TransformarController implements EventHandler<ActionEvent>{
+public class TransformarController implements EventHandler<ActionEvent> {
 	
 	private GameController controller;
 	
