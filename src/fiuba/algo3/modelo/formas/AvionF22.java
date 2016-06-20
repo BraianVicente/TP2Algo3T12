@@ -28,6 +28,11 @@ public class AvionF22 extends FormaAerea {
 		return "fiuba/algo3/vista/imagenes/transformers/RatchetVehiculo.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "AvionF22" ;
+    }
+
 
 
 }

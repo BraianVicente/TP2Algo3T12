@@ -25,4 +25,9 @@ public class Rocosa extends Superficie {
     		return "/fiuba/algo3/vista/imagenes/tierra/piedras.png";
     	}
 
+    @Override
+    public String efecto() {
+        return "Rocas: ninguna unidad se vera afectada";    
+    }
+
 }

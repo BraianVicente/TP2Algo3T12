@@ -18,6 +18,7 @@ public interface Escenario {
     
     public Superficie agregarSuperficieAerea();
     public Superficie agregarSuperficieTerrestre();
-    public Superficie agregarSuperficiesAleatoria(Integer posX, Integer posY);
+    public Superficie agregarSuperficieAereaAleatoria(Integer posX, Integer posY);
+    public Superficie agregarSuperficieTerrestreAleatoria(Integer posX, Integer posY);
     
 }

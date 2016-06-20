@@ -21,14 +21,17 @@ import java.util.Random;
  */
 public class EscenarioDefault implements Escenario {
 
-    ArrayList<Superficie> superficies ;
+    ArrayList<Superficie> superficiesAereas ;
+    ArrayList<Superficie> superficiesTerrestres;
     
     public EscenarioDefault(){
-        superficies = new ArrayList<Superficie>() ;
-        superficies.add(new Espinas());
-        superficies.add(new Pantano());
-        superficies.add(new NebulosaAndromeda());
-        superficies.add(new TormentaPsionica());
+        superficiesAereas = new ArrayList<Superficie>() ;
+        superficiesAereas.add(new NebulosaAndromeda());
+        superficiesAereas.add(new TormentaPsionica());
+        superficiesTerrestres = new ArrayList<Superficie>();
+        superficiesTerrestres.add(new Espinas());
+        superficiesTerrestres.add(new Pantano());
+       
         
     }
    
@@ -53,12 +56,19 @@ public class EscenarioDefault implements Escenario {
     }
 
     @Override
-    public Superficie agregarSuperficiesAleatoria(Integer x, Integer y) {
+    public Superficie agregarSuperficieAereaAleatoria(Integer x, Integer y) {
         Random random = new Random();
-        Integer index = random.nextInt(superficies.size());
-	    return superficies.get(index);  
+        Integer index = random.nextInt(superficiesAereas.size());
+	    return superficiesAereas.get(index);  
 
 
+    }
+
+    @Override
+    public Superficie agregarSuperficieTerrestreAleatoria(Integer posX, Integer posY) {
+        Random random = new Random();
+        Integer index = random.nextInt(superficiesTerrestres.size());
+	    return superficiesTerrestres.get(index);  
     }
 
     

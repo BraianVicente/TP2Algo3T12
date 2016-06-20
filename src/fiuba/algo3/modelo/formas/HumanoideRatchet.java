@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.formas;
 
-public class HumanoideRatchet extends FormaAerea {
+public class HumanoideRatchet extends FormaHumanoide {
 
     @Override
     public Forma getAlternativa() {
@@ -26,6 +26,11 @@ public class HumanoideRatchet extends FormaAerea {
 	public String nombreImagen() {
 		return "fiuba/algo3/vista/imagenes/transformers/RatchetHumanoide.png";
 	}
+
+    @Override
+    public String nombre() {
+        return "Ratchet" ;
+    }
 
 
 }

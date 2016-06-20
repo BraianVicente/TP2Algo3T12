@@ -10,10 +10,10 @@ import fiuba.algo3.modelo.formas.HumanoideBonecrusher;
 public class Bonecrusher extends Transformer {
 
 	public Bonecrusher(DeathListener command) {
-        super(new Decepticons(), command);
+        super(new Blindado(), new Decepticons(), command);
     }
 	public Bonecrusher() {
-        super(new Decepticons(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package fiuba.algo3.test.unidadesVivientes;
 
 import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
@@ -29,7 +30,7 @@ public class MentiTron extends MentiUnidad {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 15;
 	}
 
@@ -38,5 +39,14 @@ public class MentiTron extends MentiUnidad {
 		return 2;
 	}
 
+        @Override
+    public String nombre() {
+        return this.toString();
+    }
+
+    @Override
+    public void darChispa() {
+        chispa = ChispaSuprema.getInstance();
+    }
 
 }

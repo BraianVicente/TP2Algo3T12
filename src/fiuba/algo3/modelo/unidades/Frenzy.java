@@ -10,11 +10,11 @@ import fiuba.algo3.modelo.formas.HumanoideFrenzy;
 public class Frenzy extends Transformer {
 
     public Frenzy(DeathListener command) {
-        super(new Decepticons(), command);
+        super(new Duster(), new Decepticons(), command);
     }
 
     public Frenzy() {
-        super(new Decepticons(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
     }
     @Override
     protected Forma getVehiculo() {

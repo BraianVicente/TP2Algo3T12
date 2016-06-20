@@ -19,6 +19,7 @@ import fiuba.algo3.modelo.unidades.Unidad;
  */
 public class TormentaPsionica extends Superficie{
 
+    @Override
 	public void afectarA(Unidad unidadConVida) {
 		unidadConVida.serAfectadoPor(this);
 		
@@ -43,4 +44,9 @@ public class TormentaPsionica extends Superficie{
 	public float obtenerVelocidadParaForma(FormaHumanoide forma) {
 		return (new ModificadorPsionica()).coeficienteVelocidadPorForma(forma);
 	}
+
+    @Override
+    public String efecto() {
+        return "Tormenta Psionica:las unidades aereas veran reducido su poder de ataque al %40";
+    }
 }

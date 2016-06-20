@@ -27,5 +27,10 @@ public class HumanoideBonecrusher extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/BonecrusherHumanoide.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Bonecrusher";
+    }
+
 
 }

@@ -2,6 +2,7 @@ package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
@@ -15,7 +16,7 @@ public class Menasor extends UnidadCombinable {
 	}
 	
 	public Menasor() {
-		super(new Decepticons(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
 	}
 	
 	public Menasor(Transformer a, Transformer b, Transformer c) {
@@ -45,7 +46,7 @@ public class Menasor extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 115;
 	}
 
@@ -68,4 +69,14 @@ public class Menasor extends UnidadCombinable {
 	public String nombreImagen() {
 		return "fiuba/algo3/vista/imagenes/transformers/Menasor.png";
 	}
+
+    @Override
+    public String nombre() {
+        return this.toString();
+    }
+
+    @Override
+    public void darChispa() {
+        chispa = ChispaSuprema.getInstance();
+    }
 }

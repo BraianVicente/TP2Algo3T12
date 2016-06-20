@@ -2,6 +2,7 @@ package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
@@ -17,7 +18,7 @@ public class Superion extends UnidadCombinable {
 	}
 	
 	public Superion() {
-		super(new Autobots(), new IgnorarMuerte());
+        this(new IgnorarMuerte());
 	}
 	
 	public Superion(Transformer a, Transformer b, Transformer c) {
@@ -47,7 +48,7 @@ public class Superion extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getPuntosAtaque() {
+	public int getPuntosAtaque() {
 		return 100;
 	}
 
@@ -70,6 +71,16 @@ public class Superion extends UnidadCombinable {
 	public String nombreImagen() {
 		return "fiuba/algo3/vista/imagenes/transformers/Superion.png";
 	}
+
+    @Override
+    public String nombre() {
+        return this.toString();
+    }
+
+    @Override
+    public void darChispa() {
+        chispa = ChispaSuprema.getInstance();
+    }
 
     
 }

@@ -37,5 +37,10 @@ public class HumanoideOptimusprime extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/OptimusHumanoide.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Optimusprime";
+    }
+
 
 }

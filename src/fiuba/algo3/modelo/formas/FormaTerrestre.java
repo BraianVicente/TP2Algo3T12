@@ -19,9 +19,11 @@ public abstract class FormaTerrestre extends FormaVehiculo {
 		return danioPosible;
 	}
 	
+    @Override
 	public boolean esAerea(){
 		return false;
 	}
+    @Override
 	public boolean esTerrestre(){
 		return true;
 	}

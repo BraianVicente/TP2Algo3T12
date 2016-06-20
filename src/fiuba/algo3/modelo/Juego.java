@@ -112,7 +112,7 @@ public class Juego {
         enTurno.combinarUnidades();
     }
 
-    public void cambiarTurno() {
+    private void cambiarTurno() {
         Jugador aux = enTurno ;
         enTurno = enEspera;
         enEspera = aux ;
@@ -212,7 +212,7 @@ public class Juego {
     	return tablero.isEmpty(pos);
     }
     
-    private Unidad unidadReferenciada(Casillero c){
+    public Unidad unidadReferenciada(Casillero c){
     	if(c.getuAerea()!=null){
     		return c.getuAerea();
     	}else if(c.getuTerrestre()!=null){
@@ -223,7 +223,7 @@ public class Juego {
     }
     
     public void clickeoCasillero(Casillero c,CanvasJuego canvas){
-    	//acá estoy suponiendo que siempre que toás una unidad la querés seleccionar,
+    	//acï¿½ estoy suponiendo que siempre que toï¿½s una unidad la querï¿½s seleccionar,
     	Unidad referenciada = unidadReferenciada(c);
     	
     	if(unidadSeleccionada == null){
@@ -234,7 +234,7 @@ public class Juego {
     		//if(sePuedeAtacar...)atacar(...)
     		//if(sePuedeMover...)mover(...)
     		//if(sePuedeTransformar(...))transformar(...)
-    		//Estaría muy muy lindo una interfaz acción acá pero no hay T
+    		//Estarï¿½a muy muy lindo una interfaz acciï¿½n acï¿½ pero no hay T
     		
     		canvas.setHaloAtaque(null);
         	canvas.setHaloMovimiento(null);
@@ -243,6 +243,6 @@ public class Juego {
     	
     	
     	canvas.seleccionadorEn(c.getPos());
-    	//CanvasJuego sólo sabe de dibujar cositas en la pantalla
+    	//CanvasJuego sï¿½lo sabe de dibujar cositas en la pantalla
     }
 }

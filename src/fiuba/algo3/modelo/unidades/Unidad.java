@@ -26,7 +26,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 
 public abstract class Unidad {
 	
-	private Chispa chispa;
+	protected Chispa chispa;
 	private DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
@@ -64,9 +64,7 @@ public abstract class Unidad {
 		return (chispa instanceof ChispaSuprema);
 	}
 	
-	public void darChispa() {
-		chispa = ChispaSuprema.getInstance();
-	}
+	public abstract void darChispa();
 	
 	public void quitarChispa() {
 		chispa = new ChispaHolder();
@@ -109,7 +107,7 @@ public abstract class Unidad {
     	yaAtaco=true;
     }
     protected abstract int getDistanciaAtaque();
-    protected abstract int getPuntosAtaque();
+    public abstract int getPuntosAtaque();
     
 	//-----------------movimiento--------------
     
@@ -236,4 +234,6 @@ public abstract class Unidad {
 	public Plano planoPertenecienteSiguienteForma() {
 		return Plano.TERRESTRE;
 	}
+
+    public abstract String nombre() ;
 }

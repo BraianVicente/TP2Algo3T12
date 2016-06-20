@@ -27,5 +27,10 @@ public class HumanoideMenasor extends FormaHumanoide {
 		return "fiuba/algo3/vista/imagenes/transformers/Menasor.png";
 	}
 
+    @Override
+    public String nombre() {
+        return "Menasor";
+    }
+
 
 }

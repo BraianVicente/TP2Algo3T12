@@ -56,7 +56,6 @@ public class Jugador {
     }
     
     public void combinarUnidades(){
-        this.equipo.crearCombinacion();
         this.tablero.combinarUnidades(this.equipo);
     }
     
