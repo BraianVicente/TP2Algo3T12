@@ -4,12 +4,12 @@ import fiuba.algo3.modelo.Juego;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class finTurnoController implements EventHandler<ActionEvent> {
+public class FinTurnoController implements EventHandler<ActionEvent> {
 	
 	private Juego juego;
 	private GameboardController controller;
 	
-	public finTurnoController(Juego j, GameboardController c) {
+	public FinTurnoController(Juego j, GameboardController c) {
 		juego = j;
 		controller = c;
 	}

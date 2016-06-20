@@ -225,6 +225,7 @@ public class Tablero {
 	}
 	
 	public boolean puedeAtacar(Unidad atacante, Posicion atacado){
+		if(isEmpty(atacado))return false;
 		Unidad objetivo=obtenerUnidad(atacado);
 		return puedeAtacar(atacante, objetivo)&&!atacante.esDelMismoEquipo(objetivo);
 	}

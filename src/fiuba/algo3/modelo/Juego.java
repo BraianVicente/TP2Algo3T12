@@ -175,8 +175,16 @@ public class Juego {
         this.ganador = this.enTurno ;
     }
     
-    public String accionPosibleEn(PosicionEnElPlano posicion){
-    	return "Juego::accionPosibleEn";
+    public String accionPosibleEn(Unidad u,PosicionEnElPlano posicion){
+    	String accionPosible="Deseleccionar";
+    	if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
+    	if(sePuedeMover(u,new Posicion(posicion,u.getPlanoPerteneciente()))&&
+    			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion))accionPosible ="Mover";
+    	if((puedeAtacar(u,new Posicion(posicion,Posicion.Plano.AEREO)) ||
+    			puedeAtacar(u, new Posicion(posicion, Posicion.Plano.TERRESTRE)))&&
+    			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Atacar";
+    	return accionPosible;
+    	
     }
     
     public boolean sePuedeTransformar(Unidad u){

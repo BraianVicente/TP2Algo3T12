@@ -253,9 +253,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 					mueveVista.altoCasillero());
 			
 		}
-		
+		Unidad unidadSeleccionada=obtenerUnidadSeleccionada(seleccionada);
 		//el cartelito
-		String accion = juego.accionPosibleEn(hovereando);
+		String accion="";
+		if(unidadSeleccionada!=null)accion = juego.accionPosibleEn(unidadSeleccionada,hovereando);
+		if(accion!=""){
 		Bounds bounds = (new Text(accion)).getLayoutBounds();
 		double offsetX=20;
 		double offsetY=20;
@@ -265,8 +267,17 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		gc.setFill(Color.BLACK);
 		gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
 		gc.restore();
+		}
 		
 	}
+	private Unidad obtenerUnidadSeleccionada(PosicionEnElPlano pos) {
+		if(pos==null) return null;
+		Casillero c=construirCasillero(new Posicion(pos.clone(),Plano.TERRESTRE));
+		if(modoVista==ModoVista.SOLOAIRE||
+				(modoVista==ModoVista.AMBAS&&c.getuTerrestre()==null)) return c.getuAerea();
+		return c.getuTerrestre();
+	}
+
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
 		gc.save();
 		gc.setGlobalAlpha(opacidad);
@@ -327,6 +338,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private PosicionEnElPlano seleccionada;
 	public void seleccionadorEn(PosicionEnElPlano pos){
 		seleccionada = (PosicionEnElPlano) pos.clone();
+
 	}
 	public void seleccionadorEn(Posicion pos){
 		seleccionada = new PosicionEnElPlano(pos.getX(),pos.getY());

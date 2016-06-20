@@ -94,7 +94,7 @@ public class GameboardController {
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
 		vistaChoiceBox.setOnAction(cbc);
 		
-		finTurnoController ftc = new finTurnoController(juego, this);
+		FinTurnoController ftc = new FinTurnoController(juego, this);
         finTurnoButton.setOnAction(ftc);
     }
 }

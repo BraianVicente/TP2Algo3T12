@@ -35,7 +35,7 @@ public class MueveVista {
 		x=0;
 		y=0;
 		presionando=false;
-		escala = 0.75;
+		escala = 0.30;
 		this.ancho = ancho;
 		this.alto = alto;
 		cllbacksClickeo = new ArrayList<CallbackPosicion>();
