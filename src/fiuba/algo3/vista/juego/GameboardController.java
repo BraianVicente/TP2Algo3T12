@@ -79,9 +79,9 @@ public class GameboardController {
     }
     
     public void setUp() {    	
-    	tablero = new Tablero();
+    	tablero = new Tablero(6, 6);
 		juego=new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
-		juego.agregarUnidad(new Posicion(8,8,Plano.TERRESTRE), new Optimusprime());
+		juego.agregarUnidad(new Posicion(2,2,Plano.TERRESTRE), new Optimusprime());
 		juego.agregarUnidad(new Posicion(0,0,Plano.AEREO), new Megatron());
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
