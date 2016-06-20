@@ -7,6 +7,8 @@ package fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
@@ -124,7 +126,6 @@ public class Juego {
 	}
 
 	public ArrayList<Unidad> obtenerUnidades() {
-		// TODO Auto-generated method stub
 		return tablero.obtenerUnidades();
 	}
 
@@ -181,7 +182,7 @@ public class Juego {
     }
     
     public String accionPosibleEn(PosicionEnElPlano posicion){
-    	if(unidadSeleccionada!=null){
+    	if(unidadSeleccionada!=null && enTablero(posicion) ){
     		Unidad u = unidadSeleccionada;
     		String accionPosible="Deseleccionar";
     		if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
@@ -240,9 +241,22 @@ public class Juego {
         	canvas.setHaloMovimiento(null);
     	}
     	
-    	
-    	
     	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
     }
+
+
+	public void agregarBonus(Bonus bonus, Posicion p) {
+		tablero.agregarBonus(bonus, p);
+	}
+
+
+	public ArrayList<Bonus> obtenerBonuses() {
+		return tablero.obtenerBonuses();
+	}
+
+
+	public Posicion posicion(Bonus b) {
+		return tablero.posicion(b);
+	}
 }

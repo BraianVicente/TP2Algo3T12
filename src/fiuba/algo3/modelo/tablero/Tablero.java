@@ -396,4 +396,12 @@ public class Tablero {
         this.posicionMontePerdicion = posicion ;
     }
 
+	public ArrayList<Bonus> obtenerBonuses() {
+		return contenedorBonuses.obtenerBonuses();
+	}
+
+	public Posicion posicion(Bonus b) {
+		return contenedorBonuses.obtenerPosicion(b);
+	}
+
 }

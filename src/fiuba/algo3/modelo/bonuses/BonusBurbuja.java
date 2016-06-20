@@ -15,4 +15,9 @@ public class BonusBurbuja extends Bonus {
 		return new ModificadorBurbuja();
 	}
 
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/bonus/bonusInvulnerabilidad.png";
+	}
+
 }

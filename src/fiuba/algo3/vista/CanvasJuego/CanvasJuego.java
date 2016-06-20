@@ -6,6 +6,7 @@ import java.util.Timer;
 
 import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
@@ -212,8 +213,13 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
+			dibujarBonuses(gc);
 			dibujarUnidades(gc,Plano.TERRESTRE);
 		}
+		
+		//los bonuses
+		
+		
 		
 		//las unidades terrestres
 		
@@ -221,11 +227,14 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		if(modoVista==ModoVista.AMBAS){
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
 		}else if(modoVista==ModoVista.SOLOAIRE){
-			dibujarSuperficies(gc,Posicion.Plano.AEREO,1);
+			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.8f);
 		}
 		
 		//las unidades aerea
-		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE)dibujarUnidades(gc,Plano.AEREO);
+		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE){
+			dibujarBonuses(gc);
+			dibujarUnidades(gc,Plano.AEREO);
+		}
 		
 		
 		//el cuadrado seleccionado
@@ -303,6 +312,24 @@ public class CanvasJuego extends Canvas implements Actualizable{
 							mueveVista.altoCasillero());
 			}
 			gc.restore();
+		}
+	}
+
+	private void dibujarBonuses(GraphicsContext gc) {
+		ArrayList<Bonus> bonuses = juego.obtenerBonuses();
+		for(Bonus b: bonuses){
+			Posicion p = juego.posicion(b);
+			try{
+				Image imgB = cacheImagenes.obtenerImagen(b.nombreImagen());
+				gc.drawImage(imgB,
+						mueveVista.xPantalla(p), 
+						mueveVista.yPantalla(p), 
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero()
+				);
+			}catch(ImagenInexistenteExcption e){
+				
+			}
 		}
 	}
 
