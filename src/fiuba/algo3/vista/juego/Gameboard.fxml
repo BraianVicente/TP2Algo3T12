@@ -45,8 +45,8 @@
             		<Button fx:id="finTurnoButton" minWidth="99" layoutX="16.0" layoutY="332.0" mnemonicParsing="false" text="Fin Turno" />      
    				</children>
             </AnchorPane>
-            <AnchorPane fx:id="GamePane" prefHeight="371.0" prefWidth="340.0" />
-            <AnchorPane fx:id="StatsPane" prefHeight="371.0" prefWidth="130.0" />
+            <AnchorPane fx:id="GamePane" prefHeight="371.0" prefWidth="360.0" /> <!-- 340 -->
+            <AnchorPane fx:id="StatsPane" prefHeight="371.0" prefWidth="110.0" /> <!-- 130 -->
          </children>
       </HBox>
    </children>
