@@ -29,6 +29,8 @@ public class Main extends Application {
 	    
 	        stage.setTitle("Algoformers");
 	        stage.setScene(scene);
+	        stage.centerOnScreen();
+	        stage.setResizable(false);
 	        stage.show();
 	        
 		} catch (IOException e) {

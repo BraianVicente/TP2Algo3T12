@@ -68,18 +68,18 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private Timer timer;
 	
 	public CanvasJuego(Juego juego){
-		super(340, 371);
+		super(360, 371);
 		
 		this.juego=juego;
 		
-		mueveVista = new MueveVista(340, 371);
+		mueveVista = new MueveVista(360, 371);
 		this.addEventHandler(MouseEvent.MOUSE_MOVED, e->mueveVista.movido(e));
 		this.addEventHandler(MouseEvent.MOUSE_CLICKED, e->mueveVista.clickeado(e));
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
 		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
@@ -150,7 +150,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	}
 	
 	private void hoverea(Posicion p){
-		
 		//Posicion p = mueveVista.obtenerPosicion(e);
 		if(juego.enTablero(p)){
 			Casillero construido = construirCasillero(p);
@@ -183,6 +182,9 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	//------------------------DIBUJADO----------------------------------------------//
 
 	public void actualizar(){
+		
+		System.out.println("Still updating!");
+		
 		double xv = mueveVista.getX();
 		double yv = mueveVista.getY();
 		double escala = mueveVista.getEscala();
