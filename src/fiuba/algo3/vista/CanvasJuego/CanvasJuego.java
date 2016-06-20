@@ -192,7 +192,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	public void actualizar(){
 		
-		System.out.println("Still updating!");
+		//System.out.println("Still updating!");
 		
 		double xv = mueveVista.getX();
 		double yv = mueveVista.getY();

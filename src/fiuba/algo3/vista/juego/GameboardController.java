@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import fiuba.algo3.controlador.ClickedUnitManager;
+import fiuba.algo3.controlador.GameController;
+import fiuba.algo3.controlador.TransformarController;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
@@ -59,6 +62,9 @@ public class GameboardController {
     private String namePlayer1 = "";
     private String namePlayer2 = "";
     
+    private GameController controller;
+    private ClickedUnitManager manager;
+    
     Unidad[] unitList = {
     		new Optimusprime(),
     		new Bumblebee(),
@@ -102,7 +108,12 @@ public class GameboardController {
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
+		manager = new ClickedUnitManager();
+		controller = new GameController(juego, manager);
+		
 		CanvasJuego cj = new CanvasJuego(juego);
+		
+		cj.agregarCallbackClickeo(manager);
     	
     	GamePane.getChildren().add(cj);
     	
@@ -114,6 +125,9 @@ public class GameboardController {
 		
 		FinTurnoController ftc = new FinTurnoController(juego, this);
         finTurnoButton.setOnAction(ftc);
+        
+        TransformarController tc = new TransformarController(controller);
+        transformarButton.setOnAction(tc);
     }
     
     public void hovereoCasillero(Casillero c){
