@@ -11,13 +11,13 @@ public class MoverController implements CallbackCasillero {
 	
 	public MoverController(Juego juego) {
 		this.juego = juego;
+		actual = null;
+		anterior = null;
 	}
 	
 	@Override
 	public void execute(Casillero cas) {
-		if (actual == null) {
-			actual = cas;
-		} else if (anterior != null && cas.isEmpty()) {
+		if (actual != null && cas.isEmpty()) {
 			anterior = actual;
 			actual = cas;
 			juego.moverUnidad(anterior.getPosicion(), actual.getPosicion());
