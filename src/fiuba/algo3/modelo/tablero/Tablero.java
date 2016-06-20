@@ -365,7 +365,7 @@ public class Tablero {
     private void agregarSuperficiesAereas(Escenario e) {
         Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
         Integer posX,posY ;
-        for(Integer i = 0; i < limite/2;i ++ ){
+        for(Integer i = 0; i < limite;i ++ ){
             posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
             posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
             this.agregarSuperficie(e.agregarSuperficieAereaAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
@@ -375,11 +375,10 @@ public class Tablero {
     private void agregarSuperficiesTerrestres(Escenario e) {
         Integer limite = (e.getAnchoEscenario()*e.getLargoEscenario())/5 ;
         Integer posX,posY ;
-        for(Integer i = 0; i < limite/2;i ++ ){
+        for(Integer i = 0; i < limite;i ++ ){
             posX = (int)(Math.random()*(e.getAnchoEscenario()+1));//random
             posY = (int)(Math.random()*(e.getLargoEscenario()+1));//random
-            this.agregarSuperficie(e.agregarSuperficieAereaAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
-            this.agregarSuperficie(e.agregarSuperficieTerrestreAleatoria(posX, posY), new Posicion(posX,posY,Plano.AEREO));
+            this.agregarSuperficie(e.agregarSuperficieTerrestreAleatoria(posX, posY), new Posicion(posX,posY,Plano.TERRESTRE));
         }
     }
 

@@ -4,13 +4,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import fiuba.algo3.vista.statsPane.StatsPane ;
 
 import fiuba.algo3.controlador.ClickedUnitManager;
 import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
 import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
+import fiuba.algo3.modelo.EscenarioDefault;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
@@ -27,7 +27,6 @@ import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
 import fiuba.algo3.vista.CanvasJuego.ModoVista;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ProgressBar;
@@ -138,7 +137,7 @@ public class GameboardController {
     }
     
     public void setUp() {    	
-    	tablero = new Tablero(6, 6);
+    	tablero = new Tablero(new EscenarioDefault());
     	
 		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
 		setUpUnits(juego);
