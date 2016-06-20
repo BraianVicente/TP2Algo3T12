@@ -66,12 +66,12 @@ public class Tablero {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
-        alto=x;
-        ancho=y;
-        for (int i = 0; i < alto; i++) {
-        	for(int j=0;j<ancho;j++){
-            this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
-            this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
+        ancho=x;
+        alto=y;
+        for (int i = 0; i < ancho; i++) {
+        	for(int j=0;j<alto;j++){
+        		this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
+        		this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
         }
         this.colocarChispa();
