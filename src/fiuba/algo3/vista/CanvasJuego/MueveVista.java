@@ -92,15 +92,18 @@ public class MueveVista {
 			if(escala<0.1){
 				escala=0.1;
 			}
-			double ancho_inicial = ancho*escala_inicial;
-			double ancho_final = ancho*escala;
+			double ancho_inicial = ancho/escala_inicial;
+			double ancho_final = ancho/escala;
 			
-			double alto_inicial = alto*escala_inicial;
-			double alto_final = alto*escala;
-			//System.out.println("delta ancho: "+(ancho_final-ancho_inicial)+" el inicial: "+ancho_inicial+" el final: "+ancho_final);
+			double alto_inicial = alto/escala_inicial;
+			double alto_final = alto/escala;
 			
-			//x+=(ancho_final-ancho_inicial)/2;//O NO ME SALEN LAS CUENTAS O EL CENTRO NO ES 
-			//y+=(alto_final-alto_inicial)/2;//EL CENTRO... EN ESPERA HASTA EL LAYOUT FINAL
+			double centro_x = x+ancho_inicial/2;
+			double centro_y = y+alto_inicial/2;
+			/*
+			x = centro_x-ancho_final/2;
+			y = centro_y-alto_final/2;
+			*/
 		}
 	}
 	

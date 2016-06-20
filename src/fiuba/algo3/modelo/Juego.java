@@ -22,6 +22,8 @@ import fiuba.algo3.modelo.unidades.Megatron;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
+import fiuba.algo3.vista.CanvasJuego.Casillero;
 
 /**
  *
@@ -37,6 +39,8 @@ public class Juego {
     private Tablero tablero ;
     private Jugador ganador;
     
+    private Unidad unidadSeleccionada;
+    
 
     public Juego(Tablero tab,Jugador autobots,Jugador decepticons ){
         // el juego debe iniciarse vacio, ir agregando primero los jugadores
@@ -47,6 +51,7 @@ public class Juego {
         this.enTurno = autobots ;   
         this.jugadorDecepticons = decepticons;
         this.enEspera = decepticons ;
+        this.unidadSeleccionada = null;
     }
     
    
@@ -175,15 +180,20 @@ public class Juego {
         this.ganador = this.enTurno ;
     }
     
-    public String accionPosibleEn(Unidad u,PosicionEnElPlano posicion){
-    	String accionPosible="Deseleccionar";
-    	if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
-    	if(sePuedeMover(u,new Posicion(posicion,u.getPlanoPerteneciente()))&&
+    public String accionPosibleEn(PosicionEnElPlano posicion){
+    	if(unidadSeleccionada!=null){
+    		Unidad u = unidadSeleccionada;
+    		String accionPosible="Deseleccionar";
+    		if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
+    		if(sePuedeMover(u,new Posicion(posicion,u.getPlanoPerteneciente()))&&
     			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion))accionPosible ="Mover";
-    	if((puedeAtacar(u,new Posicion(posicion,Posicion.Plano.AEREO)) ||
+    		if((puedeAtacar(u,new Posicion(posicion,Posicion.Plano.AEREO)) ||
     			puedeAtacar(u, new Posicion(posicion, Posicion.Plano.TERRESTRE)))&&
     			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Atacar";
-    	return accionPosible;
+    		return accionPosible;
+    	}
+    	
+    	return "";
     	
     }
     
@@ -200,5 +210,28 @@ public class Juego {
     
     public boolean posicionVacia(Posicion pos) {
     	return tablero.isEmpty(pos);
+    }
+    
+    public void clickeoCasillero(Casillero c,CanvasJuego canvas){
+    	//acá estoy suponiendo que siempre que toás una unidad la querés seleccionar,
+    	
+    	
+    	if(c.getuAerea()!=null){
+    		unidadSeleccionada = c.getuAerea();
+    	}else if(c.getuTerrestre()!=null){
+    		unidadSeleccionada = c.getuTerrestre();
+    	}else{
+    		unidadSeleccionada = null;
+    	}
+    	
+    	canvas.seleccionadorEn(c.getPos());
+    	//si acaba de seleccionar un bicho:
+    	canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
+    	canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
+    	//si acaba de deseleccionar un bicho:
+    	canvas.setHaloAtaque(null);
+    	canvas.setHaloMovimiento(null);
+    	
+    	//CanvasJuego sólo sabe de dibujar cositas en la pantalla
     }
 }

@@ -15,6 +15,7 @@ import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
+import fiuba.algo3.vista.CanvasJuego.Casillero;
 import fiuba.algo3.vista.CanvasJuego.ModoVista;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -104,6 +105,9 @@ public class GameboardController {
 		CanvasJuego cj = new CanvasJuego(juego);
     	
     	GamePane.getChildren().add(cj);
+    	
+    	cj.agregarCallbackClickeo(c->juego.clickeoCasillero(c,cj));
+    	cj.agregarCallbackHover(c->hovereoCasillero(c));
 		
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
 		vistaChoiceBox.setOnAction(cbc);
@@ -111,6 +115,11 @@ public class GameboardController {
 		FinTurnoController ftc = new FinTurnoController(juego, this);
         finTurnoButton.setOnAction(ftc);
     }
+    
+    public void hovereoCasillero(Casillero c){
+    	// TODO acá le mandás las cosas a Braian
+    }
+    
     
     public void setUpUnits(Juego juego) {
     	Random generator = new Random();

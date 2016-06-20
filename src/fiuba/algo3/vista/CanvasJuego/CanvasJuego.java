@@ -48,6 +48,9 @@ import javafx.scene.text.Text;
 
 
 public class CanvasJuego extends Canvas implements Actualizable{
+	
+	
+	
 	private MueveVista mueveVista;
 	private Image seleccionador;
 	private Image seleccionadorObjetivo;
@@ -78,8 +81,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.addEventHandler(MouseEvent.MOUSE_PRESSED, e->mueveVista.presionado(e));
 		this.addEventHandler(MouseEvent.MOUSE_RELEASED, e->mueveVista.soltado(e));
 		this.addEventHandler(MouseEvent.MOUSE_EXITED, e->mueveVista.salio(e));
-		//this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
-		//this.setOnMouseDragged(e->mueveVista.draggeado(e));
+		this.addEventHandler(ScrollEvent.SCROLL, e->mueveVista.scrolleado(e));
+		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
@@ -261,29 +264,46 @@ public class CanvasJuego extends Canvas implements Actualizable{
 					mueveVista.altoCasillero());
 			
 		}
-		Unidad unidadSeleccionada=obtenerUnidadSeleccionada(seleccionada);
 		//el cartelito
-		String accion="";
-		if(unidadSeleccionada!=null)accion = juego.accionPosibleEn(unidadSeleccionada,hovereando);
+		String accion = juego.accionPosibleEn(hovereando);
 		if(accion!=""){
-		Bounds bounds = (new Text(accion)).getLayoutBounds();
-		double offsetX=20;
-		double offsetY=20;
-		gc.save();
-		gc.setFill(Color.BEIGE);
-		gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
-		gc.setFill(Color.BLACK);
-		gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
-		gc.restore();
+			Bounds bounds = (new Text(accion)).getLayoutBounds();
+			double offsetX=20;
+			double offsetY=20;
+			gc.save();
+			gc.setFill(Color.BEIGE);
+			gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
+			gc.setFill(Color.BLACK);
+			gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
+			gc.restore();
 		}
 		
-	}
-	private Unidad obtenerUnidadSeleccionada(PosicionEnElPlano pos) {
-		if(pos==null) return null;
-		Casillero c=construirCasillero(new Posicion(pos.clone(),Plano.TERRESTRE));
-		if(modoVista==ModoVista.SOLOAIRE||
-				(modoVista==ModoVista.AMBAS&&c.getuTerrestre()==null)) return c.getuAerea();
-		return c.getuTerrestre();
+		//el halo de ataque
+		if(haloAtaque!=null){
+			gc.save();
+			gc.setFill(Color.RED);
+			gc.setGlobalAlpha(0.3);
+			for(PosicionEnElPlano p : haloAtaque){
+				gc.fillRect(mueveVista.xPantalla(p),
+							mueveVista.yPantalla(p),
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			}
+			gc.restore();
+		}
+		//el halo de movimiento
+		if(haloMovimiento!=null){
+			gc.save();
+			gc.setFill(Color.YELLOW);
+			gc.setGlobalAlpha(0.3);
+			for(PosicionEnElPlano p : haloMovimiento){
+				gc.fillRect(mueveVista.xPantalla(p),
+							mueveVista.yPantalla(p),
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			}
+			gc.restore();
+		}
 	}
 
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
@@ -367,6 +387,18 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	public void setModoVista(ModoVista modoVista) {
 		this.modoVista = modoVista;
 		actualizar();
+	}
+	
+	//-----------------------------------mostrar halos de ataque/movimiento------//
+	private ArrayList<PosicionEnElPlano> haloAtaque;
+	private ArrayList<PosicionEnElPlano> haloMovimiento;
+	
+	public void setHaloAtaque(ArrayList<PosicionEnElPlano> haloAtaque){
+		this.haloAtaque = haloAtaque;
+	}
+	
+	public void setHaloMovimiento(ArrayList<PosicionEnElPlano> haloMovimiento){
+		this.haloMovimiento = haloMovimiento;
 	}
 	
 }
