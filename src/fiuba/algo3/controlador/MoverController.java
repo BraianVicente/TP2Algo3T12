@@ -29,7 +29,6 @@ public class MoverController implements CallbackCasillero {
 			actual = cas;
 
 			Unidad unit = anterior.getUnidad();
-			System.out.println(unit.getMovimientosRestantes());
 			Posicion posActual = juego.obtenerPosicion(unit);
 			Posicion posNueva = new Posicion(actual.getPos().getX(), actual.getPos().getY(), unit.getPlanoPerteneciente());
 			

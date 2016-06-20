@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import fiuba.algo3.controlador.AtacarController;
 import fiuba.algo3.controlador.ClickedUnitManager;
 import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
@@ -103,6 +104,7 @@ public class GameboardController {
     
     private GameController controller;
     private ClickedUnitManager manager;
+    private AtacarController ataque;
     MoverController mover;
     
     Unidad[] unitList = {
@@ -153,9 +155,11 @@ public class GameboardController {
 		manager = new ClickedUnitManager();
 		controller = new GameController(juego, manager, cj);
 		mover = new MoverController(juego);
+		ataque= new AtacarController(juego,cj);
 		
 		cj.agregarCallbackClickeo(manager);
 		cj.agregarCallbackClickeo(mover);
+		cj.agregarCallbackClickeo(ataque);
     	
     	GamePane.getChildren().add(cj);
     	

@@ -100,6 +100,7 @@ public class Juego {
     public void atacarUnidad(Posicion origen, Posicion destino){
         if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.atacar(tablero.obtenerUnidad(origen), tablero.obtenerUnidad(destino));
+            System.out.println("lalal");
         }
     }
     
