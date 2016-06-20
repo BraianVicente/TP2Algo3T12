@@ -203,10 +203,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
+			dibujarUnidades(gc,Plano.TERRESTRE);
 		}
 		
 		//las unidades terrestres
-		dibujarUnidades(gc,false);
 		
 		//el cielo
 		if(modoVista==ModoVista.AMBAS){
@@ -215,8 +215,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,1);
 		}
 		
-		//las unidades aereas
-		dibujarUnidades(gc,true);
+		//las unidades aerea
+		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE)dibujarUnidades(gc,Plano.AEREO);
 		
 		
 		//el cuadrado seleccionado
@@ -309,10 +309,10 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		gc.restore();
 	}
 	
-	private void dibujarUnidades(GraphicsContext gc, boolean aereas){
+	private void dibujarUnidades(GraphicsContext gc, Plano plano){
 		for(Unidad u: juego.obtenerUnidades()){
 			Posicion p = juego.posicion(u);
-			if(u.esAerea() == aereas){
+			if(u.getPlanoPerteneciente() == plano){
 				try{
 					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
 					gc.drawImage(imgU,

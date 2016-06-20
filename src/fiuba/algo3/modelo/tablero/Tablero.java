@@ -66,12 +66,12 @@ public class Tablero {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
-        ancho=x;
-        alto=y;
-        for (int i = 0; i < ancho; i++) {
-        	for(int j=0;j<alto;j++){
-        		this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
-        		this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
+        alto=x;
+        ancho=y;
+        for (int i = 0; i < alto; i++) {
+        	for(int j=0;j<ancho;j++){
+            this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
+            this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
         }
         this.colocarChispa();
@@ -118,9 +118,7 @@ public class Tablero {
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
     		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
     		this.desplazarPosicionContigua(unidad, posicionSiguiente);
-    		if (this.tieneChispa(posicionSiguiente)) {
-             unidad.darChispa();
-    		}
+    		if (this.tieneChispa(posicionSiguiente))       unidad.darChispa();
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
     	
