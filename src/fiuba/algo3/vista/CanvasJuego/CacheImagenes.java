@@ -38,7 +38,11 @@ public class CacheImagenes {
 				
 				"/fiuba/algo3/vista/imagenes/bonus/bonusInvulnerabilidad.png",
 				"/fiuba/algo3/vista/imagenes/bonus/bonusDoble.png",
-				"/fiuba/algo3/vista/imagenes/bonus/bonusFlash.png"
+				"/fiuba/algo3/vista/imagenes/bonus/bonusFlash.png",
+				
+				"/fiuba/algo3/vista/imagenes/efectos/bonusInvulnerabilidad.png",
+				"/fiuba/algo3/vista/imagenes/efectos/bonusFlash.png",
+				"/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png"
 		};
 		
 		imagenes = new HashMap<String,Image>();
