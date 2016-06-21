@@ -170,6 +170,10 @@ public class Juego {
         return jugador.equals(this.ganador) ;
     }
 
+    public Jugador getGanador() {
+    	return ganador;
+    }
+    
     public void jugadorGanador(Equipo equipo) {
         if (equipo.equals(jugadorDecepticons.getEquipo())) {
             ganador = jugadorDecepticons;
