@@ -16,6 +16,7 @@ public class FinTurnoController implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent ae) {
+		if(juego.termino()) controller.terminoJuego();
 		juego.avanzarTurno();
 		controller.setJugandoImage(juego.jugadorEnTurno().getEquipo());
 	}

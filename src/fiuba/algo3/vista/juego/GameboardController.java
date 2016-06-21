@@ -287,5 +287,10 @@ public class GameboardController {
         
     }
 
+	public void terminoJuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

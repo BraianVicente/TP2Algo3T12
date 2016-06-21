@@ -86,7 +86,6 @@ public class StatsPane {
     }
     
     public void setUnidadSeleccionada(Posicion p){
-   	 System.out.println("dd"+p);
         Unidad u = this.tablero.obtenerUnidad(p);
         this.setUnidadSeleccionada(u);
     }
@@ -122,9 +121,8 @@ public class StatsPane {
     }
 
     private void vidaUnidad(Unidad u) {
-    	 System.out.println(u.getVida());
-         System.out.println(u.getVidaMaxima());
-        this.vidaUnidad.setProgress((double)((double)u.getVida())/(double)u.getVidaMaxima());
+   
+        this.vidaUnidad.setProgress(u.getVida()/u.getVidaMaxima());
 
     }
 

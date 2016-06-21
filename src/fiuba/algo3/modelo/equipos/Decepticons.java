@@ -35,5 +35,8 @@ public class Decepticons extends Equipo {
 	public String toString() {
 		return "Decepticons";
 	}
+	public Equipo obtenerEquipoContrario(){
+		return new Autobots();
+	}
 
 }

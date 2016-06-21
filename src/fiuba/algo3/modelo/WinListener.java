@@ -6,6 +6,7 @@
 package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.jugador.Jugador;
 
 /**
  *
@@ -13,8 +14,8 @@ import fiuba.algo3.modelo.equipos.Equipo;
  */
 public interface WinListener {
     
-    public void gano(Equipo equipo);
 
-    public void perdio(Equipo equipo);
+	public Equipo determinarEquipoGanador();
+	public boolean alguienGano();
     
 }

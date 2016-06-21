@@ -29,5 +29,7 @@ public class Ninguno extends Equipo {
 	public UnidadCombinable getCombination() {
 		return null; // throw exception
 	}
-
+	public Equipo obtenerEquipoContrario(){
+		return this;
+	}
 }

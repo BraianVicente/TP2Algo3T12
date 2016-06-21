@@ -36,5 +36,9 @@ public class Autobots extends Equipo {
 		return "Autobots";
 		
 	}
+	public Equipo obtenerEquipoContrario(){
+		return new Decepticons();
+	}
+		
 
 }

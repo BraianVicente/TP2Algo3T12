@@ -195,25 +195,23 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
-			dibujarBonuses(gc);
-			dibujarUnidades(gc,Plano.TERRESTRE);
 		}
 			
 		//los bonuses
-					
-			dibujarEfectos(gc);
-		//las unidades terrestres
+		dibujarBonuses(gc);		
 		
+		//las unidades terrestres
+			if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA) dibujarUnidades(gc,Plano.TERRESTRE);
 		//el cielo
 		if(modoVista==ModoVista.AMBAS){
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
 		}else if(modoVista==ModoVista.SOLOAIRE){
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.8f);
 		}
-		
+		//efectos
+		dibujarEfectos(gc);
 		//las unidades aerea
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE){
-			dibujarBonuses(gc);
 			dibujarUnidades(gc,Plano.AEREO);
 		}
 		

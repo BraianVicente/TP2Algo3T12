@@ -46,4 +46,6 @@ public abstract class Equipo {
     public boolean tieneCombinacion() {
         return (this.combinacion != null) ; 
     }
+
+	abstract public Equipo obtenerEquipoContrario() ;
 }

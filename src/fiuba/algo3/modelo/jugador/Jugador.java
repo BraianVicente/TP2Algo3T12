@@ -21,7 +21,7 @@ public class Jugador {
     private String nombre ;
     private Equipo equipo ;
     private Tablero tablero;
-    private WinListener condicionVictoria ;
+
     
 
     public Jugador(String nombre, Equipo equipo) {
