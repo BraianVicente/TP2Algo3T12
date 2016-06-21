@@ -4,6 +4,7 @@ import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.formas.HumanoideSuperion;
@@ -11,31 +12,21 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 public class Superion extends UnidadCombinable {
 	
-	private int vidaMax;
 
-	public Superion(DeathListener command) {
-		super(new Autobots(), command);
+
+
+
+	public Superion( DeathListener command, Unidad unita, Unidad unitb, Unidad unitc) {
+		super(new Autobots(), command, unita, unitb, unitc);
+
 	}
-	
-	public Superion() {
-        this(new IgnorarMuerte());
-	}
-	
-	public Superion(Transformer a, Transformer b, Transformer c) {
-		super(new Autobots(), new IgnorarMuerte());
-		vidaMax = a.getVida() + b.getVida() + c.getVida();
-		super.setVida(vidaMax);
-	}
+
 
 	@Override
 	public boolean esTerrestre() {
 		return true;
 	}
 
-	@Override
-	public int getVidaMaxima() {
-		return vidaMax;
-	}
 
 	@Override
 	public boolean esAerea() {

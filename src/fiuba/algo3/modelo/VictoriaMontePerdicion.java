@@ -5,8 +5,6 @@
  */
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Tablero;
 
@@ -19,16 +17,20 @@ public class VictoriaMontePerdicion implements WinListener{
     private Tablero tablero;
     private Juego juego;
 
-    
-    
-    private boolean gano(Equipo equipo) {
-        return ( (this.tablero.unidadesContieneChispa(equipo)) 
-            && (this.chispaSeEncuentraEnMonterPerdicion())||this.perdio(equipo.obtenerEquipoContrario()));
-       
+    @Override
+    public void gano(Equipo equipo) {
+        if  ( (this.tablero.unidadesContieneChispa(equipo)) 
+            && (this.chispaSeEncuentraEnMonterPerdicion())) {
+            this.juego.jugadorGanador(equipo);
+        }
     }
 
-    private boolean perdio(Equipo equipo) {
-       return ! this.tablero.existenUnidadeDeEquipo(equipo)    ;
+    @Override
+    public void perdio(Equipo equipo) {
+        if( ! this.tablero.existenUnidadeDeEquipo(equipo) ){
+            this.juego.jugadorDerrotado(equipo) ;
+            
+        }
     }
 
     private boolean chispaSeEncuentraEnMonterPerdicion() {
@@ -42,18 +44,6 @@ public class VictoriaMontePerdicion implements WinListener{
     public void setTablero(Tablero tab) {
         this.tablero = tab ;
     }
-
-	@Override
-	public Equipo determinarEquipoGanador() {
-		if(!alguienGano()) throw new NoGanoNadieException();
-		if(gano(new Autobots())) return new Autobots();
-		else return new Decepticons();
-	}
-
-	@Override
-	public boolean alguienGano() {
-		return gano(new Autobots())||gano(new Decepticons());
-	}
     
     
     

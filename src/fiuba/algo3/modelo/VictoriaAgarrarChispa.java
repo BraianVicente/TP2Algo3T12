@@ -5,8 +5,6 @@
  */
 package fiuba.algo3.modelo;
 
-import fiuba.algo3.modelo.equipos.Autobots;
-import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Tablero;
 
@@ -36,27 +34,20 @@ public class VictoriaAgarrarChispa implements WinListener {
         this.juego = juego ;
     }
     
-    public boolean perdio(Equipo equipo) {
-        return ! this.tablero.existenUnidadeDeEquipo(equipo)  ;
-            
-       
-    }
-
-    public boolean gano(Equipo equipo) {
-       return this.tablero.unidadesContieneChispa(equipo)||this.perdio(equipo.obtenerEquipoContrario());
-        
-    }
     @Override
-	public Equipo determinarEquipoGanador() {
-		if(!alguienGano()) throw new NoGanoNadieException();
-		if(gano(new Autobots())) return new Autobots();
-		else return new Decepticons();
-	}
+    public void perdio(Equipo equipo) {
+        if( ! this.tablero.existenUnidadeDeEquipo(equipo) ){
+            this.juego.jugadorDerrotado(equipo) ;
+            
+        }
+    }
 
-	@Override
-	public boolean alguienGano() {
-		return gano(new Autobots())||gano(new Decepticons());
-	}
+    @Override
+    public void gano(Equipo equipo) {
+        if (this.tablero.unidadesContieneChispa(equipo)){
+            this.juego.jugadorGanador(equipo);
+        }
+    }
     
     
 }

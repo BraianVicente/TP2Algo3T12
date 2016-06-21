@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
+import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
@@ -158,13 +159,11 @@ public class Juego {
 	}
 
 	public boolean enTablero(Posicion p) {
-		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
-				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
+		return tablero.enLimites(p);
 	}
 	
 	public boolean enTablero(PosicionEnElPlano p) {
-		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
-				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
+		return tablero.enLimites(p);
 	}
     
     public boolean jugadorGanadorEs(Jugador jugador) {
@@ -285,5 +284,16 @@ public class Juego {
 
 	public Posicion posicion(Bonus b) {
 		return tablero.posicion(b);
+	}
+
+
+	public boolean termino() {
+		return this.jugadorGanadorEs(enEspera)||this.jugadorGanadorEs(enTurno);
+	}
+
+
+	public boolean hayCombinacion(Equipo equipo) {
+		return tablero.tieneCombinacion(equipo);
+		
 	}
 }

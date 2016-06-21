@@ -196,22 +196,13 @@ public class JuegoTest {
         boolean dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
         						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
         						(tab.isEmpty(p1)&&tab.isEmpty(p3));
-        Assert.assertFalse(!todasVacias&&dosEstanVacias);
+        Assert.assertTrue(!todasVacias&&dosEstanVacias);
         juego.avanzarTurno();
         juego.avanzarTurno();
-        todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
-        dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
-        						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
-        						(tab.isEmpty(p1)&&tab.isEmpty(p3));
-        Assert.assertFalse(!todasVacias&&dosEstanVacias);
+        Assert.assertTrue(juego.hayCombinacion(new Autobots()));
         juego.avanzarTurno();
         juego.avanzarTurno();
-        todasVacias= tab.isEmpty(p1)&&tab.isEmpty(p2)&&tab.isEmpty(p3);
-        dosEstanVacias= (tab.isEmpty(p1)&&tab.isEmpty(p2))||
-        						(tab.isEmpty(p2)&&tab.isEmpty(p3))||
-        						(tab.isEmpty(p1)&&tab.isEmpty(p3));
-        Assert.assertFalse(!todasVacias&&dosEstanVacias);
-
+        Assert.assertFalse(juego.hayCombinacion(new Autobots()));
         //una llena, las otras dos vacias no importa cuales
     }
     @Test

@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.vista.statsPane;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
@@ -103,7 +104,7 @@ public class StatsPane {
     
     public void setUpPreview(){
 
-        Unidad u = new Superion(new Optimusprime(),new Ratchet(),new Bumblebee()) ;
+        Unidad u = new Superion(new Death(tablero),new Optimusprime(),new Ratchet(),new Bumblebee()) ;
         this.setUnidadSeleccionada(u);
         Superficie t = new Pantano();
         this.setSuperficieTerrestre(t);

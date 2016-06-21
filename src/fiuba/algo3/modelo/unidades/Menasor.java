@@ -4,36 +4,24 @@ import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.IgnorarMuerte;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Decepticons;
+import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 public class Menasor extends UnidadCombinable {
 	
-	private int vidaMax;
-
-	public Menasor(DeathListener command) {
-		super(new Decepticons(), command);
-	}
-	
-	public Menasor() {
-        this(new IgnorarMuerte());
-	}
-	
-	public Menasor(Transformer a, Transformer b, Transformer c) {
-		super(new Decepticons(), new IgnorarMuerte());
-		vidaMax = a.getVida() + b.getVida() + c.getVida();
-		super.setVida(vidaMax);
+	public Menasor( DeathListener command, Unidad unita, Unidad unitb, Unidad unitc) {
+		super(new Decepticons(), command, unita, unitb, unitc);
+		// TODO Auto-generated constructor stub
 	}
 
+
+	
 	@Override
 	public boolean esTerrestre() {
 		return true;
 	}
 
-	@Override
-	public int getVidaMaxima() {
-		return vidaMax;
-	}
 
 	@Override
 	public boolean esAerea() {

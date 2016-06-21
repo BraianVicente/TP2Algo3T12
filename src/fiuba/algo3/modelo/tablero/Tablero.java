@@ -5,6 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Escenario;
 import fiuba.algo3.modelo.SinVictoria;
 import fiuba.algo3.modelo.WinListener;
@@ -23,6 +24,7 @@ import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 import java.util.ArrayList;
 
@@ -173,12 +175,12 @@ public class Tablero {
 			throw new CombinacionInvalidaException();
 		}
 
-		Unidad comb = unita.equipo().getCombination();
+		Unidad comb = unita.equipo().crearCombinacion(this,unita,unitb,unitc);
 
 		if ( (unita.tieneChispa()) || (unitb.tieneChispa()) || (unitc.tieneChispa())) {
 			comb.darChispa();
 		}
-
+		
 		quitarUnidadActual(a);
 		quitarUnidadActual(b);
 		quitarUnidadActual(c);
@@ -274,12 +276,6 @@ public class Tablero {
             if (unidad.es(equipo)){
                 unidad.avanzarTurno();
             }
-        }
-        if ((equipo.tieneCombinacion()) &&
-            equipo.obtenerUnidadCombinada().creacionFinalizada() )  
-            
-             {
-                this.combinarUnidadesEquipo(equipo);
         }
     }
 
@@ -402,6 +398,44 @@ public class Tablero {
 
 	public Posicion posicion(Bonus b) {
 		return contenedorBonuses.obtenerPosicion(b);
+	}
+
+	public void desarmar(UnidadCombinable u) {
+		ArrayList<Unidad> lista=u.componentesVivos();
+		Posicion posInicial=contenedorUnidades.obtenerPosicion(u);
+		for(Unidad unidadNueva:lista){
+			reubicar(unidadNueva,posInicial);
+		}
+        this.strategiWin.perdio(u.equipo());
+	}
+
+	private void reubicar(Unidad unidadNueva, Posicion posInicial) {
+		Posicion posProbable=posInicial;
+		posProbable=posProbable.nuevaPosicionConDistintoPlano(unidadNueva.getPlanoPerteneciente());
+		//me muevo a izquierda
+		while(contenedorUnidades.ocupada(posProbable)&&this.enLimites(posProbable)){
+			posProbable=posProbable.obtenerMismaPosicionDesplazada(-1, 0);
+		}
+		//despues a derecha si no puedo
+		while(contenedorUnidades.ocupada(posProbable)&&this.enLimites(posProbable)){
+			posProbable=posProbable.obtenerMismaPosicionDesplazada(1, 0);
+		}
+		
+		this.agregarUnidad(posProbable, unidadNueva);
+		
+	}
+
+	public boolean enLimites(PosicionEnElPlano p) {
+		return enLimites(new Posicion(p,Plano.TERRESTRE));
+	}
+	public boolean enLimites(Posicion p) {
+		return (0<=p.getX() && p.getX()<this.obtenerAncho()) &&
+				(0<=p.getY() && p.getY()<this.obtenerAlto());
+	}
+
+	public boolean tieneCombinacion(Equipo equipo) {
+		ArrayList<Posicion> list=this.obtenerPosicionesUnidadesVivasEquipo(equipo);
+		return list.size()==1&&contenedorUnidades.obtenerUnidad(list.get(0)).esCombinacion();
 	}
 
 }

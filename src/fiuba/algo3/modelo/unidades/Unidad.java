@@ -29,7 +29,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 public abstract class Unidad {
 	
 	protected Chispa chispa;
-	private DeathListener command;
+	protected DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
 	private boolean yaAtaco;
@@ -80,7 +80,7 @@ public abstract class Unidad {
 		return Plano.TERRESTRE;
 	}
 	//-------------------vida---------------
-    private int vida;
+    protected int vida;
     public abstract int getVidaMaxima();
     
     public int getVida(){
@@ -243,5 +243,10 @@ public abstract class Unidad {
 
 	public ArrayList<String> obtenerNombresImagenesModificadores() {
 		return modificadores.obtenerNombresImagenesModificadores();
+	}
+
+	public boolean esCombinacion() {
+
+		return false;
 	}
 }
