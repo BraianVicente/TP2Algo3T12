@@ -87,4 +87,12 @@ public class ContenedorModificadores {
 				.map(a->a.esPantano())
 				.reduce(false,(a,b)->a||b);//true pisa a false
 	}
+
+	public ArrayList<String> obtenerNombresImagenesModificadores() {
+		ArrayList<String> ret = new ArrayList<String>();
+		for(Modificador m : modificadores){
+			ret.add(m.nombreImagen());
+		}
+		return ret;
+	}
 }

@@ -341,6 +341,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 					Image imgSup = cacheImagenes.obtenerImagen(aDibujar.nombreImagen());
 					
 					
+					
 					gc.drawImage(imgSup,
 							mueveVista.xPantalla(obtener), 
 							mueveVista.yPantalla(obtener), 
@@ -360,24 +361,47 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	private void dibujarUnidades(GraphicsContext gc, Plano plano){
 		for(Unidad u: juego.obtenerUnidades()){
-			Posicion p = juego.posicion(u);
+			
 			if(u.getPlanoPerteneciente() == plano){
-				try{
-					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
-					gc.drawImage(imgU,
-							mueveVista.xPantalla(p), 
-							mueveVista.yPantalla(p), 
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero()
-					);
-				}catch(ImagenInexistenteExcption e){
-					
-				}
+				dibujarUnidad(gc, u);
+				
 			}
 		}
 	}
 	
 	
+	private void dibujarUnidad(GraphicsContext gc, Unidad u) {
+		Posicion p = juego.posicion(u);
+		try{
+			Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
+			gc.drawImage(imgU,
+					mueveVista.xPantalla(p), 
+					mueveVista.yPantalla(p), 
+					mueveVista.anchoCasillero(),
+					mueveVista.altoCasillero()
+			);
+			ArrayList<String> nombres_imagenes = u.obtenerNombresImagenesModificadores();
+			gc.save();
+			gc.setGlobalAlpha(0.5f/nombres_imagenes.size());
+			for(String nombre : nombres_imagenes ){
+				if(nombre != null){
+					Image imgM = cacheImagenes.obtenerImagen(nombre);
+					gc.drawImage(imgM,
+							mueveVista.xPantalla(p), 
+							mueveVista.yPantalla(p), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero()
+					);
+				}
+			}
+			gc.restore();
+		}catch(ImagenInexistenteExcption e){
+			
+		}
+		
+	}
+
+
 	/**
 	 *
 	 */

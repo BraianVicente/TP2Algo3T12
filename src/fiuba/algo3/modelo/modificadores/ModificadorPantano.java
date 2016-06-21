@@ -22,6 +22,11 @@ public class ModificadorPantano extends ModificadorPermanente{
 	public boolean esPantano() {
 		return true;
 	}
-	
+
+	@Override
+	public String nombreImagen() {
+		return null;
 	}
+	
+}
 

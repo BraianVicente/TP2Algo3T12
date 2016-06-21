@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.unidades;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.Chispa;
@@ -238,4 +240,8 @@ public abstract class Unidad {
 	}
 
     public abstract String nombre() ;
+
+	public ArrayList<String> obtenerNombresImagenesModificadores() {
+		return modificadores.obtenerNombresImagenesModificadores();
+	}
 }
