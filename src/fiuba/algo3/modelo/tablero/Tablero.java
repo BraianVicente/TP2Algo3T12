@@ -105,7 +105,7 @@ public class Tablero {
     		Posicion posicionSiguiente;
     		posicionSiguiente=obtenerPosicionADondeMoverse(unidad,posicionFin);
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
-    		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
+    		unidad.descontarMovimiento(1/unidad.getCoeficienteMovimientoActual());
     		this.desplazarPosicionContigua(unidad, posicionSiguiente);
     		if (this.tieneChispa(posicionSiguiente))       unidad.darChispa();
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
@@ -395,5 +395,13 @@ public class Tablero {
     public void colocarMontePerdicion(Posicion posicion) {
         this.posicionMontePerdicion = posicion ;
     }
+
+	public ArrayList<Bonus> obtenerBonuses() {
+		return contenedorBonuses.obtenerBonuses();
+	}
+
+	public Posicion posicion(Bonus b) {
+		return contenedorBonuses.obtenerPosicion(b);
+	}
 
 }

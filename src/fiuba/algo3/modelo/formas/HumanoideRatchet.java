@@ -24,7 +24,7 @@ public class HumanoideRatchet extends FormaHumanoide {
     
     @Override
 	public String nombreImagen() {
-		return "fiuba/algo3/vista/imagenes/transformers/RatchetHumanoide.png";
+		return "/fiuba/algo3/vista/imagenes/transformers/RatchetHumanoide.png";
 	}
 
     @Override

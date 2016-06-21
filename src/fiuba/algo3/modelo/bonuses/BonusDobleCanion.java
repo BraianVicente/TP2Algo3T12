@@ -14,5 +14,9 @@ public class BonusDobleCanion extends Bonus {
 	public Modificador obtenerModificador() {
 		return new ModificadorDoble();
 	}
+	
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/bonus/bonusDoble.png";
+	}
 
 }

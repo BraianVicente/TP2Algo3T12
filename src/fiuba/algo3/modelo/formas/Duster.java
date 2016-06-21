@@ -24,7 +24,7 @@ public class Duster extends FormaTerrestre {
     
     @Override
 	public String nombreImagen() {
-		return "fiuba/algo3/vista/imagenes/transformers/FrenzyVehiculo.png";
+		return "/fiuba/algo3/vista/imagenes/transformers/FrenzyVehiculo.png";
 	}
 
     @Override

@@ -8,17 +8,20 @@ import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CallbackCasillero;
+import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
 
 public class MoverController implements CallbackCasillero {
 
 	private Casillero actual, anterior;
 	private Juego juego;
+	private CanvasJuego cj;
 	
-	public MoverController(Juego juego) {
+	public MoverController(Juego juego, CanvasJuego cj) {
 		this.juego = juego;
 		actual = null;
 		anterior = null;
+		this.cj=cj;
 	}
 	
 	@Override
@@ -28,7 +31,7 @@ public class MoverController implements CallbackCasillero {
 			anterior = actual;
 			actual = cas;
 
-			Unidad unit = anterior.getUnidad();
+			Unidad unit = anterior.getUnidad(cj.getModoVista());
 			Posicion posActual = juego.obtenerPosicion(unit);
 			Posicion posNueva = new Posicion(actual.getPos().getX(), actual.getPos().getY(), unit.getPlanoPerteneciente());
 			

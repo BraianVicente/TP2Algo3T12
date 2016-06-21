@@ -11,12 +11,19 @@ import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
 import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.bonuses.BonusBurbuja;
+import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
+import fiuba.algo3.modelo.bonuses.BonusFlash;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
+
+import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
@@ -147,6 +154,7 @@ public class GameboardController {
     	
 		juego = new Juego(tablero, j1, j2);
 		setUpUnits(juego);
+		setUpBonus(juego);
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
@@ -154,7 +162,7 @@ public class GameboardController {
 		
 		manager = new ClickedUnitManager();
 		controller = new GameController(juego, manager, cj);
-		mover = new MoverController(juego);
+		mover = new MoverController(juego,cj);
 		ataque= new AtacarController(juego,cj);
 		
 		cj.agregarCallbackClickeo(manager);
@@ -180,7 +188,14 @@ public class GameboardController {
 
     }
     
-    public void hovereoCasillero(Casillero c){
+    private void setUpBonus(Juego juego) {
+    	juego.agregarBonus(new BonusBurbuja(null),new Posicion(3,3));
+    	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(5,5));
+    	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(0,4));
+    	juego.agregarBonus(new BonusFlash(null),new Posicion(4,1));
+	}
+
+	public void hovereoCasillero(Casillero c){
     	if(!c.isEmpty()){
             this.setUnidadSeleccionada(c.getUnidad());
         }
@@ -193,8 +208,9 @@ public class GameboardController {
     public void setUpUnits(Juego juego) {
     	Random generator = new Random();
     	Posicion pos = null;
-    	
+    	Death death=new Death(tablero);
     	for (Unidad unit: unitList) {
+    		unit.setDeathListener(death);
     		while ((pos == null) || (!juego.posicionVacia(pos)))
     			pos = new Posicion(generator.nextInt(6), generator.nextInt(6), unit.getPlanoPerteneciente());
     		juego.agregarUnidad(pos, unit);

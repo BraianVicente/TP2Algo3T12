@@ -24,7 +24,7 @@ public class HumanoideFrenzy extends FormaHumanoide {
     
     @Override
 	public String nombreImagen() {
-		return "fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png";
+		return "/fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png";
 	}
 
     @Override

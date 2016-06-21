@@ -54,7 +54,9 @@ public abstract class Unidad {
     public Equipo equipo() {
     	return this.equipo;
     }
-   
+    public void setDeathListener(DeathListener d){
+    	command=d;
+    }
     
 	public boolean existe(){
 		return true;
