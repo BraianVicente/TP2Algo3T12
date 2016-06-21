@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiuba.algo3.vista.splash.SplashController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="664.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@fondo.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="122.0" layoutY="36.0" text="Enhorabuena!" textFill="WHITE">
+               <font>
+                  <Font size="56.0" />
+               </font>
+            </Label>
+            <Label fx:id="nombreJugador" alignment="CENTER" layoutX="205.0" layoutY="124.0" text="NombreJugador" textAlignment="JUSTIFY" textFill="#ff0f0f" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Label>
+            <Button fx:id="playButton" layoutX="262.0" layoutY="270.0" mnemonicParsing="false" text="Jugar de nuevo" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

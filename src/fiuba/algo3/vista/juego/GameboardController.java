@@ -32,7 +32,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
-
+import fiuba.algo3.vista.finalSplash.FinalSplash;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -43,6 +43,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class GameboardController {
 
@@ -288,8 +289,13 @@ public class GameboardController {
     }
 
 	public void terminoJuego() {
-		// TODO Auto-generated method stub
-		
+		try {
+			FinalSplash.class.newInstance().start(new Stage(), juego.getGanador().getNombre());
+			Stage stage = (Stage) GamePane.getScene().getWindow();
+			stage.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
