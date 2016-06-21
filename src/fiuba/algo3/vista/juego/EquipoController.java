@@ -12,7 +12,7 @@ public class EquipoController implements EventHandler<ActionEvent> {
 			Alert alert = new Alert(AlertType.INFORMATION,""
 					+ "Este juego fue desarrollado por el equipo T12,\n"
 					+ "para presentar en el curso de AyP3 del turno tarde, \n"
-					+ "del primer cuatrimestre del año 2016."
+					+ "del primer cuatrimestre del a\u00F1o 2016."
 					);
 			alert.showAndWait();
 	}
