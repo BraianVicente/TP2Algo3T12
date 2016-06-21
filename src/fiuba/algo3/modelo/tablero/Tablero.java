@@ -212,7 +212,6 @@ public class Tablero {
 	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
-		System.out.println(u);
         this.strategiWin.perdio(u.equipo());
 
 	}
