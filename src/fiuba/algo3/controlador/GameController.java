@@ -19,11 +19,9 @@ public class GameController {
 	}
 	
 	public void transformarUnidad() {
-		System.out.println("lll2");
 		Unidad unit = manager.getUnidad(cj.getModoVista()); // Fallback: returns UnidadAerea
 		Posicion pos = juego.obtenerPosicion(unit);
-		if (unit.sePuedeTransformar())
-			juego.transformarUnidad(pos);
+		if (unit.sePuedeTransformar())	juego.transformarUnidad(pos);
 		this.actualizarInformacion();
 
 	}
@@ -36,7 +34,7 @@ public class GameController {
 
 	public void combinarUnidades() {
 		juego.combinarUnidades();
-		cj.actualizar();
+		this.actualizarInformacion();
 	}
 	
 }

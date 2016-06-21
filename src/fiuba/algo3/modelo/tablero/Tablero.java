@@ -139,6 +139,7 @@ public class Tablero {
 	public void transformar(Unidad unidad){
 		if(!unidad.sePuedeTransformar())throw new TransformacionInvalida();
         ((Transformer) unidad).transformar();
+        contenedorUnidades.cambiarPlano(unidad, unidad.getPlanoPerteneciente());;
 
 	}
 
@@ -185,7 +186,7 @@ public class Tablero {
 		quitarUnidadActual(b);
 		quitarUnidadActual(c);
 
-		agregarUnidad(a, comb); // or get avg distance?
+		agregarUnidad(a, comb); 
 
 	}
 
@@ -403,6 +404,7 @@ public class Tablero {
 	public void desarmar(UnidadCombinable u) {
 		ArrayList<Unidad> lista=u.componentesVivos();
 		Posicion posInicial=contenedorUnidades.obtenerPosicion(u);
+		contenedorUnidades.removerUnidad(u);
 		for(Unidad unidadNueva:lista){
 			reubicar(unidadNueva,posInicial);
 		}

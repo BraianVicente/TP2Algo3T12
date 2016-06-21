@@ -58,9 +58,9 @@ public class ContenedorUnidades  {
 		posicionesPorUnidad.remove(u);
 		unidadesPorPosicion.remove(p);
 	}
-	public void cambiarPlano(Unidad transformer, Plano planoPerteneciente) {
-		Posicion nuevaPosicion=posicionesPorUnidad.get(transformer).nuevaPosicionConDistintoPlano(planoPerteneciente);
-		mover(transformer,nuevaPosicion);
+	public void cambiarPlano(Unidad unidad, Plano planoPerteneciente) {
+		Posicion nuevaPosicion=posicionesPorUnidad.get(unidad).nuevaPosicionConDistintoPlano(planoPerteneciente);
+		mover(unidad,nuevaPosicion);
 	}
 	private void mover(Unidad transformer, Posicion nuevaPosicion) {
 		Posicion posicionVieja=obtenerPosicion(transformer);

@@ -15,8 +15,8 @@
       <menus>
         <Menu mnemonicParsing="false" text="Juego">
           <items>
-            <MenuItem mnemonicParsing="false" text="Volver Atras" />
-            <MenuItem mnemonicParsing="false" text="Salir" />
+            <MenuItem fx:id="volverAtras" mnemonicParsing="false" text="Volver Atras" />
+            <MenuItem fx:id="" mnemonicParsing="false" text="Salir" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Sobre">

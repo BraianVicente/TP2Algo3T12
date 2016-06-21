@@ -60,7 +60,7 @@ public class Superion extends UnidadCombinable {
 
 	@Override
 	public String nombreImagen() {
-		return "fiuba/algo3/vista/imagenes/transformers/Superion.png";
+		return "/fiuba/algo3/vista/imagenes/transformers/Superion.png";
 	}
 
     @Override

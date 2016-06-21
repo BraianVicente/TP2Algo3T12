@@ -103,12 +103,11 @@ public class Juego {
     public void atacarUnidad(Posicion origen, Posicion destino){
         if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.atacar(tablero.obtenerUnidad(origen), tablero.obtenerUnidad(destino));
-            System.out.println("lalal");
         }
     }
     
     public void transformarUnidad(Posicion origen){
-        if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
+    	if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.transformar(tablero.obtenerUnidad(origen));
         }
     }
@@ -231,25 +230,32 @@ public class Juego {
     public void clickeoCasillero(Casillero c,CanvasJuego canvas){
     	//ac� estoy suponiendo que siempre que to�s una unidad la quer�s seleccionar,
     	Unidad referenciada = unidadReferenciada(c);
-    	
-    	if(unidadSeleccionada == null){
-    		unidadSeleccionada =referenciada;
-    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
-        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
-    	}else{
-    		//if(sePuedeAtacar...)atacar(...)
-    		//if(sePuedeMover...)mover(...)
-    		//if(sePuedeTransformar(...))transformar(...)
-    		//Estar�a muy muy lindo una interfaz acci�n ac� pero no hay T
-    		
-    		canvas.setHaloAtaque(null);
-        	canvas.setHaloMovimiento(null);
-    	}
+   		this.cambiarUnidadSeleccionada(referenciada);    	
+//    	if(unidadSeleccionada == null){
+//    		this.cambiarUnidadSeleccionada(referenciada);
+//    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
+//        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
+//    	}else{
+//    		//if(sePuedeAtacar...)atacar(...)
+//    		//if(sePuedeMover...)mover(...)
+//    		//if(sePuedeTransformar(...))transformar(...)
+//    		//Estar�a muy muy lindo una interfaz acci�n ac� pero no hay T
+//    		
+//    		canvas.setHaloAtaque(null);
+//        	canvas.setHaloMovimiento(null);
+//    	}
     	
     	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
     }
     
+    
+    
+	private void cambiarUnidadSeleccionada(Unidad referenciada) {
+		unidadSeleccionada=referenciada;
+		
+	}
+
 
 	public Casillero construirCasillero(Posicion pos) {
 

@@ -33,10 +33,12 @@ import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
 import fiuba.algo3.vista.finalSplash.FinalSplash;
+import fiuba.algo3.vista.finalSplash.PlayAgainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -64,6 +66,9 @@ public class GameboardController {
     
     @FXML
     private Button combinarButton;
+    
+    @FXML
+    private MenuItem volverAtras;
     
     @FXML
     private ChoiceBox<String> vistaChoiceBox;
@@ -113,7 +118,8 @@ public class GameboardController {
     private GameController controller;
     private ClickedUnitManager manager;
     private AtacarController ataque;
-    MoverController mover;
+    private MoverController mover;
+    private CanvasJuego cj;
     
     Unidad[] unitList = {
     		new Optimusprime(),
@@ -134,7 +140,7 @@ public class GameboardController {
         assert StatsPane != null : "fx:id=\"StatsPane\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert vistaChoiceBox != null : "fx:id=\"vistaChoiceBox\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert jugandoImage != null : "fx:id=\"jugandoImage\" was not injected: check your FXML file 'MainJuego.fxml'.";
-		
+		assert volverAtras !=null : "fx:id=\"volverAtras\" was not injected: check your FXML file 'MainJuego.fxml'.";
     }
     
     public void setJugandoImage(Equipo equipo) {
@@ -159,7 +165,7 @@ public class GameboardController {
 		
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
-		CanvasJuego cj = new CanvasJuego(juego);
+		cj = new CanvasJuego(juego);
 		
 		manager = new ClickedUnitManager();
 		controller = new GameController(juego, manager, cj);
@@ -186,6 +192,9 @@ public class GameboardController {
         
         CombinarController cc = new CombinarController(controller);
         combinarButton.setOnAction(cc);
+        
+        PlayAgainController pac=new PlayAgainController(new Button());
+        volverAtras.setOnAction(pac);
 
     }
     
@@ -296,6 +305,10 @@ public class GameboardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void actualizarVista(){
+		this.cj.actualizar();
 	}
 
 

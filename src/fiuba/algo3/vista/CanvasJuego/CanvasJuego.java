@@ -394,7 +394,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			}
 			gc.restore();
 		}catch(ImagenInexistenteExcption e){
-			
 		}
 		
 	}
