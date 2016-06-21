@@ -13,7 +13,7 @@ public class FinalSplash extends Application {
 	public void start(Stage stage, String winner) throws Exception {
 		try {
 			
-			FXMLLoader loader = FXMLLoader.load(getClass().getResource("FinalSplash.fxml")); 
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("FinalSplash.fxml")); 
 			Parent root = loader.load();
 			
 			FinalSplashController controller = loader.<FinalSplashController>getController();
@@ -36,7 +36,7 @@ public class FinalSplash extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		start(stage, "");
+		start(stage, "Debug");
 	}
 
 }
