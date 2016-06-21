@@ -109,7 +109,14 @@ public class GameboardController {
     @FXML
     private TextArea aereoEfectos ;
     
-
+    @FXML
+    private MenuItem cerrarMenuItem ;
+    
+    @FXML
+    private MenuItem equipoMenuItem ;
+    
+    @FXML
+    private MenuItem comoJugar ;
     
     private Tablero tablero;
     private Juego juego;
@@ -143,6 +150,9 @@ public class GameboardController {
         assert vistaChoiceBox != null : "fx:id=\"vistaChoiceBox\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert jugandoImage != null : "fx:id=\"jugandoImage\" was not injected: check your FXML file 'MainJuego.fxml'.";
 		assert volverAtras !=null : "fx:id=\"volverAtras\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert cerrarMenuItem !=null : "fx:id=\"cerrarMenuItem\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert comoJugar !=null : "fx:id=\"comoJugar\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert equipoMenuItem !=null : "fx:id=\"equipoMenuItem\" was not injected: check your FXML file 'MainJuego.fxml'.";
     }
     
     public void setJugandoImage(Equipo equipo) {
@@ -198,8 +208,11 @@ public class GameboardController {
         CombinarController cc = new CombinarController(controller);
         combinarButton.setOnAction(cc);
         
-        PlayAgainController pac=new PlayAgainController(new Button());
-        volverAtras.setOnAction(pac);
+        ComoJugarController cjc = new ComoJugarController();
+        comoJugar.setOnAction(cjc);
+        
+        EquipoController ec = new EquipoController();
+        equipoMenuItem.setOnAction(ec);
 
     }
     
@@ -314,6 +327,13 @@ public class GameboardController {
 	
 	public void actualizarVista(){
 		this.cj.actualizar();
+	}
+
+	public void setStage(Stage stage) {
+		VolverMenuController pac=new VolverMenuController(stage);
+        volverAtras.setOnAction(pac);
+        CerrarController cc=new CerrarController(stage);
+        cerrarMenuItem.setOnAction(cc);
 	}
 
 
