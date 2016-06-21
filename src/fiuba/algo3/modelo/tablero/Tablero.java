@@ -440,4 +440,8 @@ public class Tablero {
 		return list.size()==1&&contenedorUnidades.obtenerUnidad(list.get(0)).esCombinacion();
 	}
 
+	public boolean contiene(Unidad u) {
+		return contenedorUnidades.contiene(u);
+	}
+
 }

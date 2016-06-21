@@ -186,6 +186,7 @@ public class Juego {
     }
     
     public String accionPosibleEn(PosicionEnElPlano posicion){
+    	if(!tablero.contiene(unidadSeleccionada)) unidadSeleccionada=null;
     	if(unidadSeleccionada!=null && enTablero(posicion) ){
     		Unidad u = unidadSeleccionada;
     		String accionPosible="Deseleccionar";
@@ -203,14 +204,14 @@ public class Juego {
     }
     
     public boolean sePuedeTransformar(Unidad u){
-    	return tablero.sePuedeTransformar(u);
+    	return tablero.sePuedeTransformar(u)&&enTurno.esDeSuEquipo(u);
     }
     public boolean puedeAtacar(Unidad atacante, Posicion posicionObjetivo){
-    	return tablero.puedeAtacar(atacante,posicionObjetivo);
+    	return tablero.puedeAtacar(atacante,posicionObjetivo)&&enTurno.esDeSuEquipo(atacante);
     }
     
     public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal){
-    	return tablero.sePuedeMover(unidad, posicionFinal);
+    	return tablero.sePuedeMover(unidad, posicionFinal)&&enTurno.esDeSuEquipo(unidad);
     }
     
     public boolean posicionVacia(Posicion pos) {
