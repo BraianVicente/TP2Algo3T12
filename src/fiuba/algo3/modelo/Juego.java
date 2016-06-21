@@ -8,6 +8,7 @@ package fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;

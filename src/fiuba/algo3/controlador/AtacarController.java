@@ -38,8 +38,8 @@ public class AtacarController implements CallbackCasillero {
 		}
 	}
 	private Unidad obtenerUnidadObjetivo(Casillero cas) {
-		if(cj.getModoVista()!=ModoVista.SOLOAIRE&&cas.getuTerrestre()!=null) return cas.getuTerrestre();
-		if(cj.getModoVista()==ModoVista.SOLOAIRE) return cas.getuAerea();
-		return null;
+		if((cj.getModoVista()==ModoVista.AMBAS&&cas.getuTerrestre()!=null)
+				||cj.getModoVista()==ModoVista.SOLOTIERRA )return cas.getuTerrestre();
+		else return cas.getuAerea();
 	}
 }
