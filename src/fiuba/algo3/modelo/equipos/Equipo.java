@@ -56,4 +56,6 @@ public abstract class Equipo {
 		
 	}
 
+	abstract public Equipo equipoContrario() ;
+
 }

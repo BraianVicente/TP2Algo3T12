@@ -54,7 +54,7 @@ public class Jugador {
         throw new EquipoInvalidoException();
         
     }
-    public boolean esDeSuEquipo(Unidad unidad){
+    public boolean esDeSuEquipo(Unidad unidad){ 
     	return unidad.es(this.equipo);
     }
     

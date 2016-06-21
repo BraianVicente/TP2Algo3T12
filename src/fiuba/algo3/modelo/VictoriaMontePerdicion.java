@@ -17,7 +17,7 @@ public class VictoriaMontePerdicion implements WinListener{
     private Tablero tablero;
     private Juego juego;
 
-    @Override
+	@Override
     public void gano(Equipo equipo) {
         if  ( (this.tablero.unidadesContieneChispa(equipo)) 
             && (this.chispaSeEncuentraEnMonterPerdicion())) {

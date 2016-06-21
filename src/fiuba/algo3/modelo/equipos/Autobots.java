@@ -40,4 +40,9 @@ public class Autobots extends Equipo {
 		
 	}
 
+	@Override
+	public Equipo equipoContrario() {
+		return new Decepticons();
+	}
+
 }

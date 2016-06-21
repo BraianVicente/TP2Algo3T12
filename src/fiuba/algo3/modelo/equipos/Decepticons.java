@@ -39,4 +39,10 @@ public class Decepticons extends Equipo {
 		return "Decepticons";
 	}
 
+	@Override
+	public Equipo equipoContrario() {
+		// TODO Auto-generated method stub
+		return new Autobots();
+	}
+
 }

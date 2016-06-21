@@ -13,6 +13,8 @@ import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
 import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.VictoriaMontePerdicion;
+import fiuba.algo3.modelo.WinListener;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;
@@ -153,16 +155,19 @@ public class GameboardController {
     }
     
     public void setUp() {    	
-    	tablero = new Tablero(6, 6);
+    	VictoriaMontePerdicion win=new VictoriaMontePerdicion();
+    	tablero = new Tablero(6, 6,win);
     	
 
     	Jugador j1 = new Jugador(namePlayer1, new Autobots(), tablero);
     	Jugador j2 = new Jugador(namePlayer2, new Decepticons(), tablero);
     	
 		juego = new Juego(tablero, j1, j2);
+		win.setTablero(tablero);
+		win.setJuego(juego);
 		setUpUnits(juego);
 		setUpBonus(juego);
-		
+		tablero.cambiarCondicionVictoria(new VictoriaMontePerdicion());
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
 		cj = new CanvasJuego(juego);

@@ -8,6 +8,7 @@ package fiuba.algo3.modelo.tablero;
 import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Escenario;
 import fiuba.algo3.modelo.SinVictoria;
+import fiuba.algo3.modelo.VictoriaMontePerdicion;
 import fiuba.algo3.modelo.WinListener;
 import java.util.LinkedList;
 
@@ -62,10 +63,10 @@ public class Tablero {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
-        alto=x;
-        ancho=y;
-        for (int i = 0; i < alto; i++) {
-        	for(int j=0;j<ancho;j++){
+        ancho=x;
+        alto=y;
+        for (int i = 0; i < ancho; i++) {
+        	for(int j=0;j<alto;j++){
             this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
@@ -92,7 +93,12 @@ public class Tablero {
         this(10,10);
     }
     
-    public boolean isEmpty(Posicion posicion) {
+    public Tablero(int ancho, int alto, WinListener win) {
+		this(ancho,alto);
+        this.strategiWin = win;
+	}
+
+	public boolean isEmpty(Posicion posicion) {
         return !(this.contenedorUnidades.ocupada(posicion));
     }
 
@@ -206,6 +212,7 @@ public class Tablero {
 	public void murio(Unidad u) {
 		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
 		contenedorUnidades.removerUnidad(u);
+		System.out.println(u);
         this.strategiWin.perdio(u.equipo());
 
 	}
@@ -442,6 +449,11 @@ public class Tablero {
 
 	public boolean contiene(Unidad u) {
 		return contenedorUnidades.contiene(u);
+	}
+
+	public void cambiarCondicionVictoria(WinListener wl) {
+		strategiWin=wl;
+		
 	}
 
 }

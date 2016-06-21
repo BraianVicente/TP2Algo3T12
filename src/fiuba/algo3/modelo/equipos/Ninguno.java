@@ -32,4 +32,10 @@ public class Ninguno extends Equipo {
 		return null; // throw exception
 	}
 
+	@Override
+	public Equipo equipoContrario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

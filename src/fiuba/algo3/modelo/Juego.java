@@ -56,6 +56,7 @@ public class Juego {
         this.jugadorDecepticons = decepticons;
         this.enEspera = decepticons ;
         this.unidadSeleccionada = null;
+        
     }
     
    
@@ -174,18 +175,21 @@ public class Juego {
     }
     
     public void jugadorGanador(Equipo equipo) {
-        if (equipo.equals(jugadorDecepticons.getEquipo())) {
-            ganador = jugadorDecepticons;
-        } else {
-            ganador = jugadorAutobots;
-        }
+    	this.ganador = this.jugadorDe(equipo) ;
     }
 
     public void jugadorDerrotado(Equipo equipo) {
-        this.ganador = this.enTurno ;
+        this.ganador = this.jugadorDe(equipo.equipoContrario()) ;
     }
     
-    public String accionPosibleEn(PosicionEnElPlano posicion){
+
+    private Jugador jugadorDe(Equipo e) {
+		if(this.enTurno.getEquipo().equals(e)) return enTurno;
+		else return enEspera;
+	}
+
+
+	public String accionPosibleEn(PosicionEnElPlano posicion){
     	if(!tablero.contiene(unidadSeleccionada)) unidadSeleccionada=null;
     	if(unidadSeleccionada!=null && enTablero(posicion) ){
     		Unidad u = unidadSeleccionada;
@@ -299,6 +303,7 @@ public class Juego {
 
 
 	public boolean termino() {
+		System.out.println(ganador);
 		return this.jugadorGanadorEs(enEspera)||this.jugadorGanadorEs(enTurno);
 	}
 
