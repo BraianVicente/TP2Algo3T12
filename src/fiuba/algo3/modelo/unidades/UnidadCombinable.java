@@ -27,6 +27,7 @@ public abstract class UnidadCombinable extends Unidad {
         super(equipo, command);
         this.turnosCreacion = 2 ;
 		vidaMax = unita.getVida() + unitb.getVida() + unitc.getVida();
+		vida=vidaMax;
 		this.componenteDos=unitb;
 		this.componenteUno=unita;
 		this.componenteTres=unitc;
