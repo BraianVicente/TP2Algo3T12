@@ -61,5 +61,12 @@ public class Casillero {
 		else
 			return getuAerea();
 	}
+
+
+	public Unidad getUnidad(ModoVista modoVista) {
+		if(modoVista==ModoVista.SOLOTIERRA||(modoVista==ModoVista.AMBAS&&getuTerrestre()!=null)) return this.getuTerrestre();
+		else return this.getuAerea();
+
+	}
 	
 }

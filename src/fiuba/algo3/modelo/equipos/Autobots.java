@@ -1,5 +1,8 @@
 package fiuba.algo3.modelo.equipos;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.DesarmadorCombinable;
+import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Superion;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.modelo.unidades.UnidadCombinable;
@@ -27,14 +30,19 @@ public class Autobots extends Equipo {
     }
 
 	@Override
-	public UnidadCombinable getCombination() {
-		return new Superion();
+	public UnidadCombinable getCombination(Tablero tab,Unidad unita, Unidad unitb, Unidad unitc) {
+		return new Superion(new DesarmadorCombinable(tab,this), unita,unitb,unitc);
 	}
 	
 	@Override
 	public String toString() {
 		return "Autobots";
 		
+	}
+
+	@Override
+	public Equipo equipoContrario() {
+		return new Decepticons();
 	}
 
 }

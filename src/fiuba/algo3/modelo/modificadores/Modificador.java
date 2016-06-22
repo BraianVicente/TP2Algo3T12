@@ -63,5 +63,7 @@ public abstract class Modificador {
 		return 1;
 	}
 
+	public abstract String nombreImagen();
+
 	
 }

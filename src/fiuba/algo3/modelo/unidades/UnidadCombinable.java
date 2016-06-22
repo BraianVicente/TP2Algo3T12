@@ -5,6 +5,8 @@
  */
 package fiuba.algo3.modelo.unidades;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.FormaHumanoide;
@@ -19,23 +21,33 @@ import fiuba.algo3.modelo.tablero.superficies.Superficie;
 public abstract class UnidadCombinable extends Unidad {
 
     private Integer turnosCreacion ;
-    public UnidadCombinable(Equipo equipo, DeathListener command) {
+	private int vidaMax;
+	private Unidad componenteUno, componenteDos, componenteTres;
+    public UnidadCombinable(Equipo equipo,DeathListener command,Unidad unita, Unidad unitb, Unidad unitc) {
         super(equipo, command);
         this.turnosCreacion = 2 ;
+		vidaMax = unita.getVida() + unitb.getVida() + unitc.getVida();
+		this.componenteDos=unitb;
+		this.componenteUno=unita;
+		this.componenteTres=unitc;
     }
 
-    public boolean creacionFinalizada(){
-        if (this.turnosCreacion > 0 ){
-            this.turnosCreacion-- ;
-            return false ;
-        }
-        return true ;       
-        
+    
+    @Override
+    public void avanzarTurno(){
+    	super.avanzarTurno();
+    	turnosCreacion--;
+    	if(turnosCreacion<=0) command.murio(this);
+    }
+    
+    @Override
+    public int getVidaMaxima(){
+    	return vidaMax;
     }
     
     @Override
     public boolean existe(){
-        return (this.turnosCreacion == 0) ;
+        return (this.turnosCreacion > 0)&&!algunComponenteMuerto() ;
     }
     
     @Override 
@@ -49,4 +61,34 @@ public abstract class UnidadCombinable extends Unidad {
     	
     }
     
+    @Override
+    protected void disminuirVida(int danio) {
+    	if(modificadores.recibeDanio()){
+    		vida -= danio;
+    		
+    		componenteUno.disminuirVida(danio/3);
+    		componenteDos.disminuirVida(danio/3);
+    		componenteTres.disminuirVida(danio/3);
+    	}
+    	 if (algunComponenteMuerto()||getVida()<=0)	command.murio(this);
+    	 
+    }
+    
+   private boolean algunComponenteMuerto(){
+	   return componenteUno.getVida()<=0||componenteDos.getVida()<=0||componenteTres.getVida()<=0;
+   }
+   
+   public ArrayList<Unidad> componentesVivos(){
+	   ArrayList<Unidad> lista=new ArrayList<Unidad>();
+	if(componenteUno.getVida()>0) lista.add(componenteUno);
+	if(componenteDos.getVida()>0) lista.add(componenteDos);
+	if(componenteTres.getVida()>0) lista.add(componenteTres);
+	return lista;
+	   
+	   
+   }
+   @Override
+   public boolean esCombinacion(){
+	   return true;
+   }
 }

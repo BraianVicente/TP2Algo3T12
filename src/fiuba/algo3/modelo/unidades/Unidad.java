@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.unidades;
 
+import java.util.ArrayList;
+
 import fiuba.algo3.modelo.DeathListener;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.Chispa;
@@ -27,7 +29,7 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 public abstract class Unidad {
 	
 	protected Chispa chispa;
-	private DeathListener command;
+	protected DeathListener command;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
 	private boolean yaAtaco;
@@ -54,7 +56,9 @@ public abstract class Unidad {
     public Equipo equipo() {
     	return this.equipo;
     }
-   
+    public void setDeathListener(DeathListener d){
+    	command=d;
+    }
     
 	public boolean existe(){
 		return true;
@@ -76,7 +80,7 @@ public abstract class Unidad {
 		return Plano.TERRESTRE;
 	}
 	//-------------------vida---------------
-    private int vida;
+    protected int vida;
     public abstract int getVidaMaxima();
     
     public int getVida(){
@@ -236,4 +240,13 @@ public abstract class Unidad {
 	}
 
     public abstract String nombre() ;
+
+	public ArrayList<String> obtenerNombresImagenesModificadores() {
+		return modificadores.obtenerNombresImagenesModificadores();
+	}
+
+	public boolean esCombinacion() {
+
+		return false;
+	}
 }

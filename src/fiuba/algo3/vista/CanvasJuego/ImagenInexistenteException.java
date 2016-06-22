@@ -1,9 +1,9 @@
 package fiuba.algo3.vista.CanvasJuego;
 
-public class ImagenInexistenteExcption extends Exception {
+public class ImagenInexistenteException extends RuntimeException {
 
 	private String nombre;
-	public ImagenInexistenteExcption(String nombre) {
+	public ImagenInexistenteException(String nombre) {
 		this.nombre = nombre;
 	}
 	

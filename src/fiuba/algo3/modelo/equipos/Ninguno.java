@@ -1,5 +1,7 @@
 package fiuba.algo3.modelo.equipos;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
@@ -26,8 +28,14 @@ public class Ninguno extends Equipo {
     }
 
 	@Override
-	public UnidadCombinable getCombination() {
+	public UnidadCombinable getCombination(Tablero tab, Unidad unita, Unidad unitb, Unidad unitc) {
 		return null; // throw exception
+	}
+
+	@Override
+	public Equipo equipoContrario() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

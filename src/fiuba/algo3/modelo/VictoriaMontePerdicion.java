@@ -6,6 +6,8 @@
 package fiuba.algo3.modelo;
 
 import fiuba.algo3.modelo.equipos.Equipo;
+import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.Tablero;
 
 /**
@@ -17,8 +19,9 @@ public class VictoriaMontePerdicion implements WinListener{
     private Tablero tablero;
     private Juego juego;
 
-    @Override
+	@Override
     public void gano(Equipo equipo) {
+
         if  ( (this.tablero.unidadesContieneChispa(equipo)) 
             && (this.chispaSeEncuentraEnMonterPerdicion())) {
             this.juego.jugadorGanador(equipo);

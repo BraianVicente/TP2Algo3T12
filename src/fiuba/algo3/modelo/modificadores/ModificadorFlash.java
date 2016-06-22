@@ -14,5 +14,10 @@ public class ModificadorFlash extends ModificadorTransitorio {
 	public Object clone() {
 		return new ModificadorFlash();
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/efectos/bonusFlash.png";
+	}
 
 }

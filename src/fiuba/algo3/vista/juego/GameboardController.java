@@ -1,23 +1,32 @@
 package fiuba.algo3.vista.juego;
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import fiuba.algo3.controlador.AtacarController;
 import fiuba.algo3.controlador.ClickedUnitManager;
 import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
 import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
-import fiuba.algo3.modelo.EscenarioDefault;
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.VictoriaMontePerdicion;
+import fiuba.algo3.modelo.WinListener;
+import fiuba.algo3.modelo.bonuses.BonusBurbuja;
+import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
+import fiuba.algo3.modelo.bonuses.BonusFlash;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
+
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
@@ -25,16 +34,19 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 import fiuba.algo3.modelo.unidades.*;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
-import fiuba.algo3.vista.CanvasJuego.ModoVista;
+import fiuba.algo3.vista.finalSplash.FinalSplash;
+import fiuba.algo3.vista.finalSplash.PlayAgainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class GameboardController {
 
@@ -55,6 +67,9 @@ public class GameboardController {
     
     @FXML
     private Button combinarButton;
+    
+    @FXML
+    private MenuItem volverAtras;
     
     @FXML
     private ChoiceBox<String> vistaChoiceBox;
@@ -93,7 +108,14 @@ public class GameboardController {
     @FXML
     private TextArea aereoEfectos ;
     
-
+    @FXML
+    private MenuItem cerrarMenuItem ;
+    
+    @FXML
+    private MenuItem equipoMenuItem ;
+    
+    @FXML
+    private MenuItem comoJugar ;
     
     private Tablero tablero;
     private Juego juego;
@@ -103,7 +125,9 @@ public class GameboardController {
     
     private GameController controller;
     private ClickedUnitManager manager;
-    MoverController mover;
+    private AtacarController ataque;
+    private MoverController mover;
+    private CanvasJuego cj;
     
     Unidad[] unitList = {
     		new Optimusprime(),
@@ -124,7 +148,10 @@ public class GameboardController {
         assert StatsPane != null : "fx:id=\"StatsPane\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert vistaChoiceBox != null : "fx:id=\"vistaChoiceBox\" was not injected: check your FXML file 'MainJuego.fxml'.";
         assert jugandoImage != null : "fx:id=\"jugandoImage\" was not injected: check your FXML file 'MainJuego.fxml'.";
-		
+		assert volverAtras !=null : "fx:id=\"volverAtras\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert cerrarMenuItem !=null : "fx:id=\"cerrarMenuItem\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert comoJugar !=null : "fx:id=\"comoJugar\" was not injected: check your FXML file 'MainJuego.fxml'.";
+		assert equipoMenuItem !=null : "fx:id=\"equipoMenuItem\" was not injected: check your FXML file 'MainJuego.fxml'.";
     }
     
     public void setJugandoImage(Equipo equipo) {
@@ -137,21 +164,31 @@ public class GameboardController {
     }
     
     public void setUp() {    	
-    	tablero = new Tablero(new EscenarioDefault());
+    	VictoriaMontePerdicion win=new VictoriaMontePerdicion();
+    	tablero = new Tablero(6, 6,win);
     	
-		juego = new Juego(tablero,new Jugador(namePlayer1, new Autobots()),new Jugador(namePlayer2, new Decepticons()));
+
+    	Jugador j1 = new Jugador(namePlayer1, new Autobots(), tablero);
+    	Jugador j2 = new Jugador(namePlayer2, new Decepticons(), tablero);
+    	
+		juego = new Juego(tablero, j1, j2);
+		win.setTablero(tablero);
+		win.setJuego(juego);
+		tablero.colocarMontePerdicion(new Posicion(5,0));
 		setUpUnits(juego);
-		
+		setUpBonus(juego);
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
-		CanvasJuego cj = new CanvasJuego(juego);
+		cj = new CanvasJuego(juego);
 		
 		manager = new ClickedUnitManager();
 		controller = new GameController(juego, manager, cj);
-		mover = new MoverController(juego);
+		mover = new MoverController(juego,cj);
+		ataque= new AtacarController(juego,cj);
 		
 		cj.agregarCallbackClickeo(manager);
 		cj.agregarCallbackClickeo(mover);
+		cj.agregarCallbackClickeo(ataque);
     	
     	GamePane.getChildren().add(cj);
     	
@@ -169,10 +206,23 @@ public class GameboardController {
         
         CombinarController cc = new CombinarController(controller);
         combinarButton.setOnAction(cc);
+        
+        ComoJugarController cjc = new ComoJugarController();
+        comoJugar.setOnAction(cjc);
+        
+        EquipoController ec = new EquipoController();
+        equipoMenuItem.setOnAction(ec);
 
     }
     
-    public void hovereoCasillero(Casillero c){
+    private void setUpBonus(Juego juego) {
+    	juego.agregarBonus(new BonusBurbuja(null),new Posicion(3,3));
+    	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(5,5));
+    	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(0,4));
+    	juego.agregarBonus(new BonusFlash(null),new Posicion(4,1));
+	}
+
+	public void hovereoCasillero(Casillero c){
     	if(!c.isEmpty()){
             this.setUnidadSeleccionada(c.getUnidad());
         }
@@ -185,8 +235,9 @@ public class GameboardController {
     public void setUpUnits(Juego juego) {
     	Random generator = new Random();
     	Posicion pos = null;
-    	
+    	Death death=new Death(tablero);
     	for (Unidad unit: unitList) {
+    		unit.setDeathListener(death);
     		while ((pos == null) || (!juego.posicionVacia(pos)))
     			pos = new Posicion(generator.nextInt(6), generator.nextInt(6), unit.getPlanoPerteneciente());
     		juego.agregarUnidad(pos, unit);
@@ -262,6 +313,27 @@ public class GameboardController {
         this.tieneChispa.setText("No");
         
     }
+
+	public void terminoJuego() {
+		try {
+			FinalSplash.class.newInstance().start(new Stage(), juego.getGanador().getNombre());
+			Stage stage = (Stage) GamePane.getScene().getWindow();
+			stage.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void actualizarVista(){
+		this.cj.actualizar();
+	}
+
+	public void setStage(Stage stage) {
+		VolverMenuController pac=new VolverMenuController(stage);
+        volverAtras.setOnAction(pac);
+        CerrarController cc=new CerrarController(stage);
+        cerrarMenuItem.setOnAction(cc);
+	}
 
 
 }

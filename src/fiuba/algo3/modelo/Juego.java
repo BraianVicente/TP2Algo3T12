@@ -7,12 +7,16 @@ package fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.bonuses.BonusBurbuja;
+import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
@@ -24,6 +28,7 @@ import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -52,6 +57,7 @@ public class Juego {
         this.jugadorDecepticons = decepticons;
         this.enEspera = decepticons ;
         this.unidadSeleccionada = null;
+        
     }
     
    
@@ -103,7 +109,7 @@ public class Juego {
     }
     
     public void transformarUnidad(Posicion origen){
-        if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
+    	if (enTurno.perteneceEquipo(tablero.obtenerUnidad(origen))){
             tablero.transformar(tablero.obtenerUnidad(origen));
         }
     }
@@ -124,7 +130,6 @@ public class Juego {
 	}
 
 	public ArrayList<Unidad> obtenerUnidades() {
-		// TODO Auto-generated method stub
 		return tablero.obtenerUnidades();
 	}
 
@@ -155,33 +160,39 @@ public class Juego {
 	}
 
 	public boolean enTablero(Posicion p) {
-		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
-				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
+		return tablero.enLimites(p);
 	}
 	
 	public boolean enTablero(PosicionEnElPlano p) {
-		return (0<=p.getX() && p.getX()<tablero.obtenerAncho()) &&
-				(0<=p.getY() && p.getY()<tablero.obtenerAlto());
+		return tablero.enLimites(p);
 	}
     
     public boolean jugadorGanadorEs(Jugador jugador) {
         return jugador.equals(this.ganador) ;
     }
 
+    public Jugador getGanador() {
+    	return ganador;
+    }
+    
     public void jugadorGanador(Equipo equipo) {
-        if (equipo.equals(jugadorDecepticons.getEquipo())) {
-            ganador = jugadorDecepticons;
-        } else {
-            ganador = jugadorAutobots;
-        }
+    	this.ganador = this.jugadorDe(equipo) ;
     }
 
     public void jugadorDerrotado(Equipo equipo) {
-        this.ganador = this.enTurno ;
+        this.ganador = this.jugadorDe(equipo.equipoContrario()) ;
     }
     
-    public String accionPosibleEn(PosicionEnElPlano posicion){
-    	if(unidadSeleccionada!=null){
+
+    private Jugador jugadorDe(Equipo e) {
+		if(this.enTurno.getEquipo().equals(e)) return enTurno;
+		else return enEspera;
+	}
+
+
+	public String accionPosibleEn(PosicionEnElPlano posicion){
+    	if(!tablero.contiene(unidadSeleccionada)) unidadSeleccionada=null;
+    	if(unidadSeleccionada!=null && enTablero(posicion) ){
     		Unidad u = unidadSeleccionada;
     		String accionPosible="Deseleccionar";
     		if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
@@ -198,14 +209,14 @@ public class Juego {
     }
     
     public boolean sePuedeTransformar(Unidad u){
-    	return tablero.sePuedeTransformar(u);
+    	return tablero.sePuedeTransformar(u)&&enTurno.esDeSuEquipo(u);
     }
     public boolean puedeAtacar(Unidad atacante, Posicion posicionObjetivo){
-    	return tablero.puedeAtacar(atacante,posicionObjetivo);
+    	return tablero.puedeAtacar(atacante,posicionObjetivo)&&enTurno.esDeSuEquipo(atacante);
     }
     
     public boolean sePuedeMover(Unidad unidad, Posicion posicionFinal){
-    	return tablero.sePuedeMover(unidad, posicionFinal);
+    	return tablero.sePuedeMover(unidad, posicionFinal)&&enTurno.esDeSuEquipo(unidad);
     }
     
     public boolean posicionVacia(Posicion pos) {
@@ -225,24 +236,95 @@ public class Juego {
     public void clickeoCasillero(Casillero c,CanvasJuego canvas){
     	//ac� estoy suponiendo que siempre que to�s una unidad la quer�s seleccionar,
     	Unidad referenciada = unidadReferenciada(c);
-    	
-    	if(unidadSeleccionada == null){
-    		unidadSeleccionada =referenciada;
-    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
-        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
-    	}else{
-    		//if(sePuedeAtacar...)atacar(...)
-    		//if(sePuedeMover...)mover(...)
-    		//if(sePuedeTransformar(...))transformar(...)
-    		//Estar�a muy muy lindo una interfaz acci�n ac� pero no hay T
-    		
-    		canvas.setHaloAtaque(null);
-        	canvas.setHaloMovimiento(null);
-    	}
-    	
-    	
+   		this.cambiarUnidadSeleccionada(referenciada);    	
+//    	if(unidadSeleccionada == null){
+//    		this.cambiarUnidadSeleccionada(referenciada);
+//    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
+//        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
+//    	}else{
+//    		//if(sePuedeAtacar...)atacar(...)
+//    		//if(sePuedeMover...)mover(...)
+//    		//if(sePuedeTransformar(...))transformar(...)
+//    		//Estar�a muy muy lindo una interfaz acci�n ac� pero no hay T
+//    		
+//    		canvas.setHaloAtaque(null);
+//        	canvas.setHaloMovimiento(null);
+//    	}
     	
     	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
     }
+    
+    
+    
+	private void cambiarUnidadSeleccionada(Unidad referenciada) {
+		unidadSeleccionada=referenciada;
+		
+	}
+
+
+	public Casillero construirCasillero(Posicion pos) {
+
+		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
+		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
+		
+		//ningun try, si no hay superficie estamos fritos
+		Superficie supTerrestre = this.obtenerSuperficie(terrestre);
+		Superficie supAerea = this.obtenerSuperficie(aerea);
+		
+		Unidad uTerrestre;
+		try{
+			uTerrestre = this.obtenerUnidad(terrestre);
+		}catch(PosicionLibreException e){
+			uTerrestre=null;
+		}
+		
+		Unidad uAerea;
+		try{
+			uAerea = this.obtenerUnidad(aerea);
+		}catch(PosicionLibreException e){
+			uAerea=null;
+		}
+		
+		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+	}
+	public void agregarBonus(Bonus bonus, Posicion p) {
+		tablero.agregarBonus(bonus, p);
+	}
+
+
+	public ArrayList<Bonus> obtenerBonuses() {
+		return tablero.obtenerBonuses();
+	}
+
+
+	public Posicion posicion(Bonus b) {
+		return tablero.posicion(b);
+	}
+
+
+	public boolean termino() {
+		return this.jugadorGanadorEs(enEspera)||this.jugadorGanadorEs(enTurno);
+	}
+
+
+	public boolean hayCombinacion(Equipo equipo) {
+		return tablero.tieneCombinacion(equipo);
+		
+	}
+
+
+	public Posicion posicionChispa() {
+		return tablero.getPosicionChispa();
+	}
+
+
+	public Posicion posicionMontePerdicion() {
+		return tablero.getPosicionMontePerdicion();
+	}
+
+
+	public String obtenerNombreImagenMontePerdicion() {
+		return "/fiuba/algo3/vista/imagenes/tierra/montePerdicion.png";
+	}
 }

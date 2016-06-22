@@ -20,5 +20,9 @@ public class ModificadorNebulosa extends ModificadorTransitorio {
 	public Object clone() {
 		return new ModificadorNebulosa();
 	}
+	@Override
+	public String nombreImagen() {
+		return null;
+	}
 
 }

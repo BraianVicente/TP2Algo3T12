@@ -23,6 +23,7 @@ public class Main extends Application {
 			
 			GameboardController controller = loader.getController();
 			controller.setPlayerNames(name1, name2);
+			controller.setStage(stage);
 			controller.setUp();
 	    
 	        scene = new Scene(root, 640, 400);

@@ -54,6 +54,9 @@ public class Jugador {
         throw new EquipoInvalidoException();
         
     }
+    public boolean esDeSuEquipo(Unidad unidad){ 
+    	return unidad.es(this.equipo);
+    }
     
     public void combinarUnidades(){
         this.tablero.combinarUnidades(this.equipo);

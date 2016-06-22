@@ -13,39 +13,54 @@ public class CacheImagenes {
 				"/fiuba/algo3/vista/imagenes/tierra/espinas.png",
 				"/fiuba/algo3/vista/imagenes/tierra/pantano.png",
 				"/fiuba/algo3/vista/imagenes/tierra/piedras.png",
+				"/fiuba/algo3/vista/imagenes/tierra/montePerdicion.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/Superion.png",
+				"/fiuba/algo3/vista/imagenes/transformers/Superion.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/Menasor.png",
+				"/fiuba/algo3/vista/imagenes/transformers/Menasor.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/BoneCrusherVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/BonecrusherHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/BoneCrusherVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/BonecrusherHumanoide.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/BumblebeeVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/BumblebeeHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/BumblebeeVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/BumblebeeHumanoide.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/FrenzyVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/FrenzyVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/FrenzyHumanoide.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/MegatronVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/MegatronHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/MegatronVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/MegatronHumanoide.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/OptimusVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/OptimusHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/OptimusVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/OptimusHumanoide.png",
 				
-				"fiuba/algo3/vista/imagenes/transformers/RatchetVehiculo.png",
-				"fiuba/algo3/vista/imagenes/transformers/RatchetHumanoide.png",
+				"/fiuba/algo3/vista/imagenes/transformers/RatchetVehiculo.png",
+				"/fiuba/algo3/vista/imagenes/transformers/RatchetHumanoide.png",
+				
+				"/fiuba/algo3/vista/imagenes/bonus/bonusInvulnerabilidad.png",
+				"/fiuba/algo3/vista/imagenes/bonus/bonusDoble.png",
+				"/fiuba/algo3/vista/imagenes/bonus/bonusFlash.png",
+				
+				"/fiuba/algo3/vista/imagenes/efectos/bonusInvulnerabilidad.png",
+				"/fiuba/algo3/vista/imagenes/efectos/bonusFlash.png",
+				"/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png",
+				
+				"/fiuba/algo3/vista/imagenes/bonus/chispa.png"
 		};
 		
 		imagenes = new HashMap<String,Image>();
 		for (String n: nombres){
-			imagenes.put(n, new Image(n));
+			try{
+				imagenes.put(n, new Image(n));
+			}catch(Exception e){
+				System.out.println(n);
+			}
 		}
 	}
 	
-	public Image obtenerImagen(String nombre) throws ImagenInexistenteExcption{
+	public Image obtenerImagen(String nombre) throws ImagenInexistenteException{
 		if(!imagenes.containsKey(nombre)){
-			throw new ImagenInexistenteExcption(nombre);
+			throw new ImagenInexistenteException(nombre);
 		}
 		return imagenes.get(nombre);
 	}

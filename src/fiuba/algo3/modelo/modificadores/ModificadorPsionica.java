@@ -13,4 +13,9 @@ public class ModificadorPsionica extends ModificadorPermanente {
 	public Object clone() {
 		return new ModificadorPsionica();
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return null;
+	}
 }

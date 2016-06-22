@@ -1,5 +1,8 @@
 package fiuba.algo3.modelo.equipos;
 
+import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.DesarmadorCombinable;
+import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Menasor;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.modelo.unidades.UnidadCombinable;
@@ -27,13 +30,19 @@ public class Decepticons extends Equipo {
     }
 
 	@Override
-	public UnidadCombinable getCombination() {
-		return new Menasor();
+	public UnidadCombinable getCombination(Tablero tab,Unidad unita, Unidad unitb, Unidad unitc) {
+		return new Menasor(new DesarmadorCombinable(tab,this), unita,unitb,unitc);
 	}
 	
 	@Override
 	public String toString() {
 		return "Decepticons";
+	}
+
+	@Override
+	public Equipo equipoContrario() {
+		// TODO Auto-generated method stub
+		return new Autobots();
 	}
 
 }

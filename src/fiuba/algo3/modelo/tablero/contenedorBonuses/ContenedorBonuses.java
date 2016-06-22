@@ -1,5 +1,6 @@
 package fiuba.algo3.modelo.tablero.contenedorBonuses;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
+import fiuba.algo3.modelo.unidades.Unidad;
 
 public class ContenedorBonuses {
 	private Map<Posicion, Bonus> bonusesPorPosicion;
@@ -33,7 +35,7 @@ public class ContenedorBonuses {
 	private boolean contiene(Bonus u){
 		return posicionesPorBonus.containsKey(u);
 	}
-	private Posicion obtenerPosicion(Bonus u) throws BonusNoContenidoException{
+	public Posicion obtenerPosicion(Bonus u) throws BonusNoContenidoException{
 		if(!contiene(u)){
 			throw new BonusNoContenidoException(u);
 		}
@@ -51,5 +53,12 @@ public class ContenedorBonuses {
 		Posicion p = obtenerPosicion(u);
 		posicionesPorBonus.remove(u);
 		bonusesPorPosicion.remove(p);
+	}
+	public ArrayList<Bonus> obtenerBonuses() {
+		ArrayList<Bonus> ret = new ArrayList<Bonus>();
+		for(Map.Entry<Bonus, Posicion> entry : posicionesPorBonus.entrySet()){
+			ret.add(entry.getKey());
+		}
+		return ret;
 	}
 }

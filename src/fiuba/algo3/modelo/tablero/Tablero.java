@@ -5,12 +5,16 @@
  */
 package fiuba.algo3.modelo.tablero;
 
+import fiuba.algo3.modelo.Death;
 import fiuba.algo3.modelo.Escenario;
 import fiuba.algo3.modelo.SinVictoria;
+import fiuba.algo3.modelo.VictoriaMontePerdicion;
 import fiuba.algo3.modelo.WinListener;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
@@ -23,6 +27,7 @@ import fiuba.algo3.modelo.unidades.CombinacionInvalidaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
 import java.util.ArrayList;
 
@@ -38,6 +43,7 @@ public class Tablero {
     private WinListener strategiWin;
     private Posicion posicionMontePerdicion;
 	private Posicion posicionChispa;
+
     private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 	
 	public int obtenerAncho(){
@@ -60,10 +66,10 @@ public class Tablero {
         this.contenedorUnidades = new ContenedorUnidades();
         this.contenedorSuperficies = new ContenedorSuperficies();
         this.contenedorBonuses = new ContenedorBonuses();
-        alto=x;
-        ancho=y;
-        for (int i = 0; i < alto; i++) {
-        	for(int j=0;j<ancho;j++){
+        ancho=x;
+        alto=y;
+        for (int i = 0; i < ancho; i++) {
+        	for(int j=0;j<alto;j++){
             this.contenedorSuperficies.agregarSuperficie(new Nubes(), new Posicion(i,j,Plano.AEREO));
             this.contenedorSuperficies.agregarSuperficie(new Rocosa(),new Posicion(i, j,Plano.TERRESTRE));
         	}
@@ -90,7 +96,12 @@ public class Tablero {
         this(10,10);
     }
     
-    public boolean isEmpty(Posicion posicion) {
+    public Tablero(int ancho, int alto, WinListener win) {
+		this(ancho,alto);
+        this.strategiWin = win;
+	}
+
+	public boolean isEmpty(Posicion posicion) {
         return !(this.contenedorUnidades.ocupada(posicion));
     }
 
@@ -105,20 +116,25 @@ public class Tablero {
     		Posicion posicionSiguiente;
     		posicionSiguiente=obtenerPosicionADondeMoverse(unidad,posicionFin);
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
-    		unidad.descontarMovimiento((int)Math.floor(1/unidad.getCoeficienteMovimientoActual()));
+    		unidad.descontarMovimiento(1/unidad.getCoeficienteMovimientoActual());
     		this.desplazarPosicionContigua(unidad, posicionSiguiente);
-    		if (this.tieneChispa(posicionSiguiente))       unidad.darChispa();
+    		if (this.tieneChispa(posicionSiguiente))  this.darChispa(unidad);
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
-    	
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
-    	}
-        if (unidad.tieneChispa()){
-            this.posicionChispa = posicionActual;
+    		if (unidad.tieneChispa()){
+                this.posicionChispa = posicionActual;
+    		}
+
         }
 
         this.strategiWin.gano(unidad.equipo());
     }
+
+	private void darChispa(Unidad unidad) {
+		unidad.darChispa();
+		
+	}
 
 	private Posicion obtenerPosicionADondeMoverse(Unidad unidad, Posicion posicionFin) {
 		Posicion posicionActual=contenedorUnidades.obtenerPosicion(unidad);
@@ -137,6 +153,7 @@ public class Tablero {
 	public void transformar(Unidad unidad){
 		if(!unidad.sePuedeTransformar())throw new TransformacionInvalida();
         ((Transformer) unidad).transformar();
+        contenedorUnidades.cambiarPlano(unidad, unidad.getPlanoPerteneciente());;
 
 	}
 
@@ -151,7 +168,9 @@ public class Tablero {
 	}
 
     public void combinarUnidades(Equipo equipo){
-        equipo.crearCombinacion() ;
+        //equipo.crearCombinacion() ;
+    	combinarUnidadesEquipo(equipo);
+        
     }
     
 	public void combinar(Posicion a, Posicion b, Posicion c) {
@@ -171,17 +190,17 @@ public class Tablero {
 			throw new CombinacionInvalidaException();
 		}
 
-		Unidad comb = unita.equipo().getCombination();
+		Unidad comb = unita.equipo().crearCombinacion(this,unita,unitb,unitc);
 
 		if ( (unita.tieneChispa()) || (unitb.tieneChispa()) || (unitc.tieneChispa())) {
 			comb.darChispa();
 		}
-
+		
 		quitarUnidadActual(a);
 		quitarUnidadActual(b);
 		quitarUnidadActual(c);
 
-		agregarUnidad(a, comb); // or get avg distance?
+		agregarUnidad(a, comb); 
 
 	}
 
@@ -199,7 +218,9 @@ public class Tablero {
 	}
 
 	public void murio(Unidad u) {
-		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
+		if(u.tieneChispa()){
+			posicionChispa=contenedorUnidades.obtenerPosicion(u);
+		}
 		contenedorUnidades.removerUnidad(u);
         this.strategiWin.perdio(u.equipo());
 
@@ -272,12 +293,6 @@ public class Tablero {
             if (unidad.es(equipo)){
                 unidad.avanzarTurno();
             }
-        }
-        if ((equipo.tieneCombinacion()) &&
-            equipo.obtenerUnidadCombinada().creacionFinalizada() )  
-            
-             {
-                this.combinarUnidadesEquipo(equipo);
         }
     }
 
@@ -392,5 +407,66 @@ public class Tablero {
     public void colocarMontePerdicion(Posicion posicion) {
         this.posicionMontePerdicion = posicion ;
     }
+
+	public ArrayList<Bonus> obtenerBonuses() {
+		return contenedorBonuses.obtenerBonuses();
+	}
+
+	public Posicion posicion(Bonus b) {
+		return contenedorBonuses.obtenerPosicion(b);
+	}
+
+	public void desarmar(UnidadCombinable u) {
+		ArrayList<Unidad> lista=u.componentesVivos();
+		Posicion posInicial=contenedorUnidades.obtenerPosicion(u);
+		contenedorUnidades.removerUnidad(u);
+		for(Unidad unidadNueva:lista){
+			reubicar(unidadNueva,posInicial);
+		}
+        this.strategiWin.perdio(u.equipo());
+	}
+
+	private void reubicar(Unidad unidadNueva, Posicion posInicial) {
+		Posicion posProbable=posInicial;
+		posProbable=posProbable.nuevaPosicionConDistintoPlano(unidadNueva.getPlanoPerteneciente());
+		//me muevo a izquierda
+		while(contenedorUnidades.ocupada(posProbable)&&this.enLimites(posProbable)){
+			posProbable=posProbable.obtenerMismaPosicionDesplazada(-1, 0);
+		}
+		//despues a derecha si no puedo
+		while(contenedorUnidades.ocupada(posProbable)&&this.enLimites(posProbable)){
+			posProbable=posProbable.obtenerMismaPosicionDesplazada(1, 0);
+		}
+		
+		this.agregarUnidad(posProbable, unidadNueva);
+		
+	}
+
+	public boolean enLimites(PosicionEnElPlano p) {
+		return enLimites(new Posicion(p,Plano.TERRESTRE));
+	}
+	public boolean enLimites(Posicion p) {
+		return (0<=p.getX() && p.getX()<this.obtenerAncho()) &&
+				(0<=p.getY() && p.getY()<this.obtenerAlto());
+	}
+
+	public boolean tieneCombinacion(Equipo equipo) {
+		ArrayList<Posicion> list=this.obtenerPosicionesUnidadesVivasEquipo(equipo);
+		return list.size()==1&&contenedorUnidades.obtenerUnidad(list.get(0)).esCombinacion();
+	}
+
+	public boolean contiene(Unidad u) {
+		return contenedorUnidades.contiene(u);
+	}
+
+	public void cambiarCondicionVictoria(WinListener wl) {
+		strategiWin=wl;
+		
+	}
+	
+	public boolean laChispaLaTieneUnaUnidad(){
+		return this.unidadesContieneChispa(new Autobots())
+				||this.unidadesContieneChispa(new Decepticons());
+	}
 
 }

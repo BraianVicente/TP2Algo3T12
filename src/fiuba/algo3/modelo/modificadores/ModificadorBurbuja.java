@@ -14,5 +14,9 @@ public class ModificadorBurbuja extends ModificadorTransitorio {
 	public Object clone() {
 		return new ModificadorBurbuja();
 	}
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/efectos/bonusInvulnerabilidad.png";
+	}
 
 }

@@ -6,6 +6,8 @@ import java.util.Timer;
 
 import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
@@ -69,6 +71,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private Image hovereador;
 	
 	private Timer timer;
+	private Posicion posicionAtaque;
+	private Image explosion;
 	
 	public CanvasJuego(Juego juego){
 		super(360, 371);
@@ -99,7 +103,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		hovereador = new Image("/fiuba/algo3/vista/CanvasJuego/hovereador.png");
-		
+		explosion = new Image("/fiuba/algo3/vista/imagenes/efectos/explosion.png");
+		posicionAtaque=null;
 		callbacksClickeo = new ArrayList<CallbackCasillero>();
 		callbacksHover = new ArrayList<CallbackCasillero>();
 		
@@ -120,33 +125,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	//------------------------INPUT----------------------------------------------//
 	public Casillero construirCasillero(Posicion pos){
-		Posicion terrestre = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.TERRESTRE);
-		Posicion aerea = pos.nuevaPosicionConDistintoPlano(Posicion.Plano.AEREO);
-		
-		//ningun try, si no hay superficie estamos fritos
-		Superficie supTerrestre = juego.obtenerSuperficie(terrestre);
-		Superficie supAerea = juego.obtenerSuperficie(aerea);
-		
-		Unidad uTerrestre;
-		try{
-			uTerrestre = juego.obtenerUnidad(terrestre);
-		}catch(PosicionLibreException e){
-			uTerrestre=null;
-		}
-		
-		Unidad uAerea;
-		try{
-			uAerea = juego.obtenerUnidad(aerea);
-		}catch(PosicionLibreException e){
-			uAerea=null;
-		}
-		
-		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+		return juego.construirCasillero(pos);
 
 	}
 
 	private void clickea(Posicion p){
-		System.out.println(p);
 		if(juego.enTablero(p)){
 			teclaEventHandler.cambiarSeleccionada(p);
 			Casillero construido = construirCasillero(p);
@@ -212,20 +195,27 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
-			dibujarUnidades(gc,Plano.TERRESTRE);
 		}
+		dibujarMontePerdicion(gc);	
+		//los bonuses
+		
+		dibujarBonuses(gc);		
+		dibujarChispa(gc);
 		
 		//las unidades terrestres
-		
+			if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA) dibujarUnidades(gc,Plano.TERRESTRE);
 		//el cielo
 		if(modoVista==ModoVista.AMBAS){
 			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.5f);
 		}else if(modoVista==ModoVista.SOLOAIRE){
-			dibujarSuperficies(gc,Posicion.Plano.AEREO,1);
+			dibujarSuperficies(gc,Posicion.Plano.AEREO,0.8f);
 		}
-		
+		//efectos
+		dibujarEfectos(gc);
 		//las unidades aerea
-		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE)dibujarUnidades(gc,Plano.AEREO);
+		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOAIRE){
+			dibujarUnidades(gc,Plano.AEREO);
+		}
 		
 		
 		//el cuadrado seleccionado
@@ -278,6 +268,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			gc.restore();
 		}
 		
+		
+		
 		//el halo de ataque
 		if(haloAtaque!=null){
 			gc.save();
@@ -306,6 +298,64 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 	}
 
+	private void dibujarMontePerdicion(GraphicsContext gc) {
+		try {
+			gc.drawImage(cacheImagenes.obtenerImagen(juego.obtenerNombreImagenMontePerdicion()),
+						mueveVista.xPantalla(juego.posicionMontePerdicion()), 
+						mueveVista.yPantalla(juego.posicionMontePerdicion()), 
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero());
+		} catch (RuntimeException e) {
+
+		}
+	}
+
+	private void dibujarChispa(GraphicsContext gc) {
+
+			try {
+				gc.drawImage(cacheImagenes.obtenerImagen(Chispa.nombreImagen()),
+							mueveVista.xPantalla(juego.posicionChispa()), 
+							mueveVista.yPantalla(juego.posicionChispa()), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			} catch (RuntimeException e) {
+
+			}
+
+		
+	}
+
+	private void dibujarEfectos(GraphicsContext gc) {
+		if(posicionAtaque!=null)
+			gc.drawImage(explosion,
+						mueveVista.xPantalla(posicionAtaque), 
+						mueveVista.yPantalla(posicionAtaque), 
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero());
+		posicionAtaque=null;
+		
+	}
+	public void setearPosicionExplosion(Posicion p){
+		posicionAtaque=p;
+	}
+	private void dibujarBonuses(GraphicsContext gc) {
+		ArrayList<Bonus> bonuses = juego.obtenerBonuses();
+		for(Bonus b: bonuses){
+			Posicion p = juego.posicion(b);
+			try{
+				Image imgB = cacheImagenes.obtenerImagen(b.nombreImagen());
+				gc.drawImage(imgB,
+						mueveVista.xPantalla(p), 
+						mueveVista.yPantalla(p), 
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero()
+				);
+			}catch(ImagenInexistenteException e){
+				
+			}
+		}
+	}
+
 	private void dibujarSuperficies(GraphicsContext gc, Plano plano, float opacidad) {
 		gc.save();
 		gc.setGlobalAlpha(opacidad);
@@ -318,6 +368,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 					Image imgSup = cacheImagenes.obtenerImagen(aDibujar.nombreImagen());
 					
 					
+					
 					gc.drawImage(imgSup,
 							mueveVista.xPantalla(obtener), 
 							mueveVista.yPantalla(obtener), 
@@ -325,7 +376,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 							mueveVista.altoCasillero()
 					);
 					
-				}catch(ImagenInexistenteExcption e){
+				}catch(ImagenInexistenteException e){
 					
 				}
 				
@@ -337,24 +388,46 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	private void dibujarUnidades(GraphicsContext gc, Plano plano){
 		for(Unidad u: juego.obtenerUnidades()){
-			Posicion p = juego.posicion(u);
+			
 			if(u.getPlanoPerteneciente() == plano){
-				try{
-					Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
-					gc.drawImage(imgU,
-							mueveVista.xPantalla(p), 
-							mueveVista.yPantalla(p), 
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero()
-					);
-				}catch(ImagenInexistenteExcption e){
-					
-				}
+				dibujarUnidad(gc, u);
+				
 			}
 		}
 	}
 	
 	
+	private void dibujarUnidad(GraphicsContext gc, Unidad u) {
+		Posicion p = juego.posicion(u);
+		try{
+			Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
+			gc.drawImage(imgU,
+					mueveVista.xPantalla(p), 
+					mueveVista.yPantalla(p), 
+					mueveVista.anchoCasillero(),
+					mueveVista.altoCasillero()
+			);
+			ArrayList<String> nombres_imagenes = u.obtenerNombresImagenesModificadores();
+			gc.save();
+			gc.setGlobalAlpha(0.5f/nombres_imagenes.size());
+			for(String nombre : nombres_imagenes ){
+				if(nombre != null){
+					Image imgM = cacheImagenes.obtenerImagen(nombre);
+					gc.drawImage(imgM,
+							mueveVista.xPantalla(p), 
+							mueveVista.yPantalla(p), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero()
+					);
+				}
+			}
+			gc.restore();
+		}catch(ImagenInexistenteException e){
+		}
+		
+	}
+
+
 	/**
 	 *
 	 */

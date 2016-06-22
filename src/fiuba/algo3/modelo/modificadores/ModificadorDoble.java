@@ -15,5 +15,10 @@ public class ModificadorDoble extends ModificadorTransitorio {
 	public Object clone() {
 		return new ModificadorDoble();
 	}
+	
+	@Override
+	public String nombreImagen() {
+		return "/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png";
+	}
 
 }
