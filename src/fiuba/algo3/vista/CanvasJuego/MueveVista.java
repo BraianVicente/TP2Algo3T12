@@ -13,7 +13,7 @@ public class MueveVista {
 	private volatile double y;
 	private volatile double escala;
 	
-	private Object lock = new Object();
+	//private Object lock = new Object();
 	
 	private double x_m_inicial;
 	private double y_m_inicial;
@@ -42,23 +42,23 @@ public class MueveVista {
 		cllbacksHovereo = new ArrayList<CallbackPosicion>();
 	}
 	public void presionado(MouseEvent e){//EVENTO
-		synchronized(lock){
+		//synchronized(lock){
 		x_m_inicial=e.getX();
 		y_m_inicial=e.getY();
 		presionando = true;
 		x_inicial = x;
 		y_inicial = y;
-		}
+		//}
 	}
 	
 	public void soltado(MouseEvent e){//EVENTO
 		double dis;
-		synchronized(lock){
+		//synchronized(lock){
 		presionando = false;
 		double difx = x_m_inicial-e.getX();
 		double dify = y_m_inicial-e.getY();
 		dis= Math.sqrt(difx*difx+dify*dify);//esta distancia es sin escalar nada!
-		}
+		//}
 		if(dis<5){
 			for(CallbackPosicion c: cllbacksClickeo){
 				c.execute(obtenerPosicion(e));
@@ -75,24 +75,24 @@ public class MueveVista {
 		return new Posicion((int)Math.floor(posX),(int)Math.floor(posY));
 	}
 	public void salio(MouseEvent e){//EVENTO
-		synchronized(lock){
+		//synchronized(lock){
 		presionando = false;
-		}
+		//}
 	}
 	
 	public void draggeado(MouseEvent e){//EVENTO
-		synchronized(lock){
+		//synchronized(lock){
 		if(presionando){
 			x = (e.getX()-x_m_inicial)/escala+x_inicial;
 			y = (e.getY()-y_m_inicial)/escala+y_inicial;
 		}
-		}
+		//}
 		movido(e);
 	}
 	
 	
 	public void scrolleado(ScrollEvent e){//EVENTO
-		synchronized(lock){
+		//synchronized(lock){
 			double escala_inicial = escala; 
 			escala-=e.getDeltaY()*0.001;
 			if(escala<0.1){
@@ -110,7 +110,7 @@ public class MueveVista {
 			x = centro_x-ancho_final/2;
 			y = centro_y-alto_final/2;
 			*/
-		}
+		//}
 	}
 	/*
 	public double xPantalla(Posicion p){
@@ -137,9 +137,9 @@ public class MueveVista {
 	}
 	*/
 	public double anchoCasillero(){
-		synchronized(lock){
+		//synchronized(lock){
 		return 80*escala;
-		}
+		//}
 	}
 	
 	
@@ -151,15 +151,15 @@ public class MueveVista {
 	}
 	
 	public double xPantalla(double xTablero){
-		synchronized(lock){
+		//synchronized(lock){
 		return (xTablero*80+x)*escala;
-		}
+		//}
 	}
 	
 	public double yPantalla(double yTablero){
-		synchronized(lock){
+		//synchronized(lock){
 		return (yTablero*80+y)*escala;
-		}
+		//}
 	}
 	
 	public double yPantalla(Posicion p){
@@ -172,9 +172,9 @@ public class MueveVista {
 	
 	
 	public double altoCasillero(){
-		synchronized(lock){
+		//synchronized(lock){
 		return 80*escala;
-		}
+		//}
 	}
 	public void agregarCallbackClickeo(CallbackPosicion call) {
 		cllbacksClickeo.add(call);
@@ -189,10 +189,10 @@ public class MueveVista {
 	}
 	
 	public void movido(MouseEvent e) {//EVENTO
-		synchronized(lock){
+		//synchronized(lock){
 			x_mouse = e.getX();
 			y_mouse = e.getY();
-		}
+		//}
 		for(CallbackPosicion c: cllbacksHovereo){
 			c.execute(obtenerPosicion(e));
 		}
@@ -202,14 +202,14 @@ public class MueveVista {
 	}
 	
 	public double getYMouse() {
-		synchronized(lock){
+		//synchronized(lock){
 			return y_mouse;
-		}
+		//}
 	}
 	public double getXMouse() {
-		synchronized(lock){
+		//synchronized(lock){
 			return x_mouse;
-		}
+		//}
 	}
 
 }

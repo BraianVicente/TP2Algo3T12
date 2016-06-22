@@ -221,6 +221,9 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			dibujarUnidades(gc,Plano.AEREO);
 		}
 		
+		//halos
+		dibujarHalos(gc);
+		
 		//el cuadrado seleccionado
 		if(seleccionada != null){
 			
@@ -258,23 +261,22 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			gc.setFill(Color.BLACK);
 			gc.fillText(accion, 
 						offsetX+mueveVista.getXMouse()+10, 
-						offsetY + mueveVista.getYMouse()+bounds.getHeight());
+						offsetY + mueveVista.getYMouse()+16);
 			gc.restore();
 		}
 		
-		//halos
-		dibujarHalos(gc);
+		
 		//explosiones
 		embellecedores.dibujarExplosiones(gc, mueveVista, cacheImagenes);
 		//rangos
 		dibujarRangos(gc);
 	}
 	public void dibujarHalos(GraphicsContext gc){
-		if(halos != null){
-			ArrayList<PosicionEnElPlano> haloAtaque = juego.obtenerHaloAtaque(halos);
-			dibujarHalo(gc,haloAtaque,Color.RED);
+		if(halos != null && juego.enTablero(halos)){
 			ArrayList<PosicionEnElPlano> haloMovimiento = juego.obtenerHaloMovimiento(halos);
 			dibujarHalo(gc,haloMovimiento,Color.YELLOW);
+			ArrayList<PosicionEnElPlano> haloAtaque = juego.obtenerHaloAtaque(halos);
+			dibujarHalo(gc,haloAtaque,Color.RED);
 		}
 	}
 
@@ -467,7 +469,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	}
 	
 	public void dibujarRangos(GraphicsContext gc){
-		if(mostrandoRangos!=null){
+		if(mostrandoRangos!=null && juego.enTablero(mostrandoRangos)){
 			dibujarRango(gc,
 				mostrandoRangos.getDistanciaAtaque(),
 				juego.posicion(mostrandoRangos),

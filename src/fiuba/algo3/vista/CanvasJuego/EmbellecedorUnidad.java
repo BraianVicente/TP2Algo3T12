@@ -172,10 +172,28 @@ public class EmbellecedorUnidad{
 			gc.save();
 			Posicion p = juego.posicion(unidad);
 			try{
-				Image imgU = cacheImagenes.obtenerImagen(unidad.nombreImagen());
 				double extraHovereando = 0;
-				
 				if(hovereando) extraHovereando =  (mueveVista.anchoCasillero()*0.3f);
+				
+				
+				ArrayList<String> nombres_imagenes = unidad.obtenerNombresImagenesModificadores();
+				gc.save();
+				gc.setGlobalAlpha(0.5f/nombres_imagenes.size());
+				for(String nombre : nombres_imagenes ){
+					if(nombre != null){
+						Image imgM = cacheImagenes.obtenerImagen(nombre);
+						gc.drawImage(imgM,
+								mueveVista.xPantalla(x)-extraHovereando/2, 
+								mueveVista.yPantalla(y)-extraHovereando/2, 
+								mueveVista.anchoCasillero()+extraHovereando,
+								mueveVista.altoCasillero()+extraHovereando
+								);
+					}
+				}
+				gc.restore();
+				
+				Image imgU = cacheImagenes.obtenerImagen(unidad.nombreImagen());
+				
 				
 				ColorAdjust agrisar = new ColorAdjust();
 				agrisar.setSaturation(-0.6);
@@ -190,21 +208,7 @@ public class EmbellecedorUnidad{
 						mueveVista.anchoCasillero()+extraHovereando,
 						mueveVista.altoCasillero()+extraHovereando
 						);
-				ArrayList<String> nombres_imagenes = unidad.obtenerNombresImagenesModificadores();
-				gc.save();
-				gc.setGlobalAlpha(0.5f/nombres_imagenes.size());
-				for(String nombre : nombres_imagenes ){
-					if(nombre != null){
-						Image imgM = cacheImagenes.obtenerImagen(nombre);
-						gc.drawImage(imgM,
-								mueveVista.xPantalla(p), 
-								mueveVista.yPantalla(p), 
-								mueveVista.anchoCasillero(),
-								mueveVista.altoCasillero()
-								);
-					}
-				}
-				gc.restore();
+				
 			}
 			catch(ImagenInexistenteException e){}
 			gc.restore();

@@ -189,20 +189,41 @@ public class Juego {
 
 
 	public String accionPosibleEn(PosicionEnElPlano posicion){
-    	if(!tablero.contiene(unidadSeleccionada)) unidadSeleccionada=null;
-    	if(unidadSeleccionada!=null && enTablero(posicion) ){
-    		Unidad u = unidadSeleccionada;
-    		String accionPosible="Deseleccionar";
-    		if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
-    		if(sePuedeMover(u,new Posicion(posicion,u.getPlanoPerteneciente()))&&
-    			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion))accionPosible ="Mover";
-    		if((puedeAtacar(u,new Posicion(posicion,Posicion.Plano.AEREO)) ||
-    			puedeAtacar(u, new Posicion(posicion, Posicion.Plano.TERRESTRE)))&&
-    			!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Atacar";
-    		return accionPosible;
+		if(!enTablero(posicion)) return "";
+		
+    	 Casillero cas = construirCasillero(posicion.crearPosicion(Posicion.Plano.AEREO));
+    	
+    	if(cas.getEsChispa()){
+    		return "Chispa suprema:\nLlevala al monte de la perdicon para ganar";
     	}
     	
-    	return "";
+    	if(cas.getMontePerdicion()){
+    		return "Monte de la perdicion:\nTrae la chispa para ganar!";
+    	}
+    	
+    	if(unidadSeleccionada==null){
+    		if(cas.getUnidad()!=null && cas.getUnidad().es(enTurno.getEquipo())){
+    			return "seleccionar";
+    		}else{
+    			return "";
+    		}
+    	}
+    	
+    	if(cas.getUnidad()!=null && cas.getUnidad().esDelMismoEquipo(unidadSeleccionada)){
+    		return "seleccionar";
+    	}
+    	
+    	if(!tablero.contiene(unidadSeleccionada))return "";
+    	
+   		Unidad u = unidadSeleccionada;
+    	String accionPosible="Deseleccionar";
+    	if(sePuedeTransformar(u)&&this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Transformar";
+   		if(sePuedeMover(u,new Posicion(posicion,u.getPlanoPerteneciente()))&&
+    		!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion))accionPosible ="Mover";
+    	if((puedeAtacar(u,new Posicion(posicion,Posicion.Plano.AEREO)) ||
+    		puedeAtacar(u, new Posicion(posicion, Posicion.Plano.TERRESTRE)))&&
+    		!this.obtenerPosicion(u).obtenerPosicionEnElPlano().equals(posicion)) accionPosible="Atacar";
+    	return accionPosible;
     	
     }
     
@@ -230,34 +251,11 @@ public class Juego {
     		return null;
     	}
     }
-    /*
-    public void clickeoCasillero(Casillero c,CanvasJuego canvas){
-    	//ac� estoy suponiendo que siempre que to�s una unidad la quer�s seleccionar,
-    	Unidad referenciada = unidadReferenciada(c);
-   		this.cambiarUnidadSeleccionada(referenciada);    	
-//    	if(unidadSeleccionada == null){
-//    		this.cambiarUnidadSeleccionada(referenciada);
-//    		//canvas.setHaloAtaque(tablero.posicionesAtacables(unidadSeleccionada));
-//        	//canvas.setHaloMovimiento(tablero.posicionesMovimiento(unidadSeleccionada));
-//    	}else{
-//    		//if(sePuedeAtacar...)atacar(...)
-//    		//if(sePuedeMover...)mover(...)
-//    		//if(sePuedeTransformar(...))transformar(...)
-//    		//Estar�a muy muy lindo una interfaz acci�n ac� pero no hay T
-//    		
-//    		canvas.setHaloAtaque(null);
-//        	canvas.setHaloMovimiento(null);
-//    	}
-    	
-    	canvas.seleccionadorEn(c.getPos());
-    	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
-    }
-    */
     
     
-	private void cambiarUnidadSeleccionada(Unidad referenciada) {
+    
+	public void cambiarUnidadSeleccionada(Unidad referenciada) {
 		unidadSeleccionada=referenciada;
-		
 	}
 
 
@@ -284,7 +282,10 @@ public class Juego {
 			uAerea=null;
 		}
 		
-		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre);
+		boolean esChispa= (tablero.tieneChispa(terrestre));
+		boolean esMonte = (tablero.getPosicionMontePerdicion().equals(terrestre));
+		
+		return new Casillero(supAerea,supTerrestre,pos,uAerea,uTerrestre,esChispa,esMonte);
 	}
 	public void agregarBonus(Bonus bonus, Posicion p) {
 		tablero.agregarBonus(bonus, p);

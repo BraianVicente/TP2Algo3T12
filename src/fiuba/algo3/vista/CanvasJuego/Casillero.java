@@ -11,14 +11,24 @@ public class Casillero {
 	private Unidad uAerea;
 	private Unidad uTerrestre;
 	private PosicionEnElPlano pos;
+	private boolean esChispa;
+	private boolean esMontePerdicion;
 	
 	
-	public Casillero(Superficie supAerea, Superficie supTerrestre, Posicion pos2, Unidad uAerea, Unidad uTerrestre) {
+	public Casillero(Superficie supAerea, 
+			Superficie supTerrestre, 
+			Posicion pos2, 
+			Unidad uAerea, 
+			Unidad uTerrestre,
+			boolean esChispa,
+			boolean esMontePerdicion) {
 		this.sAerea=supAerea;
 		this.sTerrestre=supTerrestre;
 		this.pos =new PosicionEnElPlano(pos2.getX(),pos2.getY());
 		this.uAerea=uAerea;
 		this.uTerrestre=uTerrestre;
+		this.esChispa = esChispa;
+		this.esMontePerdicion = esMontePerdicion;
 	}
 
 
@@ -67,6 +77,16 @@ public class Casillero {
 		if(modoVista==ModoVista.SOLOTIERRA||(modoVista==ModoVista.AMBAS&&getuTerrestre()!=null)) return this.getuTerrestre();
 		else return this.getuAerea();
 
+	}
+
+
+	public boolean getEsChispa() {
+		return esChispa;
+	}
+
+
+	public boolean getMontePerdicion() {
+		return esMontePerdicion;
 	}
 	
 }

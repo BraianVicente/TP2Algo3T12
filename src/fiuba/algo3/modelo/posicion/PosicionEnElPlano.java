@@ -1,5 +1,6 @@
 package fiuba.algo3.modelo.posicion;
 
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.*;
 import java.util.Objects;
 
@@ -82,4 +83,7 @@ public class PosicionEnElPlano implements Cloneable {
     public boolean contiguoAPosicion(PosicionEnElPlano actual) {
         return this.distanciaA(actual) == 1 ;
     }
+	public Posicion crearPosicion(Plano plano) {
+		return  new Posicion(x,y,plano);
+	}
 }

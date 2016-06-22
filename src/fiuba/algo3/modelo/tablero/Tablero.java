@@ -505,7 +505,8 @@ public class Tablero {
 		for(int x = xInicio; x<=xFin; x++){
 			for(int y = yInicio; y<=yFin; y++){
 				Posicion chequeo = new Posicion(x,y);
-				if(enLimites(chequeo) && puedeAtacar(u, chequeo)){
+				Posicion aereo = chequeo.nuevaPosicionConDistintoPlano(Plano.AEREO);
+				if(enLimites(chequeo) && (puedeAtacar(u, chequeo) || puedeAtacar(u, aereo)) ){
 					ret.add(chequeo.obtenerPosicionEnElPlano());
 				}
 			}

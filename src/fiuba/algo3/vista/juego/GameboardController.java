@@ -195,7 +195,7 @@ public class GameboardController {
     	
     	GamePane.getChildren().add(cj);
     	
-    	//cj.agregarCallbackClickeo(c->juego.clickeoCasillero(c,cj));
+    	cj.agregarCallbackClickeo(c->clickeoCasillero(c));
     	cj.agregarCallbackHover(c->hovereoCasillero(c));
 		
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
@@ -218,7 +218,15 @@ public class GameboardController {
 
     }
     
-    private void setUpBonus(Juego juego) {
+    private void clickeoCasillero(Casillero c) {
+    	Unidad seleccionada = null;
+    	if(c.getUnidad()!= null && c.getUnidad().es(juego.jugadorEnTurno().getEquipo())){
+    		seleccionada = c.getUnidad(cj.getModoVista());
+    	}
+    	juego.cambiarUnidadSeleccionada(seleccionada);
+	}
+
+	private void setUpBonus(Juego juego) {
     	juego.agregarBonus(new BonusBurbuja(null),new Posicion(3,3));
     	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(5,5));
     	juego.agregarBonus(new BonusDobleCanion(null),new Posicion(0,4));
