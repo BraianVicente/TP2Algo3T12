@@ -1,12 +1,14 @@
 package fiuba.algo3.modelo.unidades;
 
 import fiuba.algo3.modelo.unidades.muerte.DeathListener;
+import fiuba.algo3.modelo.chispa.ChispaHolder;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;
 import fiuba.algo3.modelo.modificadores.ModificadorNebulosa;
 import fiuba.algo3.modelo.modificadores.ModificadorPsionica;
 import fiuba.algo3.modelo.posicion.Posicion.Plano;
+import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
@@ -148,6 +150,16 @@ public abstract class Transformer extends Unidad {
         if (this.forma.esHumanoide()){
     		chispa = ChispaSuprema.getInstance();
         }
+	}
+
+	public void transformar(Tablero tablero) {
+		if(!forma.getAlternativa().esHumanoide()){
+			tablero.sacarChispaSiLaTiene(this);
+			this.chispa=new ChispaHolder();
+		}
+		transformar();
+
+		
 	}
 
 }
