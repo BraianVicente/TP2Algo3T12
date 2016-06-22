@@ -280,7 +280,9 @@ public class GameboardController {
     }
 
     private void vidaUnidad(Unidad u) {
-        this.vidaUnidad.setProgress((u.getVida())/u.getVidaMaxima());
+        float vidaMaxima = u.getVidaMaxima() ;
+        float vidaActual = u.getVida();
+        this.vidaUnidad.setProgress(vidaActual/vidaMaxima);
     }
 
     private void ataqueUnidad(Unidad u) {
