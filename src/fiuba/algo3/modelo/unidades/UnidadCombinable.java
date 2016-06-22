@@ -7,7 +7,7 @@ package fiuba.algo3.modelo.unidades;
 
 import java.util.ArrayList;
 
-import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.FormaHumanoide;
 import fiuba.algo3.modelo.formas.HumanoideOptimusprime;

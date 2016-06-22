@@ -5,8 +5,8 @@
  */
 package fiuba.algo3.vista.statsPane;
 
-import fiuba.algo3.modelo.Death;
-import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.unidades.muerte.Death;
+import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;

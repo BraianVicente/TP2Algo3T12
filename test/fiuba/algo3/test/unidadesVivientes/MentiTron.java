@@ -1,6 +1,6 @@
 package fiuba.algo3.test.unidadesVivientes;
 
-import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.unidades.muerte.IgnorarMuerte;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.formas.Forma;

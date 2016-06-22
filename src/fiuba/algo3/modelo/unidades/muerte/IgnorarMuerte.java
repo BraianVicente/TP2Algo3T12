@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo;
+package fiuba.algo3.modelo.unidades.muerte;
 
 import fiuba.algo3.modelo.unidades.Unidad;
 

@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.equipos;
 
-import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.modelo.unidades.UnidadCombinable;

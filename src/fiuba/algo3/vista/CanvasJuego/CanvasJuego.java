@@ -4,7 +4,7 @@ package fiuba.algo3.vista.CanvasJuego;
 import java.util.ArrayList;
 import java.util.Timer;
 
-import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
@@ -308,15 +308,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	private void dibujarChispa(GraphicsContext gc) {
 
-			try {
 				gc.drawImage(cacheImagenes.obtenerImagen(Chispa.nombreImagen()),
 							mueveVista.xPantalla(juego.posicionChispa()), 
 							mueveVista.yPantalla(juego.posicionChispa()), 
 							mueveVista.anchoCasillero(),
 							mueveVista.altoCasillero());
-			} catch (RuntimeException e) {
-
-			}
 
 		
 	}

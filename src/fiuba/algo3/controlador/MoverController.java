@@ -1,6 +1,6 @@
 package fiuba.algo3.controlador;
 
-import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;

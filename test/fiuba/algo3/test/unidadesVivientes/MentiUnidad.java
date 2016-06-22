@@ -1,6 +1,6 @@
 package fiuba.algo3.test.unidadesVivientes;
 
-import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;

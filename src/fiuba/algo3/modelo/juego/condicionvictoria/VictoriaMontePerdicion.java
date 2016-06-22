@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fiuba.algo3.modelo;
+package fiuba.algo3.modelo.juego.condicionvictoria;
 
+import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;

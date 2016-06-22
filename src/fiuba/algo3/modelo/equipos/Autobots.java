@@ -1,7 +1,7 @@
 package fiuba.algo3.modelo.equipos;
 
-import fiuba.algo3.modelo.DeathListener;
-import fiuba.algo3.modelo.DesarmadorCombinable;
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
+import fiuba.algo3.modelo.unidades.muerte.DesarmadorCombinable;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Superion;
 import fiuba.algo3.modelo.unidades.Unidad;

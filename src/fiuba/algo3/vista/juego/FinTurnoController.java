@@ -1,6 +1,6 @@
 package fiuba.algo3.vista.juego;
 
-import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.juego.Juego;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

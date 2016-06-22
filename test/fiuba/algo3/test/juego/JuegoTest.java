@@ -1,14 +1,14 @@
 package fiuba.algo3.test.juego;
 
-import fiuba.algo3.modelo.EscenarioDefault;
-import fiuba.algo3.modelo.Juego;
+import fiuba.algo3.modelo.tablero.EscenarioDefault;
+import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.jugador.EquipoInvalidoException;
 import fiuba.algo3.modelo.jugador.Jugador;
-import fiuba.algo3.modelo.Death;
-import fiuba.algo3.modelo.VictoriaAgarrarChispa;
-import fiuba.algo3.modelo.VictoriaMontePerdicion;
+import fiuba.algo3.modelo.unidades.muerte.Death;
+import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaAgarrarChispa;
+import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaMontePerdicion;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.TransformacionInvalida;

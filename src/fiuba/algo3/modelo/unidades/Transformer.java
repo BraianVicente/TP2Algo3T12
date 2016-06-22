@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.unidades;
 
-import fiuba.algo3.modelo.DeathListener;
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.formas.Forma;

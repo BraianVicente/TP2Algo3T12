@@ -5,7 +5,7 @@
  */
 package fiuba.algo3.modelo.jugador;
 
-import fiuba.algo3.modelo.WinListener;
+import fiuba.algo3.modelo.juego.condicionvictoria.WinListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;

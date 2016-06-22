@@ -5,11 +5,10 @@
  */
 package fiuba.algo3.modelo.tablero;
 
-import fiuba.algo3.modelo.Death;
-import fiuba.algo3.modelo.Escenario;
-import fiuba.algo3.modelo.SinVictoria;
-import fiuba.algo3.modelo.VictoriaMontePerdicion;
-import fiuba.algo3.modelo.WinListener;
+import fiuba.algo3.modelo.unidades.muerte.Death;
+import fiuba.algo3.modelo.juego.condicionvictoria.SinVictoria;
+import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaMontePerdicion;
+import fiuba.algo3.modelo.juego.condicionvictoria.WinListener;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
@@ -85,6 +84,7 @@ public class Tablero {
         this(e.getAnchoEscenario(),e.getLargoEscenario());
         this.agregarSuperficiesAereas(e) ;
         this.agregarSuperficiesTerrestres(e) ;
+        this.colocarChispaCentrada();
     }
 
     public Tablero(Escenario escenario,WinListener condicionVictoria){
@@ -397,7 +397,7 @@ public class Tablero {
         }
     }
 
-    private void colocarMontePerdicion() {
+    public void colocarMontePerdicion() {
         int posX = (int)(Math.random()*(ancho+1)); //random
         int posY = (int)(Math.random()*(alto+1)); //random
         this.posicionMontePerdicion = new Posicion(posX,posY);
@@ -439,7 +439,9 @@ public class Tablero {
 		}
 		
 		this.agregarUnidad(posProbable, unidadNueva);
-		
+        
+        this.strategiWin.gano(unidadNueva.equipo());
+
 	}
 
 	public boolean enLimites(PosicionEnElPlano p) {

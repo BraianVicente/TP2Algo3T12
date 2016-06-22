@@ -1,6 +1,6 @@
 package fiuba.algo3.modelo.bonuses;
 
-import fiuba.algo3.modelo.LevantadoDeBonusListener;
+import fiuba.algo3.modelo.bonuses.levantador.LevantadoDeBonusListener;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.modificadores.ModificadorDoble;
 

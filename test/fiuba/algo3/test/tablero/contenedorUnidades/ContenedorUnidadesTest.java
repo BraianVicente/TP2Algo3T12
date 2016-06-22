@@ -3,7 +3,7 @@ package fiuba.algo3.test.tablero.contenedorUnidades;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.unidades.muerte.IgnorarMuerte;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.PosicionOcupadaException;

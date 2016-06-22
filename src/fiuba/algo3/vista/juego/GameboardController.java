@@ -11,10 +11,12 @@ import fiuba.algo3.controlador.CombinarController;
 import fiuba.algo3.controlador.GameController;
 import fiuba.algo3.controlador.MoverController;
 import fiuba.algo3.controlador.TransformarController;
-import fiuba.algo3.modelo.Death;
-import fiuba.algo3.modelo.Juego;
-import fiuba.algo3.modelo.VictoriaMontePerdicion;
-import fiuba.algo3.modelo.WinListener;
+import fiuba.algo3.modelo.unidades.muerte.Death;
+import fiuba.algo3.modelo.tablero.Escenario;
+import fiuba.algo3.modelo.tablero.EscenarioDefault;
+import fiuba.algo3.modelo.juego.Juego;
+import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaMontePerdicion;
+import fiuba.algo3.modelo.juego.condicionvictoria.WinListener;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;
@@ -167,8 +169,9 @@ public class GameboardController {
     }
     
     public void setUp() {    	
+        Escenario esc = new EscenarioDefault();
     	VictoriaMontePerdicion win=new VictoriaMontePerdicion();
-    	tablero = new Tablero(6, 6,win);
+    	tablero = new Tablero(esc,win);
     	
 
     	Jugador j1 = new Jugador(namePlayer1, new Autobots(), tablero);
@@ -177,7 +180,7 @@ public class GameboardController {
 		juego = new Juego(tablero, j1, j2);
 		win.setTablero(tablero);
 		win.setJuego(juego);
-		tablero.colocarMontePerdicion(new Posicion(5,0));
+		tablero.colocarMontePerdicion();
 		setUpUnits(juego);
 		setUpBonus(juego);
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
@@ -316,8 +319,10 @@ public class GameboardController {
     private void tieneChispa(Unidad u) {
         if(u.tieneChispa()){
             this.tieneChispa.setText("Si");
-        }
+        } else {
         this.tieneChispa.setText("No");
+            
+        }
         
     }
 

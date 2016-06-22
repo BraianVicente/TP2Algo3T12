@@ -1,5 +1,6 @@
-package fiuba.algo3.modelo;
+package fiuba.algo3.modelo.unidades.muerte;
 
+import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;

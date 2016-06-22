@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fiuba.algo3.modelo;
+package fiuba.algo3.modelo.juego.condicionvictoria;
+
+import fiuba.algo3.modelo.equipos.Equipo;
 
 /**
  *
  * @author brahvic
  */
-public class JugadorSinUnidadesException {
+public interface WinListener {
+    
+    public void gano(Equipo equipo);
+
+    public void perdio(Equipo equipo);
     
 }

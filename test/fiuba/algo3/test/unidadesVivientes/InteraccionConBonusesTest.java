@@ -3,7 +3,7 @@ package fiuba.algo3.test.unidadesVivientes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.IgnorarMuerte;
+import fiuba.algo3.modelo.unidades.muerte.IgnorarMuerte;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;

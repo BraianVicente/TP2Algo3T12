@@ -1,7 +1,7 @@
 package fiuba.algo3.modelo.bonuses;
 
-import fiuba.algo3.modelo.IgnorarLevantado;
-import fiuba.algo3.modelo.LevantadoDeBonusListener;
+import fiuba.algo3.modelo.bonuses.levantador.IgnorarLevantado;
+import fiuba.algo3.modelo.bonuses.levantador.LevantadoDeBonusListener;
 import fiuba.algo3.modelo.modificadores.Modificador;
 import fiuba.algo3.modelo.unidades.Unidad;
 
