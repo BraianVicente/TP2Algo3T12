@@ -18,7 +18,7 @@ public class ContenedorEmbellecedores {
 		explosiones = new ArrayList<Explosion>();
 	}
 	/**
-	 * Agrega los embellecedores que no estén presentes ya
+	 * Agrega los embellecedores que no esten presentes ya
 	 * @param juego
 	 */
 	public void revisarEmbellecedores(Juego juego){
