@@ -90,6 +90,9 @@ public class GameboardController {
     private ProgressBar vidaUnidad ;
 
     @FXML
+    private TextField vidaInt ;
+    
+    @FXML
     private TextField ataqueUnidad ;
 
     @FXML
@@ -283,6 +286,8 @@ public class GameboardController {
         float vidaMaxima = u.getVidaMaxima() ;
         float vidaActual = u.getVida();
         this.vidaUnidad.setProgress(vidaActual/vidaMaxima);
+        Integer vid = u.getVida();
+        this.vidaInt.setText(vid.toString());
     }
 
     private void ataqueUnidad(Unidad u) {
