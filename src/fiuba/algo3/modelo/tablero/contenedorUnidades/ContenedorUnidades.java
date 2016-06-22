@@ -1,16 +1,14 @@
 package fiuba.algo3.modelo.tablero.contenedorUnidades;
 
 import fiuba.algo3.modelo.equipos.Equipo;
-import java.util.ArrayList;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
+import fiuba.algo3.modelo.posicion.PosicionLibreException;
+import fiuba.algo3.modelo.posicion.PosicionOcupadaException;
 import java.util.HashMap;
 import java.util.Map;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.tablero.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
-import fiuba.algo3.modelo.unidades.Transformer;
 import fiuba.algo3.modelo.unidades.Unidad;
 import java.util.ArrayList;
 

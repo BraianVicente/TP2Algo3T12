@@ -1,15 +1,14 @@
 package fiuba.algo3.test.tablero;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.unidades.Bumblebee;
-import fiuba.algo3.modelo.unidades.Frenzy;
 import fiuba.algo3.modelo.unidades.Megatron;
 import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Ratchet;

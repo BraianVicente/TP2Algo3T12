@@ -1,11 +1,8 @@
 package fiuba.algo3.controlador;
 
 import fiuba.algo3.modelo.juego.Juego;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
-import fiuba.algo3.modelo.tablero.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.superficies.Superficie;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CallbackCasillero;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;

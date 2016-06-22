@@ -2,7 +2,7 @@ package fiuba.algo3.controlador;
 
 
 import fiuba.algo3.modelo.juego.Juego;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 

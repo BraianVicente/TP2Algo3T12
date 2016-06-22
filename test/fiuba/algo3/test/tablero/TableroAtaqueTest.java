@@ -1,13 +1,12 @@
 package fiuba.algo3.test.tablero;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.tablero.AtaqueInvalidoException;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Frenzy;

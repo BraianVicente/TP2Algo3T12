@@ -1,13 +1,11 @@
 package fiuba.algo3.modelo.posicion;
 
-import fiuba.algo3.modelo.tablero.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
 
 public class Posicion {
 	public enum Plano{

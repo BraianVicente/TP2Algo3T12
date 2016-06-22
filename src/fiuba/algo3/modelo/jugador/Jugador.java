@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,7 +7,7 @@ package fiuba.algo3.modelo.jugador;
 
 import fiuba.algo3.modelo.juego.condicionvictoria.WinListener;
 import fiuba.algo3.modelo.equipos.Equipo;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Unidad;
 import java.util.Objects;

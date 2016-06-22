@@ -1,7 +1,7 @@
 package fiuba.algo3.vista.CanvasJuego;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
 

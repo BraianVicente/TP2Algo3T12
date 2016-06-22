@@ -6,8 +6,6 @@ import fiuba.algo3.modelo.unidades.Ratchet;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.*;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;

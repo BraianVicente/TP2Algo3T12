@@ -1,13 +1,12 @@
 package fiuba.algo3.test.obligatorias;
 
-import static org.junit.Assert.*;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.unidades.muerte.IgnorarMuerte;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.aerea.NebulosaAndromeda;
 import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;

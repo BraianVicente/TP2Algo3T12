@@ -6,8 +6,8 @@ import org.junit.Test;
 import fiuba.algo3.modelo.bonuses.BonusBurbuja;
 import fiuba.algo3.modelo.bonuses.BonusDobleCanion;
 import fiuba.algo3.modelo.bonuses.BonusFlash;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.BonusYaContenidoException;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 

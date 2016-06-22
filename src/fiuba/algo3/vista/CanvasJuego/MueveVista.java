@@ -1,9 +1,9 @@
 package fiuba.algo3.vista.CanvasJuego;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
 import java.util.ArrayList;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 

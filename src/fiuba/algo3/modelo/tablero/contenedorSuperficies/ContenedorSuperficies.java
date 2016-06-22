@@ -1,10 +1,9 @@
 package fiuba.algo3.modelo.tablero.contenedorSuperficies;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionLibreException;
 import java.util.HashMap;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 public class ContenedorSuperficies {

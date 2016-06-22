@@ -5,13 +5,13 @@
  */
 package fiuba.algo3.test.tablero;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 
 /**
  *

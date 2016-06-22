@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionLibreException;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
-import fiuba.algo3.modelo.unidades.Unidad;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionLibreException;
+import fiuba.algo3.modelo.posicion.PosicionOcupadaException;
 
 public class ContenedorBonuses {
 	private Map<Posicion, Bonus> bonusesPorPosicion;

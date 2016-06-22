@@ -5,9 +5,7 @@
  */
 package fiuba.algo3.modelo.tablero;
 
-import fiuba.algo3.modelo.unidades.muerte.Death;
 import fiuba.algo3.modelo.juego.condicionvictoria.SinVictoria;
-import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaMontePerdicion;
 import fiuba.algo3.modelo.juego.condicionvictoria.WinListener;
 import java.util.LinkedList;
 
@@ -15,7 +13,10 @@ import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
+import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
+import fiuba.algo3.modelo.posicion.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
 import fiuba.algo3.modelo.tablero.contenedorSuperficies.ContenedorSuperficies;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.ContenedorUnidades;

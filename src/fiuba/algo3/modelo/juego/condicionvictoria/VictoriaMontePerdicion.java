@@ -7,8 +7,6 @@ package fiuba.algo3.modelo.juego.condicionvictoria;
 
 import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.equipos.Equipo;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.Tablero;
 
 /**

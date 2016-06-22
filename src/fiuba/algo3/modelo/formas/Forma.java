@@ -1,7 +1,7 @@
 package fiuba.algo3.modelo.formas;
 
 import fiuba.algo3.modelo.modificadores.ContenedorModificadores;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 
 public abstract class Forma {

@@ -9,15 +9,13 @@ import fiuba.algo3.modelo.tablero.Escenario;
 import java.util.ArrayList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
-import fiuba.algo3.modelo.bonuses.BonusBurbuja;
-import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.jugador.Jugador;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.Posicion.Plano;
-import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
-import fiuba.algo3.modelo.tablero.PosicionLibreException;
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion.Plano;
+import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
+import fiuba.algo3.modelo.posicion.PosicionLibreException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
@@ -29,7 +27,6 @@ import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
-import javafx.scene.image.Image;
 
 /**
  *

@@ -7,14 +7,11 @@ package fiuba.algo3.vista.statsPane;
 
 import fiuba.algo3.modelo.unidades.muerte.Death;
 import fiuba.algo3.modelo.juego.Juego;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
-import fiuba.algo3.modelo.tablero.superficies.aerea.Nubes;
 import fiuba.algo3.modelo.tablero.superficies.aerea.TormentaPsionica;
 import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
-import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
-import fiuba.algo3.modelo.unidades.Bonecrusher;
 import fiuba.algo3.modelo.unidades.Bumblebee;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.modelo.unidades.Ratchet;

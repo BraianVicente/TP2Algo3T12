@@ -9,7 +9,7 @@ import fiuba.algo3.modelo.jugador.Jugador;
 import fiuba.algo3.modelo.unidades.muerte.Death;
 import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaAgarrarChispa;
 import fiuba.algo3.modelo.juego.condicionvictoria.VictoriaMontePerdicion;
-import fiuba.algo3.modelo.tablero.Posicion;
+import fiuba.algo3.modelo.posicion.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.TransformacionInvalida;
 import fiuba.algo3.modelo.unidades.Bumblebee;
@@ -256,7 +256,7 @@ public class JuegoTest {
     @Test
     public void testUnidadConChispaLlegAlMontePerdicionGana(){
         VictoriaMontePerdicion condition = new VictoriaMontePerdicion();
-        Tablero tab = new Tablero(new EscenarioDefault(),condition);
+        Tablero tab = new Tablero(10,10,condition);
 
         Posicion origen = new Posicion(4,4);
         Posicion destino = new Posicion(6,6) ;

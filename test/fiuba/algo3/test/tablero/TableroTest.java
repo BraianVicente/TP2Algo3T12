@@ -5,12 +5,12 @@
  */
 package fiuba.algo3.test.tablero;
 
+import fiuba.algo3.modelo.posicion.Posicion;
+import fiuba.algo3.modelo.posicion.PosicionOcupadaException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import fiuba.algo3.modelo.unidades.muerte.Death;
-import fiuba.algo3.modelo.tablero.Posicion;
-import fiuba.algo3.modelo.tablero.PosicionOcupadaException;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidades.AtaqueInvalidoPorDistanciaException;
@@ -25,7 +25,6 @@ import fiuba.algo3.modelo.unidades.MovimientoInvalidoException;
 import fiuba.algo3.modelo.unidades.Optimusprime;
 import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Superion;
-import fiuba.algo3.modelo.unidades.Unidad ;
 
 /**
  *

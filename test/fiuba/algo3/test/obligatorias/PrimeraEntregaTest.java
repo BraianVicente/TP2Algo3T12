@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.chispa.ChispaSuprema;
+import fiuba.algo3.modelo.posicion.Posicion;
 import fiuba.algo3.modelo.tablero.AtaqueInvalidoException;
-import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.tablero.contenedorUnidades.NoSeEncuentraUnidadException;
 import fiuba.algo3.modelo.unidades.Bonecrusher;
