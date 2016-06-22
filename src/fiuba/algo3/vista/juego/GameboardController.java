@@ -37,7 +37,6 @@ import fiuba.algo3.vista.CanvasJuego.Casillero;
 import fiuba.algo3.vista.finalSplash.FinalSplash;
 import fiuba.algo3.vista.finalSplash.PlayAgainController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
