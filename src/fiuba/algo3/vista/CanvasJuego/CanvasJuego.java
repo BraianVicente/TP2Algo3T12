@@ -4,7 +4,6 @@ package fiuba.algo3.vista.CanvasJuego;
 import java.util.ArrayList;
 import java.util.Timer;
 
-import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.bonuses.Bonus;
 import fiuba.algo3.modelo.chispa.Chispa;
@@ -56,7 +55,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	private MueveVista mueveVista;
 	private Image seleccionador;
 	private Image seleccionadorObjetivo;
-	private TeclaEnCanvasEventHandler teclaEventHandler;
 	private Juego juego;
 	private Posicion seleccionadaViejaSeraBorrada;
 	private Posicion objetivoVIEJOSERABORRADO;
@@ -92,9 +90,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		seleccionadaViejaSeraBorrada = new Posicion(0,0);
 		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
 		
-		teclaEventHandler= new TeclaEnCanvasEventHandler(seleccionadaViejaSeraBorrada,objetivoVIEJOSERABORRADO,juego,this);	
-		this.setOnKeyPressed(teclaEventHandler);
-		
+
 		/*
 		timer = new Timer();
 		timer.schedule(new Actualizador(this), 0, 33);
@@ -131,7 +127,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	private void clickea(Posicion p){
 		if(juego.enTablero(p)){
-			teclaEventHandler.cambiarSeleccionada(p);
+
 			Casillero construido = construirCasillero(p);
 			for(CallbackCasillero calls : callbacksClickeo){
 				calls.execute(construido);
