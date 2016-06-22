@@ -271,6 +271,7 @@ public class JuegoTest {
         Ratchet uniJ1 = new Ratchet(new Death(tab));
         juego.agregarUnidad(origen, uniJ1);
         uniJ1.transformar();
+        Assert.assertFalse(tab.unidadesContieneChispa(j1.getEquipo()));
         juego.moverUnidad(origen, new Posicion (5,5));
         Assert.assertTrue(tab.unidadesContieneChispa(j1.getEquipo()));
         

@@ -175,9 +175,9 @@ public class GameboardController {
 		juego = new Juego(tablero, j1, j2);
 		win.setTablero(tablero);
 		win.setJuego(juego);
+		tablero.colocarMontePerdicion(new Posicion(5,0));
 		setUpUnits(juego);
 		setUpBonus(juego);
-		tablero.cambiarCondicionVictoria(new VictoriaMontePerdicion());
 		setJugandoImage(juego.jugadorEnTurno().getEquipo());
 		
 		cj = new CanvasJuego(juego);

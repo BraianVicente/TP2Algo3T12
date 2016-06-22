@@ -13,6 +13,7 @@ public class CacheImagenes {
 				"/fiuba/algo3/vista/imagenes/tierra/espinas.png",
 				"/fiuba/algo3/vista/imagenes/tierra/pantano.png",
 				"/fiuba/algo3/vista/imagenes/tierra/piedras.png",
+				"/fiuba/algo3/vista/imagenes/tierra/montePerdicion.png",
 				
 				"/fiuba/algo3/vista/imagenes/transformers/Superion.png",
 				
@@ -42,7 +43,9 @@ public class CacheImagenes {
 				
 				"/fiuba/algo3/vista/imagenes/efectos/bonusInvulnerabilidad.png",
 				"/fiuba/algo3/vista/imagenes/efectos/bonusFlash.png",
-				"/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png"
+				"/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png",
+				
+				"/fiuba/algo3/vista/imagenes/bonus/chispa.png"
 		};
 		
 		imagenes = new HashMap<String,Image>();
@@ -55,9 +58,9 @@ public class CacheImagenes {
 		}
 	}
 	
-	public Image obtenerImagen(String nombre) throws ImagenInexistenteExcption{
+	public Image obtenerImagen(String nombre) throws ImagenInexistenteException{
 		if(!imagenes.containsKey(nombre)){
-			throw new ImagenInexistenteExcption(nombre);
+			throw new ImagenInexistenteException(nombre);
 		}
 		return imagenes.get(nombre);
 	}

@@ -13,6 +13,8 @@ import fiuba.algo3.modelo.WinListener;
 import java.util.LinkedList;
 
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.equipos.Autobots;
+import fiuba.algo3.modelo.equipos.Decepticons;
 import fiuba.algo3.modelo.equipos.Equipo;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.contenedorBonuses.ContenedorBonuses;
@@ -41,6 +43,7 @@ public class Tablero {
     private WinListener strategiWin;
     private Posicion posicionMontePerdicion;
 	private Posicion posicionChispa;
+
     private static final Integer MAX_DISTANCE = 2; //definir distancia maxima entre units para hacer la combinacion
 	
 	public int obtenerAncho(){
@@ -115,18 +118,23 @@ public class Tablero {
     		if(unidad.getCoeficienteMovimientoActual()==0) throw new MovimientoInvalidoException();
     		unidad.descontarMovimiento(1/unidad.getCoeficienteMovimientoActual());
     		this.desplazarPosicionContigua(unidad, posicionSiguiente);
-    		if (this.tieneChispa(posicionSiguiente))       unidad.darChispa();
+    		if (this.tieneChispa(posicionSiguiente))  this.darChispa(unidad);
     		contenedorSuperficies.obtenerSuperficie(posicionSiguiente).afectarA(unidad);
     		if(contenedorBonuses.ocupada(posicionSiguiente)) this.darBonus(unidad,posicionSiguiente);
-    	
     		posicionActual=contenedorUnidades.obtenerPosicion(unidad);
-    	}
-        if (unidad.tieneChispa()){
-            this.posicionChispa = posicionActual;
+    		if (unidad.tieneChispa()){
+                this.posicionChispa = posicionActual;
+    		}
+
         }
 
         this.strategiWin.gano(unidad.equipo());
     }
+
+	private void darChispa(Unidad unidad) {
+		unidad.darChispa();
+		
+	}
 
 	private Posicion obtenerPosicionADondeMoverse(Unidad unidad, Posicion posicionFin) {
 		Posicion posicionActual=contenedorUnidades.obtenerPosicion(unidad);
@@ -210,7 +218,9 @@ public class Tablero {
 	}
 
 	public void murio(Unidad u) {
-		if(u.tieneChispa())posicionChispa=contenedorUnidades.obtenerPosicion(u);
+		if(u.tieneChispa()){
+			posicionChispa=contenedorUnidades.obtenerPosicion(u);
+		}
 		contenedorUnidades.removerUnidad(u);
         this.strategiWin.perdio(u.equipo());
 
@@ -453,6 +463,11 @@ public class Tablero {
 	public void cambiarCondicionVictoria(WinListener wl) {
 		strategiWin=wl;
 		
+	}
+	
+	public boolean laChispaLaTieneUnaUnidad(){
+		return this.unidadesContieneChispa(new Autobots())
+				||this.unidadesContieneChispa(new Decepticons());
 	}
 
 }

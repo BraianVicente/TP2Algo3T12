@@ -122,8 +122,9 @@ public class StatsPane {
     }
 
     private void vidaUnidad(Unidad u) {
-    	System.out.println("lalal");
-        this.vidaUnidad.setProgress(u.getVida()/u.getVidaMaxima());
+    	double vida=u.getVida();
+    	double vidaMaxima=u.getVidaMaxima();
+        this.vidaUnidad.setProgress(vida/vidaMaxima);
 
     }
 

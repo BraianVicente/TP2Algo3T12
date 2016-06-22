@@ -7,6 +7,7 @@ import java.util.Timer;
 import fiuba.algo3.controlador.TeclaEnCanvasEventHandler;
 import fiuba.algo3.modelo.Juego;
 import fiuba.algo3.modelo.bonuses.Bonus;
+import fiuba.algo3.modelo.chispa.Chispa;
 import fiuba.algo3.modelo.tablero.Posicion;
 import fiuba.algo3.modelo.tablero.Posicion.Plano;
 import fiuba.algo3.modelo.tablero.PosicionEnElPlano;
@@ -129,7 +130,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	}
 
 	private void clickea(Posicion p){
-		System.out.println(p);
 		if(juego.enTablero(p)){
 			teclaEventHandler.cambiarSeleccionada(p);
 			Casillero construido = construirCasillero(p);
@@ -196,9 +196,11 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
 			dibujarSuperficies(gc,Posicion.Plano.TERRESTRE,1);
 		}
-			
+		dibujarMontePerdicion(gc);	
 		//los bonuses
+		
 		dibujarBonuses(gc);		
+		dibujarChispa(gc);
 		
 		//las unidades terrestres
 			if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA) dibujarUnidades(gc,Plano.TERRESTRE);
@@ -296,6 +298,33 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		}
 	}
 
+	private void dibujarMontePerdicion(GraphicsContext gc) {
+		try {
+			gc.drawImage(cacheImagenes.obtenerImagen(juego.obtenerNombreImagenMontePerdicion()),
+						mueveVista.xPantalla(juego.posicionMontePerdicion()), 
+						mueveVista.yPantalla(juego.posicionMontePerdicion()), 
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero());
+		} catch (RuntimeException e) {
+
+		}
+	}
+
+	private void dibujarChispa(GraphicsContext gc) {
+
+			try {
+				gc.drawImage(cacheImagenes.obtenerImagen(Chispa.nombreImagen()),
+							mueveVista.xPantalla(juego.posicionChispa()), 
+							mueveVista.yPantalla(juego.posicionChispa()), 
+							mueveVista.anchoCasillero(),
+							mueveVista.altoCasillero());
+			} catch (RuntimeException e) {
+
+			}
+
+		
+	}
+
 	private void dibujarEfectos(GraphicsContext gc) {
 		if(posicionAtaque!=null)
 			gc.drawImage(explosion,
@@ -321,7 +350,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 						mueveVista.anchoCasillero(),
 						mueveVista.altoCasillero()
 				);
-			}catch(ImagenInexistenteExcption e){
+			}catch(ImagenInexistenteException e){
 				
 			}
 		}
@@ -347,7 +376,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 							mueveVista.altoCasillero()
 					);
 					
-				}catch(ImagenInexistenteExcption e){
+				}catch(ImagenInexistenteException e){
 					
 				}
 				
@@ -393,7 +422,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				}
 			}
 			gc.restore();
-		}catch(ImagenInexistenteExcption e){
+		}catch(ImagenInexistenteException e){
 		}
 		
 	}

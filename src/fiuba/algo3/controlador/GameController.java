@@ -19,11 +19,14 @@ public class GameController {
 	}
 	
 	public void transformarUnidad() {
-		Unidad unit = manager.getUnidad(cj.getModoVista()); // Fallback: returns UnidadAerea
-		Posicion pos = juego.obtenerPosicion(unit);
-		if (unit.sePuedeTransformar())	juego.transformarUnidad(pos);
-		this.actualizarInformacion();
-
+		try{
+			Unidad unit = manager.getUnidad(cj.getModoVista()); // Fallback: returns UnidadAere
+			Posicion pos = juego.obtenerPosicion(unit);
+			if (unit.sePuedeTransformar())	juego.transformarUnidad(pos);
+			this.actualizarInformacion();
+		}catch(RuntimeException e){
+			
+		}
 	}
 	
 	private void actualizarInformacion() {

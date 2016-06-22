@@ -28,6 +28,7 @@ import fiuba.algo3.modelo.unidades.Ratchet;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.vista.CanvasJuego.CanvasJuego;
 import fiuba.algo3.vista.CanvasJuego.Casillero;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -303,7 +304,6 @@ public class Juego {
 
 
 	public boolean termino() {
-		System.out.println(ganador);
 		return this.jugadorGanadorEs(enEspera)||this.jugadorGanadorEs(enTurno);
 	}
 
@@ -311,5 +311,20 @@ public class Juego {
 	public boolean hayCombinacion(Equipo equipo) {
 		return tablero.tieneCombinacion(equipo);
 		
+	}
+
+
+	public Posicion posicionChispa() {
+		return tablero.getPosicionChispa();
+	}
+
+
+	public Posicion posicionMontePerdicion() {
+		return tablero.getPosicionMontePerdicion();
+	}
+
+
+	public String obtenerNombreImagenMontePerdicion() {
+		return "/fiuba/algo3/vista/imagenes/tierra/montePerdicion.png";
 	}
 }
