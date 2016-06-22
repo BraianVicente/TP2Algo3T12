@@ -17,8 +17,8 @@ public class ContenedorUnidadesTest {
 	private final Posicion pos2 = new Posicion(1,0);
 	private final Posicion pos1b = new Posicion(0,0);
 	
-	private final Bumblebee trans1 = new Bumblebee(new IgnorarMuerte());
-	private final Bumblebee trans2 = new Bumblebee(new IgnorarMuerte());
+	private final Bumblebee trans1 = new Bumblebee();
+	private final Bumblebee trans2 = new Bumblebee();
 	
 	@Test
 	public void testDosBumblebeeDistintosSePuedenAgregar() throws UnidadYaContenidaException {

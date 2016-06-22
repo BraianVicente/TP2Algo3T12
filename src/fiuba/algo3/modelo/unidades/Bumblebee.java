@@ -9,13 +9,10 @@ import fiuba.algo3.modelo.formas.HumanoideBumblebee;
 
 public class Bumblebee extends Transformer {
 
-    public Bumblebee(DeathListener command) {
-        super(new Camaro(), new Autobots(), command);
+    public Bumblebee() {
+        super(new Camaro(), new Autobots());
     }
 
-    public Bumblebee() {
-        this(new IgnorarMuerte());
-    }
     @Override
     protected Forma getVehiculo() {
         return new Camaro();

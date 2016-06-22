@@ -23,8 +23,8 @@ public abstract class UnidadCombinable extends Unidad {
     private Integer turnosCreacion ;
 	private int vidaMax;
 	private Unidad componenteUno, componenteDos, componenteTres;
-    public UnidadCombinable(Equipo equipo,DeathListener command,Unidad unita, Unidad unitb, Unidad unitc) {
-        super(equipo, command);
+    public UnidadCombinable(Equipo equipo,Unidad unita, Unidad unitb, Unidad unitc) {
+        super(equipo);
         this.turnosCreacion = 2 ;
 		vidaMax = unita.getVida() + unitb.getVida() + unitc.getVida();
 		vida=vidaMax;
@@ -38,7 +38,9 @@ public abstract class UnidadCombinable extends Unidad {
     public void avanzarTurno(){
     	super.avanzarTurno();
     	turnosCreacion--;
-    	if(turnosCreacion<=0) command.murio(this);
+    	if(turnosCreacion<=0){
+    		senializarMuerte();
+    	}
     }
     
     @Override
@@ -71,7 +73,9 @@ public abstract class UnidadCombinable extends Unidad {
     		componenteDos.disminuirVida(danio/3);
     		componenteTres.disminuirVida(danio/3);
     	}
-    	 if (algunComponenteMuerto()||getVida()<=0)	command.murio(this);
+    	 if (algunComponenteMuerto()||getVida()<=0){
+    		 senializarMuerte();
+    	 }
     	 
     }
     

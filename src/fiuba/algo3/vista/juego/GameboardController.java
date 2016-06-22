@@ -137,6 +137,8 @@ public class GameboardController {
     		new Bonecrusher(),
     		new Frenzy()
     };
+
+	private SeleccionController seleccion;
     
     @FXML
     void initialize() {
@@ -185,14 +187,15 @@ public class GameboardController {
 		controller = new GameController(juego, manager, cj);
 		mover = new MoverController(juego,cj);
 		ataque= new AtacarController(juego,cj);
-		
+		seleccion = new SeleccionController(juego,cj);
 		cj.agregarCallbackClickeo(manager);
 		cj.agregarCallbackClickeo(mover);
 		cj.agregarCallbackClickeo(ataque);
+		cj.agregarCallbackClickeo(seleccion);
     	
     	GamePane.getChildren().add(cj);
     	
-    	cj.agregarCallbackClickeo(c->juego.clickeoCasillero(c,cj));
+    	//cj.agregarCallbackClickeo(c->juego.clickeoCasillero(c,cj));
     	cj.agregarCallbackHover(c->hovereoCasillero(c));
 		
 		ChoiceBoxController cbc = new ChoiceBoxController(vistaChoiceBox, cj);
@@ -223,12 +226,14 @@ public class GameboardController {
 	}
 
 	public void hovereoCasillero(Casillero c){
+		Unidad u = null;
     	if(!c.isEmpty()){
-            this.setUnidadSeleccionada(c.getUnidad());
+    		u = c.getUnidad();
+            this.setUnidadSeleccionada(u);
         }
         this.setSuperficieAerea(c.getsAerea());
         this.setSuperficieTerrestre(c.getsTerrestre());
-    
+        cj.mostrarRangos(u);
     }
     
     
@@ -237,7 +242,7 @@ public class GameboardController {
     	Posicion pos = null;
     	Death death=new Death(tablero);
     	for (Unidad unit: unitList) {
-    		unit.setDeathListener(death);
+    		unit.agregarDeathListener(death);
     		while ((pos == null) || (!juego.posicionVacia(pos)))
     			pos = new Posicion(generator.nextInt(6), generator.nextInt(6), unit.getPlanoPerteneciente());
     		juego.agregarUnidad(pos, unit);
@@ -331,7 +336,7 @@ public class GameboardController {
 	}
 	
 	public void actualizarVista(){
-		this.cj.actualizar();
+		this.cj.pedirActualizacion();
 	}
 
 	public void setStage(Stage stage) {

@@ -41,19 +41,24 @@ public class MueveVista {
 		cllbacksClickeo = new ArrayList<CallbackPosicion>();
 		cllbacksHovereo = new ArrayList<CallbackPosicion>();
 	}
-	public void presionado(MouseEvent e){
+	public void presionado(MouseEvent e){//EVENTO
+		synchronized(lock){
 		x_m_inicial=e.getX();
 		y_m_inicial=e.getY();
 		presionando = true;
 		x_inicial = x;
 		y_inicial = y;
+		}
 	}
 	
-	public void soltado(MouseEvent e){
+	public void soltado(MouseEvent e){//EVENTO
+		double dis;
+		synchronized(lock){
 		presionando = false;
 		double difx = x_m_inicial-e.getX();
 		double dify = y_m_inicial-e.getY();
-		double dis = Math.sqrt(difx*difx+dify*dify);//esta distancia es sin escalar nada!
+		dis= Math.sqrt(difx*difx+dify*dify);//esta distancia es sin escalar nada!
+		}
 		if(dis<5){
 			for(CallbackPosicion c: cllbacksClickeo){
 				c.execute(obtenerPosicion(e));
@@ -61,31 +66,32 @@ public class MueveVista {
 		}
 	}
 	public Posicion obtenerPosicion(MouseEvent e) {
-		double escala = getEscala();
-		double mxAbs = e.getX()/escala-getX();
-		double myAbs = e.getY()/escala-getY();
+		double mxAbs = e.getX()/escala-x;
+		double myAbs = e.getY()/escala-y;
 		
 		double posX = mxAbs/80;
 		double posY = myAbs/80;
 		
 		return new Posicion((int)Math.floor(posX),(int)Math.floor(posY));
 	}
-	public void salio(MouseEvent e){
+	public void salio(MouseEvent e){//EVENTO
+		synchronized(lock){
 		presionando = false;
+		}
 	}
 	
-	public void draggeado(MouseEvent e){
+	public void draggeado(MouseEvent e){//EVENTO
+		synchronized(lock){
 		if(presionando){
-			synchronized(lock){
-				x = (e.getX()-x_m_inicial)/escala+x_inicial;
-				y = (e.getY()-y_m_inicial)/escala+y_inicial;
-			}
+			x = (e.getX()-x_m_inicial)/escala+x_inicial;
+			y = (e.getY()-y_m_inicial)/escala+y_inicial;
+		}
 		}
 		movido(e);
 	}
 	
 	
-	public void scrolleado(ScrollEvent e){
+	public void scrolleado(ScrollEvent e){//EVENTO
 		synchronized(lock){
 			double escala_inicial = escala; 
 			escala-=e.getDeltaY()*0.001;
@@ -106,65 +112,89 @@ public class MueveVista {
 			*/
 		}
 	}
-	
-	public double getX(){
-		synchronized(lock){
-			return x;
-		}
-	}
-	
-	public double getY(){
-		synchronized(lock){
-			return y;
-		}
-	}
-	
-	public double getEscala(){
-		synchronized(lock){
-			return escala;
-		}
-	}
-	
+	/*
 	public double xPantalla(Posicion p){
-		return (p.getX()*80+getX())*getEscala();
+		synchronized(lock){
+		return (p.getX()*80+x)*escala;
+		}
 	}
 	public double xPantalla(PosicionEnElPlano p){
-		return (p.getX()*80+getX())*getEscala();
+		synchronized(lock){
+		return (p.getX()*80+x)*escala;
+		}
 	}
 	
 	public double yPantalla(Posicion p){
-		return (p.getY()*80+getY())*getEscala();
+		synchronized(lock){
+		return (p.getY()*80+y)*escala;
+		}
 	}
 	
 	public double yPantalla(PosicionEnElPlano p){
-		return (p.getY()*80+getY())*getEscala();
+		synchronized(lock){
+		return (p.getY()*80+y)*escala;
+		}
+	}
+	*/
+	public double anchoCasillero(){
+		synchronized(lock){
+		return 80*escala;
+		}
 	}
 	
-	public double anchoCasillero(){
-		return 80*getEscala();
+	
+	public double xPantalla(Posicion p){
+		return xPantalla(p.getX());
 	}
+	public double xPantalla(PosicionEnElPlano p){
+		return xPantalla(p.getX());
+	}
+	
+	public double xPantalla(double xTablero){
+		synchronized(lock){
+		return (xTablero*80+x)*escala;
+		}
+	}
+	
+	public double yPantalla(double yTablero){
+		synchronized(lock){
+		return (yTablero*80+y)*escala;
+		}
+	}
+	
+	public double yPantalla(Posicion p){
+		return yPantalla(p.getY());
+	}
+	
+	public double yPantalla(PosicionEnElPlano p){
+		return yPantalla(p.getY());
+	}
+	
 	
 	public double altoCasillero(){
-		return 80*getEscala();
+		synchronized(lock){
+		return 80*escala;
+		}
 	}
 	public void agregarCallbackClickeo(CallbackPosicion call) {
 		cllbacksClickeo.add(call);
-		
 	}
+	
 	public void agregarCallbackHover(CallbackPosicion call) {
 		cllbacksHovereo.add(call);
 		
 	}
-	public void clickeado(MouseEvent e) {
+	public void clickeado(MouseEvent e) {//EVENTO
 		// TODO Auto-generated method stub
 	}
-	public void movido(MouseEvent e) {
+	
+	public void movido(MouseEvent e) {//EVENTO
 		synchronized(lock){
 			x_mouse = e.getX();
 			y_mouse = e.getY();
-			for(CallbackPosicion c: cllbacksHovereo){
-				c.execute(obtenerPosicion(e));
-			}
+		}
+		for(CallbackPosicion c: cllbacksHovereo){
+			c.execute(obtenerPosicion(e));
 		}
 	}
 	public boolean draggeando(){

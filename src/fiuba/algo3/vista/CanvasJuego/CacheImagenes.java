@@ -45,7 +45,17 @@ public class CacheImagenes {
 				"/fiuba/algo3/vista/imagenes/efectos/bonusFlash.png",
 				"/fiuba/algo3/vista/imagenes/efectos/bonusDoble.png",
 				
-				"/fiuba/algo3/vista/imagenes/bonus/chispa.png"
+				"/fiuba/algo3/vista/imagenes/bonus/chispa.png",
+				
+				cuadroExplosion(1),
+				cuadroExplosion(2),
+				cuadroExplosion(3),
+				cuadroExplosion(4),
+				cuadroExplosion(5),
+				cuadroExplosion(6),
+				cuadroExplosion(7),
+				cuadroExplosion(8),
+				cuadroExplosion(9)
 		};
 		
 		imagenes = new HashMap<String,Image>();
@@ -63,5 +73,10 @@ public class CacheImagenes {
 			throw new ImagenInexistenteException(nombre);
 		}
 		return imagenes.get(nombre);
+	}
+	
+	public static String cuadroExplosion(int i){
+		if(i<1 || i>9)return "";
+		return "/fiuba/algo3/vista/imagenes/explosion/"+i+".png";
 	}
 }

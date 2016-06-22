@@ -31,7 +31,7 @@ public class AtacarController implements CallbackCasillero {
 		}else{
 		atacante=cas.getUnidad();
 		}
-		cj.actualizar();
+		cj.pedirActualizacion();
 	}
 	private Unidad obtenerUnidadObjetivo(Casillero cas) {
 		if((cj.getModoVista()==ModoVista.AMBAS&&cas.getuTerrestre()!=null)

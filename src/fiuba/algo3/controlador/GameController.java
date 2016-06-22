@@ -30,7 +30,7 @@ public class GameController {
 	}
 	
 	private void actualizarInformacion() {
-		cj.actualizar();
+		cj.pedirActualizacion();
 		manager.actualizarCasillero(juego.construirCasillero(manager.getPosicion()));
 		
 	}

@@ -9,13 +9,10 @@ import fiuba.algo3.modelo.formas.HumanoideRatchet;
 
 public class Ratchet extends Transformer {
 
-    public Ratchet(DeathListener command) {
-        super(new AvionF22(), new Autobots(), command);
+    public Ratchet() {
+        super(new AvionF22(), new Autobots());
     }
     
-    public Ratchet() {
-        this(new IgnorarMuerte());
-    }
 
     @Override
     protected Forma getVehiculo() {

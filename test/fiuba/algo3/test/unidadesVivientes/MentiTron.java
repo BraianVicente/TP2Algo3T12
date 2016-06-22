@@ -16,7 +16,7 @@ import fiuba.algo3.modelo.unidades.Unidad;
 public class MentiTron extends MentiUnidad {
 
 	public MentiTron() {
-		super(new Decepticons(), new IgnorarMuerte());
+		super(new Decepticons());
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class MentiTron extends MentiUnidad {
 	}
 
 	@Override
-	protected int getDistanciaAtaque() {
+	public int getDistanciaAtaque() {
 		return 0;
 	}
 
@@ -35,7 +35,7 @@ public class MentiTron extends MentiUnidad {
 	}
 
 	@Override
-	protected int getDistanciaMovimiento() {
+	public int getDistanciaMovimiento() {
 		return 2;
 	}
 

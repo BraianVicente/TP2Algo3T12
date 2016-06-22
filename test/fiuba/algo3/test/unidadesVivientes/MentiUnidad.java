@@ -14,8 +14,8 @@ import fiuba.algo3.modelo.unidades.Unidad;
 
 abstract public class MentiUnidad extends Unidad{
 	
-	public MentiUnidad(Equipo e, DeathListener d){
-		super(e,d);
+	public MentiUnidad(Equipo e){
+		super(e);
 	}
 	
 	@Override

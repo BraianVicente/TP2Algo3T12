@@ -31,7 +31,9 @@ public class Autobots extends Equipo {
 
 	@Override
 	public UnidadCombinable getCombination(Tablero tab,Unidad unita, Unidad unitb, Unidad unitc) {
-		return new Superion(new DesarmadorCombinable(tab,this), unita,unitb,unitc);
+		Superion s = new Superion(unita,unitb,unitc);
+		s.agregarDeathListener(new DesarmadorCombinable(tab,this));
+		return s;
 	}
 	
 	@Override

@@ -16,8 +16,8 @@ public class Superion extends UnidadCombinable {
 
 
 
-	public Superion( DeathListener command, Unidad unita, Unidad unitb, Unidad unitc) {
-		super(new Autobots(), command, unita, unitb, unitc);
+	public Superion( Unidad unita, Unidad unitb, Unidad unitc) {
+		super(new Autobots(), unita, unitb, unitc);
 
 	}
 
@@ -34,7 +34,7 @@ public class Superion extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getDistanciaAtaque() {
+	public int getDistanciaAtaque() {
 		return 2;
 	}
 
@@ -44,7 +44,7 @@ public class Superion extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getDistanciaMovimiento() {
+	public int getDistanciaMovimiento() {
 		return 2;
 	}
 

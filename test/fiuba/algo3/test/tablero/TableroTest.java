@@ -79,8 +79,10 @@ public class TableroTest {
     	Death command = new Death(tab); 
     	Posicion posB = new Posicion(5, 5);
     	Posicion posM = new Posicion(4, 4);
-    	Bumblebee bee = new Bumblebee(command);
-    	Megatron tron = new Megatron(command);
+    	Bumblebee bee = new Bumblebee();
+    	bee.agregarDeathListener(command);
+    	Megatron tron = new Megatron();
+    	tron.agregarDeathListener(command);
     	tab.agregarUnidad(posB, bee);
     	tab.agregarUnidad(posM, tron);
     	while(bee.getVida()>0){
@@ -96,8 +98,10 @@ public class TableroTest {
     	Posicion pos = new Posicion(5, 5);
     	Death command = new Death(tab); 
     	
-    	Bumblebee bee = new Bumblebee(command);
-    	Megatron tron = new Megatron(command);
+    	Bumblebee bee = new Bumblebee();
+    	bee.agregarDeathListener(command);
+    	Megatron tron = new Megatron();
+    	tron.agregarDeathListener(command);
     	Posicion posM = new Posicion(4, 4);
     	bee.darChispa();
     	tab.agregarUnidad(pos, bee);

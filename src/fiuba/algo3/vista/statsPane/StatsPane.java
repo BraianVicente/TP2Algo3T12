@@ -101,7 +101,7 @@ public class StatsPane {
     
     public void setUpPreview(){
 
-        Unidad u = new Superion(new Death(tablero),new Optimusprime(),new Ratchet(),new Bumblebee()) ;
+        Unidad u = new Superion(new Optimusprime(),new Ratchet(),new Bumblebee()) ;
         this.setUnidadSeleccionada(u);
         Superficie t = new Pantano();
         this.setSuperficieTerrestre(t);

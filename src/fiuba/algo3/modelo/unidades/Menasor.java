@@ -10,8 +10,8 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Pantano;
 
 public class Menasor extends UnidadCombinable {
 	
-	public Menasor( DeathListener command, Unidad unita, Unidad unitb, Unidad unitc) {
-		super(new Decepticons(), command, unita, unitb, unitc);
+	public Menasor( Unidad unita, Unidad unitb, Unidad unitc) {
+		super(new Decepticons(), unita, unitb, unitc);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,7 +29,7 @@ public class Menasor extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getDistanciaAtaque() {
+	public int getDistanciaAtaque() {
 		return 2;
 	}
 
@@ -39,7 +39,7 @@ public class Menasor extends UnidadCombinable {
 	}
 
 	@Override
-	protected int getDistanciaMovimiento() {
+	public int getDistanciaMovimiento() {
 		return 2;
 	}
 

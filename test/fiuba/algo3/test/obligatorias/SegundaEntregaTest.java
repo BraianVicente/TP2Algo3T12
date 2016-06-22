@@ -40,7 +40,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new Espinas());
         }
-        Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
+        Ratchet rat = new Ratchet() ;
         tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),rat );
         tab.mover(rat,new Posicion(5,6,Plano.AEREO));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,6,Plano.AEREO)));
@@ -58,7 +58,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,10,Plano.AEREO), new Espinas());
         }
-        Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
+        Megatron uAerea = new Megatron() ;
         tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),uAerea );
         tab.mover(uAerea,new Posicion(5,10,Plano.AEREO));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,10,Plano.AEREO)));
@@ -75,7 +75,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5,Plano.AEREO), new Nubes());
         }
-        Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
+        Ratchet rat = new Ratchet() ;
         tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),rat );
         tab.mover(rat,new Posicion(5,6,Plano.AEREO));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,6,Plano.AEREO)));
@@ -92,7 +92,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,10,Plano.AEREO), new Nubes());
         }
-        Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
+        Megatron uAerea = new Megatron() ;
         tab.agregarUnidad(new Posicion(5,5,Plano.AEREO),uAerea );
         tab.mover(uAerea,new Posicion(5,10,Plano.AEREO));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,10,Plano.AEREO)));
@@ -108,7 +108,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new NebulosaAndromeda());
         }
-        Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
+        Ratchet rat = new Ratchet() ;
         tab.agregarUnidad(new Posicion(5,4),rat );
         tab.mover(rat,new Posicion(5,5));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,5)));
@@ -127,7 +127,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new NebulosaAndromeda());
         }
-        Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
+        Ratchet rat = new Ratchet() ;
         rat.transformar();
         tab.agregarUnidad(new Posicion(5,4),rat );
         tab.mover(rat,new Posicion(5,5));
@@ -148,7 +148,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new NebulosaAndromeda());
         }
-        Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
+        Megatron uAerea = new Megatron() ;
         tab.agregarUnidad(new Posicion(5,4),uAerea );
         tab.mover(uAerea,new Posicion(5,5));
         Assert.assertFalse(tab.isEmpty(new Posicion(5,5)));
@@ -168,7 +168,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new NebulosaAndromeda());
         }
-        Megatron uAerea = new Megatron(new IgnorarMuerte()) ;
+        Megatron uAerea = new Megatron() ;
         uAerea.transformar();
         tab.agregarUnidad(new Posicion(5,4),uAerea );
         tab.mover(uAerea,new Posicion(5,5));
@@ -189,7 +189,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new TormentaPsionica());
         }
-        Ratchet rat = new Ratchet(new IgnorarMuerte()) ;
+        Ratchet rat = new Ratchet() ;
         tab.agregarUnidad(new Posicion(5,4),rat );
         tab.mover(rat,new Posicion(5,5));
         tab.mover(rat,new Posicion(5,6));
@@ -204,7 +204,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new TormentaPsionica());
         }
-        Megatron rat = new Megatron(new IgnorarMuerte()) ;
+        Megatron rat = new Megatron() ;
         tab.agregarUnidad(new Posicion(5,4),rat );
         tab.mover(rat,new Posicion(5,5));
         tab.mover(rat,new Posicion(5,6));
@@ -220,7 +220,7 @@ public class SegundaEntregaTest {
         for(int x = 0; x<10;x++){
             tab.configurarSuperficie(new Posicion(x,5), new TormentaPsionica());
         }
-        Megatron rat = new Megatron(new IgnorarMuerte()) ;
+        Megatron rat = new Megatron() ;
         tab.agregarUnidad(new Posicion(5,4),rat );
         tab.mover(rat,new Posicion(5,5));
         tab.mover(rat,new Posicion(5,6));

@@ -472,4 +472,46 @@ public class Tablero {
 				||this.unidadesContieneChispa(new Decepticons());
 	}
 
+	public ArrayList<PosicionEnElPlano> obtenerHaloMovimiento(Unidad u) {
+		ArrayList<PosicionEnElPlano> ret = new ArrayList<PosicionEnElPlano>(); 
+		int xInicio=posicion(u).getX()-u.getDistanciaMovimiento();
+		int yInicio=posicion(u).getY()-u.getDistanciaMovimiento();
+		
+		int xFin=posicion(u).getX()+u.getDistanciaMovimiento();
+		int yFin=posicion(u).getY()+u.getDistanciaMovimiento();
+		
+		for(int x = xInicio; x<=xFin; x++){
+			for(int y = yInicio; y<=yFin; y++){
+				
+				Posicion chequeo = new Posicion(x,y,u.getPlanoPerteneciente());
+				if(enLimites(chequeo) && sePuedeMover(u, chequeo)){
+					ret.add(chequeo.obtenerPosicionEnElPlano());
+				}
+				
+			}
+		}
+		
+		return ret;
+	}
+
+	public ArrayList<PosicionEnElPlano> obtenerHaloAtaque(Unidad u) {
+		ArrayList<PosicionEnElPlano> ret = new ArrayList<PosicionEnElPlano>(); 
+		int xInicio=posicion(u).getX()-u.getDistanciaAtaque();
+		int yInicio=posicion(u).getY()-u.getDistanciaAtaque();
+		
+		int xFin=posicion(u).getX()+u.getDistanciaMovimiento();
+		int yFin=posicion(u).getY()+u.getDistanciaMovimiento();
+		
+		for(int x = xInicio; x<=xFin; x++){
+			for(int y = yInicio; y<=yFin; y++){
+				Posicion chequeo = new Posicion(x,y);
+				if(enLimites(chequeo) && puedeAtacar(u, chequeo)){
+					ret.add(chequeo.obtenerPosicionEnElPlano());
+				}
+			}
+		}
+		
+		return ret;
+	}
+
 }

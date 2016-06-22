@@ -18,8 +18,8 @@ public class InteraccionConBonusesTest {
 
 	@Test
 	public void testCanion() {
-		Bumblebee bee = new Bumblebee(new IgnorarMuerte());//vida: 350, atk:20, mov: 5
-		Megatron tron = new Megatron(new IgnorarMuerte());//vida:550, atk:55, mov: 8
+		Bumblebee bee = new Bumblebee();//vida: 350, atk:20, mov: 5
+		Megatron tron = new Megatron();//vida:550, atk:55, mov: 8
 		bee.atacarA(tron);
 		Assert.assertEquals(tron.getVida(), 550-20);
 		bee.recibirBonus(dobleCanion);
@@ -29,8 +29,8 @@ public class InteraccionConBonusesTest {
 
 	@Test
 	public void testBurbuja() {
-		Bumblebee bee = new Bumblebee(new IgnorarMuerte());//vida: 350, atk:20, mov: 5
-		Megatron tron = new Megatron(new IgnorarMuerte());//vida:550, atk:55, mov: 8
+		Bumblebee bee = new Bumblebee();//vida: 350, atk:20, mov: 5
+		Megatron tron = new Megatron();//vida:550, atk:55, mov: 8
 		bee.atacarA(tron);
 		Assert.assertEquals(tron.getVida(), 550-20);
 		tron.recibirBonus(burbuja);
@@ -41,7 +41,7 @@ public class InteraccionConBonusesTest {
 
 	@Test
 	public void testFlash() {
-		Bumblebee bee = new Bumblebee(new IgnorarMuerte());//vida: 350, atk:20, mov: 5
+		Bumblebee bee = new Bumblebee();//vida: 350, atk:20, mov: 5
 		Assert.assertEquals(bee.getVelocidad(), 5);
 		bee.recibirBonus(flash);
 		Assert.assertEquals(bee.getVelocidad(), 5*3);
@@ -49,7 +49,7 @@ public class InteraccionConBonusesTest {
 	
 	@Test
 	public void testFlashPierdeEfecto() {
-		Bumblebee bee = new Bumblebee(new IgnorarMuerte());//vida: 350, atk:20, mov: 5
+		Bumblebee bee = new Bumblebee();//vida: 350, atk:20, mov: 5
 		Assert.assertEquals(bee.getVelocidad(), 5);
 		bee.recibirBonus(flash);
 		Assert.assertEquals(bee.getVelocidad(), 5*3);
@@ -61,13 +61,13 @@ public class InteraccionConBonusesTest {
 	
 	@Test
 	public void testSuperposicion() {
-		Bumblebee bee = new Bumblebee(new IgnorarMuerte());//vida: 350, atk:20, mov: 5
+		Bumblebee bee = new Bumblebee();//vida: 350, atk:20, mov: 5
 		bee.recibirBonus(flash);
 		bee.recibirBonus(dobleCanion);
 		bee.recibirBonus(burbuja);
 		Assert.assertEquals(bee.getVelocidad(), 5*3);
 		
-		Megatron tron = new Megatron(new IgnorarMuerte());//vida:550, atk:55, mov: 8
+		Megatron tron = new Megatron();//vida:550, atk:55, mov: 8
 		bee.atacarA(tron);
 		Assert.assertEquals(tron.getVida(), 550-40);
 		

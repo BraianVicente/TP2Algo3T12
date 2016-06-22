@@ -27,26 +27,24 @@ import fiuba.algo3.modelo.tablero.superficies.terrestre.Rocosa;
 public abstract class Unidad {
 	
 	protected Chispa chispa;
-	protected DeathListener command;
+	protected ArrayList<DeathListener> deathListeners;
 	protected ContenedorModificadores modificadores;
 	protected float movimientosUsados;
 	private boolean yaAtaco;
 	
+	
+	
     //-------------------equipo-------------
     protected final Equipo equipo;
-
-    protected Unidad(Equipo equipo){
-        this.equipo = equipo ;
-    }
     
-	protected Unidad(Equipo equipo, DeathListener command) {
-        this(equipo);
+	protected Unidad(Equipo equipo) {
+		this.equipo=equipo;
 		vida = getVidaMaxima();
 		chispa = new ChispaHolder();
-		this.command = command;
 		modificadores=new ContenedorModificadores();
-    
+		deathListeners = new ArrayList<DeathListener>();
     }
+	
     public boolean es(Equipo e) {
         return equipo.equals(e);
     }
@@ -54,8 +52,8 @@ public abstract class Unidad {
     public Equipo equipo() {
     	return this.equipo;
     }
-    public void setDeathListener(DeathListener d){
-    	command=d;
+    public void agregarDeathListener(DeathListener listener){
+    	deathListeners.add(listener);
     }
     
 	public boolean existe(){
@@ -98,17 +96,20 @@ public abstract class Unidad {
     }
     
     //------------------ataque-----------------
-    public boolean puedeAtacar(Posicion a, Posicion desde){
+	public boolean puedeAtacar(Posicion a, Posicion desde){
     	return a.distanciaA(desde)<=getDistanciaAtaque()&&!yaAtaco;
+    }
+	
+	public boolean puedeAtacar(){
+    	return yaAtaco;
     }
     
     public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{
-
     	int danio = (int)Math.ceil(getPuntosAtaque()*modificadores.coeficienteAtaque());
     	receptor.recibirDanio(this,danio);
     	yaAtaco=true;
     }
-    protected abstract int getDistanciaAtaque();
+    public abstract int getDistanciaAtaque();
     public abstract int getPuntosAtaque();
     
 	//-----------------movimiento--------------
@@ -128,9 +129,22 @@ public abstract class Unidad {
     	if(modificadores.recibeDanio()){
     		vida -= danio;
     	}
-    	 if (getVida() <= 0)	command.murio(this);
+    	
+    	if (getVida() <= 0){
+    		senializarMuerte();
+    	}
     }
     
+    protected void senializarMuerte(){
+    	for(DeathListener d : deathListeners){
+			d.murio(this);
+		}
+    }
+    /*
+    public float getMovimientosUsados(){
+    	return movimientosUsados;
+    }
+    */
     public void restaurarMovimientosRestantes(float nuevoMovimientosRestantes) {
     	if(nuevoMovimientosRestantes>getDistanciaMovimiento()) throw new IllegalArgumentException();
 		movimientosUsados=getDistanciaMovimiento()-nuevoMovimientosRestantes;
@@ -146,6 +160,11 @@ public abstract class Unidad {
     }
     
     public abstract float getCoeficienteMovimientoActual() ;
+    
+    public boolean puedeMoverseUnCasillero(){
+    	return ((float)this.getDistanciaMovimiento()-movimientosUsados)>=1/(float)getCoeficienteMovimientoActual();
+    }
+    
     //------------------------modificadores------------------//
     
     protected void agregarModificador(Modificador m){
@@ -171,7 +190,7 @@ public abstract class Unidad {
 	public void serAfectadoPor(Superficie s){
 		s.afectarA(this);
 	}
-	protected abstract int getDistanciaMovimiento();
+	public abstract int getDistanciaMovimiento();
 
 
 	public void serAfectadoPor(NebulosaAndromeda s){

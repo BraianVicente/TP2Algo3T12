@@ -4,6 +4,7 @@ import fiuba.algo3.modelo.unidades.muerte.DeathListener;
 import fiuba.algo3.modelo.unidades.muerte.DesarmadorCombinable;
 import fiuba.algo3.modelo.tablero.Tablero;
 import fiuba.algo3.modelo.unidades.Menasor;
+import fiuba.algo3.modelo.unidades.Superion;
 import fiuba.algo3.modelo.unidades.Unidad;
 import fiuba.algo3.modelo.unidades.UnidadCombinable;
 
@@ -31,7 +32,10 @@ public class Decepticons extends Equipo {
 
 	@Override
 	public UnidadCombinable getCombination(Tablero tab,Unidad unita, Unidad unitb, Unidad unitc) {
-		return new Menasor(new DesarmadorCombinable(tab,this), unita,unitb,unitc);
+		//return new Menasor(new DesarmadorCombinable(tab,this), unita,unitb,unitc);
+		Menasor m = new Menasor(unita,unitb,unitc);
+		m.agregarDeathListener(new DesarmadorCombinable(tab,this));
+		return m;
 	}
 	
 	@Override

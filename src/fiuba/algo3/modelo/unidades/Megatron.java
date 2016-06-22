@@ -9,12 +9,9 @@ import fiuba.algo3.modelo.formas.NaveCybertroniana;
 
 public class Megatron extends Transformer {
 
-    public Megatron(DeathListener command) {
-        super(new NaveCybertroniana(), new Decepticons(), command);
-        // TODO Auto-generated constructor stub
-    }
     public Megatron() {
-        this(new IgnorarMuerte());
+        super(new NaveCybertroniana(), new Decepticons());
+        // TODO Auto-generated constructor stub
     }
     @Override
     protected Forma getVehiculo() {

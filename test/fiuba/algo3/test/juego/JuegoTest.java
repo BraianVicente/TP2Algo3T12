@@ -232,8 +232,11 @@ public class JuegoTest {
         condition.setTablero(tab);
         Posicion origen = new Posicion(6,6);
         Posicion destino = new Posicion(7,7) ;
-        Ratchet uniJ1 = new Ratchet(new Death(tab));
-        Megatron uniJ2 = new Megatron(new Death(tab));
+        Death death = new Death(tab);
+        Ratchet uniJ1 = new Ratchet();
+        uniJ1.agregarDeathListener(death);
+        Megatron uniJ2 = new Megatron();
+        uniJ2.agregarDeathListener(death);
         j1.agregarUnidad(origen, uniJ1);
         
         j2.agregarUnidad(destino,uniJ2 );
@@ -268,7 +271,9 @@ public class JuegoTest {
         condition.setJuego(juego);
         condition.setTablero(tab);
 
-        Ratchet uniJ1 = new Ratchet(new Death(tab));
+        Death d = new Death(tab);
+        Ratchet uniJ1 = new Ratchet();
+        uniJ1.agregarDeathListener(d);
         juego.agregarUnidad(origen, uniJ1);
         uniJ1.transformar();
         Assert.assertFalse(tab.unidadesContieneChispa(j1.getEquipo()));
@@ -295,9 +300,14 @@ public class JuegoTest {
         condition.setTablero(tab);
         Posicion origen = new Posicion(5,5);
         Posicion destino = new Posicion(6,6) ;
-        Ratchet uniJ1 = new Ratchet(new Death(tab));
-        Bumblebee otraUni = new Bumblebee(new Death(tab));
-        Megatron uniJ2 = new Megatron(new Death(tab));
+        Death d = new Death(tab);
+        Ratchet uniJ1 = new Ratchet();
+        Bumblebee otraUni = new Bumblebee();
+        Megatron uniJ2 = new Megatron();
+        
+        uniJ1.agregarDeathListener(d);
+        otraUni.agregarDeathListener(d);
+        uniJ2.agregarDeathListener(d);
         
         j1.agregarUnidad(new Posicion(4,4), uniJ1);
         j1.agregarUnidad(new Posicion(1,1),otraUni);

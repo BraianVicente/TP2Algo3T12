@@ -17,7 +17,7 @@ import fiuba.algo3.modelo.unidades.Unidad;
 public class MentiPrime extends MentiUnidad {
 
 	protected MentiPrime() {
-		super(new Autobots(), new IgnorarMuerte());
+		super(new Autobots());
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class MentiPrime extends MentiUnidad {
 	}
 
 	@Override
-	protected int getDistanciaAtaque() {
+	public int getDistanciaAtaque() {
 		return 3;
 	}
 
@@ -36,7 +36,7 @@ public class MentiPrime extends MentiUnidad {
 	}
 
 	@Override
-	protected int getDistanciaMovimiento() {
+	public int getDistanciaMovimiento() {
 		return 0;
 	}
 

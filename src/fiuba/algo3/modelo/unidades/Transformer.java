@@ -18,8 +18,8 @@ public abstract class Transformer extends Unidad {
 	private Forma forma;
 	boolean seTransformoEnEsteTurno;
 	
-	Transformer(Forma f, Equipo equipo, DeathListener command){
-		super(equipo,command);
+	Transformer(Forma f, Equipo equipo){
+		super(equipo);
 		movimientosUsados=0;
 		seTransformoEnEsteTurno=false;
 		this.forma = f;

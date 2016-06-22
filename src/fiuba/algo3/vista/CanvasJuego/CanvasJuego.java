@@ -12,6 +12,12 @@ import fiuba.algo3.modelo.posicion.Posicion.Plano;
 import fiuba.algo3.modelo.posicion.PosicionEnElPlano;
 import fiuba.algo3.modelo.tablero.superficies.Superficie;
 import fiuba.algo3.modelo.unidades.Unidad;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.value.WritableFloatValue;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * SOBRE CANVASJUEGO:COMO USAR
@@ -50,13 +57,11 @@ import javafx.scene.text.Text;
 public class CanvasJuego extends Canvas implements Actualizable{
 	
 	
-	
+	private float escalaSeleccionador;
 	private MueveVista mueveVista;
 	private Image seleccionador;
 	private Image seleccionadorObjetivo;
 	private Juego juego;
-	private Posicion seleccionadaViejaSeraBorrada;
-	private Posicion objetivoVIEJOSERABORRADO;
 	CacheImagenes cacheImagenes = new CacheImagenes();
 
 	private ArrayList<CallbackCasillero> callbacksClickeo;
@@ -67,9 +72,12 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	
 	private Image hovereador;
 	
-	private Timer timer;
+	private Actualizador actualizador;
 	private Posicion posicionAtaque;
 	private Image explosion;
+	
+	private ContenedorEmbellecedores embellecedores;
+	
 	
 	public CanvasJuego(Juego juego){
 		super(360, 371);
@@ -86,14 +94,8 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		this.setOnMouseDragged(e->mueveVista.draggeado(e));
 		this.setFocusTraversable(true);
 		
-		seleccionadaViejaSeraBorrada = new Posicion(0,0);
-		objetivoVIEJOSERABORRADO =seleccionadaViejaSeraBorrada;
-		
-
-		/*
-		timer = new Timer();
-		timer.schedule(new Actualizador(this), 0, 33);
-		*/
+		actualizador=new Actualizador(this);
+		actualizador.start();
 		
 		seleccionador = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
 		seleccionadorObjetivo = new Image("/fiuba/algo3/vista/CanvasJuego/seleccionador.png");
@@ -109,14 +111,14 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		mueveVista.agregarCallbackClickeo(p->clickea(p));
 		mueveVista.agregarCallbackHover(p->hoverea(p));
 		
-		actualizar();
+		embellecedores=new ContenedorEmbellecedores();
+		
+		escalaSeleccionador = 1;
+		
+		pedirActualizacion();
 	}
 	
-	//--------------------MANEJO DE CONCURRENCIA/LIMPIEZA----------------------//
-	public void destruir(){
-		timer.cancel();
-		timer.purge();
-	}
+	
 	
 	//------------------------INPUT----------------------------------------------//
 	public Casillero construirCasillero(Posicion pos){
@@ -132,7 +134,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 				calls.execute(construido);
 			}
 		}
-		actualizar();
+		pedirActualizacion();
 	}
 	
 	private void hoverea(Posicion p){
@@ -142,8 +144,16 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			for(CallbackCasillero calls : callbacksHover){
 				calls.execute(construido);
 			}
+			
+			if(construido.getuAerea()!=null){
+				embellecedores.settearHovereado(construido.getuAerea());
+			}else if(construido.getuTerrestre()!=null){
+				embellecedores.settearHovereado(construido.getuTerrestre());
+			}else{
+				embellecedores.settearHovereado(null);
+			}
 		}
-		actualizar();
+		pedirActualizacion();
 		synchronized(hovereando){
 			hovereando = new PosicionEnElPlano(p.getX(),p.getY());
 		}
@@ -157,35 +167,35 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		callbacksHover.add(call);
 	}
 	
-	//----------------------------COSAS QUE ESTAN DUPLICADAS/CAMBIARON----------------//
-	public void seleccionarObjetivoESTAFUNCIONHAYQUEBORRARLA(Posicion p) {
-		objetivoVIEJOSERABORRADO=p;
-	}
-	
-	public Posicion getSeleccionadaESTAFUNCIONHAYQUEBORRARLA() {
-		return seleccionadaViejaSeraBorrada;
-	}
-	
 	//------------------------DIBUJADO----------------------------------------------//
-
+	public void pedirActualizacion(){
+		
+	}
+	
 	public void actualizar(){
+		if(this.getParent()==null){
+			actualizador.stop();
+		}
 		
-		//System.out.println("Still updating!");
+		actualizacion();
 		
-		double xv = mueveVista.getX();
-		double yv = mueveVista.getY();
-		double escala = mueveVista.getEscala();
-		
+	}
+
+	public void actualizacion(){
 		ArrayList<Unidad> unidades = juego.obtenerUnidades();
+		embellecedores.revisarEmbellecedores(juego);
+		embellecedores.detectarCambioPosicion();
+		
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
 		
-
 		//el fondo blanco
 		gc.setFill(Color.WHITE);
-		gc.fillRect(0+xv*escala, 0+yv*escala, 
-				juego.obtenerAncho()*mueveVista.anchoCasillero(),
-				juego.obtenerAlto()*mueveVista.altoCasillero());
+		PosicionEnElPlano cero=new PosicionEnElPlano(0,0); 
+		gc.fillRect(mueveVista.xPantalla(cero),
+					mueveVista.yPantalla(cero),
+					juego.obtenerAncho()*mueveVista.anchoCasillero(),
+					juego.obtenerAlto()*mueveVista.altoCasillero());
 		
 		//la tierra
 		if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA){
@@ -196,7 +206,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		
 		dibujarBonuses(gc);		
 		dibujarChispa(gc);
-		
 		//las unidades terrestres
 			if(modoVista==ModoVista.AMBAS || modoVista==ModoVista.SOLOTIERRA) dibujarUnidades(gc,Plano.TERRESTRE);
 		//el cielo
@@ -212,42 +221,27 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			dibujarUnidades(gc,Plano.AEREO);
 		}
 		
-		
 		//el cuadrado seleccionado
-		/*
-		if(seleccionadaViejaSeraBorrada != null){
-			gc.drawImage(seleccionador,
-				(seleccionadaViejaSeraBorrada.getX()*80+xv)*escala,
-				(seleccionadaViejaSeraBorrada.getY()*80+yv)*escala,
-				80*escala,
-				80*escala);
-		}
-
-		if(objetivoVIEJOSERABORRADO != null){
-			gc.drawImage(seleccionadorObjetivo,
-				(objetivoVIEJOSERABORRADO.getX()*80+xv)*escala,
-				(objetivoVIEJOSERABORRADO.getY()*80+yv)*escala,
-				80*escala,
-				80*escala);
-		}
-		*/
 		if(seleccionada != null){
 			
 			gc.drawImage(seleccionador,
-				mueveVista.xPantalla(seleccionada),
-				mueveVista.yPantalla(seleccionada),
-				mueveVista.anchoCasillero(),
-				mueveVista.altoCasillero());
+				mueveVista.xPantalla(seleccionada)-(escalaSeleccionador-1)*mueveVista.anchoCasillero()/2,
+				mueveVista.yPantalla(seleccionada)-(escalaSeleccionador-1)*mueveVista.altoCasillero()/2,
+				mueveVista.anchoCasillero()*escalaSeleccionador,
+				mueveVista.altoCasillero()*escalaSeleccionador
+				);
 		}
 		
 		//el cuadrado hovereando
-		synchronized(hovereando){
-			gc.drawImage(hovereador,
-					mueveVista.xPantalla(hovereando),
-					mueveVista.yPantalla(hovereando),
-					mueveVista.anchoCasillero(),
-					mueveVista.altoCasillero());
-			
+		if(hovereando != null){
+			synchronized(hovereando){
+				gc.drawImage(hovereador,
+						mueveVista.xPantalla(hovereando),
+						mueveVista.yPantalla(hovereando),
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero());
+				
+			}
 		}
 		//el cartelito
 		String accion = juego.accionPosibleEn(hovereando);
@@ -257,41 +251,47 @@ public class CanvasJuego extends Canvas implements Actualizable{
 			double offsetY=20;
 			gc.save();
 			gc.setFill(Color.BEIGE);
-			gc.fillRect(offsetX+mueveVista.getXMouse(), offsetY+mueveVista.getYMouse(), bounds.getWidth()+20, bounds.getHeight()*1.5);
+			gc.fillRect(offsetX+mueveVista.getXMouse(), 
+						offsetY+mueveVista.getYMouse(), 
+						bounds.getWidth()+20, 
+						bounds.getHeight()*1.5);
 			gc.setFill(Color.BLACK);
-			gc.fillText(accion, offsetX+mueveVista.getXMouse()+10, offsetY + mueveVista.getYMouse()+bounds.getHeight());
+			gc.fillText(accion, 
+						offsetX+mueveVista.getXMouse()+10, 
+						offsetY + mueveVista.getYMouse()+bounds.getHeight());
 			gc.restore();
 		}
 		
-		
-		
-		//el halo de ataque
-		if(haloAtaque!=null){
-			gc.save();
-			gc.setFill(Color.RED);
-			gc.setGlobalAlpha(0.3);
-			for(PosicionEnElPlano p : haloAtaque){
-				gc.fillRect(mueveVista.xPantalla(p),
-							mueveVista.yPantalla(p),
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero());
-			}
-			gc.restore();
-		}
-		//el halo de movimiento
-		if(haloMovimiento!=null){
-			gc.save();
-			gc.setFill(Color.YELLOW);
-			gc.setGlobalAlpha(0.3);
-			for(PosicionEnElPlano p : haloMovimiento){
-				gc.fillRect(mueveVista.xPantalla(p),
-							mueveVista.yPantalla(p),
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero());
-			}
-			gc.restore();
+		//halos
+		dibujarHalos(gc);
+		//explosiones
+		embellecedores.dibujarExplosiones(gc, mueveVista, cacheImagenes);
+		//rangos
+		dibujarRangos(gc);
+	}
+	public void dibujarHalos(GraphicsContext gc){
+		if(halos != null){
+			ArrayList<PosicionEnElPlano> haloAtaque = juego.obtenerHaloAtaque(halos);
+			dibujarHalo(gc,haloAtaque,Color.RED);
+			ArrayList<PosicionEnElPlano> haloMovimiento = juego.obtenerHaloMovimiento(halos);
+			dibujarHalo(gc,haloMovimiento,Color.YELLOW);
 		}
 	}
+
+	private void dibujarHalo(GraphicsContext gc, ArrayList<PosicionEnElPlano> halo, Color color) {
+		gc.save();
+		gc.setFill(color);
+		gc.setGlobalAlpha(0.3);
+		for(PosicionEnElPlano p : halo){
+			gc.fillRect(mueveVista.xPantalla(p),
+						mueveVista.yPantalla(p),
+						mueveVista.anchoCasillero(),
+						mueveVista.altoCasillero());
+		}
+		gc.restore();
+	}
+
+
 
 	private void dibujarMontePerdicion(GraphicsContext gc) {
 		try {
@@ -325,9 +325,6 @@ public class CanvasJuego extends Canvas implements Actualizable{
 						mueveVista.altoCasillero());
 		posicionAtaque=null;
 		
-	}
-	public void setearPosicionExplosion(Posicion p){
-		posicionAtaque=p;
 	}
 	private void dibujarBonuses(GraphicsContext gc) {
 		ArrayList<Bonus> bonuses = juego.obtenerBonuses();
@@ -381,42 +378,13 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		for(Unidad u: juego.obtenerUnidades()){
 			
 			if(u.getPlanoPerteneciente() == plano){
-				dibujarUnidad(gc, u);
-				
+				embellecedores.dibujarUnidad(gc, u, juego, mueveVista, cacheImagenes);
 			}
 		}
 	}
 	
 	
-	private void dibujarUnidad(GraphicsContext gc, Unidad u) {
-		Posicion p = juego.posicion(u);
-		try{
-			Image imgU = cacheImagenes.obtenerImagen(u.nombreImagen());
-			gc.drawImage(imgU,
-					mueveVista.xPantalla(p), 
-					mueveVista.yPantalla(p), 
-					mueveVista.anchoCasillero(),
-					mueveVista.altoCasillero()
-			);
-			ArrayList<String> nombres_imagenes = u.obtenerNombresImagenesModificadores();
-			gc.save();
-			gc.setGlobalAlpha(0.5f/nombres_imagenes.size());
-			for(String nombre : nombres_imagenes ){
-				if(nombre != null){
-					Image imgM = cacheImagenes.obtenerImagen(nombre);
-					gc.drawImage(imgM,
-							mueveVista.xPantalla(p), 
-							mueveVista.yPantalla(p), 
-							mueveVista.anchoCasillero(),
-							mueveVista.altoCasillero()
-					);
-				}
-			}
-			gc.restore();
-		}catch(ImagenInexistenteException e){
-		}
-		
-	}
+	
 
 
 	/**
@@ -429,6 +397,12 @@ public class CanvasJuego extends Canvas implements Actualizable{
 	//---------------------------------------selecci�n----------------------
 	private PosicionEnElPlano seleccionada;
 	public void seleccionadorEn(PosicionEnElPlano pos){
+		escalaSeleccionador = 1.3f;
+		Timeline timeline = new Timeline();
+		KeyValue keyE= new KeyValue(new EscribeEscalaSeleccionador(),1,Interpolator.EASE_IN);
+		KeyFrame frameE = new KeyFrame(Duration.millis(80),keyE);
+		timeline.getKeyFrames().add(frameE);
+		timeline.playFromStart();
 		seleccionada = (PosicionEnElPlano) pos.clone();
 
 	}
@@ -450,19 +424,89 @@ public class CanvasJuego extends Canvas implements Actualizable{
 
 	public void setModoVista(ModoVista modoVista) {
 		this.modoVista = modoVista;
-		actualizar();
+		pedirActualizacion();
 	}
 	
 	//-----------------------------------mostrar halos de ataque/movimiento------//
-	private ArrayList<PosicionEnElPlano> haloAtaque;
-	private ArrayList<PosicionEnElPlano> haloMovimiento;
+	private Unidad mostrandoRangos;
+	private Unidad halos;
 	
-	public void setHaloAtaque(ArrayList<PosicionEnElPlano> haloAtaque){
-		this.haloAtaque = haloAtaque;
+	public void setHalos(Unidad halos){
+		this.halos = halos;
 	}
 	
-	public void setHaloMovimiento(ArrayList<PosicionEnElPlano> haloMovimiento){
-		this.haloMovimiento = haloMovimiento;
+	
+	//---------------------embelleciendo el seleccionador--------------------------//
+	protected class EscribeEscalaSeleccionador implements WritableFloatValue{
+
+		@Override
+		public Number getValue() {
+			return escalaSeleccionador;
+		}
+
+		@Override
+		public float get() {
+			return escalaSeleccionador;
+		}
+
+		@Override
+		public void set(float arg0) {
+			escalaSeleccionador= arg0;
+		}
+
+		@Override
+		public void setValue(Number arg0) {
+			escalaSeleccionador = (float) arg0;
+		}
+		
+	}
+
+
+	public void mostrarRangos(Unidad u) {
+		mostrandoRangos = u;
 	}
 	
+	public void dibujarRangos(GraphicsContext gc){
+		if(mostrandoRangos!=null){
+			dibujarRango(gc,
+				mostrandoRangos.getDistanciaAtaque(),
+				juego.posicion(mostrandoRangos),
+				Color.RED);
+			dibujarRango(gc,
+				(int)mostrandoRangos.getMovimientosRestantes(),
+				juego.posicion(mostrandoRangos),
+				Color.YELLOW);
+		}
+	}
+	
+	public void dibujarRango(GraphicsContext gc, int distancia, Posicion centro, Color color){
+		gc.save();
+		gc.setStroke(color);
+		gc.setLineWidth(5);
+		
+		Posicion arribaIzq = centro.obtenerMismaPosicionDesplazada(-distancia  , -distancia  );
+		Posicion arribaDer = centro.obtenerMismaPosicionDesplazada( distancia+1, -distancia  );
+		Posicion abajoIzq  = centro.obtenerMismaPosicionDesplazada(-distancia  ,  distancia+1);
+		Posicion abajoDer  = centro.obtenerMismaPosicionDesplazada( distancia+1,  distancia+1);
+		
+		gc.beginPath();
+		gc.moveTo(	mueveVista.xPantalla(arribaIzq), 
+					mueveVista.yPantalla(arribaIzq));
+		
+		gc.lineTo(	mueveVista.xPantalla(arribaDer), 
+					mueveVista.yPantalla(arribaDer));
+		
+		gc.lineTo(	mueveVista.xPantalla(abajoDer), 
+					mueveVista.yPantalla(abajoDer));
+		
+		gc.lineTo(	mueveVista.xPantalla(abajoIzq), 
+					mueveVista.yPantalla(abajoIzq));
+		
+		gc.lineTo(	mueveVista.xPantalla(arribaIzq), 
+					mueveVista.yPantalla(arribaIzq));
+		gc.stroke();
+		
+		gc.restore();
+
+	}
 }

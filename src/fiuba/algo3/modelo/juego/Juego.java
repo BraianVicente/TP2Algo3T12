@@ -230,7 +230,7 @@ public class Juego {
     		return null;
     	}
     }
-    
+    /*
     public void clickeoCasillero(Casillero c,CanvasJuego canvas){
     	//ac� estoy suponiendo que siempre que to�s una unidad la quer�s seleccionar,
     	Unidad referenciada = unidadReferenciada(c);
@@ -252,7 +252,7 @@ public class Juego {
     	canvas.seleccionadorEn(c.getPos());
     	//CanvasJuego s�lo sabe de dibujar cositas en la pantalla
     }
-    
+    */
     
     
 	private void cambiarUnidadSeleccionada(Unidad referenciada) {
@@ -324,5 +324,25 @@ public class Juego {
 
 	public String obtenerNombreImagenMontePerdicion() {
 		return "/fiuba/algo3/vista/imagenes/tierra/montePerdicion.png";
+	}
+
+
+	public boolean puedeHacerAlgo(Unidad unidad) {
+		return unidad.puedeAtacar() || sePuedeTransformar(unidad) || unidad.puedeMoverseUnCasillero();
+	}
+
+
+	public boolean enTablero(Unidad u) {
+		return tablero.contiene(u);
+	}
+
+
+	public ArrayList<PosicionEnElPlano> obtenerHaloMovimiento(Unidad u) {
+		return tablero.obtenerHaloMovimiento(u);
+	}
+
+
+	public ArrayList<PosicionEnElPlano> obtenerHaloAtaque(Unidad u) {
+		return tablero.obtenerHaloAtaque(u);
 	}
 }
