@@ -1,6 +1,6 @@
 package fiuba.algo3.test.juego;
 
-import fiuba.algo3.modelo.tablero.EscenarioDefault;
+
 import fiuba.algo3.modelo.juego.Juego;
 import fiuba.algo3.modelo.equipos.Autobots;
 import fiuba.algo3.modelo.equipos.Decepticons;
@@ -208,7 +208,7 @@ public class JuegoTest {
     @Test
     public void testJugadorQueConsigueChispaGana(){
         VictoriaAgarrarChispa condition = new VictoriaAgarrarChispa();
-        Tablero tab = new Tablero(new EscenarioDefault(),condition);
+        Tablero tab = new Tablero(new EscenarioBasico(),condition);
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
@@ -224,7 +224,7 @@ public class JuegoTest {
     @Test
     public void testJugadorConUnidadesMuertasPierde(){
         VictoriaAgarrarChispa condition = new VictoriaAgarrarChispa();
-        Tablero tab = new Tablero(new EscenarioDefault(),condition);
+        Tablero tab = new Tablero(new EscenarioBasico(),condition);
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
         Juego juego = new Juego(tab,j1,j2);
@@ -291,7 +291,7 @@ public class JuegoTest {
     @Test
     public void testUnidadPierdeChispaYLaAgarraElOtroEquipo(){
         VictoriaMontePerdicion condition = new VictoriaMontePerdicion();
-        Tablero tab = new Tablero(new EscenarioDefault(),condition);
+        Tablero tab = new Tablero(new EscenarioBasico(),condition);
         tab.colocarMontePerdicion(new Posicion(5,6));
         Jugador j1 = new Jugador("J1", new Autobots(),tab);
         Jugador j2 = new Jugador("J2",new Decepticons(),tab);
