@@ -101,7 +101,7 @@ public abstract class Unidad {
     }
 	
 	public boolean puedeAtacar(){
-    	return yaAtaco;
+    	return !yaAtaco;
     }
     
     public void atacarA(Unidad receptor) throws FriendlyFireException, NoSeEncuentraUnidadException{

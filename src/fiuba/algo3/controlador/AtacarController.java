@@ -23,7 +23,7 @@ public class AtacarController implements CallbackCasillero {
 	public void execute(Casillero cas) {
 		if(atacante!=null&&atacante.getVida()>0)  {
 		Unidad objetivo=obtenerUnidadObjetivo(cas);
-		if(objetivo!=null&&
+		if(objetivo!=null&& juego.enTablero(atacante) &&
 				juego.puedeAtacar(atacante,juego.obtenerPosicion(objetivo))
 				&&atacante.es(juego.jugadorEnTurno().getEquipo()))
 			juego.atacarUnidad(juego.obtenerPosicion(atacante), juego.obtenerPosicion(objetivo));
