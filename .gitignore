@@ -1,0 +1,10 @@
+*.sw*
+*.class
+nbproject/
+tmp/
+.classpath
+.project
+.settings/
+build.xml.old
+manifest.mf
+/bin/

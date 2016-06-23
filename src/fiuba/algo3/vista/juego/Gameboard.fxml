@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fiuba.algo3.vista.juego.GameboardController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Juego">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Volver Atras" fx:id="volverAtras" />
+            <MenuItem mnemonicParsing="false" text="Salir" fx:id="cerrarMenuItem" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Sobre">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Equipo" fx:id="equipoMenuItem" />
+            <MenuItem mnemonicParsing="false" text="Como Jugar" fx:id="comoJugar" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <children>
+        <AnchorPane fx:id="InfoPane" prefHeight="371.0" prefWidth="130.0">
+          <children>
+            <Label layoutX="34.0" layoutY="23.0" text="Jugando" />
+            <ImageView fx:id="jugandoImage" fitHeight="93.0" fitWidth="93.0" layoutX="16.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
+            <ChoiceBox fx:id="vistaChoiceBox" layoutX="16.0" layoutY="198.0" prefHeight="25.0" prefWidth="93.0" value="Ambas">
+              <String fx:value="Tierra" />
+              <String fx:value="Cielo" />
+              <String fx:value="Ambas" />
+            </ChoiceBox>
+            <Label layoutX="44.0" layoutY="162.0" text="Vista" />
+            <Label layoutX="29.0" layoutY="244.0" text="Controles" />
+            <Button fx:id="transformarButton" layoutX="16.0" layoutY="269.0" minWidth="99.0" mnemonicParsing="false" text="Transformar" />
+            <Button fx:id="combinarButton" layoutX="16.0" layoutY="302.0" minWidth="99.0" mnemonicParsing="false" text="Combinar" />
+            <Button fx:id="finTurnoButton" layoutX="16.0" layoutY="332.0" minWidth="99.0" mnemonicParsing="false" text="Fin Turno" />
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="GamePane" prefHeight="371.0" prefWidth="360.0" />
+        <!-- 340 -->
+        <AnchorPane fx:id="StatsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="130.0">
+          <children>
+            <TextField fx:id="unidadNombre" editable="false" focusTraversable="false" layoutX="4.0" layoutY="7.0" prefHeight="14.0" prefWidth="124.0" text="" />
+            <ImageView fx:id="unidadImagen" fitHeight="47.0" fitWidth="47.0" layoutX="42.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="vidaLabel" layoutX="7.0" layoutY="80.0" prefWidth="29.0" text="Vida">
+              <font>
+                <Font size="12.0" fx:id="x1" />
+              </font>
+            </Label>
+            <ProgressBar fx:id="vidaUnidad" disable="false" focusTraversable="false" layoutX="9.0" layoutY="108.0" minHeight="7.0" prefHeight="14.0" prefWidth="112.699951171875" progress="0.0" style="&#10;" />
+            <TextField fx:id="vidaInt" cache="true" editable="false" layoutX="74.0" layoutY="80.0" prefHeight="21.0" prefWidth="47.0" text="" />
+            <Label fx:id="ataqueLabel" font="$x1" layoutX="9.0" layoutY="130.0" text="Ataque" />
+            <TextField fx:id="ataqueUnidad" cache="true" editable="false" layoutX="70.0" layoutY="127.0" prefHeight="25.0" prefWidth="53.0" text="" />
+            <Label fx:id="tieneChispaLabel" font="$x1" layoutX="9.0" layoutY="161.0" prefHeight="15.0" prefWidth="47.0" text="Chispa" textOverrun="CENTER_ELLIPSIS" />
+            <TextField fx:id="tieneChispa" cache="true" editable="false" layoutX="69.0" layoutY="156.0" prefHeight="25.0" prefWidth="53.0" text="" />
+            <Label fx:id="terrestreLabel" layoutX="10.0" layoutY="185.0" text="Tierra" />
+            <ImageView fx:id="terrestreView" fitHeight="35.0" fitWidth="46.666666666666664" layoutX="80.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="terrestreEfectos" blendMode="DARKEN" cache="false" cacheHint="DEFAULT" depthTest="INHERIT" disable="false" editable="false" focusTraversable="true" layoutX="-20.0" layoutY="214.0" mouseTransparent="false" pickOnBounds="false" prefHeight="60.01427459716797" prefWidth="175.0" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
+            <Label fx:id="aereoLabel" layoutX="9.0" layoutY="276.0" text="Aerea" />
+            <ImageView fx:id="aereoView" fitHeight="35.00001525878906" fitWidth="46.66668701171875" layoutX="80.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="aereoEfectos" blendMode="DARKEN" cache="false" disable="false" editable="false" focusTraversable="true" layoutX="-15.0" layoutY="302.0" pickOnBounds="false" prefHeight="60.57145881652832" prefWidth="161.0" scaleX="0.7" scaleY="0.7" text="" translateX="1.0" translateY="2.0" visible="true" wrapText="true" />
+          </children>
+        </AnchorPane>
+      </children>
+    </HBox>
+  </children>
+</VBox>
