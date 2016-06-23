@@ -272,7 +272,7 @@ public class CanvasJuego extends Canvas implements Actualizable{
 		dibujarRangos(gc);
 	}
 	public void dibujarHalos(GraphicsContext gc){
-		if(halos != null && juego.enTablero(halos)){
+		if(halos != null && juego.enTablero(halos) && !halos.esCombinacion()){//la condición de combinación para evitar crashes
 			ArrayList<PosicionEnElPlano> haloMovimiento = juego.obtenerHaloMovimiento(halos);
 			dibujarHalo(gc,haloMovimiento,Color.YELLOW);
 			ArrayList<PosicionEnElPlano> haloAtaque = juego.obtenerHaloAtaque(halos);
