@@ -203,13 +203,13 @@
                     includes="**/*.png,**/*.jpg"/>
             <jar destfile="${build}/dist/Algoformers.jar" basedir="${build}/classes"/>
 	</target>
-        
+
         <target name="empaquetar.con.javaFX" >
             <copydir src="src/fiuba/algo3/vista"
                     dest="${build}/classes/fiuba/algo3/vista"
                     includes="**/*.fxml"/>
             <jar destfile="${build}/dist/Algoformers.jar" basedir="${build}/classes"/>
-            
+
         </target>
 
 	<target name="ejecutar.aplicacion" depends="empaquetar.con.imagenes">
