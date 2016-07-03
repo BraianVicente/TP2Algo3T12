@@ -1,6 +1,5 @@
 *.sw*
 *.class
-nbproject/
 tmp/
 .classpath
 .project
@@ -8,3 +7,4 @@ tmp/
 build.xml.old
 manifest.mf
 /bin/
+/dist/

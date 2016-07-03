@@ -1,4 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="nicopaez.tutoriales.oo.notas" basedir="." default="test">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="algoformers" basedir="." default="test">
 	<property name="build" location="build" />
 	<property name="libs" location="libs" />
 	<property name="classes.dir" location="build" />
@@ -145,12 +145,12 @@
 
 
     <target name="compilar.paquete" depends="test">
-		<javac srcdir="src" destdir="${build}/classes" debug="no">
+		<javac srcdir="src" destdir="${build}/classes" debug="no" target="1.8" includeantruntime="false" >
 		</javac>
 	</target>
 
 	<target name="empaquetar" depends="compilar.paquete">
-		<jar destfile="${build}/dist/algo3.jar" basedir="${build}/classes" />
+		<jar destfile="${build}/dist/Algoformers.jar" basedir="${build}/classes" />
 	</target>
 
 	<target name="integracion-continua" depends="run-pmd,coverage-report,alternate-coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
@@ -197,18 +197,27 @@
 	</target>
 
 
-		<target name="empaquetar.con.imagenes" depends="compilar.paquete">
-			<copydir src="src/gui/imagess"
-				dest="${build}/classes/gui/imagess"
-				includes="**/*.png"/>
-		<jar destfile="${build}/dist/algo3.jar" basedir="${build}/classes"/>
+        <target name="empaquetar.con.imagenes" depends="compilar.paquete,empaquetar.con.javaFX">
+            <copydir src="src/fiuba/algo3/vista"
+                    dest="${build}/classes/fiuba/algo3/vista"
+                    includes="**/*.png,**/*.jpg"/>
+            <jar destfile="${build}/dist/Algoformers.jar" basedir="${build}/classes"/>
 	</target>
+        
+        <target name="empaquetar.con.javaFX" >
+            <copydir src="src/fiuba/algo3/vista"
+                    dest="${build}/classes/fiuba/algo3/vista"
+                    includes="**/*.fxml"/>
+            <jar destfile="${build}/dist/Algoformers.jar" basedir="${build}/classes"/>
+            
+        </target>
 
-	<target name="ejecutar.aplicacion" depends="empaquetar">
-		<java classname="fiuba.algo3.ejemplo1.Foo" fork="true">
+	<target name="ejecutar.aplicacion" depends="empaquetar.con.imagenes">
+		<java classname="fiuba.algo3.vista.splash.Splash" fork="true">
 			<classpath refid="classpath" />
-			<classpath location="${build}/dist/algo3.jar" />
+			<classpath location="${build}/dist/Algoformers.jar" />
 		</java>
 	</target>
+
 
 </project>
