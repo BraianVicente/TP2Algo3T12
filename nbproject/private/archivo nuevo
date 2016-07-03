@@ -1,0 +1,5 @@
+		<java classname="fiuba.algo3.vista.splash.Splash" fork="true">
+			<classpath refid="classpath" />
+			<classpath location="${build}/dist/Algoformers.jar" />
+
+		</java>
